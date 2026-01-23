@@ -1,0 +1,20 @@
+\textbf{Camera-level stress.} Camera stress is computed from image features using the composite stress
+formula in \texttt{src/pax/stress/composite\_stress.py:compute\_camera\_stress}. This uses spacing,
+infrastructure, and pedestrian/vehicle counts as documented in the implementation.
+
+\textbf{Intersection-level aggregation (implemented).} The current mapping from cameras to intersections
+is implemented in \texttt{src/pax/pathfinding/learned\_heuristic.py:\_map\_intersections\_to\_stress}
+with a primary street-based averaging rule and an IDW fallback. The IDW interpolation is defined in
+\texttt{src/pax/stress/composite\_stress.py:compute\_intersection\_stress} and uses k-nearest inverse
+distance weights.
+
+\textbf{Alternative aggregation constructions (proposed comparison).} The manuscript will compare at least
+two constructions: (1) street-based averaging (current primary), and (2) IDW interpolation (current fallback).
+A hard-assignment Voronoi-based construction is present in
+\texttt{src/pax/voronoi/generator.py} and the legacy aggregation script
+\texttt{src/pax/scripts/voronoi\_stress\_scoring.py} and is marked as a proposed comparison rather than
+the current runtime path.
+
+\textbf{Routing.} Stress-aware routing is performed by A* in
+\texttt{src/pax/pathfinding/learned\_heuristic.py:find\_path} with edge stress computed as the average
+of endpoint stresses and route stress computed as a length-weighted integral.

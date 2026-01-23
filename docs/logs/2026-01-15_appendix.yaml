@@ -1,0 +1,38 @@
+---
+meta:
+  date: 2026-01-15
+  title: Context Reconstruction Appendix
+file_lists_by_repo:
+  pax:
+    code:
+      - src/pax/pathfinding/learned_heuristic.py
+      - src/pax/stress/composite_stress.py
+      - src/pax/vision/extractor.py
+    scripts:
+      - scripts/2025-11-15/*
+      - scripts/2025-12-16/*
+    data:
+      - data/stress_scores_updated.json
+      - data/geojson/intersections.json
+  paxnyc:
+    manuscript:
+      - manuscript/main.tex
+      - manuscript/sections/02_methods.tex
+    figures:
+      - figures/figure2_spatial.png
+    code:
+      - code/fig02_spatial_analysis.py
+  mat761:
+    officehours:
+      - docs/officehours/data_explorer.html
+      - docs/officehours/figures/graph_data.json
+    classnotes:
+      - docs/classnotes/20260113_chapter0_pax_notes.tex
+diff_summary:
+  - pax_full_implementation_and_data
+  - paxnyc_public_manuscript_and_figures_only
+mat761_references_index:
+  chapter0:
+    - MAT761/docs/classnotes/20260113_chapter0_pax_notes.tex
+    - MAT761/docs/officehours/Gil_Raitses_MAT761_Aggregation_Quotient_Spaces_Project_Brief.tex
+  chapter1: []

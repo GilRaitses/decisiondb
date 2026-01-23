@@ -1,0 +1,124 @@
+{
+  "edges": [
+    {
+      "edge_length": 0.0007631427606469288,
+      "edge_stress": 0.3880607561661825,
+      "edge_u": 179,
+      "edge_v": 178,
+      "stress_penalty": 0.03414934654262406
+    },
+    {
+      "edge_length": 0.0030868379352853026,
+      "edge_stress": 0.3969307247154936,
+      "edge_u": 178,
+      "edge_v": 387,
+      "stress_penalty": 0.03492990377496344
+    }
+  ],
+  "intersections": [
+    {
+      "base_source": "blend_idw_voronoi",
+      "base_stress": 0.3351910710334778,
+      "blend_components": {
+        "idw": 0.3170894774510033,
+        "lambda": 0.95,
+        "voronoi": 1.6300283297896385
+      },
+      "blend_lambda": 0.95,
+      "blended_total_stress": 0.3827364200679351,
+      "camera_id": "b0cbb042-de0a-449f-b5d1-49f68a9bf2ae",
+      "coord": [
+        -73.98924341991618,
+        40.75289546416634
+      ],
+      "fallback_used": false,
+      "idw_stress": 0.3170894774510033,
+      "neighbor_stress": 0.6060873866081238,
+      "neighbor_summary": {
+        "count": 4,
+        "total": 0.6060873866081238
+      },
+      "node_id": 179,
+      "second_order_stress": 0.688749872148037,
+      "second_order_summary": {
+        "count": 10,
+        "total": 0.688749872148037
+      },
+      "stress_path_id": "intersection_stress:blend_idw_voronoi",
+      "stress_source_key": "normalized_stress",
+      "total_stress": 0.3827364200679351,
+      "voronoi_total_stress": 1.6300283297896385,
+      "zone_index": 6
+    },
+    {
+      "base_source": "blend_idw_voronoi",
+      "base_stress": 0.3351910710334778,
+      "blend_components": {
+        "idw": 0.32829860607889255,
+        "lambda": 0.95,
+        "voronoi": 1.6300283297896385
+      },
+      "blend_lambda": 0.95,
+      "blended_total_stress": 0.3933850922644299,
+      "camera_id": "b0cbb042-de0a-449f-b5d1-49f68a9bf2ae",
+      "coord": [
+        -73.98969328136359,
+        40.75228026273499
+      ],
+      "fallback_used": false,
+      "idw_stress": 0.32829860607889255,
+      "neighbor_stress": 0.6060873866081238,
+      "neighbor_summary": {
+        "count": 4,
+        "total": 0.6060873866081238
+      },
+      "node_id": 178,
+      "second_order_stress": 0.688749872148037,
+      "second_order_summary": {
+        "count": 10,
+        "total": 0.688749872148037
+      },
+      "stress_path_id": "intersection_stress:blend_idw_voronoi",
+      "stress_source_key": "normalized_stress",
+      "total_stress": 0.3933850922644299,
+      "voronoi_total_stress": 1.6300283297896385,
+      "zone_index": 6
+    },
+    {
+      "base_source": "blend_idw_voronoi",
+      "base_stress": 0.2757643163204193,
+      "blend_components": {
+        "idw": 0.3024293852998381,
+        "lambda": 0.95,
+        "voronoi": 2.26336882263422
+      },
+      "blend_lambda": 0.95,
+      "blended_total_stress": 0.4004763571665573,
+      "camera_id": "f06979b2-3497-4330-9882-a06c8a442b7c",
+      "coord": [
+        -73.98684991118436,
+        40.7510816792154
+      ],
+      "fallback_used": false,
+      "idw_stress": 0.3024293852998381,
+      "neighbor_stress": 0.9831224679946899,
+      "neighbor_summary": {
+        "count": 7,
+        "total": 0.9831224679946899
+      },
+      "node_id": 387,
+      "second_order_stress": 1.0044820383191109,
+      "second_order_summary": {
+        "count": 13,
+        "total": 1.0044820383191109
+      },
+      "stress_path_id": "intersection_stress:blend_idw_voronoi",
+      "stress_source_key": "normalized_stress",
+      "total_stress": 0.4004763571665573,
+      "voronoi_total_stress": 2.26336882263422,
+      "zone_index": 3
+    }
+  ],
+  "stress_path_id": "intersection_stress:blend_idw_voronoi",
+  "stress_source_key": "normalized_stress"
+}

@@ -1,0 +1,227 @@
+{
+  "determinism_check": {
+    "diagnostics_bytes_match": true,
+    "lambda": 0.0,
+    "leg_id": "OD-01",
+    "run_bytes_match": true,
+    "timestamp_used": "2000-01-01T00:00:00+00:00"
+  },
+  "legs": [
+    {
+      "changed": true,
+      "destination_label": "P1 Precision Patterns",
+      "destination_node": 116,
+      "leg_id": "OD-01",
+      "origin_label": "D1 Atelier on 39th",
+      "origin_node": 177,
+      "sequence_id": null,
+      "transition_count": 3
+    },
+    {
+      "changed": false,
+      "destination_label": "F1 Broadway Textiles",
+      "destination_node": 395,
+      "leg_id": "OD-02",
+      "origin_label": "P2 Metro Grading",
+      "origin_node": 118,
+      "sequence_id": null,
+      "transition_count": 0
+    },
+    {
+      "changed": false,
+      "destination_label": "T1 M&J Trimming",
+      "destination_node": 383,
+      "leg_id": "OD-03",
+      "origin_label": "F2 Sixth Avenue Fabrics",
+      "origin_node": 387,
+      "sequence_id": null,
+      "transition_count": 0
+    },
+    {
+      "changed": true,
+      "destination_label": "S1 West Side Sample Room",
+      "destination_node": 91,
+      "leg_id": "OD-04",
+      "origin_label": "D2 Fashion Center Studios",
+      "origin_node": 175,
+      "sequence_id": null,
+      "transition_count": 2
+    },
+    {
+      "changed": true,
+      "destination_label": "D3 Midtown Showroom",
+      "destination_node": 179,
+      "leg_id": "OD-05",
+      "origin_label": "T2 Pacific Trimming",
+      "origin_node": 385,
+      "sequence_id": null,
+      "transition_count": 1
+    },
+    {
+      "changed": true,
+      "destination_label": "D4 Herald Square Design",
+      "destination_node": 391,
+      "leg_id": "OD-06",
+      "origin_label": "S2 34th Street Factory",
+      "origin_node": 120,
+      "sequence_id": null,
+      "transition_count": 2
+    },
+    {
+      "changed": true,
+      "destination_label": "F2 Sixth Avenue Fabrics",
+      "destination_node": 387,
+      "leg_id": "OD-07",
+      "origin_label": "D3 Midtown Showroom",
+      "origin_node": 179,
+      "sequence_id": null,
+      "transition_count": 1
+    },
+    {
+      "changed": true,
+      "destination_label": "P1 Precision Patterns",
+      "destination_node": 116,
+      "leg_id": "SEQ-A_A1",
+      "origin_label": "D1 Atelier on 39th",
+      "origin_node": 177,
+      "sequence_id": "SEQ-A",
+      "transition_count": 3
+    },
+    {
+      "changed": true,
+      "destination_label": "F1 Broadway Textiles",
+      "destination_node": 395,
+      "leg_id": "SEQ-A_A2",
+      "origin_label": "P1 Precision Patterns",
+      "origin_node": 116,
+      "sequence_id": "SEQ-A",
+      "transition_count": 1
+    },
+    {
+      "changed": true,
+      "destination_label": "T1 M&J Trimming",
+      "destination_node": 383,
+      "leg_id": "SEQ-A_A3",
+      "origin_label": "F1 Broadway Textiles",
+      "origin_node": 395,
+      "sequence_id": "SEQ-A",
+      "transition_count": 1
+    },
+    {
+      "changed": true,
+      "destination_label": "S1 West Side Sample Room",
+      "destination_node": 91,
+      "leg_id": "SEQ-A_A4",
+      "origin_label": "T1 M&J Trimming",
+      "origin_node": 383,
+      "sequence_id": "SEQ-A",
+      "transition_count": 2
+    },
+    {
+      "changed": true,
+      "destination_label": "F2 Sixth Avenue Fabrics",
+      "destination_node": 387,
+      "leg_id": "SEQ-B_B1",
+      "origin_label": "D2 Fashion Center Studios",
+      "origin_node": 175,
+      "sequence_id": "SEQ-B",
+      "transition_count": 2
+    },
+    {
+      "changed": false,
+      "destination_label": "P2 Metro Grading",
+      "destination_node": 118,
+      "leg_id": "SEQ-B_B2",
+      "origin_label": "F2 Sixth Avenue Fabrics",
+      "origin_node": 387,
+      "sequence_id": "SEQ-B",
+      "transition_count": 0
+    },
+    {
+      "changed": true,
+      "destination_label": "S2 34th Street Factory",
+      "destination_node": 120,
+      "leg_id": "SEQ-B_B3",
+      "origin_label": "P2 Metro Grading",
+      "origin_node": 118,
+      "sequence_id": "SEQ-B",
+      "transition_count": 1
+    },
+    {
+      "changed": true,
+      "destination_label": "T2 Pacific Trimming",
+      "destination_node": 385,
+      "leg_id": "SEQ-C_C1",
+      "origin_label": "D3 Midtown Showroom",
+      "origin_node": 179,
+      "sequence_id": "SEQ-C",
+      "transition_count": 1
+    },
+    {
+      "changed": true,
+      "destination_label": "S1 West Side Sample Room",
+      "destination_node": 91,
+      "leg_id": "SEQ-C_C2",
+      "origin_label": "T2 Pacific Trimming",
+      "origin_node": 385,
+      "sequence_id": "SEQ-C",
+      "transition_count": 2
+    },
+    {
+      "changed": true,
+      "destination_label": "D3 Midtown Showroom",
+      "destination_node": 179,
+      "leg_id": "SEQ-C_C3",
+      "origin_label": "S1 West Side Sample Room",
+      "origin_node": 91,
+      "sequence_id": "SEQ-C",
+      "transition_count": 1
+    }
+  ],
+  "metadata": {
+    "artifact_root": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district",
+    "control_summary": {
+      "diagnostics_dir": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/control/diagnostics",
+      "runs_dir": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/control/runs",
+      "summary_path": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/control/summary.json"
+    },
+    "lambda_grid": [
+      0.0,
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1.0
+    ],
+    "timestamp_utc": "2026-01-18T23:44:42.464608+00:00"
+  },
+  "stress_selection_summary": {
+    "camera_manifest_count": 82,
+    "camera_payload_count": 82,
+    "chosen_key": "normalized_stress",
+    "fallback_used": false,
+    "field_counts": {
+      "normalized_stress": 82
+    },
+    "field_priority": [
+      "normalized_stress",
+      "stress_score",
+      "raw_stress",
+      "mean_stress"
+    ],
+    "max": 0.44065016508102417,
+    "median": 0.3172307759523392,
+    "min": 0.24366243183612823,
+    "missing_count": 0,
+    "selection_metadata": {
+      "available_keys": [
+        "normalized_stress"
+      ],
+      "caller_file": "/Users/gilraitses/pax/src/pax/stress/stress_reader.py",
+      "caller_function": "resolve_camera_stress_map",
+      "chosen_key": "normalized_stress",
+      "fallback_used": false,
+      "preferred_key": "normalized_stress"
+    }
+  }
+}

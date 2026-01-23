@@ -1,0 +1,262 @@
+{
+  "edge_trace": [
+    {
+      "edge_length": 0.008331521257595398,
+      "edge_stress": 1.3420631479113312,
+      "edge_u": 85,
+      "edge_v": 176,
+      "stress_penalty": 0.11810155701619714
+    },
+    {
+      "edge_length": 0.009248943817262045,
+      "edge_stress": 0.9948600470174607,
+      "edge_u": 176,
+      "edge_v": 463,
+      "stress_penalty": 0.08754768413753654
+    },
+    {
+      "edge_length": 0.0008162194463849914,
+      "edge_stress": 0.5333105474708034,
+      "edge_u": 463,
+      "edge_v": 14,
+      "stress_penalty": 0.046931328177430696
+    },
+    {
+      "edge_length": 0.0008334638477265344,
+      "edge_stress": 0.4974011672853993,
+      "edge_u": 14,
+      "edge_v": 404,
+      "stress_penalty": 0.04377130272111514
+    },
+    {
+      "edge_length": 0.0007767057621563822,
+      "edge_stress": 0.46151763624420206,
+      "edge_u": 404,
+      "edge_v": 76,
+      "stress_penalty": 0.04061355198948978
+    },
+    {
+      "edge_length": 0.0007778500072532779,
+      "edge_stress": 0.46438819493181405,
+      "edge_u": 76,
+      "edge_v": 406,
+      "stress_penalty": 0.04086616115399963
+    },
+    {
+      "edge_length": 0.0007780914112274218,
+      "edge_stress": 1.0448887374329376,
+      "edge_u": 406,
+      "edge_v": 407,
+      "stress_penalty": 0.09195020889409851
+    },
+    {
+      "edge_length": 0.00929505821703458,
+      "edge_stress": 1.4689155328775734,
+      "edge_u": 407,
+      "edge_v": 223,
+      "stress_penalty": 0.12926456689322646
+    },
+    {
+      "edge_length": 0.0007853233574195428,
+      "edge_stress": 1.3349246888263262,
+      "edge_u": 223,
+      "edge_v": 200,
+      "stress_penalty": 0.1174733726167167
+    },
+    {
+      "edge_length": 0.006570865508649604,
+      "edge_stress": 1.319235957262026,
+      "edge_u": 200,
+      "edge_v": 311,
+      "stress_penalty": 0.11609276423905829
+    },
+    {
+      "edge_length": 0.0007831494136851802,
+      "edge_stress": 1.332919585518065,
+      "edge_u": 311,
+      "edge_v": 310,
+      "stress_penalty": 0.11729692352558972
+    },
+    {
+      "edge_length": 0.0007811515030695659,
+      "edge_stress": 1.3839540463395528,
+      "edge_u": 310,
+      "edge_v": 314,
+      "stress_penalty": 0.12178795607788064
+    },
+    {
+      "edge_length": 0.0007760415673061516,
+      "edge_stress": 1.651681309238601,
+      "edge_u": 314,
+      "edge_v": 322,
+      "stress_penalty": 0.14534795521299687
+    },
+    {
+      "edge_length": 0.0007760576915600836,
+      "edge_stress": 1.9181115468456755,
+      "edge_u": 322,
+      "edge_v": 323,
+      "stress_penalty": 0.16879381612241945
+    },
+    {
+      "edge_length": 0.0007729947097487866,
+      "edge_stress": 1.9194663657577677,
+      "edge_u": 323,
+      "edge_v": 50,
+      "stress_penalty": 0.16891304018668354
+    }
+  ],
+  "metadata": {
+    "diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/control/diagnostics/lambda_0p2.json",
+    "git_commit": "a356128cab9700f87a476d50c66e53e4a22b3e22",
+    "git_dirty": true,
+    "lambda": 0.2,
+    "od_pair": {
+      "end_node": 50,
+      "start_node": 85
+    },
+    "projection_target_crs": "EPSG:32618",
+    "script_name": "run_representation_sensitivity_garment_suite.py",
+    "stress_source_key": "normalized_stress",
+    "timestamp_utc": "2026-01-18T23:44:42.135512+00:00",
+    "zones_projected": true
+  },
+  "results": {
+    "distance": 0.042103437518079545,
+    "lambda": 0.2,
+    "path_nodes": [
+      85,
+      176,
+      463,
+      14,
+      404,
+      76,
+      406,
+      407,
+      223,
+      200,
+      311,
+      310,
+      314,
+      322,
+      323,
+      50
+    ],
+    "route_geometry": [
+      {
+        "coord": [
+          -73.97976864692963,
+          40.75214077265929
+        ],
+        "node_id": 85
+      },
+      {
+        "coord": [
+          -73.98744642207124,
+          40.7553729609264
+        ],
+        "node_id": 176
+      },
+      {
+        "coord": [
+          -73.99595169203054,
+          40.75896816299256
+        ],
+        "node_id": 463
+      },
+      {
+        "coord": [
+          -73.99547450245583,
+          40.759626856359134
+        ],
+        "node_id": 14
+      },
+      {
+        "coord": [
+          -73.99498358118493,
+          40.76030016137839
+        ],
+        "node_id": 404
+      },
+      {
+        "coord": [
+          -73.99452593263244,
+          40.760927044816434
+        ],
+        "node_id": 76
+      },
+      {
+        "coord": [
+          -73.99406769859542,
+          40.76155517084623
+        ],
+        "node_id": 406
+      },
+      {
+        "coord": [
+          -73.9936093066775,
+          40.76218343546572
+        ],
+        "node_id": 407
+      },
+      {
+        "coord": [
+          -73.98504970040777,
+          40.75857362544388
+        ],
+        "node_id": 223
+      },
+      {
+        "coord": [
+          -73.98461925246458,
+          40.759199410623665
+        ],
+        "node_id": 200
+      },
+      {
+        "coord": [
+          -73.9785652538158,
+          40.7566548427295
+        ],
+        "node_id": 311
+      },
+      {
+        "coord": [
+          -73.97811606532336,
+          40.75728443825639
+        ],
+        "node_id": 310
+      },
+      {
+        "coord": [
+          -73.9776548278053,
+          40.75791142357778
+        ],
+        "node_id": 314
+      },
+      {
+        "coord": [
+          -73.97720026571109,
+          40.75853793285152
+        ],
+        "node_id": 322
+      },
+      {
+        "coord": [
+          -73.97674467649142,
+          40.75916473813571
+        ],
+        "node_id": 323
+      },
+      {
+        "coord": [
+          -73.9762886955087,
+          40.75978675980173
+        ],
+        "node_id": 50
+      }
+    ],
+    "total_cost": 1.5968556264825187,
+    "total_stress": 0.05251495725243415
+  }
+}

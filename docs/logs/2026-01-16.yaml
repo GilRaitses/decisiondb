@@ -1,0 +1,110 @@
+---
+date: "2026-01-16"
+objective: "New day rollover, ingest Pearson activation artifacts, update manuscript to nonzero stress baseline."
+carryover_from_2026_01_15:
+  - "Pearson activation artifacts in /Users/gilraitses/decisiondb/scripts/2026-01-15/"
+  - "Manuscript in /Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/manuscript/"
+new_artifacts_created_today:
+  - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/traces/pearson_activation_trace_pointer.txt"
+  - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/audits/pearson_normalized_stress_audit_pointer.txt"
+  - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/pearson_activation_extracted_summary.json"
+  - "/Users/gilraitses/decisiondb/scripts/2026-01-16/notes/compile_research_pdf_log.txt"
+  - "/Users/gilraitses/decisiondb/scripts/2026-01-16/notes/compile_instructor_pdf_log.txt"
+manuscript_edits_made_today:
+  - "/Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/manuscript/sections/03_results.tex"
+  - "/Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/manuscript/appendix.tex"
+  - "/Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/manuscript/sections/04_discussion.tex"
+compile_status:
+  research_pdf: "success"
+  instructor_pdf: "success"
+notes:
+  - "Prior invariance language was conditioned on zero stress and is deprecated once activation metrics are cited."
+  - "Pearson activation metrics: total_stress 0.062427461378944026, max_edge_stress 2.321364551782608, nonzero_edge_count 15."
+  - "Pearson runs 0041 (activated perturbations) and 0052 (viz normalize smoke test) are the canonical references for 2026-01-16."
+  - "2026-01-16 establishes the first valid stress-aware baseline under normalized_stress."
+  - "Baseline frozen at 1604 EST; no refactor work started. Canonical artifacts remain under scripts/2026-01-16/artifacts."
+
+pearson_runs:
+  "0027":
+    task: "normalize_stress_everywhere"
+    commands_run:
+      - "python3 scripts/2026-01-16/run_normalized_stress_activation.py"
+      - "python3 scripts/2026-01-16/run_neighbor_weight_activated.py"
+      - "python3 scripts/2026-01-16/run_second_order_weight_activated.py"
+    paths_read:
+      - "/Users/gilraitses/decisiondb/data/stress_scores_updated.json"
+      - "/Users/gilraitses/decisiondb/data/geojson/voronoi_zones.geojson"
+      - "/Users/gilraitses/decisiondb/data/geojson/intersections.json"
+      - "/Users/gilraitses/decisiondb/data/manifests/corridor_cameras_numbered.json"
+    artifacts_written:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/audits/normalized_stress_audit.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/traces/pearson_stress_activation_trace.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/pearson_stress_activation_summary.txt"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/traces/pearson_neighbor_weight_activated_trace.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/traces/pearson_second_order_weight_activated_trace.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/notes/pearson_preperturbation_checks.txt"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/notes/pearson_stress_consumer_inventory.txt"
+    field_selection:
+      preferred_key: "normalized_stress"
+      fallback_order: ["stress_score", "raw_stress", "mean_stress"]
+      chosen_key: "normalized_stress"
+  "0035":
+    task: "activated_perturbations_response"
+    actions:
+      - "Wrote preperturbation status text"
+      - "Copied activated perturbation artifacts to top-level 2026-01-16 paths"
+      - "Wrote response YAML to King inbox"
+    artifacts_written:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/pearson_preperturbation_status.txt"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/pearson_neighbor_weight_activated_results.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/pearson_neighbor_weight_activated_trace.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/pearson_neighbor_weight_activated_summary.txt"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/pearson_second_order_weight_activated_results.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/pearson_second_order_weight_activated_trace.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/pearson_second_order_weight_activated_summary.txt"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/agents/handoff/king/0035-pearson-brief-response.yaml"
+  "0041":
+    task: "rerun_activated_perturbations"
+    commands_run:
+      - "python3 scripts/2026-01-16/run_normalized_stress_activation.py"
+      - "python3 scripts/2026-01-16/run_neighbor_weight_activated.py"
+      - "python3 scripts/2026-01-16/run_second_order_weight_activated.py"
+    paths_read:
+      - "/Users/gilraitses/decisiondb/data/stress_scores_updated.json"
+      - "/Users/gilraitses/decisiondb/data/geojson/voronoi_zones.geojson"
+      - "/Users/gilraitses/decisiondb/data/geojson/intersections.json"
+      - "/Users/gilraitses/decisiondb/data/manifests/corridor_cameras_numbered.json"
+    artifacts_written:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/audits/normalized_stress_audit.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/traces/pearson_stress_activation_trace.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/pearson_stress_activation_summary.txt"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/traces/pearson_neighbor_weight_activated_trace.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_summary.txt"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/traces/pearson_second_order_weight_activated_trace.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_summary.txt"
+    chosen_key: "normalized_stress"
+    fallback_order: ["stress_score", "raw_stress", "mean_stress"]
+    warnings: []
+  "0052":
+    task: "viz_normalize_smoke_test"
+    commands_run:
+      - "python3 scripts/2025-11-15/generate_stress_heatmap.py --output scripts/2026-01-16/artifacts/visuals/stress_heatmap_smoke.png"
+    paths_read:
+      - "/Users/gilraitses/decisiondb/data/stress_scores_updated.json"
+      - "/Users/gilraitses/decisiondb/data/manifests/corridor_cameras_numbered.json"
+      - "/Users/gilraitses/decisiondb/data/shapefiles/dcm/DCM_StreetCenterLine.shp"
+    artifacts_written:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/NOTES_noncanonical_copies.txt"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/audits/pearson_viz_consumer_inventory.txt"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/visuals/stress_heatmap_smoke.png"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/visuals/stress_heatmap_smoke.stress_audit.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/visuals/viz_smoke_test_metadata.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-16/artifacts/visuals/viz_smoke_test_summary.txt"
+    chosen_key: "normalized_stress"
+    fallback_order: ["stress_score", "raw_stress", "mean_stress"]
+    warnings:
+      - "UserWarning: linestyle specified twice in generate_stress_heatmap.py"

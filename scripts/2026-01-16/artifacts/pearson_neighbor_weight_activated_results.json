@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-01-18T22:11:58.155026+00:00",
+    "od_pair": {
+      "start_node": 85,
+      "end_node": 50
+    },
+    "neighbor_weight_baseline": 0.5,
+    "neighbor_weight_perturbed": 1.0,
+    "second_order_weight": 0.25,
+    "stress_source_key": "normalized_stress",
+    "fallback_used": false,
+    "missing_count": 0,
+    "projection_target_crs": "EPSG:32618",
+    "zones_projected": true
+  },
+  "baseline": {
+    "node_count": 16,
+    "distance": 0.042103437518079545,
+    "total_stress": 0.062427461378944026,
+    "max_edge_stress": 2.321364551782608,
+    "nonzero_edge_count": 15,
+    "path_nodes": [
+      85,
+      176,
+      463,
+      14,
+      404,
+      76,
+      406,
+      407,
+      223,
+      200,
+      311,
+      310,
+      314,
+      322,
+      323,
+      50
+    ]
+  },
+  "perturbed": {
+    "node_count": 16,
+    "distance": 0.042103437518079545,
+    "total_stress": 0.08900817336152145,
+    "max_edge_stress": 3.13231760263443,
+    "nonzero_edge_count": 15,
+    "path_nodes": [
+      85,
+      176,
+      463,
+      14,
+      404,
+      76,
+      406,
+      407,
+      223,
+      200,
+      311,
+      310,
+      314,
+      322,
+      323,
+      50
+    ]
+  },
+  "total_stress_before": 0.062427461378944026,
+  "total_stress_after": 0.08900817336152145,
+  "max_edge_stress_before": 2.321364551782608,
+  "max_edge_stress_after": 3.13231760263443,
+  "nonzero_edge_count_before": 15,
+  "nonzero_edge_count_after": 15,
+  "route_changed": false,
+  "edge_order_changed": false
+}

@@ -1,0 +1,67 @@
+{
+  "edge_trace": [
+    {
+      "edge_length": 0.001060220293972236,
+      "edge_stress": 0.311983346884229,
+      "edge_u": 395,
+      "edge_v": 391,
+      "stress_penalty": 0.027454534525812153
+    },
+    {
+      "edge_length": 0.001481700074435821,
+      "edge_stress": 0.33363603592051494,
+      "edge_u": 391,
+      "edge_v": 383,
+      "stress_penalty": 0.029359971161005312
+    }
+  ],
+  "metadata": {
+    "diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/suite/SEQ-A_A3/zoom/diagnostics/lambda_0p9875.json",
+    "git_commit": "a356128cab9700f87a476d50c66e53e4a22b3e22",
+    "git_dirty": true,
+    "lambda": 0.9875,
+    "od_pair": {
+      "end_node": 383,
+      "start_node": 395
+    },
+    "projection_target_crs": "EPSG:32618",
+    "script_name": "run_representation_sensitivity_garment_suite.py",
+    "stress_source_key": "normalized_stress",
+    "timestamp_utc": "2026-01-18T23:44:42.330151+00:00",
+    "zones_projected": true
+  },
+  "results": {
+    "distance": 0.002541920368408057,
+    "lambda": 0.9875,
+    "path_nodes": [
+      395,
+      391,
+      383
+    ],
+    "route_geometry": [
+      {
+        "coord": [
+          -73.98749101867483,
+          40.752158934720185
+        ],
+        "node_id": 395
+      },
+      {
+        "coord": [
+          -73.98731032078743,
+          40.75289242273276
+        ],
+        "node_id": 391
+      },
+      {
+        "coord": [
+          -73.98594653100483,
+          40.75231680529444
+        ],
+        "node_id": 383
+      }
+    ],
+    "total_cost": 0.05935642605522552,
+    "total_stress": 0.0008251196150059386
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "od_pair": {
+    "origin": {
+      "name": "Grand Central Terminal",
+      "coordinates": [
+        -73.977229,
+        40.752726
+      ]
+    },
+    "destination": {
+      "name": "Carnegie Hall",
+      "coordinates": [
+        -73.979924,
+        40.765126
+      ]
+    },
+    "snapped_nodes": {
+      "start_node": 85,
+      "end_node": 50
+    },
+    "snapping_rule": "AStarPathfinder._resolve_node with nearest fallback"
+  },
+  "parameters": {
+    "use_regularization": false,
+    "idw_max_distance": 0.005,
+    "idw_k_nearest": 5,
+    "idw_epsilon": 1e-06,
+    "stress_config": {
+      "w_spacing_powerlaw": 0.35,
+      "w_infra_psycho": 0.2,
+      "w_ped_psycho": 0.25,
+      "w_veh_psycho": 0.2
+    }
+  },
+  "street_based": {
+    "path_nodes": [
+      85,
+      31,
+      21,
+      25,
+      26,
+      44,
+      33,
+      22,
+      35,
+      38,
+      322,
+      323,
+      50
+    ],
+    "node_count": 13,
+    "distance": 0.010392050479950399,
+    "total_stress": 0.0,
+    "stress_weight": 0.088
+  },
+  "idw": {
+    "path_nodes": [
+      85,
+      31,
+      21,
+      25,
+      26,
+      44,
+      33,
+      22,
+      35,
+      38,
+      322,
+      323,
+      50
+    ],
+    "node_count": 13,
+    "distance": 0.010392050479950399,
+    "total_stress": 0.0,
+    "stress_weight": 0.088
+  }
+}

@@ -1,0 +1,3 @@
+check_audit_file_exists_and_nontrivial: PASS
+check_od_trace_nonzero: PASS
+check_key_is_consistent: PASS

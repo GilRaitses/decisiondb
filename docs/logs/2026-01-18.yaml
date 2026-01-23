@@ -1,0 +1,115 @@
+---
+date: "2026-01-18"
+objective: "Post-refactor phase 1 documentation and log initialization."
+phase_1_status:
+  intersection_owned_stress: "complete"
+  parity_statement: "Parity achieved for OD 85 -> 50 against activation trace."
+  completion_response: "/Users/gilraitses/decisiondb/scripts/2026-01-18/agents/handoff/king/1700-pearson-brief-response.yaml"
+  files_modified:
+    - "/Users/gilraitses/decisiondb/src/pax/stress/intersection_stress.py"
+    - "/Users/gilraitses/decisiondb/src/pax/scripts/voronoi_stress_scoring.py"
+    - "/Users/gilraitses/decisiondb/src/pax/pathfinding/learned_heuristic.py"
+    - "/Users/gilraitses/decisiondb/scripts/2026-01-16/run_normalized_stress_activation.py"
+    - "/Users/gilraitses/decisiondb/scripts/2026-01-16/run_neighbor_weight_activated.py"
+    - "/Users/gilraitses/decisiondb/scripts/2026-01-16/run_second_order_weight_activated.py"
+    - "/Users/gilraitses/decisiondb/scripts/2026-01-18/debug/intersection_refactor_map.md"
+    - "/Users/gilraitses/decisiondb/scripts/2026-01-18/debug/test_intersection_stress_parity.py"
+  tests_run:
+    - "python3 scripts/2026-01-18/debug/test_intersection_stress_parity.py"
+notes:
+  - "Intersection owned stress Phase 1 refactor is complete."
+  - "Behavioral outputs match the frozen baseline; no behavioral change claimed."
+  - "Intersection aggregation is now recorded explicitly in diagnostics."
+post_phase_2_system_snapshot_intersection_owned_stress:
+  title: "Post-Phase-2 System Snapshot (Intersection-Owned Stress)"
+  status: "snapshot recorded"
+  stress_ownership: "intersection-owned"
+  block_aggregation: "block layer aggregates intersection scalars without recomputation"
+  parity_tests: "PASS for Phase 1 and Phase 2"
+  audit_reference: "/Users/gilraitses/decisiondb/scripts/2026-01-18/agents/handoff/king/1720-bebo-brief-response.yaml"
+  refactor_map: "/Users/gilraitses/decisiondb/scripts/2026-01-18/debug/block_refactor_map.md"
+  intersection_spec: "/Users/gilraitses/decisiondb/scripts/2026-01-18/notes/intersection_signal_spec.md"
+
+post_sensitivity_system_snapshot:
+  title: "Post-sensitivity snapshot frozen"
+  status: "snapshot recorded"
+  artifact_roots:
+    - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district"
+    - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom"
+  breakpoint_summary_index: "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/breakpoint_summary_index.json"
+  synthesis_note: "/Users/gilraitses/decisiondb/scripts/2026-01-18/notes/garment_district_representation_breakpoints.md"
+  snapshot_index: "/Users/gilraitses/decisiondb/scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
+
+portfolio_exit_snapshot:
+  title: "Portfolio exit packet final freeze"
+  status: "snapshot recorded"
+  canonical_root: "/Users/gilraitses/decisiondb/scripts/2026-01-18/portfolio_exit/"
+  snapshot_index: "/Users/gilraitses/decisiondb/scripts/2026-01-18/snapshots/portfolio_exit_snapshot_index.md"
+
+portfolio_exit_snapshot_finalized:
+  canonical_root: "/Users/gilraitses/decisiondb/scripts/2026-01-18/portfolio_exit/"
+  snapshot_index: "/Users/gilraitses/decisiondb/scripts/2026-01-18/snapshots/portfolio_exit_snapshot_index.md"
+
+pearson_runs:
+  "1756":
+    task: "representation_sensitivity_sweep"
+    command_run:
+      - "python3 scripts/2026-01-18/run_representation_sensitivity_sweep.py"
+    artifacts_written:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/representation_sensitivity_summary.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/representation_sensitivity_changes.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/runs/lambda_0.0.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/runs/lambda_0.2.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/runs/lambda_0.4.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/runs/lambda_0.6.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/runs/lambda_0.8.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/runs/lambda_1.0.json"
+    summary:
+      lambda_values: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+      route_change_points: ["0.0 to 0.2", "0.6 to 0.8"]
+      routing_behavior: "piecewise changed"
+  "1810":
+    task: "representation_sensitivity_zoom"
+    command_run:
+      - "python3 scripts/2026-01-18/run_representation_sensitivity_zoom.py"
+    artifacts_written:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/zoom/representation_sensitivity_zoom_summary.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/zoom/runs"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/zoom/diagnostics"
+    transition_intervals:
+      band_a: [[0.0054, 0.0055], [0.0276, 0.0277], [0.0532, 0.0533]]
+      band_b: [[0.6418, 0.6419]]
+  "1816":
+    task: "representation_sensitivity_second_od"
+    command_run:
+      - "python3 scripts/2026-01-18/run_representation_sensitivity_second_od.py"
+    artifacts_written:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/second_od/summary.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/second_od/runs"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/second_od/diagnostics"
+  "1838":
+    task: "garment_district_od_suite"
+    command_run:
+      - "python3 scripts/2026-01-18/run_representation_sensitivity_garment_suite.py -g 0.0,0.2,0.4,0.6,0.8,1.0"
+    artifact_root:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district"
+    lambda_grid: [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+    summary_paths:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/suite_summary.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/suite_changes.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/suite_zoom_summary.json"
+    outcome: "14 legs changed, 3 legs stable."
+  "1651":
+    task: "representation_sensitivity_breakpoint_characterization"
+    command_run:
+      - "python3 scripts/2026-01-18/run_representation_sensitivity_breakpoint_characterization.py"
+    artifact_root:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom"
+    summary_paths:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/breakpoint_summary_index.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-01_summary.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-02_summary.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-03_summary.json"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-04_summary.json"
+    synthesis_doc:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-18/notes/garment_district_representation_breakpoints.md"

@@ -1,0 +1,247 @@
+# decisiondb-mirror
+
+A minimal, auditable logging + analysis layer for **decision-valued maps** of the form **f: r → d**, where:
+
+- **r** is a *representation* of fixed raw data (kernel choice, aggregation window, thresholding policy, cost encoding)
+- **d** is a *discrete decision identity* produced by a fixed engine (route id, regime label, policy choice)
+- the **engine** and **raw data snapshot** are held fixed while **r** varies
+
+This repo is the **decisiondb** mirror. It is meant to be runnable by a fresh agent with zero context when shipped to the destination repo at `/Users/gilraitses/decisiondb`.
+
+## what this is (and what it is not)
+
+This system is about **identity changes** induced by representational choices.
+
+It is not:
+
+- hyperparameter tuning
+- gradient or loss surface analysis
+- training dynamics
+
+The primary observable is the **decision id**.
+
+## architecture
+
+decisiondb is three thin layers:
+
+1. **sweep runner**: enumerates a representation family `r ∈ R` and calls a fixed engine.
+2. **registry**: logs each run as an immutable record `(r, d, aux)` with strict ids.
+3. **diagnostics**: computes stability, flips, and region connectivity over representation space.
+
+Everything is file-first. A database can be added later, but the first experiment must work with plain files.
+
+## repository layout
+
+Root: `/Users/gilraitses/decisiondb`
+
+- `data/` core run data and inputs
+  - `raw/` fixed input snapshots, if available
+  - `runs/` immutable run records written by sweep runners
+  - `indexes/` derived indexes for fast queries
+- `docs/` narrative documentation and logs
+- `scripts/` runnable experiments and reproducible runs
+- `src/` reusable library code for decisiondb
+- `handoff/` agent handoff specs and prompts
+
+## core data model
+
+### entities
+
+- **representation**: a named, typed configuration that transforms raw data into an engine-ready view.
+- **decision**: a discrete identity emitted by the engine.
+- **run**: one execution of the engine under one representation.
+
+### invariants
+
+- raw data snapshot id is constant within an experiment.
+- engine id is constant within an experiment.
+- representation parameters are the *only* varying inputs across the sweep.
+
+## id rules (strict)
+
+All ids are **lowercase**. Use only: `a-z`, `0-9`, `_`, `-`.
+
+### ulids
+
+When you need a new unique id, use a **ULID** (26 chars, base32). Store it lowercase.
+
+- `run_id`: ulid
+- `experiment_id`: ulid
+
+### content ids
+
+When you need identity for content, use **sha256** of canonical bytes.
+
+- `representation_id`: `rep_<sha256_16>` where `<sha256_16>` is the first 16 hex chars of sha256(canonical_representation_json)
+- `decision_id`: `dec_<sha256_16>` where hash is over the canonical decision payload
+- `snapshot_id`: `snap_<sha256_16>` over raw snapshot bytes or a canonical manifest
+
+### canonicalization
+
+Canonical JSON means:
+
+- UTF-8
+- no trailing whitespace
+- sorted keys
+- no NaN/Infinity
+
+## schemas
+
+All records are JSON.
+
+### representation schema
+
+Stored in each run record under `representation`.
+
+```json
+{
+  "schema": "decisiondb.representation.v1",
+  "representation_id": "rep_0123abcd4567ef89",
+  "name": "linear_mix",
+  "family": "cost_encoding",
+  "params": {
+    "lambda": 0.4,
+    "cost_a": "distance",
+    "cost_b": "time"
+  },
+  "notes": "mix distance and time linearly"
+}
+```
+
+### decision schema
+
+```json
+{
+  "schema": "decisiondb.decision.v1",
+  "decision_id": "dec_89ab0123cdef4567",
+  "kind": "route",
+  "identity": {
+    "path_nodes": ["a", "b", "d"],
+    "path_edges": ["a-b", "b-d"]
+  },
+  "equivalence": {
+    "exact": "sha256(identity)",
+    "corridor": "optional corridor hash"
+  }
+}
+```
+
+### run schema
+
+One file per run:
+
+`data/runs/<experiment_id>/<run_id>.json`
+
+```json
+{
+  "schema": "decisiondb.run.v1",
+  "run_id": "01j2h8k9m0n1p2q3r4s5t6u7v8",
+  "experiment_id": "01j2h8k9m0n1p2q3r4s5t6u7v8",
+  "created_at": "2026-01-22t21:00:00-05:00",
+  "engine": {
+    "engine_id": "engine_networkx_dijkstra_v1",
+    "engine_kind": "router",
+    "engine_version": "1"
+  },
+  "snapshot": {
+    "snapshot_id": "snap_abcdef0123456789",
+    "description": "toy graph v1"
+  },
+  "representation": {"schema": "decisiondb.representation.v1"},
+  "decision": {"schema": "decisiondb.decision.v1"},
+  "aux": {
+    "score": 12.7,
+    "runtime_ms": 3,
+    "notes": "anything else you want to keep"
+  }
+}
+```
+
+### experiment manifest schema
+
+`data/runs/<experiment_id>/experiment.json`
+
+```json
+{
+  "schema": "decisiondb.experiment.v1",
+  "experiment_id": "01j2h8k9m0n1p2q3r4s5t6u7v8",
+  "name": "toy_router_lambda_sweep",
+  "created_at": "2026-01-22t21:00:00-05:00",
+  "engine_id": "engine_networkx_dijkstra_v1",
+  "snapshot_id": "snap_abcdef0123456789",
+  "representation_family": "cost_encoding",
+  "sweep": {
+    "param": "lambda",
+    "values": [0.0, 0.25, 0.5, 0.75, 1.0]
+  },
+  "outputs": {
+    "runs_dir": "data/runs/<experiment_id>/",
+    "index_path": "data/indexes/<experiment_id>.json"
+  }
+}
+```
+
+## minimal first experiment (must be runnable)
+
+The first experiment is a **toy routing sweep**.
+
+### goal
+
+Hold a toy graph fixed. Vary a representation parameter `lambda ∈ [0,1]` that mixes two edge costs:
+
+- `cost = (1-lambda)*distance + lambda*time`
+
+Run Dijkstra each time. Log the chosen path as the decision.
+
+### expected result
+
+A small set of distinct path identities across the sweep and at least one flip if the toy graph is chosen correctly.
+
+### implementation spec
+
+Create a script:
+
+- `scripts/first_experiment_toy_router.py`
+
+It must:
+
+1. create `experiment_id` (ulid)
+2. define a toy graph with per-edge `distance` and `time`
+3. define a sweep grid (start: `[0.0, 0.25, 0.5, 0.75, 1.0]`)
+4. for each `lambda`:
+   - build a representation record
+   - compute the mixed edge weight
+   - run Dijkstra from `a` to `d`
+   - build a decision record (`kind: route`, identity includes node list)
+   - write one run file into `data/runs/<experiment_id>/`
+5. write the experiment manifest `experiment.json`
+6. write a simple derived index `data/indexes/<experiment_id>.json` that includes:
+   - counts of distinct decisions
+   - a map from `decision_id` to the list of lambdas producing it
+   - the ordered sequence of decisions along the lambda grid
+
+### acceptance criteria
+
+- running the script creates a new `data/runs/<experiment_id>/` directory
+- there is one `*.json` file per lambda value
+- `experiment.json` exists and matches the schema above
+- `data/indexes/<experiment_id>.json` exists
+
+## diagnostics (v1)
+
+After the first experiment, implement these diagnostic computations using only the index:
+
+- `distinct_decision_count`
+- `flip_points`: positions in the sweep where decision_id changes
+- `stability_spans`: contiguous segments of lambdas with same decision_id
+
+Keep this as pure python in `src/decisiondb/diagnostics.py`.
+
+## notes on continuous data
+
+The system can support continuous updates by treating each update as a new **snapshot_id**. Within each snapshot, sweeps are over representation families. Over time, you get a time series of decision maps.
+
+## contributing
+
+Keep 'pax' lowercase. All other names and ids should be lowercase, unless they are literal strings in code or file paths.
+

@@ -1,0 +1,18 @@
+This manuscript now closes with a concrete specification for a decision-valued map of the form
+$f : R \rightarrow D$ that is intended to make representation choices and routing outcomes
+reproducible, auditable, and queryable. The outcome of the 2026-01-15 to 2026-01-20 work window
+is a minimal, implementable design for a logging and analysis subsystem that records how each
+representation of a frozen snapshot yields a discrete decision identity under a fixed engine.
+
+The specification defines strict identifiers for snapshots, representations, engine runs, and
+decisions using canonical JSON hashing, and it separates representation parameters from engine
+tuning. It fixes a minimal schema for snapshots, representations, engine runs, decisions, and
+the $f$ map, with artifact references and policy versions captured for auditability. It also
+declares a minimal directory layout and a first experiment that sweeps a representation family
+to verify nontrivial decision diversity and repeatability. Required analysis outputs include
+decision counts, flip edges across neighbors, and connected components per decision identity.
+
+Taken together, these changes convert the prior planning narrative into an executable, testable
+contract. The manuscript should be read as the baseline for implementation, with the conclusion
+anchoring the data model, identity rules, and experiment criteria that define the system outcome
+for this phase of work.

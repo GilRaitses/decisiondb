@@ -1,0 +1,252 @@
+{
+  "change_points": [
+    {
+      "changed_nodes": [
+        162,
+        450,
+        455,
+        460
+      ],
+      "lambda_from": 0.0,
+      "lambda_to": 0.2,
+      "top_delta_nodes": [
+        {
+          "abs_delta": 1.4220647862681082,
+          "idw_stress": 0.3116309890023539,
+          "node_id": 455,
+          "voronoi_stress": 1.733695775270462
+        },
+        {
+          "abs_delta": 0.40254767534902786,
+          "idw_stress": 0.31562349649497773,
+          "node_id": 162,
+          "voronoi_stress": 0.7181711718440056
+        },
+        {
+          "abs_delta": 0.4020056174420779,
+          "idw_stress": 0.3161655544019277,
+          "node_id": 460,
+          "voronoi_stress": 0.7181711718440056
+        },
+        {
+          "abs_delta": 0.15331459084939453,
+          "idw_stress": 0.31396701971482727,
+          "node_id": 450,
+          "voronoi_stress": 0.16065242886543274
+        }
+      ]
+    },
+    {
+      "changed_nodes": [
+        107,
+        110,
+        118,
+        452,
+        455,
+        480,
+        534,
+        535
+      ],
+      "lambda_from": 0.6,
+      "lambda_to": 0.8,
+      "top_delta_nodes": [
+        {
+          "abs_delta": 1.7870559312591603,
+          "idw_stress": 0.33761015607022743,
+          "node_id": 110,
+          "voronoi_stress": 2.1246660873293877
+        },
+        {
+          "abs_delta": 1.4220647862681082,
+          "idw_stress": 0.3116309890023539,
+          "node_id": 455,
+          "voronoi_stress": 1.733695775270462
+        },
+        {
+          "abs_delta": 1.24786404358596,
+          "idw_stress": 0.31825690878182267,
+          "node_id": 107,
+          "voronoi_stress": 1.5661209523677826
+        },
+        {
+          "abs_delta": 1.2163903885995118,
+          "idw_stress": 0.30858019501817535,
+          "node_id": 118,
+          "voronoi_stress": 1.5249705836176872
+        },
+        {
+          "abs_delta": 0.4029007993274909,
+          "idw_stress": 0.3152703725165147,
+          "node_id": 480,
+          "voronoi_stress": 0.7181711718440056
+        }
+      ]
+    },
+    {
+      "changed_nodes": [
+        107,
+        110,
+        175,
+        179
+      ],
+      "lambda_from": 0.8,
+      "lambda_to": 1.0,
+      "top_delta_nodes": [
+        {
+          "abs_delta": 2.17915601771125,
+          "idw_stress": 0.3173706631754951,
+          "node_id": 175,
+          "voronoi_stress": 2.4965266808867455
+        },
+        {
+          "abs_delta": 1.7870559312591603,
+          "idw_stress": 0.33761015607022743,
+          "node_id": 110,
+          "voronoi_stress": 2.1246660873293877
+        },
+        {
+          "abs_delta": 1.3129388523386352,
+          "idw_stress": 0.3170894774510033,
+          "node_id": 179,
+          "voronoi_stress": 1.6300283297896385
+        },
+        {
+          "abs_delta": 1.24786404358596,
+          "idw_stress": 0.31825690878182267,
+          "node_id": 107,
+          "voronoi_stress": 1.5661209523677826
+        }
+      ]
+    }
+  ],
+  "description": "Route changes across 3 lambda bands for this leg.",
+  "dominant_stress_deltas": [
+    {
+      "lambda_from": 0.0,
+      "lambda_to": 0.2,
+      "top_delta_nodes": [
+        {
+          "abs_delta": 1.4220647862681082,
+          "idw_stress": 0.3116309890023539,
+          "node_id": 455,
+          "voronoi_stress": 1.733695775270462
+        },
+        {
+          "abs_delta": 0.40254767534902786,
+          "idw_stress": 0.31562349649497773,
+          "node_id": 162,
+          "voronoi_stress": 0.7181711718440056
+        },
+        {
+          "abs_delta": 0.4020056174420779,
+          "idw_stress": 0.3161655544019277,
+          "node_id": 460,
+          "voronoi_stress": 0.7181711718440056
+        },
+        {
+          "abs_delta": 0.15331459084939453,
+          "idw_stress": 0.31396701971482727,
+          "node_id": 450,
+          "voronoi_stress": 0.16065242886543274
+        }
+      ]
+    },
+    {
+      "lambda_from": 0.6,
+      "lambda_to": 0.8,
+      "top_delta_nodes": [
+        {
+          "abs_delta": 1.7870559312591603,
+          "idw_stress": 0.33761015607022743,
+          "node_id": 110,
+          "voronoi_stress": 2.1246660873293877
+        },
+        {
+          "abs_delta": 1.4220647862681082,
+          "idw_stress": 0.3116309890023539,
+          "node_id": 455,
+          "voronoi_stress": 1.733695775270462
+        },
+        {
+          "abs_delta": 1.24786404358596,
+          "idw_stress": 0.31825690878182267,
+          "node_id": 107,
+          "voronoi_stress": 1.5661209523677826
+        },
+        {
+          "abs_delta": 1.2163903885995118,
+          "idw_stress": 0.30858019501817535,
+          "node_id": 118,
+          "voronoi_stress": 1.5249705836176872
+        },
+        {
+          "abs_delta": 0.4029007993274909,
+          "idw_stress": 0.3152703725165147,
+          "node_id": 480,
+          "voronoi_stress": 0.7181711718440056
+        }
+      ]
+    },
+    {
+      "lambda_from": 0.8,
+      "lambda_to": 1.0,
+      "top_delta_nodes": [
+        {
+          "abs_delta": 2.17915601771125,
+          "idw_stress": 0.3173706631754951,
+          "node_id": 175,
+          "voronoi_stress": 2.4965266808867455
+        },
+        {
+          "abs_delta": 1.7870559312591603,
+          "idw_stress": 0.33761015607022743,
+          "node_id": 110,
+          "voronoi_stress": 2.1246660873293877
+        },
+        {
+          "abs_delta": 1.3129388523386352,
+          "idw_stress": 0.3170894774510033,
+          "node_id": 179,
+          "voronoi_stress": 1.6300283297896385
+        },
+        {
+          "abs_delta": 1.24786404358596,
+          "idw_stress": 0.31825690878182267,
+          "node_id": 107,
+          "voronoi_stress": 1.5661209523677826
+        }
+      ]
+    }
+  ],
+  "leg_id": "OD-01",
+  "od_pair": {
+    "end_node": 116,
+    "start_node": 177
+  },
+  "refined_intervals": [
+    {
+      "lambda_after": 0.1555,
+      "lambda_before": 0.1547,
+      "lambda_interval": [
+        0.1547,
+        0.1555
+      ]
+    },
+    {
+      "lambda_after": 0.696,
+      "lambda_before": 0.6952,
+      "lambda_interval": [
+        0.6952,
+        0.696
+      ]
+    },
+    {
+      "lambda_after": 0.9484,
+      "lambda_before": 0.9476,
+      "lambda_interval": [
+        0.9476,
+        0.9484
+      ]
+    }
+  ]
+}

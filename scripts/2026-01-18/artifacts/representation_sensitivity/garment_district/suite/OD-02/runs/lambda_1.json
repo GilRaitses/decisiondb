@@ -1,0 +1,52 @@
+{
+  "edge_trace": [
+    {
+      "edge_length": 0.004978388379541343,
+      "edge_stress": 0.29781711134676137,
+      "edge_u": 118,
+      "edge_v": 395,
+      "stress_penalty": 0.026207905798514997
+    }
+  ],
+  "metadata": {
+    "diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/suite/OD-02/diagnostics/lambda_1.json",
+    "git_commit": "a356128cab9700f87a476d50c66e53e4a22b3e22",
+    "git_dirty": true,
+    "lambda": 1.0,
+    "od_pair": {
+      "end_node": 395,
+      "start_node": 118
+    },
+    "projection_target_crs": "EPSG:32618",
+    "script_name": "run_representation_sensitivity_garment_suite.py",
+    "stress_source_key": "normalized_stress",
+    "timestamp_utc": "2026-01-18T23:44:42.182209+00:00",
+    "zones_projected": true
+  },
+  "results": {
+    "distance": 0.004978388379541343,
+    "lambda": 1.0,
+    "path_nodes": [
+      118,
+      395
+    ],
+    "route_geometry": [
+      {
+        "coord": [
+          -73.99207900061595,
+          40.754091115131246
+        ],
+        "node_id": 118
+      },
+      {
+        "coord": [
+          -73.98749101867483,
+          40.752158934720185
+        ],
+        "node_id": 395
+      }
+    ],
+    "total_cost": 0.03118629417805634,
+    "total_stress": 0.001482649246357287
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "chosen_key": "normalized_stress",
+  "fallback_used": false,
+  "od_pair_if_applicable": null,
+  "min_max_mean_nonzero_count_used_in_plot_or_table": {
+    "min": 0.24366243183612823,
+    "max": 0.44065016508102417,
+    "mean": 0.3168924490853054,
+    "nonzero_count": 82
+  },
+  "script_path": "/Users/gilraitses/pax/scripts/2025-11-15/generate_stress_heatmap.py",
+  "timestamp_est_hhmm": "0052"
+}

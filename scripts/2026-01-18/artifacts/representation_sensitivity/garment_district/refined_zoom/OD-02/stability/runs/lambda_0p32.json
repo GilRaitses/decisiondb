@@ -1,0 +1,52 @@
+{
+  "edge_trace": [
+    {
+      "edge_length": 0.004978388379541343,
+      "edge_stress": 1.1680011061894544,
+      "edge_u": 118,
+      "edge_v": 395,
+      "stress_penalty": 0.10278409734467198
+    }
+  ],
+  "metadata": {
+    "diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-02/stability/diagnostics/lambda_0p32.json",
+    "git_commit": "a356128cab9700f87a476d50c66e53e4a22b3e22",
+    "git_dirty": true,
+    "lambda": 0.32,
+    "od_pair": {
+      "end_node": 395,
+      "start_node": 118
+    },
+    "projection_target_crs": "EPSG:32618",
+    "script_name": "run_representation_sensitivity_breakpoint_characterization.py",
+    "stress_source_key": "normalized_stress",
+    "timestamp_utc": "2000-01-01T00:00:00+00:00",
+    "zones_projected": true
+  },
+  "results": {
+    "distance": 0.004978388379541343,
+    "lambda": 0.32,
+    "path_nodes": [
+      118,
+      395
+    ],
+    "route_geometry": [
+      {
+        "coord": [
+          -73.99207900061595,
+          40.754091115131246
+        ],
+        "node_id": 118
+      },
+      {
+        "coord": [
+          -73.98749101867483,
+          40.752158934720185
+        ],
+        "node_id": 395
+      }
+    ],
+    "total_cost": 0.10776248572421332,
+    "total_stress": 0.005814763134345014
+  }
+}

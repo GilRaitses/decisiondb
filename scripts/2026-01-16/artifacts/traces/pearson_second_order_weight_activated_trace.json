@@ -1,0 +1,175 @@
+{
+  "stress_source_key": "normalized_stress",
+  "baseline_edge_trace": [
+    {
+      "edge_u": 85,
+      "edge_v": 176,
+      "edge_length": 0.008331521257595398,
+      "edge_stress": 1.6017335318028927
+    },
+    {
+      "edge_u": 176,
+      "edge_v": 463,
+      "edge_length": 0.009248943817262045,
+      "edge_stress": 1.166159063577652
+    },
+    {
+      "edge_u": 463,
+      "edge_v": 14,
+      "edge_length": 0.0008162194463849914,
+      "edge_stress": 0.5846361666917801
+    },
+    {
+      "edge_u": 14,
+      "edge_v": 404,
+      "edge_length": 0.0008334638477265344,
+      "edge_stress": 0.5405042208731174
+    },
+    {
+      "edge_u": 404,
+      "edge_v": 76,
+      "edge_length": 0.0007767057621563822,
+      "edge_stress": 0.4963722750544548
+    },
+    {
+      "edge_u": 76,
+      "edge_v": 406,
+      "edge_length": 0.0007778500072532779,
+      "edge_stress": 0.4963722750544548
+    },
+    {
+      "edge_u": 406,
+      "edge_v": 407,
+      "edge_length": 0.0007780914112274218,
+      "edge_stress": 1.21847502887249
+    },
+    {
+      "edge_u": 407,
+      "edge_v": 223,
+      "edge_length": 0.00929505821703458,
+      "edge_stress": 1.7581375688314438
+    },
+    {
+      "edge_u": 223,
+      "edge_v": 200,
+      "edge_length": 0.0007853233574195428,
+      "edge_stress": 1.6004245094954967
+    },
+    {
+      "edge_u": 200,
+      "edge_v": 311,
+      "edge_length": 0.006570865508649604,
+      "edge_stress": 1.578814685344696
+    },
+    {
+      "edge_u": 311,
+      "edge_v": 310,
+      "edge_length": 0.0007831494136851802,
+      "edge_stress": 1.5926655530929565
+    },
+    {
+      "edge_u": 310,
+      "edge_v": 314,
+      "edge_length": 0.0007811515030695659,
+      "edge_stress": 1.652853399515152
+    },
+    {
+      "edge_u": 314,
+      "edge_v": 322,
+      "edge_length": 0.0007760415673061516,
+      "edge_stress": 1.98710897564888
+    },
+    {
+      "edge_u": 322,
+      "edge_v": 323,
+      "edge_length": 0.0007760576915600836,
+      "edge_stress": 2.321364551782608
+    },
+    {
+      "edge_u": 323,
+      "edge_v": 50,
+      "edge_length": 0.0007729947097487866,
+      "edge_stress": 2.321364551782608
+    }
+  ],
+  "perturbed_edge_trace": [
+    {
+      "edge_u": 85,
+      "edge_v": 411,
+      "edge_length": 0.005253226044615644,
+      "edge_stress": 1.9060817211866379
+    },
+    {
+      "edge_u": 411,
+      "edge_v": 419,
+      "edge_length": 0.000825325670277266,
+      "edge_stress": 1.8652948141098022
+    },
+    {
+      "edge_u": 419,
+      "edge_v": 422,
+      "edge_length": 0.0008352221975229668,
+      "edge_stress": 1.8652948141098022
+    },
+    {
+      "edge_u": 422,
+      "edge_v": 332,
+      "edge_length": 0.0007743870252667762,
+      "edge_stress": 1.8652948141098022
+    },
+    {
+      "edge_u": 332,
+      "edge_v": 204,
+      "edge_length": 0.0007764971469441662,
+      "edge_stress": 1.8652948141098022
+    },
+    {
+      "edge_u": 204,
+      "edge_v": 500,
+      "edge_length": 0.000774923097104363,
+      "edge_stress": 2.2940979972481728
+    },
+    {
+      "edge_u": 500,
+      "edge_v": 369,
+      "edge_length": 0.0007750940223445468,
+      "edge_stress": 2.7229011803865433
+    },
+    {
+      "edge_u": 369,
+      "edge_v": 79,
+      "edge_length": 0.0007784234609715668,
+      "edge_stress": 2.7229011803865433
+    },
+    {
+      "edge_u": 79,
+      "edge_v": 402,
+      "edge_length": 0.0007784401132937546,
+      "edge_stress": 2.7229011803865433
+    },
+    {
+      "edge_u": 402,
+      "edge_v": 473,
+      "edge_length": 0.000782408676634816,
+      "edge_stress": 2.7229011803865433
+    },
+    {
+      "edge_u": 473,
+      "edge_v": 502,
+      "edge_length": 0.000782629767797971,
+      "edge_stress": 2.7229011803865433
+    },
+    {
+      "edge_u": 502,
+      "edge_v": 501,
+      "edge_length": 0.0007848067013824789,
+      "edge_stress": 2.389521710574627
+    },
+    {
+      "edge_u": 501,
+      "edge_v": 50,
+      "edge_length": 0.006988576072345154,
+      "edge_stress": 2.7933916598558426
+    }
+  ]
+}

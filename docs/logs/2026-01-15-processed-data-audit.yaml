@@ -1,0 +1,178 @@
+---
+date: "2026-01-15"
+subject: "Processed data audit"
+scope: "Processed camera-level data products used by planning pipeline"
+constraints:
+  - "No new experiments"
+  - "No code changes"
+  - "Factual inspection only"
+
+processed_data_artifacts_table:
+  - path: "/Users/gilraitses/decisiondb/data/stress_scores_updated.json"
+    last_modified: "2025-12-16T03:23:44.177459"
+    generating_script_or_process: "no evidence found in repo; referenced as aggregated camera stress in docs/logs/2026-01-15.yaml"
+    usage_paths:
+      - "/Users/gilraitses/decisiondb/src/pax/pathfinding/learned_heuristic.py"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-15/baseline_street_vs_idw.py"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-15/perturbation_neighbor_weight.py"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-coverage/run_stress_coverage_audit.py"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-activation/run_stress_activation.py"
+  - path: "/Users/gilraitses/decisiondb/data/stress_scores_preliminary.json"
+    last_modified: "2025-11-10T12:46:22.432496"
+    generating_script_or_process: "no evidence found"
+    usage_paths: []
+  - path: "/Users/gilraitses/decisiondb/data/stress_scores_manhattan_nov22.json"
+    last_modified: "2025-12-07T23:13:50.387586"
+    generating_script_or_process: "documented dataset from Nov 22 Manhattan collection"
+    usage_paths:
+      - "/Users/gilraitses/decisiondb/docs/presentations/pax_presentation.qmd"
+  - path: "/Users/gilraitses/decisiondb/data/stress_scores_citywide_thanksgiving.json"
+    last_modified: "2025-12-07T23:15:23.251346"
+    generating_script_or_process: "documented dataset from Thanksgiving citywide collection"
+    usage_paths:
+      - "/Users/gilraitses/decisiondb/docs/presentations/pax_presentation.qmd"
+  - path: "/Users/gilraitses/decisiondb/data/camera_features_manhattan_nov22.json"
+    last_modified: "2025-12-07T23:13:50.386402"
+    generating_script_or_process: "GPU pipeline with YOLO, CLIP, Detectron2; documented in pax_presentation.qmd"
+    usage_paths:
+      - "/Users/gilraitses/decisiondb/docs/presentations/pax_presentation.qmd"
+      - "/Users/gilraitses/decisiondb/scripts/bayesian_feature_learning.py"
+  - path: "/Users/gilraitses/decisiondb/data/camera_features_citywide_thanksgiving.json"
+    last_modified: "2025-12-07T23:15:23.250024"
+    generating_script_or_process: "GPU pipeline with YOLO, CLIP, Detectron2; documented in pax_presentation.qmd"
+    usage_paths:
+      - "/Users/gilraitses/decisiondb/docs/presentations/pax_presentation.qmd"
+  - path: "/Users/gilraitses/decisiondb/data/features_nyc_2025.h5"
+    last_modified: "2025-12-08T12:56:14.668926"
+    generating_script_or_process: "H5 features; documented in pax_presentation.qmd"
+    usage_paths:
+      - "/Users/gilraitses/decisiondb/docs/presentations/pax_presentation.qmd"
+      - "/Users/gilraitses/decisiondb/scripts/2025-12-08/apply_winning_formula_to_h5.py"
+  - path: "/Users/gilraitses/decisiondb/data/features_phase1_bottleneck.h5"
+    last_modified: "2025-12-08T12:56:16.314442"
+    generating_script_or_process: "H5 bottleneck features; documented in poster_package/TECHNICAL_NOTES.md"
+    usage_paths:
+      - "/Users/gilraitses/decisiondb/scripts/2025-12-08/extract_ridge_basin_metrics.py"
+      - "/Users/gilraitses/decisiondb/poster_package/TECHNICAL_NOTES.md"
+  - path: "/Users/gilraitses/decisiondb/data/intersection_scores_from_dynamics.json"
+    last_modified: "2025-11-17T22:54:32.407764"
+    generating_script_or_process: "no evidence found"
+    usage_paths:
+      - "/Users/gilraitses/decisiondb/src/pax/pathfinding/learned_heuristic.py (use_empirical_scores optional)"
+  - path: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-coverage/coverage_table.json"
+    last_modified: "2026-01-16T03:22:41.006613"
+    generating_script_or_process: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-coverage/run_stress_coverage_audit.py"
+    usage_paths: []
+  - path: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-activation/stress_activation_trace.json"
+    last_modified: "2026-01-16T03:29:44.192627"
+    generating_script_or_process: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-activation/run_stress_activation.py"
+    usage_paths: []
+
+intended_processing_pipeline_reconstruction:
+  raw_inputs:
+    - "Camera imagery collected via corridor or citywide sweeps"
+  ml_preprocessing_steps:
+    - "YOLO object detection"
+    - "CLIP embeddings"
+    - "Detectron2 segmentation"
+  expected_per_camera_outputs:
+    - "Per camera feature vectors"
+    - "Stress scores derived from features"
+  expected_stress_fields:
+    - "mean_stress (scalar)"
+    - "normalized_stress (scalar)"
+  evidence:
+    - "/Users/gilraitses/decisiondb/docs/presentations/pax_presentation.qmd"
+    - "/Users/gilraitses/decisiondb/docs/logs/2026-01-15.yaml (data_provenance note)"
+
+actual_data_contents:
+  stress_scores_updated:
+    camera_count: 82
+    fields_present: ["normalized_stress"]
+    normalized_stress_stats:
+      min: 0.24366243183612823
+      max: 0.44065016508102417
+      mean: 0.3168924490853054
+      nonzero_count: 82
+    mean_stress_stats:
+      present: false
+      missing_count: 82
+  stress_scores_preliminary:
+    camera_count: 5
+    fields_present: ["mean_stress", "stress_scores", "camera_id", "camera_name", "camera_number", "image_count"]
+    mean_stress_stats:
+      min: 0.03175
+      max: 0.39016666666666666
+      mean: 0.22956666666666664
+      nonzero_count: 5
+  stress_scores_manhattan_nov22:
+    camera_count: 0
+    fields_present: []
+  stress_scores_citywide_thanksgiving:
+    camera_count: 0
+    fields_present: []
+  camera_features_manhattan_nov22:
+    camera_count: 356
+  camera_features_citywide_thanksgiving:
+    camera_count: 365
+
+expected_vs_observed_fields_table:
+  - consumer: "/Users/gilraitses/decisiondb/src/pax/pathfinding/learned_heuristic.py:_load_stress_scores"
+    expected_field: "mean_stress with fallback to normalized_stress"
+    observed_in_stress_scores_updated: "mean_stress missing, normalized_stress present"
+    mismatch: "mean_stress missing"
+  - consumer: "/Users/gilraitses/decisiondb/scripts/2026-01-15/perturbation_neighbor_weight.py:load_camera_stress"
+    expected_field: "mean_stress"
+    observed_in_stress_scores_updated: "mean_stress missing"
+    mismatch: "yes"
+  - consumer: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-coverage/run_stress_coverage_audit.py:load_camera_stress"
+    expected_field: "mean_stress"
+    observed_in_stress_scores_updated: "mean_stress missing"
+    mismatch: "yes"
+  - consumer: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-activation/run_stress_activation.py:load_camera_stress_normalized"
+    expected_field: "normalized_stress"
+    observed_in_stress_scores_updated: "normalized_stress present and nonzero"
+    mismatch: "no"
+
+cameras_with_missing_or_trivial_signal:
+  missing_mean_stress:
+    count: 82
+    sample_camera_ids:
+      - "332f161d-47cb-4c8a-b6b6-5ad48a55c978"
+      - "9c4c2657-6796-4953-bbe6-c50f24bb5820"
+      - "cd949f21-54b2-4d11-8aae-4ffba8654271"
+      - "053e8995-f8cb-4d02-a659-70ac7c7da5db"
+      - "34674be5-4791-47f1-b0b2-2db0ff619732"
+      - "b0cbb042-de0a-449f-b5d1-49f68a9bf2ae"
+      - "5d055599-875a-4010-991f-e7e454889052"
+      - "20b2298a-90cf-463f-b172-0b398a34f061"
+      - "421960d6-54a8-4f12-a5ee-7a07390def4c"
+      - "83655dbc-7902-4fdb-926c-15fee4396b83"
+  normalized_stress_zero:
+    count: 0
+
+timeline_consistency_check:
+  - artifact: "/Users/gilraitses/decisiondb/data/stress_scores_updated.json"
+    last_modified: "2025-12-16T03:23:44.177459"
+    notes: "Predates the 2026-01-15 refactor work; current code expects mean_stress but file only contains normalized_stress."
+  - artifact: "/Users/gilraitses/decisiondb/data/stress_scores_preliminary.json"
+    last_modified: "2025-11-10T12:46:22.432496"
+    notes: "Older, partial camera coverage; not used by current scripts."
+  - artifact: "/Users/gilraitses/decisiondb/data/stress_scores_citywide_thanksgiving.json"
+    last_modified: "2025-12-07T23:15:23.251346"
+    notes: "Empty camera_stress payload."
+  - artifact: "/Users/gilraitses/decisiondb/data/stress_scores_manhattan_nov22.json"
+    last_modified: "2025-12-07T23:13:50.387586"
+    notes: "Empty camera_stress payload."
+
+validity_statement:
+  data_source_valid_for_planning: "conditional"
+  reasoning:
+    - "stress_scores_updated.json provides nonzero normalized_stress for all 82 cameras."
+    - "mean_stress is missing in stress_scores_updated.json, so any consumer using mean_stress alone will see zeros."
+    - "LearnedHeuristicPathfinder uses fallback to normalized_stress, but several diagnostic and perturbation scripts do not."
+  canonical_recommendation:
+    - "Treat normalized_stress in stress_scores_updated.json as the canonical field unless mean_stress is regenerated and documented."
+  regeneration_required: "yes"
+  regeneration_scope:
+    - "Either regenerate mean_stress for all 82 cameras in stress_scores_updated.json or update all consumers to use normalized_stress."

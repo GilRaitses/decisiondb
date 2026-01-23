@@ -1,0 +1,8 @@
+chosen_key: normalized_stress
+fallback_used: False
+min: 0.24366243183612823
+max: 0.44065016508102417
+mean: 0.3168924490853054
+nonzero_count: 82
+plot: scripts/2026-01-16/artifacts/visuals/stress_heatmap_smoke.png
+audit: scripts/2026-01-16/artifacts/visuals/stress_heatmap_smoke.stress_audit.json

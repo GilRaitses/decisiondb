@@ -1,0 +1,159 @@
+{
+  "od_pair": {
+    "start_node": 85,
+    "end_node": 50
+  },
+  "route_nodes": [
+    85,
+    176,
+    463,
+    14,
+    404,
+    76,
+    406,
+    407,
+    223,
+    200,
+    311,
+    310,
+    314,
+    322,
+    323,
+    50
+  ],
+  "edge_trace": [
+    {
+      "edge_u": 85,
+      "edge_v": 176,
+      "edge_length": 0.008331521257595398,
+      "edge_stress": 1.6017335318028927,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 176,
+      "edge_v": 463,
+      "edge_length": 0.009248943817262045,
+      "edge_stress": 1.166159063577652,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 463,
+      "edge_v": 14,
+      "edge_length": 0.0008162194463849914,
+      "edge_stress": 0.5846361666917801,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 14,
+      "edge_v": 404,
+      "edge_length": 0.0008334638477265344,
+      "edge_stress": 0.5405042208731174,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 404,
+      "edge_v": 76,
+      "edge_length": 0.0007767057621563822,
+      "edge_stress": 0.4963722750544548,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 76,
+      "edge_v": 406,
+      "edge_length": 0.0007778500072532779,
+      "edge_stress": 0.4963722750544548,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 406,
+      "edge_v": 407,
+      "edge_length": 0.0007780914112274218,
+      "edge_stress": 1.21847502887249,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 407,
+      "edge_v": 223,
+      "edge_length": 0.00929505821703458,
+      "edge_stress": 1.7581375688314438,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 223,
+      "edge_v": 200,
+      "edge_length": 0.0007853233574195428,
+      "edge_stress": 1.6004245094954967,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 200,
+      "edge_v": 311,
+      "edge_length": 0.006570865508649604,
+      "edge_stress": 1.578814685344696,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 311,
+      "edge_v": 310,
+      "edge_length": 0.0007831494136851802,
+      "edge_stress": 1.5926655530929565,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 310,
+      "edge_v": 314,
+      "edge_length": 0.0007811515030695659,
+      "edge_stress": 1.652853399515152,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 314,
+      "edge_v": 322,
+      "edge_length": 0.0007760415673061516,
+      "edge_stress": 1.98710897564888,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 322,
+      "edge_v": 323,
+      "edge_length": 0.0007760576915600836,
+      "edge_stress": 2.321364551782608,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 323,
+      "edge_v": 50,
+      "edge_length": 0.0007729947097487866,
+      "edge_stress": 2.321364551782608,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    }
+  ],
+  "total_stress": 0.062427461378944026,
+  "max_edge_stress": 2.321364551782608,
+  "nonzero_edge_count": 15,
+  "stress_source_key": "normalized_stress",
+  "diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-16/artifacts/traces/pearson_stress_activation_diagnostics.json",
+  "block_diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-16/artifacts/traces/pearson_block_stress_diagnostics.json",
+  "metadata": {
+    "timestamp_utc": "2026-01-18T22:11:49.957255+00:00",
+    "neighbor_weight": 0.5,
+    "second_order_weight": 0.25,
+    "projection_target_crs": "EPSG:32618",
+    "zones_projected": true
+  }
+}

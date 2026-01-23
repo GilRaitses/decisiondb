@@ -1,0 +1,82 @@
+{
+  "edge_trace": [
+    {
+      "edge_length": 0.000773844606271723,
+      "edge_stress": 0.3799131732306447,
+      "edge_u": 175,
+      "edge_v": 179,
+      "stress_penalty": 0.03343235924429673
+    },
+    {
+      "edge_length": 0.0030869082749163113,
+      "edge_stress": 0.3694786591961037,
+      "edge_u": 179,
+      "edge_v": 388,
+      "stress_penalty": 0.03251412200925712
+    },
+    {
+      "edge_length": 0.0007651146757794436,
+      "edge_stress": 0.3737802236211948,
+      "edge_u": 388,
+      "edge_v": 387,
+      "stress_penalty": 0.03289265967866514
+    }
+  ],
+  "metadata": {
+    "diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/suite/SEQ-B_B1/zoom/diagnostics/lambda_0p9641.json",
+    "git_commit": "a356128cab9700f87a476d50c66e53e4a22b3e22",
+    "git_dirty": true,
+    "lambda": 0.9641,
+    "od_pair": {
+      "end_node": 387,
+      "start_node": 175
+    },
+    "projection_target_crs": "EPSG:32618",
+    "script_name": "run_representation_sensitivity_garment_suite.py",
+    "stress_source_key": "normalized_stress",
+    "timestamp_utc": "2026-01-18T23:44:42.383154+00:00",
+    "zones_projected": true
+  },
+  "results": {
+    "distance": 0.004625867556967478,
+    "lambda": 0.9641,
+    "path_nodes": [
+      175,
+      179,
+      388,
+      387
+    ],
+    "route_geometry": [
+      {
+        "coord": [
+          -73.98878655070159,
+          40.75351677843798
+        ],
+        "node_id": 175
+      },
+      {
+        "coord": [
+          -73.98924341991618,
+          40.75289546416634
+        ],
+        "node_id": 179
+      },
+      {
+        "coord": [
+          -73.98639930861408,
+          40.751699985312676
+        ],
+        "node_id": 388
+      },
+      {
+        "coord": [
+          -73.98684991118436,
+          40.7510816792154
+        ],
+        "node_id": 387
+      }
+    ],
+    "total_cost": 0.10346500848918647,
+    "total_stress": 0.0017205252250422436
+  }
+}

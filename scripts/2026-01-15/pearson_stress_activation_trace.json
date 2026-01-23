@@ -1,0 +1,224 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-01-16T05:03:26.883695+00:00",
+    "od_pair": {
+      "start_node": 85,
+      "end_node": 50
+    },
+    "neighbor_weight": 0.5,
+    "second_order_weight": 0.25,
+    "projection_target_crs": "EPSG:32618",
+    "zones_projected": true
+  },
+  "field_resolution_summary": {
+    "field_priority": [
+      "normalized_stress",
+      "stress_score",
+      "raw_stress",
+      "mean_stress"
+    ],
+    "field_counts": {
+      "normalized_stress": 82
+    },
+    "min": 0.24366243183612823,
+    "median": 0.3172307759523392,
+    "max": 0.44065016508102417
+  },
+  "stress_source": {
+    "stress_source_json_path": "/Users/gilraitses/pax/data/stress_scores_updated.json",
+    "top_level_keys": [
+      "camera_stress"
+    ],
+    "mean_stress_present": false,
+    "normalized_stress_present": true,
+    "sample_camera_entry": {
+      "camera_id": "332f161d-47cb-4c8a-b6b6-5ad48a55c978",
+      "normalized_stress": 0.3368711769580841
+    }
+  },
+  "summary_numbers": {
+    "total_stress": 0.062427461378944026,
+    "max_edge_stress": 2.321364551782608,
+    "nonzero_edge_count": 15
+  },
+  "intersection_summary": {
+    "min": 0.16065242886543274,
+    "median": 1.5249705836176872,
+    "max": 2.8867505118250847
+  },
+  "path_result": {
+    "nodes": [
+      85,
+      176,
+      463,
+      14,
+      404,
+      76,
+      406,
+      407,
+      223,
+      200,
+      311,
+      310,
+      314,
+      322,
+      323,
+      50
+    ],
+    "distance": 0.042103437518079545,
+    "total_stress": 0.062427461378944026,
+    "stress_weight": 0.088
+  },
+  "edge_trace": [
+    {
+      "edge_u": 85,
+      "edge_v": 176,
+      "edge_length": 0.008331521257595398,
+      "edge_stress": 1.6017335318028927,
+      "stress_penalty": 0.14095255079865454,
+      "edge_cost": 0.14928407205624994,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 176,
+      "edge_v": 463,
+      "edge_length": 0.009248943817262045,
+      "edge_stress": 1.166159063577652,
+      "stress_penalty": 0.10262199759483337,
+      "edge_cost": 0.11187094141209541,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 463,
+      "edge_v": 14,
+      "edge_length": 0.0008162194463849914,
+      "edge_stress": 0.5846361666917801,
+      "stress_penalty": 0.051447982668876645,
+      "edge_cost": 0.052264202115261636,
+      "stress_field_used": "default_zero",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 14,
+      "edge_v": 404,
+      "edge_length": 0.0008334638477265344,
+      "edge_stress": 0.5405042208731174,
+      "stress_penalty": 0.047564371436834334,
+      "edge_cost": 0.04839783528456087,
+      "stress_field_used": "default_zero",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 404,
+      "edge_v": 76,
+      "edge_length": 0.0007767057621563822,
+      "edge_stress": 0.4963722750544548,
+      "stress_penalty": 0.04368076020479202,
+      "edge_cost": 0.044457465966948405,
+      "stress_field_used": "default_zero",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 76,
+      "edge_v": 406,
+      "edge_length": 0.0007778500072532779,
+      "edge_stress": 0.4963722750544548,
+      "stress_penalty": 0.04368076020479202,
+      "edge_cost": 0.0444586102120453,
+      "stress_field_used": "default_zero",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 406,
+      "edge_v": 407,
+      "edge_length": 0.0007780914112274218,
+      "edge_stress": 1.21847502887249,
+      "stress_penalty": 0.10722580254077911,
+      "edge_cost": 0.10800389395200653,
+      "stress_field_used": "default_zero",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 407,
+      "edge_v": 223,
+      "edge_length": 0.00929505821703458,
+      "edge_stress": 1.7581375688314438,
+      "stress_penalty": 0.15471610605716704,
+      "edge_cost": 0.16401116427420162,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": true
+    },
+    {
+      "edge_u": 223,
+      "edge_v": 200,
+      "edge_length": 0.0007853233574195428,
+      "edge_stress": 1.6004245094954967,
+      "stress_penalty": 0.1408373568356037,
+      "edge_cost": 0.14162268019302324,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 200,
+      "edge_v": 311,
+      "edge_length": 0.006570865508649604,
+      "edge_stress": 1.578814685344696,
+      "stress_penalty": 0.13893569231033323,
+      "edge_cost": 0.14550655781898283,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 311,
+      "edge_v": 310,
+      "edge_length": 0.0007831494136851802,
+      "edge_stress": 1.5926655530929565,
+      "stress_penalty": 0.14015456867218018,
+      "edge_cost": 0.14093771808586536,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 310,
+      "edge_v": 314,
+      "edge_length": 0.0007811515030695659,
+      "edge_stress": 1.652853399515152,
+      "stress_penalty": 0.14545109915733337,
+      "edge_cost": 0.14623225066040293,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 314,
+      "edge_v": 322,
+      "edge_length": 0.0007760415673061516,
+      "edge_stress": 1.98710897564888,
+      "stress_penalty": 0.17486558985710143,
+      "edge_cost": 0.17564163142440758,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 322,
+      "edge_v": 323,
+      "edge_length": 0.0007760576915600836,
+      "edge_stress": 2.321364551782608,
+      "stress_penalty": 0.2042800805568695,
+      "edge_cost": 0.20505613824842958,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    },
+    {
+      "edge_u": 323,
+      "edge_v": 50,
+      "edge_length": 0.0007729947097487866,
+      "edge_stress": 2.321364551782608,
+      "stress_penalty": 0.2042800805568695,
+      "edge_cost": 0.20505307526661828,
+      "stress_field_used": "normalized_stress",
+      "fallback_used": false
+    }
+  ]
+}

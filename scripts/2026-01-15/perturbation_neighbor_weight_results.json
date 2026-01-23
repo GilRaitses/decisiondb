@@ -1,0 +1,70 @@
+{
+  "od_pair": {
+    "origin": {
+      "name": "Grand Central Terminal",
+      "coordinates": [
+        -73.977229,
+        40.752726
+      ]
+    },
+    "destination": {
+      "name": "Carnegie Hall",
+      "coordinates": [
+        -73.979924,
+        40.765126
+      ]
+    },
+    "snapped_nodes": {
+      "start_node": 85,
+      "end_node": 50
+    }
+  },
+  "coefficients": {
+    "neighbor_weight_original": 0.5,
+    "neighbor_weight_perturbed": 1.0,
+    "second_order_weight": 0.25
+  },
+  "baseline": {
+    "path_nodes": [
+      85,
+      31,
+      21,
+      25,
+      26,
+      44,
+      33,
+      22,
+      35,
+      38,
+      322,
+      323,
+      50
+    ],
+    "node_count": 13,
+    "distance": 0.010392050479950399,
+    "total_stress": 0.0,
+    "stress_weight": 0.088
+  },
+  "perturbed": {
+    "path_nodes": [
+      85,
+      31,
+      21,
+      25,
+      26,
+      44,
+      33,
+      22,
+      35,
+      38,
+      322,
+      323,
+      50
+    ],
+    "node_count": 13,
+    "distance": 0.010392050479950399,
+    "total_stress": 0.0,
+    "stress_weight": 0.088
+  },
+  "route_changed": false
+}

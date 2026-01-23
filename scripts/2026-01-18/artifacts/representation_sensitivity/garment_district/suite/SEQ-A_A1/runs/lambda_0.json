@@ -1,0 +1,157 @@
+{
+  "edge_trace": [
+    {
+      "edge_length": 0.007573622170134797,
+      "edge_stress": 1.6073489263653755,
+      "edge_u": 177,
+      "edge_v": 480,
+      "stress_penalty": 0.14144670552015304
+    },
+    {
+      "edge_length": 0.0007602938778390467,
+      "edge_stress": 0.7181711718440056,
+      "edge_u": 480,
+      "edge_v": 162,
+      "stress_penalty": 0.06319906312227248
+    },
+    {
+      "edge_length": 0.0016877759104971801,
+      "edge_stress": 0.7181711718440056,
+      "edge_u": 162,
+      "edge_v": 460,
+      "stress_penalty": 0.06319906312227248
+    },
+    {
+      "edge_length": 0.0015227080141571037,
+      "edge_stress": 0.43941180035471916,
+      "edge_u": 460,
+      "edge_v": 450,
+      "stress_penalty": 0.038668238431215286
+    },
+    {
+      "edge_length": 0.001261925771878225,
+      "edge_stress": 0.16065242886543274,
+      "edge_u": 450,
+      "edge_v": 452,
+      "stress_penalty": 0.01413741374015808
+    },
+    {
+      "edge_length": 0.0008356502745314742,
+      "edge_stress": 0.16065242886543274,
+      "edge_u": 452,
+      "edge_v": 534,
+      "stress_penalty": 0.01413741374015808
+    },
+    {
+      "edge_length": 0.0008433374062448706,
+      "edge_stress": 0.3489082604646683,
+      "edge_u": 534,
+      "edge_v": 535,
+      "stress_penalty": 0.030703926920890807
+    },
+    {
+      "edge_length": 0.007571688294845558,
+      "edge_stress": 1.0310673378407955,
+      "edge_u": 535,
+      "edge_v": 116,
+      "stress_penalty": 0.09073392572999
+    }
+  ],
+  "metadata": {
+    "diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/suite/SEQ-A_A1/diagnostics/lambda_0.json",
+    "git_commit": "a356128cab9700f87a476d50c66e53e4a22b3e22",
+    "git_dirty": true,
+    "lambda": 0.0,
+    "od_pair": {
+      "end_node": 116,
+      "start_node": 177
+    },
+    "projection_target_crs": "EPSG:32618",
+    "script_name": "run_representation_sensitivity_garment_suite.py",
+    "stress_source_key": "normalized_stress",
+    "timestamp_utc": "2026-01-18T23:44:42.277849+00:00",
+    "zones_projected": true
+  },
+  "results": {
+    "distance": 0.022057001720128255,
+    "lambda": 0.0,
+    "path_nodes": [
+      177,
+      480,
+      162,
+      460,
+      450,
+      452,
+      534,
+      535,
+      116
+    ],
+    "route_geometry": [
+      {
+        "coord": [
+          -73.98833572548162,
+          40.754130293077665
+        ],
+        "node_id": 177
+      },
+      {
+        "coord": [
+          -73.99530284051063,
+          40.757073588567756
+        ],
+        "node_id": 480
+      },
+      {
+        "coord": [
+          -73.9948546672738,
+          40.75768652517044
+        ],
+        "node_id": 162
+      },
+      {
+        "coord": [
+          -73.99640941566543,
+          40.75833915842816
+        ],
+        "node_id": 460
+      },
+      {
+        "coord": [
+          -73.99730671471512,
+          40.75711050691639
+        ],
+        "node_id": 450
+      },
+      {
+        "coord": [
+          -73.99846768942571,
+          40.75760089280956
+        ],
+        "node_id": 452
+      },
+      {
+        "coord": [
+          -73.99898331653374,
+          40.75701003574986
+        ],
+        "node_id": 534
+      },
+      {
+        "coord": [
+          -73.99950368443707,
+          40.756413734599455
+        ],
+        "node_id": 535
+      },
+      {
+        "coord": [
+          -73.99252855997325,
+          40.753473912596725
+        ],
+        "node_id": 116
+      }
+    ],
+    "total_cost": 0.4782827520472385,
+    "total_stress": 0.02303883104953391
+  }
+}

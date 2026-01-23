@@ -1,0 +1,275 @@
+---
+date: 2026-01-15
+title: Daily Log
+objective: >
+  Establish the MAT761-informed continuation of the CIS667 PAX prototype with a verified
+  context baseline, clear repo authorities, and traceable references.
+continuity_from_cis667: >
+  Camera-derived stress, spatial interpolation, and stress-aware routing are preserved;
+  MAT761 concepts now guide the refactor framing and stability analysis.
+handoff_reference: /Users/gilraitses/decisiondb/scripts/2026-01-15/agents/handoff/lily/2058-king-context-indexing.yaml
+work_trees_dir: /Users/gilraitses/decisiondb/scripts/2026-01-15/agents/work-trees/
+protocols:
+  mat761_citation:
+    - include_source_path: MAT761/docs/classnotes/20260113_chapter0_pax_notes.tex
+    - include_chapter_section: Chapter 0, specific section title when cited
+    - include_page_line_if_available: true
+    - include_figure_identifier_if_present: true
+  pax_citation:
+    - include_full_path_and_function: src/pax/pathfinding/learned_heuristic.py:_map_intersections_to_stress
+    - include_data_provenance: data/stress_scores_updated.json (derived from camera features)
+    - use_module_function_for_code: true
+inventory_section:
+  aggregation:
+    - src/pax/pathfinding/learned_heuristic.py:_map_intersections_to_stress
+    - src/pax/stress/composite_stress.py:compute_intersection_stress
+    - src/pax/voronoi/generator.py:generate_corridor_voronoi
+  scoring:
+    - src/pax/stress/composite_stress.py:compute_camera_stress
+    - src/pax/stress/uncertainty.py:interpolate_mean_and_variance
+  routing:
+    - src/pax/pathfinding/astar.py
+    - src/pax/pathfinding/learned_heuristic.py:find_path
+  visualization:
+    - scripts/2025-11-15/plot_route_map.py
+    - scripts/2025-11-15/generate_stress_heatmap.py
+  theory_notes:
+    - /Users/gilraitses/MAT761/docs/classnotes/20260113_chapter0_pax_notes.tex
+    - /Users/gilraitses/MAT761/docs/officehours/Gil_Raitses_MAT761_Aggregation_Quotient_Spaces_Project_Brief.tex
+theory_to_code_table:
+  - pax_construct: camera_to_intersection_aggregation
+    mat761_concept: quotient_constructions_and_preimages
+    evidence: src/pax/pathfinding/learned_heuristic.py:_map_intersections_to_stress
+  - pax_construct: idw_interpolation_cutoffs
+    mat761_concept: continuity_via_open_set_preimages
+    evidence: src/pax/stress/composite_stress.py:compute_intersection_stress
+  - pax_construct: route_selection_map
+    mat761_concept: stability_of_map_outputs
+    evidence: src/pax/pathfinding/learned_heuristic.py:find_path
+open_problems_list:
+  - voronoi_intersection_processing_marked_incomplete: src/pax/scripts/voronoi_stress_scoring.py
+  - discrete_cutoffs_in_idw_k_nearest_and_max_distance: src/pax/stress/composite_stress.py
+  - street_name_matching_brittleness: src/pax/pathfinding/learned_heuristic.py:_map_intersections_to_stress
+status: Active
+next_session: >
+  Continue context indexing; verify pax vs paxnyc deltas; keep MAT761 references anchored
+  to chapter/section/page; prepare next handoff with EST timestamp.
+
+baseline_empirical_pass:
+  od_pair:
+    description: "Grand Central Terminal to Carnegie Hall"
+    origin:
+      name: "Grand Central Terminal"
+      coordinates: [-73.977229, 40.752726]
+    destination:
+      name: "Carnegie Hall"
+      coordinates: [-73.979924, 40.765126]
+    snapped_nodes:
+      start_node: 85
+      end_node: 50
+    snapping_rule: "AStarPathfinder._resolve_node with nearest fallback"
+  comparison_modes:
+    - "street-based averaging (learned_heuristic.py:_map_intersections_to_stress)"
+    - "IDW interpolation (composite_stress.py:compute_intersection_stress)"
+  parameters:
+    use_regularization: false
+    idw_max_distance: 0.005
+    idw_k_nearest: 5
+    idw_epsilon: 1e-6
+    stress_config_weights:
+      w_spacing_powerlaw: 0.35
+      w_infra_psycho: 0.20
+      w_ped_psycho: 0.25
+      w_veh_psycho: 0.20
+    stress_weight: 0.088
+  outcomes:
+    street_based:
+      path_nodes: [85, 31, 21, 25, 26, 44, 33, 22, 35, 38, 322, 323, 50]
+      node_count: 13
+      distance: 0.010392050479950399
+      total_stress: 0.0
+    idw:
+      path_nodes: [85, 31, 21, 25, 26, 44, 33, 22, 35, 38, 322, 323, 50]
+      node_count: 13
+      distance: 0.010392050479950399
+      total_stress: 0.0
+  artifacts:
+    results_json: "/Users/gilraitses/decisiondb/scripts/2026-01-15/baseline_street_vs_idw_results.json"
+
+single_perturbation_pass:
+  coefficient:
+    name: "neighbor_weight"
+    original: 0.5
+    perturbed: 1.0
+    second_order_weight: 0.25
+    code_path: "src/pax/scripts/voronoi_stress_scoring.py:calculate_weighted_stress"
+  od_pair:
+    snapped_nodes: {start_node: 85, end_node: 50}
+  outcomes:
+    route_changed: false
+    edge_ordering_changed: false
+    baseline:
+      node_count: 13
+      distance: 0.010392050479950399
+      total_stress: 0.0
+    perturbed:
+      node_count: 13
+      distance: 0.010392050479950399
+      total_stress: 0.0
+  earliest_effect_point: "Intersection stress aggregation via Voronoi neighbor weighting."
+  warnings:
+    - "GeoPandas distance warning: zones in geographic CRS (see voronoi_stress_scoring.py)."
+  artifacts:
+    results_json: "/Users/gilraitses/decisiondb/scripts/2026-01-15/perturbation_neighbor_weight_results.json"
+
+parallel_perturbation_pass:
+  timestamp_est_hhmm: "2205"
+  diagnosis:
+    - "stress_scores_updated.json stores normalized_stress, but LearnedHeuristicPathfinder._load_stress_scores read mean_stress"
+    - "camera stress inputs were zeros, so Voronoi aggregation returned zero stress on route"
+  fix:
+    - "src/pax/pathfinding/learned_heuristic.py:_load_stress_scores now falls back to normalized_stress"
+  coefficient:
+    name: "second_order_weight"
+    original: 0.25
+    perturbed: 0.5
+    neighbor_weight: 0.5
+    code_path: "src/pax/scripts/voronoi_stress_scoring.py:calculate_weighted_stress"
+  od_pair:
+    snapped_nodes: {start_node: 85, end_node: 50}
+  outcomes:
+    route_changed: true
+    baseline:
+      node_count: 16
+      distance: 0.042103437518079545
+      total_stress: 0.062427461378944026
+    perturbed:
+      node_count: 14
+      distance: 0.02090995999650147
+      total_stress: 0.049789373082522514
+  stress_field_summary:
+    baseline: {min: 0.16065242886543274, max: 2.8867505118250847, mean: 1.5591808125560342, nonzero_count: 568}
+    perturbed: {min: 0.3213048577308655, max: 4.357947915792465, mean: 2.169997706432158, nonzero_count: 568}
+  warnings:
+    - "GeoPandas distance warning: zones in geographic CRS (see voronoi_stress_scoring.py)."
+  artifacts:
+    results_json: "/Users/gilraitses/decisiondb/scripts/2026-01-15/pearson_parallel_results.json"
+
+crs_stability_pass:
+  timestamp_est_hhmm: "2213"
+  projection:
+    target_crs: "EPSG:32618"
+    zones_projected: true
+    code_path: "src/pax/scripts/voronoi_stress_scoring.py:project_zones_for_distance"
+  coefficient:
+    name: "second_order_weight"
+    original: 0.25
+    perturbed: 0.5
+    neighbor_weight: 0.5
+  od_pair:
+    snapped_nodes: {start_node: 85, end_node: 50}
+  outcomes:
+    route_changed: true
+    edge_ordering_changed: true
+    baseline:
+      node_count: 16
+      distance: 0.042103437518079545
+      total_stress: 0.062427461378944026
+    perturbed:
+      node_count: 14
+      distance: 0.02090995999650147
+      total_stress: 0.049789373082522514
+  stress_field_summary:
+    baseline: {min: 0.16065242886543274, max: 2.8867505118250847, mean: 1.5596529293647954, nonzero_count: 568}
+    perturbed: {min: 0.3213048577308655, max: 4.357947915792465, mean: 2.1709555046449247, nonzero_count: 568}
+  artifacts:
+    results_json: "/Users/gilraitses/decisiondb/scripts/2026-01-15/pearson_crs_stability_results.json"
+
+appendix_updates:
+  - timestamp_est_hhmm: "2201"
+    change: "Added math-forward note in appendix.tex framing perturbation as deformation with legend and followup perturbations."
+
+pearson_runs:
+  "2222":
+    task: "stress_coverage_audit"
+    diagnosis_label: "A"
+    summary: "Camera stress inputs from mean_stress are zero across corridor zones; downstream zone, intersection, and edge stress remain zero."
+    entrypoints:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-15/baseline_street_vs_idw.py"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-15/perturbation_neighbor_weight.py"
+    outputs:
+      coverage_json: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-coverage/coverage_table.json"
+      coverage_csv: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-coverage/coverage_table.csv"
+      run_metadata: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-coverage/run_metadata.yaml"
+  "2229":
+    task: "stress_activation_diagnosis"
+    diagnosis: "Stress first becomes nonzero at camera normalized_stress; propagation remains nonzero through zones, intersections, and edges."
+    activation_method: "Switch camera stress inputs to normalized_stress (no coefficient changes)."
+    behavior_note: "A* path for 85 -> 50 shows nonzero edge stress penalties and total_stress."
+    artifact: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/stress-activation/stress_activation_trace.json"
+  "2351":
+    task: "stress_activation_with_trace"
+    command: "python3 scripts/2026-01-15/pearson_stress_activation.py"
+    paths_read:
+      - "/Users/gilraitses/decisiondb/data/stress_scores_updated.json"
+      - "/Users/gilraitses/decisiondb/data/geojson/voronoi_zones.geojson"
+      - "/Users/gilraitses/decisiondb/data/geojson/intersections.json"
+    stress_source:
+      stress_source_json_path: "/Users/gilraitses/decisiondb/data/stress_scores_updated.json"
+      top_level_keys: ["camera_stress"]
+      mean_stress_present: false
+      normalized_stress_present: true
+      sample_camera_entry: {camera_id: "332f161d-47cb-4c8a-b6b6-5ad48a55c978", normalized_stress: 0.3368711769580841}
+    summary_numbers:
+      total_stress: 0.062427461378944026
+      max_edge_stress: 2.321364551782608
+      nonzero_edge_count: 15
+    artifacts:
+      trace_json: "/Users/gilraitses/decisiondb/scripts/2026-01-15/pearson_stress_activation_trace.json"
+      summary_txt: "/Users/gilraitses/decisiondb/scripts/2026-01-15/pearson_stress_activation_summary.txt"
+  "0003":
+    task: "normalize_stress_defaults"
+    command: "python3 scripts/2026-01-15/pearson_stress_activation.py"
+    paths_read:
+      - "/Users/gilraitses/decisiondb/data/stress_scores_updated.json"
+      - "/Users/gilraitses/decisiondb/data/geojson/voronoi_zones.geojson"
+      - "/Users/gilraitses/decisiondb/data/geojson/intersections.json"
+    stress_fields:
+      top_level_keys: ["camera_stress"]
+      camera_keys: ["normalized_stress"]
+      sample_payload: {normalized_stress: 0.3368711769580841}
+    field_selection:
+      priority: ["normalized_stress", "stress_score", "raw_stress", "mean_stress"]
+      field_counts: {normalized_stress: 82}
+    result_summary:
+      total_stress: 0.062427461378944026
+      max_edge_stress: 2.321364551782608
+      nonzero_edge_count: 15
+    artifacts:
+      trace_json: "/Users/gilraitses/decisiondb/scripts/2026-01-15/pearson_stress_activation_trace.json"
+      summary_txt: "/Users/gilraitses/decisiondb/scripts/2026-01-15/pearson_stress_activation_summary.txt"
+      audit_json: "/Users/gilraitses/decisiondb/scripts/2026-01-15/normalized_stress_audit.json"
+
+lilly_runs:
+  - timestamp_est_hhmm: "2221"
+    run: "compile_readiness_check"
+    outputs:
+      compile_checklist: "/Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/manuscript/build-notes/compile_checklist.yaml"
+      compile_errors: "/Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/manuscript/build-notes/compile_errors.txt"
+      compile_command: "/Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/manuscript/build-notes/minimal_makefile_or_compile_command.txt"
+  - timestamp_est_hhmm: "2300"
+    run: "post_activation_synthesis"
+    gate_decision: "A"
+    basis:
+      - "pearson_runs:2229 stress activation diagnosis (nonzero propagation)"
+      - "pearson_runs:2222 stress coverage audit (mean_stress zeros)"
+    manuscript_updates:
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/manuscript/sections/03_results.tex"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/manuscript/sections/04_discussion.tex"
+      - "/Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/manuscript/appendix.tex"
+  - timestamp_est_hhmm: "2341"
+    run: "cv_imagery_audit"
+    outputs:
+      audit_report: "/Users/gilraitses/decisiondb/scripts/2026-01-15/follow-up-study/audits/imagery_cv_stress_audit.md"
+      imagery_root_summary: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/imagery_root_summary.txt"
+      imagery_sample_stats: "/Users/gilraitses/decisiondb/scripts/2026-01-15/diagnostics/imagery_sample_stats.txt"

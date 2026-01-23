@@ -1,0 +1,82 @@
+{
+  "edge_trace": [
+    {
+      "edge_length": 0.0007746472337615273,
+      "edge_stress": 0.3357725613456123,
+      "edge_u": 385,
+      "edge_v": 383,
+      "stress_penalty": 0.02954798539841388
+    },
+    {
+      "edge_length": 0.0007672799501321492,
+      "edge_stress": 0.3121729167986119,
+      "edge_u": 383,
+      "edge_v": 388,
+      "stress_penalty": 0.027471216678277847
+    },
+    {
+      "edge_length": 0.0030869082749163113,
+      "edge_stress": 0.31074803475790413,
+      "edge_u": 388,
+      "edge_v": 179,
+      "stress_penalty": 0.027345827058695562
+    }
+  ],
+  "metadata": {
+    "diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/suite/OD-05/diagnostics/lambda_1.json",
+    "git_commit": "a356128cab9700f87a476d50c66e53e4a22b3e22",
+    "git_dirty": true,
+    "lambda": 1.0,
+    "od_pair": {
+      "end_node": 179,
+      "start_node": 385
+    },
+    "projection_target_crs": "EPSG:32618",
+    "script_name": "run_representation_sensitivity_garment_suite.py",
+    "stress_source_key": "normalized_stress",
+    "timestamp_utc": "2026-01-18T23:44:42.220956+00:00",
+    "zones_projected": true
+  },
+  "results": {
+    "distance": 0.004628835458809988,
+    "lambda": 1.0,
+    "path_nodes": [
+      385,
+      383,
+      388,
+      179
+    ],
+    "route_geometry": [
+      {
+        "coord": [
+          -73.98548819097519,
+          40.75293517881572
+        ],
+        "node_id": 385
+      },
+      {
+        "coord": [
+          -73.98594653100483,
+          40.75231680529444
+        ],
+        "node_id": 383
+      },
+      {
+        "coord": [
+          -73.98639930861408,
+          40.751699985312676
+        ],
+        "node_id": 388
+      },
+      {
+        "coord": [
+          -73.98924341991618,
+          40.75289546416634
+        ],
+        "node_id": 179
+      }
+    ],
+    "total_cost": 0.08899386459419728,
+    "total_stress": 0.0014588799857614037
+  }
+}

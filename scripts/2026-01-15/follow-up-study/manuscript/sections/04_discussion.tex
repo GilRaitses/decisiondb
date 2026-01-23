@@ -1,0 +1,30 @@
+The current implementation contains discrete cutoffs and string-based routing context that introduce
+brittleness in aggregation. IDW selection depends on k-nearest ordering and a max-distance cutoff
+in \texttt{src/pax/stress/composite\_stress.py:compute\_intersection\_stress}. Street-based averaging
+relies on street name matching in
+\texttt{src/pax/pathfinding/learned\_heuristic.py:\_map\_intersections\_to\_stress}. These choices
+are explicit in code and are the primary targets for stability comparisons in the proposed study.
+
+The neighbor-weight perturbation (0.5 \( \rightarrow \) 1.0) in the Voronoi aggregation path did not change
+the selected route for the fixed OD pair, and the edge ordering and cumulative stress remained unchanged.
+This is a diagnostic outcome under the earlier zero-stress condition and should not be interpreted as
+structural invariance once stress activation is used; any stability language must be conditional on the
+stress field and the activation method.
+
+Earlier invariance observations were invalid because stress coverage was zero in the mean\_stress
+entrypoints. With activated normalized\_stress, the results now reflect nonzero stress penalties and
+must be treated as a diagnostic correction rather than a discovery.
+
+MAT761 notes emphasize quotient constructions and continuity via open-set preimages
+(\texttt{MAT761/docs/classnotes/20260113\_chapter0\_pax\_notes.tex}) and treat aggregation as a mapping
+problem (\texttt{MAT761/docs/officehours/Gil\_Raitses\_MAT761\_Aggregation\_Quotient\_Spaces\_Project\_Brief.tex}).
+The manuscript will use these references to justify why structural stability (route ordering, bottlenecks)
+is the appropriate evidence for refactor progress.
+
+Under this configuration, Pearson's activation diagnosis confirms nonzero stress propagation
+through zones, intersections, and edges with the OD 85 \(\rightarrow\) 50 run, enabling
+perturbation outcomes to be interpreted as behavioral tests under the activated stress field
+only. This scopes interpretation to the activation artifacts and deprecates the earlier
+zero-stress interpretation as a diagnostic baseline. Evidence:
+\texttt{pax/scripts/2026-01-16/artifacts/traces/pearson\_stress\_activation\_trace.json} and
+\texttt{pax/scripts/2026-01-16/artifacts/audits/normalized\_stress\_audit.json}.

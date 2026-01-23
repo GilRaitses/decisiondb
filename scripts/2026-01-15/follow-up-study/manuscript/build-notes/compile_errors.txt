@@ -1,0 +1,3 @@
+Missing compile entrypoint: no main.tex present.
+No \input/\include directives found to stitch sections.
+No bibliography directives found (references.bib not yet wired).

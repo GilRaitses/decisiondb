@@ -1,0 +1,152 @@
+{
+  "change_points": [
+    {
+      "changed_nodes": [
+        107,
+        116,
+        118,
+        450,
+        452,
+        533,
+        534,
+        535
+      ],
+      "lambda_from": 0.6,
+      "lambda_to": 0.8,
+      "top_delta_nodes": [
+        {
+          "abs_delta": 1.24786404358596,
+          "idw_stress": 0.31825690878182267,
+          "node_id": 107,
+          "voronoi_stress": 1.5661209523677826
+        },
+        {
+          "abs_delta": 1.2209437412492121,
+          "idw_stress": 0.30402684236847516,
+          "node_id": 116,
+          "voronoi_stress": 1.5249705836176872
+        },
+        {
+          "abs_delta": 1.2163903885995118,
+          "idw_stress": 0.30858019501817535,
+          "node_id": 118,
+          "voronoi_stress": 1.5249705836176872
+        },
+        {
+          "abs_delta": 0.2694470286369324,
+          "idw_stress": 0.26771706342697144,
+          "node_id": 533,
+          "voronoi_stress": 0.5371640920639038
+        },
+        {
+          "abs_delta": 0.22866036851980004,
+          "idw_stress": 0.30850372354410377,
+          "node_id": 535,
+          "voronoi_stress": 0.5371640920639038
+        }
+      ]
+    },
+    {
+      "changed_nodes": [
+        107,
+        179
+      ],
+      "lambda_from": 0.8,
+      "lambda_to": 1.0,
+      "top_delta_nodes": [
+        {
+          "abs_delta": 1.3129388523386352,
+          "idw_stress": 0.3170894774510033,
+          "node_id": 179,
+          "voronoi_stress": 1.6300283297896385
+        },
+        {
+          "abs_delta": 1.24786404358596,
+          "idw_stress": 0.31825690878182267,
+          "node_id": 107,
+          "voronoi_stress": 1.5661209523677826
+        }
+      ]
+    }
+  ],
+  "description": "Route changes across 2 lambda bands for this leg.",
+  "dominant_stress_deltas": [
+    {
+      "lambda_from": 0.6,
+      "lambda_to": 0.8,
+      "top_delta_nodes": [
+        {
+          "abs_delta": 1.24786404358596,
+          "idw_stress": 0.31825690878182267,
+          "node_id": 107,
+          "voronoi_stress": 1.5661209523677826
+        },
+        {
+          "abs_delta": 1.2209437412492121,
+          "idw_stress": 0.30402684236847516,
+          "node_id": 116,
+          "voronoi_stress": 1.5249705836176872
+        },
+        {
+          "abs_delta": 1.2163903885995118,
+          "idw_stress": 0.30858019501817535,
+          "node_id": 118,
+          "voronoi_stress": 1.5249705836176872
+        },
+        {
+          "abs_delta": 0.2694470286369324,
+          "idw_stress": 0.26771706342697144,
+          "node_id": 533,
+          "voronoi_stress": 0.5371640920639038
+        },
+        {
+          "abs_delta": 0.22866036851980004,
+          "idw_stress": 0.30850372354410377,
+          "node_id": 535,
+          "voronoi_stress": 0.5371640920639038
+        }
+      ]
+    },
+    {
+      "lambda_from": 0.8,
+      "lambda_to": 1.0,
+      "top_delta_nodes": [
+        {
+          "abs_delta": 1.3129388523386352,
+          "idw_stress": 0.3170894774510033,
+          "node_id": 179,
+          "voronoi_stress": 1.6300283297896385
+        },
+        {
+          "abs_delta": 1.24786404358596,
+          "idw_stress": 0.31825690878182267,
+          "node_id": 107,
+          "voronoi_stress": 1.5661209523677826
+        }
+      ]
+    }
+  ],
+  "leg_id": "OD-04",
+  "od_pair": {
+    "end_node": 91,
+    "start_node": 175
+  },
+  "refined_intervals": [
+    {
+      "lambda_after": 0.7937,
+      "lambda_before": 0.7929,
+      "lambda_interval": [
+        0.7929,
+        0.7937
+      ]
+    },
+    {
+      "lambda_after": 0.982,
+      "lambda_before": 0.9812,
+      "lambda_interval": [
+        0.9812,
+        0.982
+      ]
+    }
+  ]
+}

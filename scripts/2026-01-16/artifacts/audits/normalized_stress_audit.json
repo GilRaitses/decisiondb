@@ -1,0 +1,45 @@
+{
+  "stress_table_path": "/Users/gilraitses/pax/data/stress_scores_updated.json",
+  "column_names": [
+    "normalized_stress"
+  ],
+  "normalized_stress_stats": {
+    "min": 0.24366243183612823,
+    "max": 0.44065016508102417,
+    "mean": 0.3168924490853054,
+    "nonzero_count": 82
+  },
+  "camera_id_coverage_count": 82,
+  "missing_camera_ids": [],
+  "stress_key_selection_path": [
+    "src/pax/stress/stress_keys.py:pick_stress_key",
+    "src/pax/stress/stress_reader.py:resolve_camera_stress_map"
+  ],
+  "field_resolution_summary": {
+    "field_priority": [
+      "normalized_stress",
+      "stress_score",
+      "raw_stress",
+      "mean_stress"
+    ],
+    "field_counts": {
+      "normalized_stress": 82
+    },
+    "chosen_key": "normalized_stress",
+    "fallback_used": false,
+    "missing_count": 0,
+    "min": 0.24366243183612823,
+    "median": 0.3172307759523392,
+    "max": 0.44065016508102417,
+    "selection_metadata": {
+      "preferred_key": "normalized_stress",
+      "chosen_key": "normalized_stress",
+      "available_keys": [
+        "normalized_stress"
+      ],
+      "fallback_used": false,
+      "caller_file": "/Users/gilraitses/pax/src/pax/stress/stress_reader.py",
+      "caller_function": "resolve_camera_stress_map"
+    }
+  }
+}

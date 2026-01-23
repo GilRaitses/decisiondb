@@ -1,0 +1,26 @@
+{
+  "determinism_check": {
+    "diagnostics_bytes_match": true,
+    "lambda": 0.1547,
+    "leg_id": "OD-01",
+    "run_bytes_match": true
+  },
+  "refined_root": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom",
+  "selected_legs": {
+    "changing": [
+      "OD-01",
+      "OD-04"
+    ],
+    "stable": [
+      "OD-02",
+      "OD-03"
+    ]
+  },
+  "summary_files": {
+    "OD-01": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-01_summary.json",
+    "OD-02": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-02_summary.json",
+    "OD-03": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-03_summary.json",
+    "OD-04": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-04_summary.json"
+  },
+  "synthesis_doc": "/Users/gilraitses/pax/scripts/2026-01-18/notes/garment_district_representation_breakpoints.md"
+}

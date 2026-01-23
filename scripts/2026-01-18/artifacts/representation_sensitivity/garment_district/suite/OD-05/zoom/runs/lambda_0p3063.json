@@ -1,0 +1,97 @@
+{
+  "edge_trace": [
+    {
+      "edge_length": 0.005227768414179934,
+      "edge_stress": 1.613408364187334,
+      "edge_u": 385,
+      "edge_v": 234,
+      "stress_penalty": 0.14197993604848538
+    },
+    {
+      "edge_length": 0.0007721074741979805,
+      "edge_stress": 1.1167791912341745,
+      "edge_u": 234,
+      "edge_v": 275,
+      "stress_penalty": 0.09827656882860734
+    },
+    {
+      "edge_length": 0.0007623741655962135,
+      "edge_stress": 1.1168807714181996,
+      "edge_u": 275,
+      "edge_v": 268,
+      "stress_penalty": 0.09828550788480156
+    },
+    {
+      "edge_length": 0.008324499400686136,
+      "edge_stress": 1.1723296683045148,
+      "edge_u": 268,
+      "edge_v": 179,
+      "stress_penalty": 0.10316501081079729
+    }
+  ],
+  "metadata": {
+    "diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/suite/OD-05/zoom/diagnostics/lambda_0p3063.json",
+    "git_commit": "a356128cab9700f87a476d50c66e53e4a22b3e22",
+    "git_dirty": true,
+    "lambda": 0.3063,
+    "od_pair": {
+      "end_node": 179,
+      "start_node": 385
+    },
+    "projection_target_crs": "EPSG:32618",
+    "script_name": "run_representation_sensitivity_garment_suite.py",
+    "stress_source_key": "normalized_stress",
+    "timestamp_utc": "2026-01-18T23:44:42.227458+00:00",
+    "zones_projected": true
+  },
+  "results": {
+    "distance": 0.015086749454660264,
+    "lambda": 0.3063,
+    "path_nodes": [
+      385,
+      234,
+      275,
+      268,
+      179
+    ],
+    "route_geometry": [
+      {
+        "coord": [
+          -73.98548819097519,
+          40.75293517881572
+        ],
+        "node_id": 385
+      },
+      {
+        "coord": [
+          -73.98067345262578,
+          40.75090510178984
+        ],
+        "node_id": 234
+      },
+      {
+        "coord": [
+          -73.98112322914119,
+          40.75028245852974
+        ],
+        "node_id": 275
+      },
+      {
+        "coord": [
+          -73.98157269656679,
+          40.74966808906003
+        ],
+        "node_id": 268
+      },
+      {
+        "coord": [
+          -73.98924341991618,
+          40.75289546416634
+        ],
+        "node_id": 179
+      }
+    ],
+    "total_cost": 0.4567937730273518,
+    "total_stress": 0.019907337513440856
+  }
+}

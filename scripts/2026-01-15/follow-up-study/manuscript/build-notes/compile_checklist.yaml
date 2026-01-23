@@ -1,0 +1,21 @@
+---
+timestamp_est_hhmm: "2221"
+manuscript_root: "/Users/gilraitses/pax/scripts/2026-01-15/follow-up-study/manuscript"
+checks:
+  files_present:
+    - "sections/abstract.tex"
+    - "sections/01_introduction.tex"
+    - "sections/02_methods.tex"
+    - "sections/03_results.tex"
+    - "sections/04_discussion.tex"
+    - "sections/05_conclusion.tex"
+    - "appendix.tex"
+    - "sections/biblio/references.bib"
+  missing_or_blocking:
+    - "No main.tex or build entrypoint present."
+    - "No \\input/\\include statements detected; sections are standalone."
+    - "No bibliography directives detected; references.bib not yet wired."
+    - "Figures directory empty; no figure includes detected."
+recommendation:
+  - "Add a minimal main.tex that inputs sections and appendix."
+  - "Add bibliography directives only after citations are used."

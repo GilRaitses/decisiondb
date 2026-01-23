@@ -1,0 +1,31 @@
+\subsection*{Activated stress comparison: baseline vs neighbor\_weight}
+This section replaces earlier zero-stress results. Stress is activated using
+\texttt{normalized\_stress}, and the planner is now stress-sensitive even if the route
+does not change.
+
+\textbf{Baseline (activated).} total\_stress = 0.062427461378944026,
+max\_edge\_stress = 2.321364551782608, nonzero\_edge\_count = 15.
+
+\textbf{Neighbor\_weight perturbation.} total\_stress = 0.08900817336152145,
+max\_edge\_stress = 3.13231760263443, nonzero\_edge\_count = 15,
+route\_changed = false, edge\_order\_changed = false.
+
+Artifacts:
+\texttt{pax/scripts/2026-01-16/artifacts/pearson\_neighbor\_weight\_activated\_results.json},
+\texttt{pax/scripts/2026-01-16/artifacts/traces/pearson\_stress\_activation\_trace.json},
+\texttt{pax/scripts/2026-01-16/artifacts/audits/normalized\_stress\_audit.json}.
+
+\paragraph*{Baseline (Pre-Refactor).}
+This stress-activated snapshot is frozen as the pre-refactor baseline. Stress ownership remains
+implicit (camera-level to intersection aggregation), and no intersection-owned stress design is
+implemented yet. This paragraph is a reference marker only, not a new claim.
+
+\paragraph*{Phase 1 (Intersection-Owned Stress).}
+The stress signal is now explicitly owned at the intersection layer and recorded in diagnostics,
+while route-level behavior remains unchanged relative to the frozen baseline. This is a structural
+documentation update only; no new results are claimed.
+
+\paragraph*{Phase 2 (Block Aggregation).}
+Results are now produced under intersection-owned stress with a block aggregation layer that
+aggregates intersection scalars without recomputation. Parity tests pass and behavior remains
+unchanged from the frozen baseline; this is a documentation update only.

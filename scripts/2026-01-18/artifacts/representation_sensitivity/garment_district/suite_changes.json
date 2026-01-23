@@ -1,0 +1,968 @@
+[
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          162,
+          450,
+          455,
+          460
+        ],
+        "lambda_from": 0.0,
+        "lambda_to": 0.2,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.4220647862681082,
+            "idw_stress": 0.3116309890023539,
+            "node_id": 455,
+            "voronoi_stress": 1.733695775270462
+          },
+          {
+            "abs_delta": 0.40254767534902786,
+            "idw_stress": 0.31562349649497773,
+            "node_id": 162,
+            "voronoi_stress": 0.7181711718440056
+          },
+          {
+            "abs_delta": 0.4020056174420779,
+            "idw_stress": 0.3161655544019277,
+            "node_id": 460,
+            "voronoi_stress": 0.7181711718440056
+          },
+          {
+            "abs_delta": 0.15331459084939453,
+            "idw_stress": 0.31396701971482727,
+            "node_id": 450,
+            "voronoi_stress": 0.16065242886543274
+          }
+        ]
+      },
+      {
+        "changed_nodes": [
+          107,
+          110,
+          118,
+          452,
+          455,
+          480,
+          534,
+          535
+        ],
+        "lambda_from": 0.6,
+        "lambda_to": 0.8,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.7870559312591603,
+            "idw_stress": 0.33761015607022743,
+            "node_id": 110,
+            "voronoi_stress": 2.1246660873293877
+          },
+          {
+            "abs_delta": 1.4220647862681082,
+            "idw_stress": 0.3116309890023539,
+            "node_id": 455,
+            "voronoi_stress": 1.733695775270462
+          },
+          {
+            "abs_delta": 1.24786404358596,
+            "idw_stress": 0.31825690878182267,
+            "node_id": 107,
+            "voronoi_stress": 1.5661209523677826
+          },
+          {
+            "abs_delta": 1.2163903885995118,
+            "idw_stress": 0.30858019501817535,
+            "node_id": 118,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 0.4029007993274909,
+            "idw_stress": 0.3152703725165147,
+            "node_id": 480,
+            "voronoi_stress": 0.7181711718440056
+          }
+        ]
+      },
+      {
+        "changed_nodes": [
+          107,
+          110,
+          175,
+          179
+        ],
+        "lambda_from": 0.8,
+        "lambda_to": 1.0,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 2.17915601771125,
+            "idw_stress": 0.3173706631754951,
+            "node_id": 175,
+            "voronoi_stress": 2.4965266808867455
+          },
+          {
+            "abs_delta": 1.7870559312591603,
+            "idw_stress": 0.33761015607022743,
+            "node_id": 110,
+            "voronoi_stress": 2.1246660873293877
+          },
+          {
+            "abs_delta": 1.3129388523386352,
+            "idw_stress": 0.3170894774510033,
+            "node_id": 179,
+            "voronoi_stress": 1.6300283297896385
+          },
+          {
+            "abs_delta": 1.24786404358596,
+            "idw_stress": 0.31825690878182267,
+            "node_id": 107,
+            "voronoi_stress": 1.5661209523677826
+          }
+        ]
+      }
+    ],
+    "leg_id": "OD-01"
+  },
+  {
+    "change_points": [],
+    "leg_id": "OD-02"
+  },
+  {
+    "change_points": [],
+    "leg_id": "OD-03"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          107,
+          116,
+          118,
+          450,
+          452,
+          533,
+          534,
+          535
+        ],
+        "lambda_from": 0.6,
+        "lambda_to": 0.8,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.24786404358596,
+            "idw_stress": 0.31825690878182267,
+            "node_id": 107,
+            "voronoi_stress": 1.5661209523677826
+          },
+          {
+            "abs_delta": 1.2209437412492121,
+            "idw_stress": 0.30402684236847516,
+            "node_id": 116,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 1.2163903885995118,
+            "idw_stress": 0.30858019501817535,
+            "node_id": 118,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 0.2694470286369324,
+            "idw_stress": 0.26771706342697144,
+            "node_id": 533,
+            "voronoi_stress": 0.5371640920639038
+          },
+          {
+            "abs_delta": 0.22866036851980004,
+            "idw_stress": 0.30850372354410377,
+            "node_id": 535,
+            "voronoi_stress": 0.5371640920639038
+          }
+        ]
+      },
+      {
+        "changed_nodes": [
+          107,
+          179
+        ],
+        "lambda_from": 0.8,
+        "lambda_to": 1.0,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.3129388523386352,
+            "idw_stress": 0.3170894774510033,
+            "node_id": 179,
+            "voronoi_stress": 1.6300283297896385
+          },
+          {
+            "abs_delta": 1.24786404358596,
+            "idw_stress": 0.31825690878182267,
+            "node_id": 107,
+            "voronoi_stress": 1.5661209523677826
+          }
+        ]
+      }
+    ],
+    "leg_id": "OD-04"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          234,
+          268,
+          383,
+          388,
+          553
+        ],
+        "lambda_from": 0.2,
+        "lambda_to": 0.4,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 2.1765874393543267,
+            "idw_stress": 0.31993924153241887,
+            "node_id": 383,
+            "voronoi_stress": 2.4965266808867455
+          },
+          {
+            "abs_delta": 1.9589622305694152,
+            "idw_stress": 0.30440659206480497,
+            "node_id": 388,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.1551425590860744,
+            "idw_stress": 0.31525862368465474,
+            "node_id": 234,
+            "voronoi_stress": 1.470401182770729
+          },
+          {
+            "abs_delta": 1.1544792865818274,
+            "idw_stress": 0.3159218961889016,
+            "node_id": 268,
+            "voronoi_stress": 1.470401182770729
+          },
+          {
+            "abs_delta": 1.10620574628834,
+            "idw_stress": 0.3411007153439118,
+            "node_id": 553,
+            "voronoi_stress": 1.4473064616322517
+          }
+        ]
+      }
+    ],
+    "leg_id": "OD-05"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          91,
+          107,
+          116,
+          118,
+          395,
+          452,
+          532,
+          533,
+          534,
+          535
+        ],
+        "lambda_from": 0.6,
+        "lambda_to": 0.8,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.3429743021142913,
+            "idw_stress": 0.2870540276753474,
+            "node_id": 395,
+            "voronoi_stress": 1.6300283297896385
+          },
+          {
+            "abs_delta": 1.24786404358596,
+            "idw_stress": 0.31825690878182267,
+            "node_id": 107,
+            "voronoi_stress": 1.5661209523677826
+          },
+          {
+            "abs_delta": 1.2342468137925733,
+            "idw_stress": 0.29072376982511394,
+            "node_id": 91,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 1.2209437412492121,
+            "idw_stress": 0.30402684236847516,
+            "node_id": 116,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 1.2163903885995118,
+            "idw_stress": 0.30858019501817535,
+            "node_id": 118,
+            "voronoi_stress": 1.5249705836176872
+          }
+        ]
+      },
+      {
+        "changed_nodes": [
+          84,
+          91,
+          116,
+          118,
+          390,
+          394
+        ],
+        "lambda_from": 0.8,
+        "lambda_to": 1.0,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.9821141444144632,
+            "idw_stress": 0.2812546782197568,
+            "node_id": 84,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.9674944617275405,
+            "idw_stress": 0.29587436090667957,
+            "node_id": 390,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.9622247205904078,
+            "idw_stress": 0.3011441020438124,
+            "node_id": 394,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.2342468137925733,
+            "idw_stress": 0.29072376982511394,
+            "node_id": 91,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 1.2209437412492121,
+            "idw_stress": 0.30402684236847516,
+            "node_id": 116,
+            "voronoi_stress": 1.5249705836176872
+          }
+        ]
+      }
+    ],
+    "leg_id": "OD-06"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          178,
+          388
+        ],
+        "lambda_from": 0.8,
+        "lambda_to": 1.0,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.9589622305694152,
+            "idw_stress": 0.30440659206480497,
+            "node_id": 388,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.301729723710746,
+            "idw_stress": 0.32829860607889255,
+            "node_id": 178,
+            "voronoi_stress": 1.6300283297896385
+          }
+        ]
+      }
+    ],
+    "leg_id": "OD-07"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          162,
+          450,
+          455,
+          460
+        ],
+        "lambda_from": 0.0,
+        "lambda_to": 0.2,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.4220647862681082,
+            "idw_stress": 0.3116309890023539,
+            "node_id": 455,
+            "voronoi_stress": 1.733695775270462
+          },
+          {
+            "abs_delta": 0.40254767534902786,
+            "idw_stress": 0.31562349649497773,
+            "node_id": 162,
+            "voronoi_stress": 0.7181711718440056
+          },
+          {
+            "abs_delta": 0.4020056174420779,
+            "idw_stress": 0.3161655544019277,
+            "node_id": 460,
+            "voronoi_stress": 0.7181711718440056
+          },
+          {
+            "abs_delta": 0.15331459084939453,
+            "idw_stress": 0.31396701971482727,
+            "node_id": 450,
+            "voronoi_stress": 0.16065242886543274
+          }
+        ]
+      },
+      {
+        "changed_nodes": [
+          107,
+          110,
+          118,
+          452,
+          455,
+          480,
+          534,
+          535
+        ],
+        "lambda_from": 0.6,
+        "lambda_to": 0.8,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.7870559312591603,
+            "idw_stress": 0.33761015607022743,
+            "node_id": 110,
+            "voronoi_stress": 2.1246660873293877
+          },
+          {
+            "abs_delta": 1.4220647862681082,
+            "idw_stress": 0.3116309890023539,
+            "node_id": 455,
+            "voronoi_stress": 1.733695775270462
+          },
+          {
+            "abs_delta": 1.24786404358596,
+            "idw_stress": 0.31825690878182267,
+            "node_id": 107,
+            "voronoi_stress": 1.5661209523677826
+          },
+          {
+            "abs_delta": 1.2163903885995118,
+            "idw_stress": 0.30858019501817535,
+            "node_id": 118,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 0.4029007993274909,
+            "idw_stress": 0.3152703725165147,
+            "node_id": 480,
+            "voronoi_stress": 0.7181711718440056
+          }
+        ]
+      },
+      {
+        "changed_nodes": [
+          107,
+          110,
+          175,
+          179
+        ],
+        "lambda_from": 0.8,
+        "lambda_to": 1.0,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 2.17915601771125,
+            "idw_stress": 0.3173706631754951,
+            "node_id": 175,
+            "voronoi_stress": 2.4965266808867455
+          },
+          {
+            "abs_delta": 1.7870559312591603,
+            "idw_stress": 0.33761015607022743,
+            "node_id": 110,
+            "voronoi_stress": 2.1246660873293877
+          },
+          {
+            "abs_delta": 1.3129388523386352,
+            "idw_stress": 0.3170894774510033,
+            "node_id": 179,
+            "voronoi_stress": 1.6300283297896385
+          },
+          {
+            "abs_delta": 1.24786404358596,
+            "idw_stress": 0.31825690878182267,
+            "node_id": 107,
+            "voronoi_stress": 1.5661209523677826
+          }
+        ]
+      }
+    ],
+    "leg_id": "SEQ-A_A1"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          118,
+          394
+        ],
+        "lambda_from": 0.8,
+        "lambda_to": 1.0,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.9622247205904078,
+            "idw_stress": 0.3011441020438124,
+            "node_id": 394,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.2163903885995118,
+            "idw_stress": 0.30858019501817535,
+            "node_id": 118,
+            "voronoi_stress": 1.5249705836176872
+          }
+        ]
+      }
+    ],
+    "leg_id": "SEQ-A_A2"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          388,
+          391
+        ],
+        "lambda_from": 0.8,
+        "lambda_to": 1.0,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 2.203950575767153,
+            "idw_stress": 0.2925761051195927,
+            "node_id": 391,
+            "voronoi_stress": 2.4965266808867455
+          },
+          {
+            "abs_delta": 1.9589622305694152,
+            "idw_stress": 0.30440659206480497,
+            "node_id": 388,
+            "voronoi_stress": 2.26336882263422
+          }
+        ]
+      }
+    ],
+    "leg_id": "SEQ-A_A3"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          116,
+          118,
+          452,
+          533,
+          534,
+          535
+        ],
+        "lambda_from": 0.6,
+        "lambda_to": 0.8,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.2209437412492121,
+            "idw_stress": 0.30402684236847516,
+            "node_id": 116,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 1.2163903885995118,
+            "idw_stress": 0.30858019501817535,
+            "node_id": 118,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 0.2694470286369324,
+            "idw_stress": 0.26771706342697144,
+            "node_id": 533,
+            "voronoi_stress": 0.5371640920639038
+          },
+          {
+            "abs_delta": 0.22866036851980004,
+            "idw_stress": 0.30850372354410377,
+            "node_id": 535,
+            "voronoi_stress": 0.5371640920639038
+          },
+          {
+            "abs_delta": 0.14975049517062172,
+            "idw_stress": 0.31040292403605446,
+            "node_id": 534,
+            "voronoi_stress": 0.16065242886543274
+          }
+        ]
+      },
+      {
+        "changed_nodes": [
+          107,
+          116,
+          118,
+          245,
+          387,
+          388
+        ],
+        "lambda_from": 0.8,
+        "lambda_to": 1.0,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.9766685737695306,
+            "idw_stress": 0.2867002488646894,
+            "node_id": 245,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.960939437334382,
+            "idw_stress": 0.3024293852998381,
+            "node_id": 387,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.9589622305694152,
+            "idw_stress": 0.30440659206480497,
+            "node_id": 388,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.24786404358596,
+            "idw_stress": 0.31825690878182267,
+            "node_id": 107,
+            "voronoi_stress": 1.5661209523677826
+          },
+          {
+            "abs_delta": 1.2209437412492121,
+            "idw_stress": 0.30402684236847516,
+            "node_id": 116,
+            "voronoi_stress": 1.5249705836176872
+          }
+        ]
+      }
+    ],
+    "leg_id": "SEQ-A_A4"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          116,
+          178,
+          179,
+          450,
+          452,
+          534,
+          535
+        ],
+        "lambda_from": 0.2,
+        "lambda_to": 0.4,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.3129388523386352,
+            "idw_stress": 0.3170894774510033,
+            "node_id": 179,
+            "voronoi_stress": 1.6300283297896385
+          },
+          {
+            "abs_delta": 1.301729723710746,
+            "idw_stress": 0.32829860607889255,
+            "node_id": 178,
+            "voronoi_stress": 1.6300283297896385
+          },
+          {
+            "abs_delta": 1.2209437412492121,
+            "idw_stress": 0.30402684236847516,
+            "node_id": 116,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 0.22866036851980004,
+            "idw_stress": 0.30850372354410377,
+            "node_id": 535,
+            "voronoi_stress": 0.5371640920639038
+          },
+          {
+            "abs_delta": 0.15331459084939453,
+            "idw_stress": 0.31396701971482727,
+            "node_id": 450,
+            "voronoi_stress": 0.16065242886543274
+          }
+        ]
+      },
+      {
+        "changed_nodes": [
+          178,
+          388
+        ],
+        "lambda_from": 0.8,
+        "lambda_to": 1.0,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.9589622305694152,
+            "idw_stress": 0.30440659206480497,
+            "node_id": 388,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.301729723710746,
+            "idw_stress": 0.32829860607889255,
+            "node_id": 178,
+            "voronoi_stress": 1.6300283297896385
+          }
+        ]
+      }
+    ],
+    "leg_id": "SEQ-B_B1"
+  },
+  {
+    "change_points": [],
+    "leg_id": "SEQ-B_B2"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          91,
+          116,
+          532,
+          533,
+          534,
+          535
+        ],
+        "lambda_from": 0.4,
+        "lambda_to": 0.6,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.2342468137925733,
+            "idw_stress": 0.29072376982511394,
+            "node_id": 91,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 1.2209437412492121,
+            "idw_stress": 0.30402684236847516,
+            "node_id": 116,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 0.2694470286369324,
+            "idw_stress": 0.26771706342697144,
+            "node_id": 532,
+            "voronoi_stress": 0.5371640920639038
+          },
+          {
+            "abs_delta": 0.2694470286369324,
+            "idw_stress": 0.26771706342697144,
+            "node_id": 533,
+            "voronoi_stress": 0.5371640920639038
+          },
+          {
+            "abs_delta": 0.22866036851980004,
+            "idw_stress": 0.30850372354410377,
+            "node_id": 535,
+            "voronoi_stress": 0.5371640920639038
+          }
+        ]
+      }
+    ],
+    "leg_id": "SEQ-B_B3"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          234,
+          268,
+          383,
+          388,
+          553
+        ],
+        "lambda_from": 0.2,
+        "lambda_to": 0.4,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 2.1765874393543267,
+            "idw_stress": 0.31993924153241887,
+            "node_id": 383,
+            "voronoi_stress": 2.4965266808867455
+          },
+          {
+            "abs_delta": 1.9589622305694152,
+            "idw_stress": 0.30440659206480497,
+            "node_id": 388,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.1551425590860744,
+            "idw_stress": 0.31525862368465474,
+            "node_id": 234,
+            "voronoi_stress": 1.470401182770729
+          },
+          {
+            "abs_delta": 1.1544792865818274,
+            "idw_stress": 0.3159218961889016,
+            "node_id": 268,
+            "voronoi_stress": 1.470401182770729
+          },
+          {
+            "abs_delta": 1.10620574628834,
+            "idw_stress": 0.3411007153439118,
+            "node_id": 553,
+            "voronoi_stress": 1.4473064616322517
+          }
+        ]
+      }
+    ],
+    "leg_id": "SEQ-C_C1"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          107,
+          110,
+          116,
+          118,
+          451,
+          452,
+          479,
+          533,
+          534,
+          535
+        ],
+        "lambda_from": 0.6,
+        "lambda_to": 0.8,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.7870559312591603,
+            "idw_stress": 0.33761015607022743,
+            "node_id": 110,
+            "voronoi_stress": 2.1246660873293877
+          },
+          {
+            "abs_delta": 1.441638736150984,
+            "idw_stress": 0.29205703911947806,
+            "node_id": 479,
+            "voronoi_stress": 1.733695775270462
+          },
+          {
+            "abs_delta": 1.4192367185753778,
+            "idw_stress": 0.31445905669508417,
+            "node_id": 451,
+            "voronoi_stress": 1.733695775270462
+          },
+          {
+            "abs_delta": 1.24786404358596,
+            "idw_stress": 0.31825690878182267,
+            "node_id": 107,
+            "voronoi_stress": 1.5661209523677826
+          },
+          {
+            "abs_delta": 1.2209437412492121,
+            "idw_stress": 0.30402684236847516,
+            "node_id": 116,
+            "voronoi_stress": 1.5249705836176872
+          }
+        ]
+      },
+      {
+        "changed_nodes": [
+          107,
+          110,
+          116,
+          118,
+          245,
+          383,
+          387,
+          388
+        ],
+        "lambda_from": 0.8,
+        "lambda_to": 1.0,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 2.1765874393543267,
+            "idw_stress": 0.31993924153241887,
+            "node_id": 383,
+            "voronoi_stress": 2.4965266808867455
+          },
+          {
+            "abs_delta": 1.9766685737695306,
+            "idw_stress": 0.2867002488646894,
+            "node_id": 245,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.960939437334382,
+            "idw_stress": 0.3024293852998381,
+            "node_id": 387,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.9589622305694152,
+            "idw_stress": 0.30440659206480497,
+            "node_id": 388,
+            "voronoi_stress": 2.26336882263422
+          },
+          {
+            "abs_delta": 1.7870559312591603,
+            "idw_stress": 0.33761015607022743,
+            "node_id": 110,
+            "voronoi_stress": 2.1246660873293877
+          }
+        ]
+      }
+    ],
+    "leg_id": "SEQ-C_C2"
+  },
+  {
+    "change_points": [
+      {
+        "changed_nodes": [
+          116,
+          118,
+          250,
+          461,
+          462
+        ],
+        "lambda_from": 0.2,
+        "lambda_to": 0.4,
+        "top_delta_nodes": [
+          {
+            "abs_delta": 1.260899500004249,
+            "idw_stress": 0.3052214523635335,
+            "node_id": 462,
+            "voronoi_stress": 1.5661209523677826
+          },
+          {
+            "abs_delta": 1.2209437412492121,
+            "idw_stress": 0.30402684236847516,
+            "node_id": 116,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 1.2163903885995118,
+            "idw_stress": 0.30858019501817535,
+            "node_id": 118,
+            "voronoi_stress": 1.5249705836176872
+          },
+          {
+            "abs_delta": 0.23597529878060064,
+            "idw_stress": 0.30118879328330317,
+            "node_id": 250,
+            "voronoi_stress": 0.5371640920639038
+          },
+          {
+            "abs_delta": 0.2339618057420107,
+            "idw_stress": 0.3032022863218931,
+            "node_id": 461,
+            "voronoi_stress": 0.5371640920639038
+          }
+        ]
+      }
+    ],
+    "leg_id": "SEQ-C_C3"
+  }
+]

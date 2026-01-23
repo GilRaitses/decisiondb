@@ -1,0 +1,26 @@
+This follow-up study maintains the existing PAX pipeline while making aggregation choices explicit and
+traceable. The current implementation computes camera-level stress from image-derived features and maps
+those values to intersection-level stress for routing (\texttt{src/pax/stress/composite\_stress.py},
+\texttt{src/pax/pathfinding/learned\_heuristic.py}). The refactor framing uses MAT761 Chapter 0 concepts
+as grounding for how aggregation collapses should be evaluated, with explicit links in
+\texttt{MAT761/docs/classnotes/20260113\_chapter0\_pax\_notes.tex} and
+\texttt{MAT761/docs/officehours/Gil\_Raitses\_MAT761\_Aggregation\_Quotient\_Spaces\_Project\_Brief.tex}
+\cite{mat761_chapter0_pax_notes,mat761_officehours_brief}.
+
+The primary question is structural: which properties of the planning output are stable under different
+aggregation constructions, and which are sensitive to bookkeeping choices such as distance cutoffs,
+neighbor definitions, or street-name matching. The manuscript documents what is implemented today and
+labels proposed comparisons without prescribing changes.
+
+In a controlled perturbation of the Voronoi neighbor weight (0.5 \( \rightarrow \) 1.0), the route for the
+fixed OD pair (Grand Central Terminal to Carnegie Hall, node 85 to node 50) did not change in node
+sequence, edge ordering, distance, or cumulative stress in this pass. This empirical observation frames
+the central research question as invariance of planning structure under representational perturbation,
+motivating the use of MAT761 concepts like deformation and quotient-like aggregation without claiming
+formal equivalence.
+
+% course-substitution derivative text (2–3 sentences, reuse-ready)
+% A single perturbation of the neighbor weight (0.5 to 1.0) left the chosen route unchanged, indicating
+% that the decision structure can remain invariant under small representational changes. We treat this
+% as a concrete illustration of stability and deformation in the MAT761 sense, using aggregation as the
+% mapping whose continuity is under test.

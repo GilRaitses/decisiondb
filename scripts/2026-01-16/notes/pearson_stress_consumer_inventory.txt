@@ -1,0 +1,54 @@
+Stress consumer inventory (planning + perturbation paths)
+
+1) /Users/gilraitses/pax/src/pax/stress/stress_keys.py
+   - pick_stress_key(df_or_record, preferred_key="normalized_stress")
+   - Keys read: normalized_stress, stress_score, raw_stress, mean_stress (fallback order)
+   - Default behavior: raises if no keys found; emits metadata with fallback_used.
+
+2) /Users/gilraitses/pax/src/pax/stress/stress_reader.py
+   - resolve_camera_stress_map(camera_payloads, field_priority)
+   - Key read: chosen_key from pick_stress_key
+   - Default behavior: if chosen_key missing for a camera, value coerced to 0.0 and missing_count increments.
+
+3) /Users/gilraitses/pax/src/pax/pathfinding/learned_heuristic.py
+   - _load_stress_scores()
+   - Key read: chosen_key from resolve_camera_stress_map
+   - Default behavior: if no stress keys exist in payloads, pick_stress_key raises.
+
+4) /Users/gilraitses/pax/src/pax/scripts/voronoi_stress_scoring.py
+   - calculate_weighted_stress()
+   - Key read: camera_stress[camera_id] from caller-provided dict
+   - Default behavior: camera_id missing => stress=0.0.
+
+5) /Users/gilraitses/pax/src/pax/stress/composite_stress.py
+   - compute_intersection_stress()
+   - Key read: camera_stresses[cam_id] from caller-provided dict
+   - Default behavior: cameras without entries are skipped; if none within max_distance, returns 0.0.
+
+6) /Users/gilraitses/pax/scripts/2026-01-15/perturbation_neighbor_weight.py
+   - load_camera_stress() -> resolve_camera_stress_map
+   - Key read: chosen_key; recorded in results json
+   - Default behavior: missing per-camera key => 0.0, counted by missing_count.
+
+7) /Users/gilraitses/pax/scripts/2026-01-15/perturbation_second_order_weight.py
+   - load_camera_stress() -> resolve_camera_stress_map
+   - Key read: chosen_key; recorded in results json
+   - Default behavior: missing per-camera key => 0.0, counted by missing_count.
+
+8) /Users/gilraitses/pax/scripts/2026-01-15/perturbation_second_order_weight_projected.py
+   - load_camera_stress() -> resolve_camera_stress_map
+   - Key read: chosen_key; recorded in results json
+   - Default behavior: missing per-camera key => 0.0, counted by missing_count.
+
+9) /Users/gilraitses/pax/scripts/2026-01-15/pearson_stress_activation.py
+   - load_camera_stress() -> resolve_camera_stress_map
+   - Key read: chosen_key; stored in trace stress_source_key
+   - Default behavior: missing per-camera key => 0.0, counted by missing_count.
+
+10) /Users/gilraitses/pax/scripts/2026-01-15/baseline_street_vs_idw.py
+   - LearnedHeuristicPathfinder._load_stress_scores() (street-based)
+   - compute_intersection_stress() (IDW)
+   - Default behavior: see items 3 and 5 above.
+
+Notes:
+- Many visualization and legacy scripts also reference stress fields; not part of the current OD 85->50 planning runs.

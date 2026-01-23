@@ -1,0 +1,184 @@
+\section*{Traceability Table: Collapse Steps to Code}
+\begin{tabular}{p{3.2cm} p{5.4cm} p{5.4cm}}
+\hline
+\textbf{Collapse step} & \textbf{PAX file / function} & \textbf{Notes / gaps} \\
+\hline
+Camera features \( \rightarrow \) camera stress &
+\texttt{src/pax/stress/composite\_stress.py:compute\_camera\_stress} &
+Composite formula from detected counts and spacing. \\
+Camera stress \( \rightarrow \) intersection stress (street-based) &
+\texttt{src/pax/pathfinding/learned\_heuristic.py:\_map\_intersections\_to\_stress} &
+String-based street matching; brittle when names are missing. \\
+Camera stress \( \rightarrow \) intersection stress (IDW) &
+\texttt{src/pax/stress/composite\_stress.py:compute\_intersection\_stress} &
+k-nearest + max-distance cutoff; discontinuities at ordering/cutoff. \\
+Camera zones (Voronoi) \( \rightarrow \) stress aggregation &
+\texttt{src/pax/voronoi/generator.py}; \texttt{src/pax/scripts/voronoi\_stress\_scoring.py} &
+Intersection processing marked incomplete in legacy script. \\
+Intersection stress \( \rightarrow \) edge stress &
+\texttt{src/pax/pathfinding/learned\_heuristic.py:find\_path} &
+Edge stress computed as average of endpoint stresses. \\
+Edge stress \( \rightarrow \) route stress &
+\texttt{src/pax/pathfinding/learned\_heuristic.py:find\_path} &
+Length-weighted integral over edges. \\
+Temporal dimension &
+\texttt{src/pax/stress/composite\_stress.py:get\_temporal\_factor} &
+Office-hours brief describes prototype as static snapshot
+(\texttt{MAT761/docs/officehours/Gil\_Raitses\_MAT761\_Aggregation\_Quotient\_Spaces\_Project\_Brief.tex}). \\
+\hline
+\end{tabular}
+
+\section*{Coefficient Ownership by Level}
+\begin{itemize}
+  \item Camera level: composite stress weights in \texttt{src/pax/stress/composite\_stress.py} (StressConfig).
+  \item Intersection level: IDW parameters \texttt{k\_nearest}, \texttt{max\_distance}, and \texttt{epsilon} in
+  \texttt{src/pax/stress/composite\_stress.py:compute\_intersection\_stress}.
+  \item Edge level: edge stress defined as average of endpoint intersections in
+  \texttt{src/pax/pathfinding/learned\_heuristic.py:find\_path}.
+  \item Route level: stress-weighted A* cost uses \texttt{stress\_weight} in
+  \texttt{src/pax/pathfinding/learned\_heuristic.py:find\_path}.
+\end{itemize}
+
+\section*{Collapse Points by Pipeline}
+\begin{itemize}
+  \item Street-based averaging pipeline: collapse occurs when camera-level stress is averaged across
+  same-street cameras in \texttt{src/pax/pathfinding/learned\_heuristic.py:\_map\_intersections\_to\_stress}.
+  \item IDW pipeline: collapse occurs when camera-level stress is aggregated to intersection-level via
+  inverse-distance weighting in \texttt{src/pax/stress/composite\_stress.py:compute\_intersection\_stress}.
+\end{itemize}
+
+\section*{Perturbation Note}
+\begin{itemize}
+  \item Neighbor-weight perturbation (0.5 \( \rightarrow \) 1.0) did not change route identity for the
+  fixed OD pair (\(85 \rightarrow 50\)); see \texttt{pax/scripts/2026-01-15/perturbation\_neighbor\_weight\_results.json}.
+  \item The Voronoi distance warning indicates CRS-based distance computation in
+  \texttt{src/pax/scripts/voronoi\_stress\_scoring.py}; this did not change the reported route outcome.
+\end{itemize}
+
+\section*{Stress coverage diagnosis (Pearson)}
+\begin{itemize}
+  \item Diagnosis label A (stress coverage audit): camera stress inputs from
+  \texttt{mean\_stress} were zero across corridor zones, and downstream zone,
+  intersection, and edge stress remained zero
+  (\texttt{pax/scripts/2026-01-15/diagnostics/stress-coverage/coverage\_table.json};
+  \texttt{pax/scripts/2026-01-15/diagnostics/stress-coverage/coverage\_table.csv};
+  \texttt{pax/scripts/2026-01-15/diagnostics/stress-coverage/run\_metadata.yaml};
+  \texttt{pax/docs/logs/2026-01-15.yaml} pearson\_runs: "2222").
+  \item Stress activation diagnosis: switching camera stress inputs to
+  \texttt{normalized\_stress} produced nonzero stress propagation through zones,
+  intersections, and edges, and the OD 85 \(\rightarrow\) 50 path shows nonzero
+  edge penalties and total\_stress
+  (\texttt{pax/scripts/2026-01-15/diagnostics/stress-activation/stress\_activation\_trace.json};
+  \texttt{pax/docs/logs/2026-01-15.yaml} pearson\_runs: "2229").
+\end{itemize}
+
+\section*{Stress Activation and Traceability}
+Canonical artifacts for activated stress runs:
+\begin{itemize}
+  \item \texttt{pax/scripts/2026-01-16/artifacts/audits/normalized\_stress\_audit.json}
+  \item \texttt{pax/scripts/2026-01-16/artifacts/traces/pearson\_stress\_activation\_trace.json}
+  \item \texttt{pax/scripts/2026-01-16/artifacts/pearson\_neighbor\_weight\_activated\_results.json}
+  \item \texttt{pax/scripts/2026-01-16/artifacts/traces/pearson\_neighbor\_weight\_activated\_trace.json}
+\end{itemize}
+Stress source key: \texttt{normalized\_stress}. The audit reports
+\texttt{fallback\_used = false} at field selection
+(\texttt{normalized\_stress\_audit.json}). The activation trace includes per-edge
+\texttt{fallback\_used} flags; these flags are recorded for traceability and are not
+interpreted here.
+
+\section*{Pre-refactor baseline freeze}
+This appendix anchors the pre-refactor baseline. The activated stress artifacts under
+\texttt{scripts/2026-01-16/artifacts} are the canonical reference, and stress ownership
+remains implicit in the current pipeline (no intersection-owned stress yet).
+
+\section*{Phase 1 documentation note}
+Intersection-owned stress is now explicit and recorded in diagnostics, while behavior remains
+unchanged relative to the frozen baseline. This note documents the structural change only.
+
+\section*{Intersection-owned stress and block aggregation (current system)}
+Current system state: intersection-owned stress is computed and recorded explicitly, and a block
+aggregation layer consumes intersection scalars without recomputation. Diagnostics for block
+aggregation and parity testing are referenced here for traceability:
+\begin{itemize}
+  \item \texttt{pax/src/pax/stress/intersection\_stress.py}
+  \item \texttt{pax/src/pax/stress/block\_stress.py}
+  \item \texttt{pax/scripts/2026-01-18/debug/block\_refactor\_map.md}
+  \item \texttt{pax/scripts/2026-01-18/debug/test\_block\_stress\_parity.py}
+  \item \texttt{pax/scripts/2026-01-18/agents/handoff/king/1720-bebo-brief-response.yaml}
+\end{itemize}
+This subsection records the current ownership structure only and does not add new results.
+
+\section*{Post-Snapshot Representation Sensitivity State}
+Canonical artifact roots for the Garment District sensitivity suite and refined breakpoint
+characterization are:
+\begin{itemize}
+  \item \texttt{pax/scripts/2026-01-18/artifacts/representation\_sensitivity/garment\_district/}
+  \item \texttt{pax/scripts/2026-01-18/artifacts/representation\_sensitivity/garment\_district/refined\_zoom/}
+  \item \texttt{pax/scripts/2026-01-18/artifacts/representation\_sensitivity/garment\_district/refined\_zoom/breakpoint\_summary\_index.json}
+  \item \texttt{pax/scripts/2026-01-18/notes/garment\_district\_representation\_breakpoints.md}
+\end{itemize}
+Localized breakpoint intervals exist for selected OD legs. This snapshot precedes any further
+experimental branching and records artifact locations only.
+
+\section*{Stress key contract}
+Camera stress artifacts must include at least one of the following keys per camera:
+\texttt{normalized\_stress} or \texttt{mean\_stress}. The current planning path reads
+\texttt{mean\_stress} with fallback to \texttt{normalized\_stress} in
+\texttt{src/pax/pathfinding/learned\_heuristic.py:\_load\_stress\_scores}. Diagnostics
+that read only \texttt{mean\_stress} will report zeros when the key is missing
+(\texttt{pax/scripts/2026-01-15/normalized\_stress\_audit.json}).
+
+\section*{Interpretation limits after activation}
+Activated nonzero stress enables behavioral testing of perturbations under this configuration,
+but earlier zero-stress outcomes remain diagnostic, and claims must always specify the
+activation method and artifact path. No global invariance is claimed.
+
+\section*{Scope disclaimers}
+All stability statements are conditional on the activated stress field and the specific
+OD pair and data snapshot used. The earlier zero-stress outcomes are deprecated for
+interpretation once activation metrics are cited.
+
+\section*{Math-forward interpretation (appendix)}
+Treat the neighbor-weight perturbation as a parameterized family of aggregation maps
+that send camera-level observations to intersection-level stress:
+\( A_{\lambda}: O \rightarrow R \), with \( \lambda \) corresponding to \texttt{neighbor\_weight}.
+For the fixed OD pair, the route and cumulative stress did not change between
+the baseline and perturbed values, providing empirical evidence of invariance under this
+coefficient deformation. This is a descriptive alignment with MAT761 language on
+deformations and quotient-like forgetting, without claiming a formal homotopy equivalence.
+\emph{Remark:} The Voronoi distance computation uses geographic CRS in
+\texttt{src/pax/scripts/voronoi\_stress\_scoring.py}; the warning was recorded and did not alter
+the reported route outcome in this pass.
+
+\section*{Math-forward note (instructor voice)}
+\textbf{Legend.} Let \(O\) denote camera-level observations, \(R\) intersection-level stress fields,
+and \(P\) the path output for a fixed OD pair. Let \(A_{\lambda}: O \rightarrow R\) be the aggregation map
+parameterized by \(\lambda = \texttt{neighbor\_weight}\). Let \(S: R \rightarrow P\) be the routing map
+implemented by A* with stress-weighted edge costs.
+
+\textbf{Fixed context.} OD pair fixed at nodes 85 \(\rightarrow\) 50 (Grand Central Terminal to Carnegie Hall),
+graph and data snapshot held fixed; only \(\lambda\) changes from 0.5 to 1.0. This is a single-parameter
+deformation of the aggregation map, not a change in algorithm or data.
+
+\textbf{Observed invariants.} Path identity, edge ordering, and total cost were unchanged under this perturbation.
+An unexpected degenerate fact is that total\_stress remained 0.0 in both runs, suggesting either missing stress
+coverage on this path or a fallback path that does not accumulate stress contributions. This observation should be
+treated as a data-quality flag, not a theoretical conclusion.
+
+\textbf{MAT761 framing.} This is an empirical instance of invariance under a deformation of a map
+(\textit{Chapter 0} notes on deformation/quotient collapse; \textit{Chapter 1: Paths and Homotopy} section heading
+on homotopy of paths in \texttt{MAT761/readings/latex-drafts/chapter1.tex}). No claim of homotopy equivalence is
+made; only invariance under this specific perturbation is reported.
+
+\textbf{Not claimed.} This pass does not assert homotopy equivalence of routes or maps; it only records
+unchanged planner output under a single-parameter deformation.
+
+\textbf{Followup perturbations (testable statements).}
+\begin{itemize}
+  \item If \texttt{second\_order\_weight} is doubled (0.25 \( \rightarrow \) 0.5), then either route identity changes
+  or total\_stress deviates from 0.0 under the same fixed OD pair.
+  \item If \texttt{neighbor\_weight} is halved (0.5 \( \rightarrow \) 0.25), then the Voronoi-weighted stress field
+  will change, and any route invariance will be recorded as a stability result.
+  \item If the aggregation path is switched to IDW for the same OD pair, route identity will either remain fixed
+  (stability) or switch (sensitivity), providing a contrast to the Voronoi perturbation.
+\end{itemize}

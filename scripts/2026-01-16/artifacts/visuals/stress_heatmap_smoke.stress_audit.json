@@ -1,0 +1,12 @@
+{
+  "script_path": "/Users/gilraitses/pax/scripts/2025-11-15/generate_stress_heatmap.py",
+  "chosen_key": "normalized_stress",
+  "fallback_used": false,
+  "missing_count": 0,
+  "field_counts": {
+    "normalized_stress": 82
+  },
+  "min": 0.24366243183612823,
+  "median": 0.3172307759523392,
+  "max": 0.44065016508102417
+}

@@ -1,0 +1,21 @@
+timestamp_est: "2026-01-15 22:22 EST"
+entrypoints:
+  - "/Users/gilraitses/pax/scripts/2026-01-15/baseline_street_vs_idw.py"
+  - "/Users/gilraitses/pax/scripts/2026-01-15/perturbation_neighbor_weight.py"
+key_functions:
+  - "pax.scripts.voronoi_stress_scoring.calculate_weighted_stress"
+  - "pax.pathfinding.learned_heuristic.LearnedHeuristicPathfinder.find_path"
+data_files:
+  - "/Users/gilraitses/pax/data/stress_scores_updated.json"
+  - "/Users/gilraitses/pax/data/geojson/voronoi_zones.geojson"
+  - "/Users/gilraitses/pax/data/geojson/intersections.json"
+  - "/Users/gilraitses/pax/data/manifests/corridor_cameras_numbered.json"
+parameters:
+  neighbor_weight: 0.5
+  second_order_weight: 0.25
+  od_pair: {"start_node": 85, "end_node": 50}
+projection:
+  target_crs: "EPSG:32618"
+  zones_projected: true
+  distance_in_geographic: false
+normalized_stress_nonzero_count: 82

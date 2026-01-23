@@ -1,0 +1,85 @@
+---
+meta:
+  date: 2026-01-15
+  author: John Lilly
+  temporal_scope:
+    start: 2024-11-01
+    end: 2024-12-16
+  repositories:
+    pax: /Users/gilraitses/decisiondb
+    paxnyc: /Users/gilraitses/decisiondbnyc
+    mat761: /Users/gilraitses/MAT761
+executive_summary:
+  - The pax implementation is authoritative for code, data, and experiments.
+  - The paxnyc repo is authoritative for public manuscript and figures only.
+  - Aggregation layers run camera → intersection → edge → route, with optional Voronoi visualization.
+  - Brittleness arises at discrete cutoffs in IDW and street-name matching rules.
+repo_map:
+  pax:
+    - src/pax: core library (pathfinding, stress, vision, data collection)
+    - data: datasets and generated artifacts
+    - scripts: dated experiments and batch jobs
+    - docs: logs, reports, manuscript deliverables
+  paxnyc:
+    - manuscript: public LaTeX/PDF
+    - figures: public figures
+    - code: figure generation scripts
+  mat761:
+    - docs/officehours: interactive materials and data explorer
+    - docs/classnotes: chapter-aligned notes mapping theory to pax
+change_audit:
+  - date: 2025-11-15
+    focus: coordinate fixes, route visualizations, validation
+    files:
+      - scripts/2025-11-15/regenerate_intersections.py
+      - scripts/2025-11-15/plot_route_map.py
+      - scripts/2025-11-15/generate_stress_heatmap.py
+  - date: 2025-11-16
+    focus: workflow protocol updates, project status
+    files:
+      - docs/agents/reviews/protocols/workflow_protocol.yaml
+      - docs/reports/project_status_2025-11-15.md
+  - date: 2025-12-08
+    focus: multi-scale stress field implementation
+    files:
+      - src/pax/pathfinding/learned_heuristic.py
+      - src/pax/stress/composite_stress.py
+  - date: 2025-12-16
+    focus: evaluation scripts and alpha grid search
+    files:
+      - scripts/2025-12-16/compare_raw_vs_regularized.py
+      - scripts/2025-12-16/alpha_grid_search.py
+system_dataflow:
+  - raw_images: NYC DOT camera snapshots (data/raw/images)
+  - feature_extraction: YOLO + Detectron2 + CLIP (src/pax/vision/*)
+  - camera_stress: composite stress formula (src/pax/stress/composite_stress.py:compute_camera_stress)
+  - intersection_stress: street-based average with IDW fallback (src/pax/pathfinding/learned_heuristic.py)
+  - edge_stress: average of endpoint stresses (src/pax/pathfinding/learned_heuristic.py:find_path)
+  - route_stress: length-weighted integral (src/pax/pathfinding/learned_heuristic.py:find_path)
+brittleness_flags:
+  - idw_k_nearest_cutoff: src/pax/stress/composite_stress.py
+  - idw_max_distance_cutoff: src/pax/stress/composite_stress.py
+  - street_name_matching: src/pax/pathfinding/learned_heuristic.py:_map_intersections_to_stress
+  - ridge_basin_thresholds: src/pax/pathfinding/learned_heuristic.py
+crosswalk_mat761_to_pax:
+  - mat761_concept: quotient_construction
+    pax_construct: aggregation_map_camera_to_intersection
+    evidence: src/pax/pathfinding/learned_heuristic.py:_map_intersections_to_stress
+  - mat761_concept: continuity_open_set_preimage
+    pax_construct: idw_cutoff_stability
+    evidence: src/pax/stress/composite_stress.py:compute_intersection_stress
+  - mat761_concept: stability_of_outputs
+    pax_construct: route_choice_map
+    evidence: src/pax/pathfinding/learned_heuristic.py:find_path
+deltas_pax_vs_paxnyc:
+  - pax_contains: src/, data/, scripts/, docs/
+  - paxnyc_contains: manuscript/, figures/, code/
+  - authority:
+      implementation: pax
+      public_manuscript: paxnyc
+open_questions:
+  - chapter1_references_in_mat761: not yet located
+  - criteria_for_regularization_toggle: not explicitly documented in code
+  - intersection_processing_in_voronoi_script: still marked not implemented
+references:
+  appendix: /Users/gilraitses/decisiondb/docs/logs/2026-01-15_appendix.yaml

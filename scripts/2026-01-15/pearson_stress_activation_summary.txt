@@ -1,0 +1,5 @@
+total_stress: 0.062427461378944026
+max_edge_stress: 2.321364551782608
+nonzero_edge_count: 15
+trace_artifact: /Users/gilraitses/pax/scripts/2026-01-15/pearson_stress_activation_trace.json
+audit_artifact: /Users/gilraitses/pax/scripts/2026-01-15/normalized_stress_audit.json
