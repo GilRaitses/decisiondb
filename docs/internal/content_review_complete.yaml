@@ -1,0 +1,39 @@
+content_review_complete:
+  id: "content-review-complete-2026-01-24"
+  project: decisiondb
+  date_ny: "2026-01-24"
+
+  status:
+    content_review: complete
+    layout_status: frozen
+    submission_status: ready
+
+  governing_freezes:
+    - docs/internal/layout_freeze.yaml
+    - docs/internal/pre_submission_checklist_v1.md
+
+  review_history:
+    content_logic_review:
+      agent: roland
+      handoff_id: "1708"
+      outcome: minimal edit applied, layout preserved
+    verification_review:
+      agent: levi
+      handoff_id: "1715"
+      outcome: pass with low-risk flags, no required changes
+
+  allowed_changes_post_declaration:
+    - none without explicit author authorization
+    - venue-specific formatting only
+    - reviewer-requested clarifications only
+
+  forbidden_changes_post_declaration:
+    - section restructuring
+    - figure placement or float behavior
+    - header renaming
+    - caption mechanics
+    - page count changes
+
+  notes: >
+    Manuscript content and layout are considered stable and submission-ready.
+    Further edits require a new scoped handoff and explicit unlock of this declaration.
