@@ -1,0 +1,78 @@
+0808-anon-probe_promotion_engine_runs_exec_report.yaml
+handoff_id: 0804-king-probe_promotion_engine_runs_only
+exec_report_id: 0808-anon-probe_promotion_engine_runs_exec_report
+author: anon
+date: 2026-01-24
+status: COMPLETE
+
+summary: |
+  Successfully promoted one probe artifact into a single engine_runs row.
+  No engine execution performed. No decisions or f_map written.
+  Provenance chain preserved for downstream persistence and replay expansion.
+
+authorization_used:
+  type: LIMITED_AUTHORIZATION
+  scope: PROBE_PROMOTION
+  tables_touched:
+    - engine_runs (1 insert)
+  tables_unchanged:
+    - snapshots (0 rows)
+    - representations (0 rows)
+    - decisions (0 rows)
+    - f_map (0 rows)
+
+probe_source:
+  probe_id: probe_20260124_052401
+  probe_dir: scripts/2026-01-24/outputs/probe_20260124_052401
+  raw_output_path: scripts/2026-01-24/outputs/probe_20260124_052401/raw_output.json
+  raw_output_sha256: 0c515e41e5f3e039d419779299585156c6180ba86513116c4a2146ecb2e5d7d2
+  hash_verification: PASSED
+
+engine_run_inserted:
+  engine_run_id: run_promoted_5167394a7e5fc6b1
+  representation_id: cb9f8c1d418c4678
+  engine_name: pax_pathfinder
+  engine_version: "1.0.0"
+  engine_config_hash: a5ecc09429ac27a29ac881f177b5b58a946fd79569dd851f90ac23a7dcdafd45
+  runtime_ms: 1
+  status: complete
+  experiment_id: exp_probe_promotion_20260124
+
+database:
+  path: scripts/2026-01-24/outputs/probe_promotion/decisiondb.sqlite
+  before_counts:
+    snapshots: 0
+    representations: 0
+    engine_runs: 0
+    decisions: 0
+    f_map: 0
+  after_counts:
+    snapshots: 0
+    representations: 0
+    engine_runs: 1
+    decisions: 0
+    f_map: 0
+
+outputs:
+  promotion_manifest: scripts/2026-01-24/outputs/probe_promotion/promotion_manifest.json
+  promotion_script: scripts/2026-01-24/agents/work-tree/anon/0804-probe_promotion.py
+  database: scripts/2026-01-24/outputs/probe_promotion/decisiondb.sqlite
+
+success_criteria_verification:
+  exactly_one_engine_runs_inserted: true
+  status_is_complete: true
+  raw_output_uri_resolvable: true
+  config_hash_recorded: true
+  raw_output_hash_verified: true
+  no_decisions_written: true
+  no_fmap_written: true
+  no_snapshots_modified: true
+  no_representations_modified: true
+  engine_run_id_deterministic: true
+
+notes:
+  - This is governance infrastructure, not feature work.
+  - The promotion bridges probe phase to engine_runs without re-execution.
+  - Execution remains upstream and auditable.
+  - Downstream persistence and replay expansion can now proceed on clean provenance.
+  - Decision extraction requires a separate Decision Persistence Authorization handoff.
