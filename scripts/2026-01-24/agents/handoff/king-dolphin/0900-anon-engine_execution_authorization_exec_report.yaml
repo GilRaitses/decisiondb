@@ -1,0 +1,77 @@
+exec_report_id: 0900-anon-engine_execution_authorization_exec_report
+handoff_ref: 0845-king-engine_execution_authorization_v1
+author: anon
+date: 2026-01-24
+status: BLOCKED
+
+summary: |
+  Task blocked per selection_rule. No existing representation satisfies both
+  constraints: (1) compatible with PaxEngineAdapter and (2) has not yet produced
+  a successful engine_run with raw_output.
+
+precondition_verification:
+  validate_unlock:
+    exit_code: 0
+    result: "12 PASS, 1 WARN, 0 FAIL"
+    passed: true
+  replay_expansion_v2_frozen: "Assumed PASS per handoff preconditions"
+  equivalence_policy_frozen: "pol_d8da3e00e9584eb1 referenced"
+
+blocking_analysis:
+  reason: "no_eligible_representation"
+  
+  representations_examined:
+    - representation_id: repr_ee6d8f5a57ffe120
+      database: persistence/exp_20260124T075856Z/decisiondb.sqlite
+      representation_spec: '{"factory":"run_persist","factory_version":"1.0.0","params":{"mode":"minimal","purpose":"persistence_wiring_check"},"type":"validation"}'
+      engine_runs_count: 0
+      successful_runs_with_output: 0
+      pax_engine_compatible: false
+      incompatibility_reason: "No start_node/end_node in spec; validation type only"
+      
+    - representation_id: cb9f8c1d418c4678
+      database: probe_promotion/decisiondb.sqlite
+      engine_runs_count: 1
+      successful_runs_with_output: 1
+      engine_run_id: run_promoted_5167394a7e5fc6b1
+      status: complete
+      has_raw_output: true
+      pax_engine_compatible: true
+      disqualification_reason: "Already has successful engine_run with raw_output"
+      
+    - representation_id: repr_validation_first_engine
+      databases:
+        - path: engine/exp_20260124T081644Z/decisiondb.sqlite
+          status: error
+          has_raw_output: false
+        - path: engine/exp_20260124T102432Z/decisiondb.sqlite
+          status: complete
+          has_raw_output: true
+      pax_engine_compatible: true
+      disqualification_reason: "Already has successful engine_run with raw_output in exp_20260124T102432Z"
+
+  conclusion: |
+    The only representation without a successful run (repr_ee6d8f5a57ffe120) is a
+    validation-type representation created by run_persist.py. It lacks start_node
+    and end_node fields required by PaxEngineAdapter.run(). All representations
+    compatible with PaxEngineAdapter have already produced successful engine_runs
+    with raw_output present.
+
+authorization_compliance:
+  engine_runs_created: 0
+  decisions_written: 0
+  f_map_written: 0
+  policy_changes: 0
+  schema_changes: 0
+  new_representations_created: 0
+  within_bounds: true
+
+recommended_resolution: |
+  To proceed, one of the following would be required (each requires separate authorization):
+  1. Create a new representation with start_node/end_node (violates new_representations: forbidden)
+  2. Modify existing validation representation to add start_node/end_node (violates no-modification constraint)
+  3. Expand scope to consider probe artifact files as eligible representations (would require handoff amendment)
+
+notes: |
+  Per handoff selection_rule: "If none exist, STOP and report BLOCKED."
+  No improvisation attempted. Execution halted at analysis phase.

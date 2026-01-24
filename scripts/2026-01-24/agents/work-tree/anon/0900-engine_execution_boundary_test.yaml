@@ -1,0 +1,81 @@
+work_tree_id: 0900-engine_execution_boundary_test
+handoff_ref: 0845-king-engine_execution_authorization_v1
+author: anon
+date: 2026-01-24
+status: BLOCKED
+
+task: |
+  Create exactly one new successful engine_runs row with raw_output present,
+  with no decision writes, no f_map writes, no policy changes, and no schema
+  changes. If no existing representation qualifies, stop and report BLOCKED.
+
+execution_log:
+  - step: 1
+    action: "Read handoff authorization"
+    result: "Understood constraints: max 1 engine_run, reuse-only, no new representations"
+    
+  - step: 2
+    action: "Verify precondition: validate_unlock.py"
+    command: "python3 scripts/validate_unlock.py"
+    exit_code: 0
+    result: "12 PASS, 1 WARN, 0 FAIL"
+    
+  - step: 3
+    action: "Enumerate all SQLite databases in outputs"
+    databases_found:
+      - probe_promotion/decisiondb.sqlite
+      - persistence/exp_20260124T075856Z/decisiondb.sqlite
+      - engine/exp_20260124T081644Z/decisiondb.sqlite
+      - engine/exp_20260124T102432Z/decisiondb.sqlite
+      
+  - step: 4
+    action: "Query all representations"
+    findings:
+      - db: persistence/exp_20260124T075856Z
+        representation_id: repr_ee6d8f5a57ffe120
+        spec_type: validation
+        has_start_end_nodes: false
+        
+  - step: 5
+    action: "Query all engine_runs"
+    findings:
+      - db: probe_promotion
+        representation_id: cb9f8c1d418c4678
+        status: complete
+        has_raw_output: true
+      - db: engine/exp_20260124T081644Z
+        representation_id: repr_validation_first_engine
+        status: error
+        has_raw_output: false
+      - db: engine/exp_20260124T102432Z
+        representation_id: repr_validation_first_engine
+        status: complete
+        has_raw_output: true
+        
+  - step: 6
+    action: "Apply selection_rule filter"
+    filter: "existing representation with no successful engine_run with raw_output"
+    candidates:
+      - repr_ee6d8f5a57ffe120: "No engine_runs, but incompatible with PaxEngineAdapter"
+    eligible_candidates: 0
+    
+  - step: 7
+    action: "STOP per selection_rule"
+    reason: "No eligible representation found; improvisation forbidden"
+
+blocking_cause: |
+  repr_ee6d8f5a57ffe120 is the only representation without a successful run,
+  but its spec is {"type":"validation",...} with no start_node/end_node.
+  PaxEngineAdapter.run() requires start_node and end_node to execute pathfinding.
+  
+  All other representations (cb9f8c1d418c4678, repr_validation_first_engine)
+  have already produced successful engine_runs with raw_output present.
+
+outputs:
+  engine_run_id: null
+  experiment_id: null
+  representation_id: null
+  policy_id: pol_d8da3e00e9584eb1
+  raw_output_hash: null
+  
+exec_report_path: scripts/2026-01-24/agents/handoff/king-dolphin/0900-anon-engine_execution_authorization_exec_report.yaml
