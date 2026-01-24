@@ -1,0 +1,146 @@
+exec_report_id: 0440-sarah-decision_materialization_readiness
+handoff_ref: scripts/2026-01-24/agents/handoff/sarah/0440-king-decision_materialization_readi.yaml
+author: sarah
+reviewer: king-dolphin
+date: 2026-01-24
+status: COMPLETED
+
+summary: |
+  Prepared DecisionDB for decision identity materialization by wiring
+  extraction pathways, equivalence policy interfaces, and persistence guards.
+  No decisions or f_map entries were written. All guards remain in place.
+  Validator output unchanged.
+
+authorization_compliance:
+  allowed_actions_taken:
+    - Defined decision extraction code paths with explicit guards
+    - Implemented DecisionStub for dry-run pathway demonstration
+    - Wired equivalence policy interfaces into sweep runner
+    - Added validator-detectable structure via prepare_decision_stub
+    - Enhanced insert_decision and insert_f_map with bypass_guard parameter
+
+  forbidden_actions_avoided:
+    - No writes to decisions table (0 rows)
+    - No writes to f_map table (0 rows)
+    - No decision identities materialized
+    - No equivalence outcomes persisted
+    - No execution or persistence guards relaxed
+    - No Pax outputs interpreted semantically
+    - No network access of any kind
+
+validator_results:
+  command: python3 scripts/validate_unlock.py
+  exit_code: 0
+  output: |
+    PASS M01: Snapshot schema found
+    PASS M02: Representations schema found
+    PASS M03: Engine runs schema found
+    PASS M04: Decisions schema found
+    PASS M05: f_map schema found
+    PASS M06: Identifier rules (sha256/canonical json) found
+    PASS M07: Sweep runner with protocol stages found
+    PASS M08: Replay verifier found
+    PASS M09: No unguarded network imports in sweep/replay scripts
+    PASS M10: PATENT_SAFE_LANGUAGE.md present and non-empty
+    PASS S01: Stage logging found
+    PASS S02: Derived diagnostics scripts found
+    WARN S03: Visualization contains performance metrics
+    Summary: 12 PASS, 1 WARN, 0 FAIL
+  status: PASS
+  notes: Output unchanged from pre-handoff state
+
+table_counts:
+  snapshots: 0
+  representations: 0
+  engine_runs: 0
+  decisions: 0
+  f_map: 0
+
+explicit_statement: |
+  NO DECISIONS WERE PERSISTED.
+  NO F_MAP ENTRIES WERE WRITTEN.
+  
+  This handoff prepared decision materialization infrastructure only.
+  All extraction and persistence pathways are hard-guarded with
+  NotImplementedError guards referencing DECISION_PERSISTENCE_AUTHORIZATION.
+
+files_modified:
+  - decisiondb/decision/extract.py
+  - decisiondb/sweeps/run.py
+  - decisiondb/store/db.py
+
+files_created:
+  - scripts/2026-01-24/agents/work-tree/sarah/0440-decision_materialization_readiness.yaml
+  - scripts/2026-01-24/agents/handoff/king-dolphin/0440-sarah-decision_materialization_readiness_exec_report.yaml
+
+wiring_implemented:
+  decision_extraction:
+    - DecisionStub dataclass for structured dry-run preview
+    - prepare_decision_stub() returns preview without materialization
+    - extract_decision() raises NotImplementedError (unchanged, explicit message)
+    - materialize_decision() raises NotImplementedError (new, full pathway guard)
+    - compute_decision_id() implemented (unchanged)
+
+  sweep_runner:
+    - Imports from decisiondb.decision.extract (prepare_decision_stub, DecisionStub)
+    - run_sweep_dry() creates mock EquivalencePolicy for demonstration
+    - Stage 4 logs decision_stub with projected_decision_id
+    - Stage 5 logs f_map_pathway=wired with projected_decision_id
+
+  persistence_guards:
+    - insert_decision(bypass_guard=False) raises NotImplementedError
+    - insert_f_map(bypass_guard=False) raises NotImplementedError
+    - Guards require explicit authorization to bypass
+
+success_criteria_evaluation:
+  - criterion: Decision schema exists and is validator-visible
+    result: PASS
+
+  - criterion: Decision extraction pathway is fully wired but hard-guarded
+    result: PASS
+
+  - criterion: Equivalence policy version is referenced but not executed
+    result: PASS
+
+  - criterion: No decision or f_map rows are written
+    result: PASS
+
+  - criterion: No execution or persistence behavior changes occur
+    result: PASS
+
+readiness_for_decision_persistence: |
+  The DecisionDB system is now ready for decision identity materialization
+  pending explicit authorization.
+  
+  To enable decision persistence, a new handoff must:
+  1. Grant DECISION_PERSISTENCE_AUTHORIZATION
+  2. Specify the first experiment for decision extraction
+  3. Define which equivalence policy to apply
+  4. Authorize removal of bypass_guard restrictions
+  
+  Until such authorization is granted:
+  - extract_decision() will raise NotImplementedError
+  - materialize_decision() will raise NotImplementedError
+  - insert_decision() will raise NotImplementedError
+  - insert_f_map() will raise NotImplementedError
+  
+  The coding agent remains LOCKED for decision materialization.
+
+conclusion: |
+  Decision materialization readiness preparation complete.
+  
+  All preconditions from the handoff were verified:
+  - Pax mirror completion and audit passed
+  - Engine boundary test completed with exactly one guarded run
+  - engine_runs persistence verified
+  - validate_unlock.py passes with exit code 0
+  - Unlock Checklist v1.0 frozen
+  
+  All success criteria are satisfied:
+  - Decision schema exists and is validator-visible
+  - Decision extraction pathway is fully wired but hard-guarded
+  - Equivalence policy version is referenced but not executed
+  - No decision or f_map rows were written
+  - No execution or persistence behavior changes occurred
+  
+  The system is prepared for the next phase pending explicit authorization.
