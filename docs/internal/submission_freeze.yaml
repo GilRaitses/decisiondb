@@ -1,0 +1,49 @@
+submission_freeze:
+  declaration: global_freeze
+  date_ny: "2026-01-24"
+  time_ny: "18:15"
+  declared_by: roland
+
+frozen_components:
+  layout:
+    status: frozen
+    reference: docs/internal/layout_freeze.yaml
+    includes:
+      - section order
+      - figure placement
+      - float behavior
+      - page count (10 pages)
+
+  content:
+    status: frozen
+    includes:
+      - all manuscript .tex files
+      - bibliography entries
+      - glossary definitions
+
+  auxiliary_materials:
+    status: frozen
+    includes:
+      - submission PDFs
+      - cover pages
+      - packaging artifacts
+
+  language_policy:
+    patent_safe_language: enforced
+    first_person: removed
+    terminology: aligned_with_glossary
+
+commit_reference:
+  pre_freeze_hash: 3b59c3984290c159dd95ffc9d2d707791d3d635e
+  branch: strauss/protocol-scaffolding
+
+guards_active:
+  - pre-commit hook (figures, terminology, patent-safe)
+  - layout_freeze.yaml
+  - content_review_complete.yaml
+
+allowed_future_edits: none_without_new_branch
+
+repository_state:
+  append_only: true
+  submission_cycle: peer_review_2026-01-24
