@@ -1,0 +1,70 @@
+work_tree_id: 0711-replay_expansion
+agent: michelle
+date: 2026-01-24
+handoff_ref: 0711-king-replay_authorization_expansion.yaml
+
+authorization_scope:
+  type: REPLAY_VERIFICATION_ONLY (LIMITED)
+  decision_limit: all existing persisted decisions
+  experiment_limit: existing experiments only
+  engine_execution: forbidden
+  database_writes: forbidden
+  policy_modifications: forbidden
+
+preconditions_verified:
+  - check: validate_unlock.py exit code 0
+    result: PASS
+    evidence: "12 PASS, 1 WARN, 0 FAIL"
+  
+  - check: Replay Authorization v1 marked PASS
+    result: PASS
+    evidence: "0647-barbara-replay_verification_exec_report.yaml verdict: PASS"
+  
+  - check: Equivalence policy unchanged
+    result: PASS
+    evidence: "pol_d8da3e00e9584eb1 matches authorized policy"
+  
+  - check: Canonicalization rules unchanged
+    result: PASS
+    evidence: "json_sorted_keys_utf8, sha256_equality"
+
+decisions_replayed:
+  total_count: 1
+  decisions:
+    - decision_id: dec_e28092c4dc33b8f1
+      experiment_id: exp_20260124T102432Z
+      decision_type: route
+      replay_verdict: PASS
+      payload_hash:
+        recomputed: 3a9d63ac28378116
+        persisted: 3a9d63ac28378116
+        match: true
+      policy_id:
+        recomputed: pol_d8da3e00e9584eb1
+        persisted: pol_d8da3e00e9584eb1
+        match: true
+      signature:
+        node_count: 29
+        path_found: true
+        verified: true
+
+expansion_status:
+  expanded: false
+  reason: |
+    Only 1 decision exists in the system. All three databases were scanned:
+    - exp_20260124T075856Z (persistence): 0 decisions
+    - exp_20260124T081644Z (engine, errored): 0 decisions
+    - exp_20260124T102432Z (engine, success): 1 decision
+    
+    Replay expansion cannot proceed without additional decisions.
+    Materialization of additional decisions requires separate authorization
+    (engine execution is forbidden by this handoff).
+
+verification_script: 0711-replay_expansion_verification.py
+
+notes:
+  - Independent verification performed (separate from Barbara's v1)
+  - Determinism confirmed for single decision across two verification runs
+  - Hash stability verified: payload_hash, policy_id, decision_id all match
+  - No database rows modified (read-only verification)
+  - Expansion blocked by lack of additional decisions, not by verification failure
