@@ -1,0 +1,65 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+
+\title{Decision-Valued Maps: A Diagnostic Infrastructure for Representational Dependence}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/abstract}
+
+% Section order per handoff 2141-king-enforce-manuscript-structure.yaml
+
+\input{sections/introduction}
+
+\input{sections/problem_scope}
+
+\input{sections/core_object}
+
+\input{sections/invariants}
+
+\input{sections/system_design}
+
+\input{sections/protocol}
+
+\input{sections/empirical_characterization}
+
+\input{sections/example_route}
+
+\input{sections/limitations}
+
+\input{sections/prior_infrastructure}
+
+\input{sections/implications}
+
+\input{sections/conclusion}
+
+\input{sections/glossary}
+
+\input{sections/figure_placeholders}
+
+% ------------------------------------------------------------------
+% CANONICAL FIGURE CAPTION TEMPLATE (MANDATORY)
+% All figures in this manuscript MUST use this caption structure.
+% Any mention of performance, accuracy, loss, optimization, learning,
+% or intelligence is a violation of manuscript scope.
+%
+% \textbf{Figure X:} Canonical representational sweep for a fixed snapshot and engine.
+% Each point corresponds to a deterministic representation drawn from the declared
+% representation family. Axes denote representation parameters. Color encodes discrete
+% decision identity as defined by the equivalence policy. Contiguous regions indicate
+% identity persistence; boundaries indicate identity change induced by representational
+% variation.
+% ------------------------------------------------------------------
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+\end{document}

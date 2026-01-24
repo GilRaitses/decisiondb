@@ -1,0 +1,99 @@
+compile-check.log
+==================
+date: 2026-01-23
+agent: roland
+handoff: 1635-king-manuscript_split_compile
+
+compilation_result:
+  engine: pdflatex
+  mode: nonstopmode
+  exit_code: 0
+  output_file: main.pdf
+  pages: 7
+
+errors: []
+
+warnings:
+  - type: missing_bbl
+    message: "No file main.bbl"
+    cause: bibliography entries defined but no \cite commands in text
+    severity: minor
+    action_required: false
+
+structural_issues:
+  - type: empty_section_file
+    file: sections/abstract.tex
+    status: empty
+    note: included in main.tex but contributes no content
+
+  - type: uncited_bibliography
+    file: bibliography.bib
+    entries: 4
+    cited: 0
+    note: entries present for ADT, WAL, spec-curve, cross-validation but not \cited
+
+consistency_verification:
+  labels_and_refs:
+    labels_defined: 0
+    refs_used: 0
+    unresolved_refs: 0
+    status: clean
+
+  glossary_alignment:
+    glossary_terms: 10
+    terms_used_in_text: verified
+    status: consistent
+
+  figure_references:
+    figure_files_present: 0
+    caption_templates_defined: 5
+    status: placeholders_only
+
+section_order_as_compiled:
+  1: abstract.tex (empty)
+  2: introduction.tex
+  3: problem_scope.tex
+  4: core_object.tex
+  5: protocol.tex
+  6: prior_infrastructure.tex
+  7: system_design.tex
+  8: figure_captions.tex
+  9: empirical_characterization.tex
+  10: implications.tex
+  11: limitations.tex
+  12: glossary.tex
+  13: figure_placeholders.tex
+
+deviation_from_structure_doc:
+  expected_sections_per_structure_md:
+    - abstract
+    - introduction
+    - problem_scope
+    - core_object
+    - invariants           # not present as separate section
+    - system_design
+    - protocol
+    - example_route        # not present
+    - failure_modes        # present as limitations
+    - prior_infrastructure
+    - discussion           # present as implications
+    - conclusion           # not present
+  actual_sections_in_draft:
+    - introduction
+    - problem_scope
+    - core_object
+    - protocol
+    - prior_infrastructure
+    - system_design
+    - figure_captions      # working notes
+    - empirical_characterization
+    - implications
+    - limitations
+    - glossary
+    - figure_placeholders  # working notes
+
+summary:
+  compilation: PASS
+  content_transfer: VERBATIM
+  restructuring_applied: NONE
+  terminology_changes: NONE

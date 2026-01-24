@@ -1,0 +1,254 @@
+#!/usr/bin/env bash
+#
+# decisiondb pre-commit hook
+# enforces FIGURE_CHECKLIST.md and STYLE_GUIDE.md constraints using terminology-table.yaml as term source when available
+#
+# install:
+#   cp docs/git/hooks/pre-commit .git/hooks/pre-commit
+#   chmod +x .git/hooks/pre-commit
+
+set -e
+
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+FAIL=0
+
+echo "decisiondb pre-commit: validating figures and language"
+
+# files staged for commit
+FILES=$(git diff --cached --name-only)
+
+# ---------- language guardrails ----------
+# single-source-of-truth term lists
+# priority:
+#   1) docs/internal/terminology/terminology-table.yaml (banned/discouraged)
+#   2) fallback lists below
+
+TERMINOLOGY_TABLE="docs/internal/terminology/terminology-table.yaml"
+
+# fallback (only used if terminology-table.yaml cannot be parsed)
+FALLBACK_FORBIDDEN_TERMS=(
+  "criticality"
+  "phase transition"
+  "universality"
+  "order parameter"
+  "renormalization"
+  "emergent law"
+  "self-organized"
+)
+
+FALLBACK_WARN_TERMS=(
+  "phase map"
+  "regime diagram"
+)
+
+# Load banned/discouraged terms from terminology-table.yaml if possible.
+# Expected shape (nested with term: keys):
+#   banned:
+#     - term: phrase
+#       reason: ...
+#   discouraged:
+#     - term: phrase
+#       reason: ...
+# This loader is intentionally lightweight (no external deps like yq).
+load_terms_from_yaml() {
+  local yaml_path="$1"
+  python3 - <<'PY' "$yaml_path" 2>/dev/null || true
+import re, sys
+path = sys.argv[1]
+try:
+    txt = open(path, 'r', encoding='utf-8').read()
+except Exception:
+    sys.exit(0)
+
+sections = {"banned": [], "discouraged": []}
+current = None
+for line in txt.splitlines():
+    # strip comments
+    line = line.split('#', 1)[0].rstrip('\n')
+    if not line.strip():
+        continue
+    # check for banned: or discouraged: section headers
+    m = re.match(r'^  (banned|discouraged)\s*:\s*$', line)
+    if m:
+        current = m.group(1)
+        continue
+    # reset current if we hit any other top-level or second-level section header
+    if re.match(r'^  \w+:\s*$', line) or re.match(r'^\w+:', line):
+        current = None
+        continue
+    if current:
+        # look for "- term: value" pattern (nested structure)
+        m2 = re.match(r'^\s*-\s*term:\s*(.+?)\s*$', line)
+        if m2:
+            term = m2.group(1).strip().strip('"\'')
+            if term:
+                sections[current].append(term)
+
+# print bash arrays as NUL-delimited streams so spaces are preserved
+for key in ("banned", "discouraged"):
+    for t in sections[key]:
+        sys.stdout.write(f"{key}\t{t}\n")
+PY
+}
+
+FORBIDDEN_TERMS=()
+WARN_TERMS=()
+
+if [[ -f "$TERMINOLOGY_TABLE" ]]; then
+  while IFS=$'\t' read -r kind term; do
+    [[ -z "$kind" || -z "$term" ]] && continue
+    if [[ "$kind" == "banned" ]]; then
+      FORBIDDEN_TERMS+=("$term")
+    elif [[ "$kind" == "discouraged" ]]; then
+      WARN_TERMS+=("$term")
+    fi
+  done < <(load_terms_from_yaml "$TERMINOLOGY_TABLE")
+fi
+
+# If parsing failed or file missing, fall back.
+if [[ "${#FORBIDDEN_TERMS[@]}" -eq 0 ]]; then
+  FORBIDDEN_TERMS=("${FALLBACK_FORBIDDEN_TERMS[@]}")
+fi
+if [[ "${#WARN_TERMS[@]}" -eq 0 ]]; then
+  WARN_TERMS=("${FALLBACK_WARN_TERMS[@]}")
+fi
+
+# also block em-dash usage per STYLE_RULES.md (both unicode and common LaTeX form)
+STYLE_DASH_FORBIDDEN=(
+  "—"
+)
+
+for f in $FILES; do
+  if [[ "$f" == *.md || "$f" == *.tex || "$f" == *.rst ]]; then
+    CONTENT=$(git show :"$f" || true)
+
+    for term in "${FORBIDDEN_TERMS[@]}"; do
+      if echo "$CONTENT" | grep -qi "$term"; then
+        echo -e "${RED}FAIL:${NC} forbidden term '$term' found in $f"
+        FAIL=1
+      fi
+    done
+
+    for term in "${WARN_TERMS[@]}"; do
+      if echo "$CONTENT" | grep -qi "$term"; then
+        echo -e "${YELLOW}WARN:${NC} '$term' found in $f (verify placement per STYLE_GUIDE.md)"
+      fi
+    done
+
+    for tok in "${STYLE_DASH_FORBIDDEN[@]}"; do
+      if echo "$CONTENT" | grep -q "$tok"; then
+        echo -e "${RED}FAIL:${NC} forbidden punctuation '$tok' found in $f (no em dashes)"
+        FAIL=1
+      fi
+    done
+
+    # common LaTeX em-dash token (---). Only flag when used as punctuation.
+    if [[ "$f" == *.tex ]]; then
+      if echo "$CONTENT" | grep -qE "(^|[^-])---([^-]|$)"; then
+        echo -e "${RED}FAIL:${NC} forbidden punctuation '---' found in $f (no em dashes)"
+        FAIL=1
+      fi
+    fi
+  fi
+done
+
+# ---------- figure checklist enforcement ----------
+# require a caption checklist block for new figures
+for f in $FILES; do
+  if [[ "$f" =~ figures/.*\.(png|pdf|svg) ]]; then
+    META="${f%.*}.md"
+    if ! git show :"$META" >/dev/null 2>&1; then
+      echo -e "${RED}FAIL:${NC} figure $f missing companion metadata file $META"
+      FAIL=1
+    else
+      META_CONTENT=$(git show :"$META" || true)
+      REQUIRED_KEYS=(
+        "decision identity definition"
+        "representation axes"
+        "equivalence rule"
+        "stability criterion"
+        "sampling method"
+        "non-claims disclaimer"
+      )
+      for key in "${REQUIRED_KEYS[@]}"; do
+        if ! echo "$META_CONTENT" | grep -qi "$key"; then
+          echo -e "${RED}FAIL:${NC} $META missing required checklist item: '$key'"
+          FAIL=1
+        fi
+      done
+    fi
+  fi
+done
+
+# ---------- scope guard ----------
+# prevent overclaiming language in repos
+SCOPE_FAIL_TERMS=(
+  "theory of"
+  "explains all"
+  "universal"
+  "fundamental law"
+)
+
+for f in $FILES; do
+  if [[ "$f" == *.md ]]; then
+    CONTENT=$(git show :"$f" || true)
+    for term in "${SCOPE_FAIL_TERMS[@]}"; do
+      if echo "$CONTENT" | grep -qi "$term"; then
+        echo -e "${RED}FAIL:${NC} overclaiming phrase '$term' found in $f"
+        FAIL=1
+      fi
+    done
+  fi
+done
+
+# ---------- patent-safe language enforcement ----------
+# enforces constraints from docs/internal/PATENT_SAFE_LANGUAGE.md
+# blocks claims about improvement, optimization, learning, or new algorithms
+PATENT_FORBIDDEN_PHRASES=(
+  # Direct violations from PATENT_SAFE_LANGUAGE.md (no claims about these)
+  "improvement of outcomes"
+  "improves outcomes"
+  "improved outcomes"
+  "optimization of decisions"
+  "optimizes decisions"
+  "optimized decisions"
+  "prediction accuracy"
+  "learning efficiency"
+  "new decision-making procedure"
+  "novel decision-making"
+  "optimization objective"
+  "control mechanism"
+  # Common patent-claim language (scope creep)
+  "outperforms"
+  "state-of-the-art"
+  "state of the art"
+  "novel method"
+  "novel algorithm"
+  "new algorithm"
+  "our invention"
+  "the invention"
+)
+
+for f in $FILES; do
+  if [[ "$f" == *.md || "$f" == *.tex ]]; then
+    CONTENT=$(git show :"$f" || true)
+    for phrase in "${PATENT_FORBIDDEN_PHRASES[@]}"; do
+      if echo "$CONTENT" | grep -qi "$phrase"; then
+        echo -e "${RED}FAIL:${NC} PATENT_SAFE_LANGUAGE violation: '$phrase' found in $f"
+        FAIL=1
+      fi
+    done
+  fi
+done
+
+if [[ "$FAIL" -eq 1 ]]; then
+  echo -e "${RED}Commit blocked.${NC}"
+  echo "Review STYLE_GUIDE.md, FIGURE_CHECKLIST.md, and PATENT_SAFE_LANGUAGE.md."
+  exit 1
+fi
+
+echo "decisiondb pre-commit: checks passed"
+exit 0

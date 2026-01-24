@@ -1,0 +1,85 @@
+exec_report:
+  id: "2141-roland-manuscript_structure_exec_report"
+  agent: roland
+  date_ny: "2026-01-23"
+  responding_to: "2141-king-enforce-manuscript-structure"
+
+acceptance_tests:
+  manuscript_compiles: PASS
+  no_em_dashes: PASS
+  section_order_matches: PASS
+  abstract_non_empty: PASS
+  abstract_no_performance_claims: PASS
+  placeholders_in_empirical_sections_only: PASS
+  terminology_consistent: PASS
+  no_performance_metrics_in_figures: PASS
+
+section_order_final:
+  - Introduction
+  - Problem Setting and Scope
+  - Core Object: Decision-Valued Maps
+  - System Invariants
+  - DecisionDB System Architecture
+  - Experimental Protocol for Representational Sweeps
+  - Empirical Characterization via Representational Sweeps
+  - Example: Route Identity Under Weight Policy Variation
+  - Failure Modes and Misinterpretations
+  - Relation to Prior Infrastructure Work
+  - Discussion: What This Enables
+  - Conclusion
+  - Glossary
+  - Planned Figures and Empirical Placeholders
+
+changes_made:
+  - abstract.tex: Populated with non-empirical summary
+  - conclusion.tex: Populated with 2-3 sentence closing
+  - prior_infrastructure.tex: Added citations to ADT, WAL, spec-curve references
+  - main.tex: Restored figure_placeholders section
+
+prohibited_language:
+  scan_result: PASS
+  notes: |
+    All occurrences of "optimization", "learning", "cognition" appear
+    in exclusion/disclaimer context only (e.g., "without introducing...")
+
+citations:
+  total_in_bibliography: 4
+  cited_in_text: 3
+  uncited:
+    - stone1974cv
+  recommendation: Remove stone1974cv or add cross-validation mention if applicable
+
+terminology_consistency:
+  representation: consistent with glossary
+  decision_identity: consistent with glossary
+  engine: consistent with glossary
+  equivalence_policy: consistent with glossary
+  no_competing_synonyms_introduced: true
+
+placeholders_verified:
+  - EXP_ID_PRIMARY
+  - EXP_ID_ROUTE
+  - EXP_ID_AUDIT
+  - EXP_ID_PERSISTENCE
+  - EXP_ID_BOUNDARY
+  - SNAPSHOT_ID
+  - REP_FAMILY
+  - REP_FAMILY_LIST
+  - DECISION_ID_LIST
+  - DECISION_TYPE
+  - PARAM_LIST
+  - BOUNDARY_PARAM_RANGE
+  - UNEXPLORED_REGIONS
+
+compile_metrics:
+  pages: 8
+  errors: 0
+  warnings: 0
+
+repo_readiness:
+  ready_for_coding_agent: true
+  empirical_artifacts_pending: true
+  note: |
+    Manuscript structure enforced. Placeholders ready for empirical
+    data population. Bibliography has one uncited entry (stone1974cv)
+    that should be removed or cited.

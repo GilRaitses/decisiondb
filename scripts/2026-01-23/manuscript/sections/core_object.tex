@@ -1,0 +1,11 @@
+\section{Core Object: Decision-Valued Maps}
+
+The central object of study is a decision-valued map
+\[
+f : \mathcal{R} \rightarrow \mathcal{D},
+\]
+where $\mathcal{R}$ denotes a family of representations over a fixed snapshot and $\mathcal{D}$ denotes a set of discrete decision identities.
+
+Each element $r \in \mathcal{R}$ is a fully specified, deterministic representation derived from the snapshot. The engine consumes $r$ and produces raw output, which is then reduced to a decision identity $d \in \mathcal{D}$ according to an equivalence policy. The equivalence policy defines when two raw outputs are considered to represent the same decision identity, independent of incidental numerical differences.
+
+The purpose of the system is to make the mapping $f$ queryable, replayable, and auditable. By materializing this map across controlled variation in $\mathcal{R}$, it becomes possible to observe regions of identity persistence, identify boundary formation, and detect fractures where small representational changes induce discrete outcome changes.

@@ -1,0 +1,96 @@
+title: "Enforce DecisionDB Manuscript Structure and Placeholders"
+scope: "manuscript mechanics only"
+
+allowed_actions:
+  - reorder sections
+  - insert missing or thin sections
+  - add or standardize empirical placeholders
+  - ensure citations are cited in text
+  - populate abstract with a non-empirical summary
+
+forbidden_actions:
+  - invent empirical results
+  - add new scientific or algorithmic claims
+  - change definitions of snapshot, representation, engine, decision identity, or equivalence policy
+  - introduce optimization, learning, intelligence, or safety-guarantee language
+  - introduce or rephrase claims using optimization, learning, or performance language
+
+exact_steps:
+  - Ensure the global section order matches the required sequence:
+    1. Introduction
+    2. Problem Setting and Scope
+    3. Core Object: Decision-Valued Maps
+    4. System Invariants
+    5. DecisionDB System Architecture
+    6. Experimental Protocol for Representational Sweeps
+    7. Empirical Characterization via Representational Sweeps
+    8. Failure Modes and Misinterpretations
+    9. Relation to Prior Infrastructure Work
+    10. Discussion: What This Enables
+    11. Limitations and Scope Constraints
+    12. Glossary
+    13. Planned Figures and Empirical Placeholders
+  - Review the existing Introduction and expand it using only concepts present in the current text, keeping it aligned with the diagnostic framing and inserting placeholder <INTRO_CONTEXT> where any concrete example would be needed.
+  - Verify that Problem Setting and Scope defines snapshot, representation, engine, decision identity, and equivalence policy using wording consistent with the glossary, and that all exclusion statements (no learning, no optimization, no cognition) remain intact.
+  - Keep System Invariants as a standalone section, preserving the four invariants and adding only connective sentences that do not introduce new claims.
+  - Confirm that Section 6 (Experimental Protocol for Representational Sweeps) exactly reflects the five protocol stages and does not add any sixth step or performance discussion.
+  - In Section 7 and 7.1, ensure that the canonical visualization description explicitly states that decision identity is encoded categorically and that no continuous performance metric is displayed.
+  - In Section 8 (Example: Route Identity Under Weight Policy Variation), preserve the placeholder structure and ensure it uses:
+      - <EXP_ID_ROUTE>
+      - <SNAPSHOT_ID>
+      - <REP_FAMILY>
+      - <DECISION_ID_LIST>
+  - In Section 9 (Failure Modes and Misinterpretations), verify that all four subsections are present (discrete outcome requirement, fixed snapshot and engine assumption, no optimization or learning claims, empirical coverage limits) and keep placeholders <REP_FAMILY_LIST> and <UNEXPLORED_REGIONS>.
+  - In Section 10 (Relation to Prior Infrastructure Work), check that precedents are described only as infrastructural lineage and are not framed as competing systems or products.
+  - In Section 11 (Discussion: What This Enables), ensure that the three empirical subsections use placeholders only:
+      - <EXP_ID_AUDIT>, <SNAPSHOT.ID>, <REP_FAMILY>, <DECISION.TYPE>
+      - <EXP_ID_PERSISTENCE>, <PARAM_LIST>
+      - <EXP_ID_BOUNDARY>, <BOUNDARY_PARAM_RANGE>
+  - Convert the current Conclusion header and Glossary into a Conclusion section followed by a Glossary section:
+      - Add 2-3 sentences of non-empirical summary in Conclusion using existing concepts only.
+      - Keep the glossary definitions verbatim.
+  - Add a short, non-empirical abstract summarizing:
+      - the existence of decision-valued maps
+      - the infrastructure for logging, replaying, and auditing
+      - the use of canonical representational sweeps
+    without any performance or safety claims.
+  - Scan the full manuscript for prohibited language and remove or rephrase any new occurrences of:
+      - optimize, optimization
+      - learn, learning, training
+      - intelligent, cognition
+      - better decisions, improved performance, safety guarantees
+  - Check that all references listed in the References section are cited at least once in the text, or mark unused references for removal after separate approval.
+  - Validate that all uses of the terms representation, decision identity, engine, and equivalence policy match the glossary definitions and that no new primary synonyms have been introduced.
+  - Run a compile of the manuscript and confirm that all placeholders are syntactically valid and that the PDF builds without LaTeX errors.
+
+placeholders:
+  - EXP_ID_PRIMARY
+  - EXP_ID_ROUTE
+  - EXP_ID_AUDIT
+  - EXP_ID_PERSISTENCE
+  - EXP_ID_BOUNDARY
+  - SNAPSHOT_ID
+  - SNAPSHOT.ID
+  - REP_FAMILY
+  - REP_FAMILY_LIST
+  - DECISION_ID_LIST
+  - DECISION.TYPE
+  - EQUIV_POLICY_ID
+  - ENGINE_NAME
+  - ENGINE_VERSION
+  - PARAM_GRID
+  - PARAM_LIST
+  - BOUNDARY_PARAM_RANGE
+  - UNEXPLORED_REGIONS
+  - INTRO_CONTEXT
+  - SCOPE_EXAMPLE
+  - FUTURE_WORK_DOMAINS
+
+acceptance_tests:
+  - The manuscript compiles successfully to PDF without errors or missing-reference warnings.
+  - No em dashes or LaTeX triple-dash constructs are present in the source.
+  - The section order in the compiled PDF matches the required sequence exactly.
+  - The abstract is non-empty and does not contain empirical numbers or performance claims.
+  - All placeholders listed above appear only in sections explicitly marked as empirical or example scaffolds.
+  - The terms representation, decision identity, engine, and equivalence policy are used consistently with the glossary and without competing primary synonyms.
+  - All figures and empirical subsections refer to explicit experiment IDs and placeholders and do not display performance metrics or learning curves.

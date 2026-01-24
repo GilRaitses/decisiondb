@@ -1,0 +1,90 @@
+exec_report:
+  id: "2041-roland-manuscript_alignment_exec_report"
+  agent: roland
+  date_ny: "2026-01-23"
+  responding_to: "2041-king-manuscript_alignment_and_gatin"
+
+dominant_mode_of_work: mechanical_alignment
+
+deviation_flags:
+  content_modified: false
+  terminology_changed: false
+  new_claims_introduced: false
+  interpretation_added: false
+
+drift_risk:
+  level: low
+  notes:
+    - Section titles renamed to match structure doc exactly
+    - Invariants relocated verbatim from system_design.tex
+    - No prose added to new sections beyond TODO comments
+    - empirical_characterization.tex retained as supplementary material
+
+ambiguity_encountered:
+  - issue: "deep_research_alignment_findings.yaml not found"
+    resolution: "Used decisiondb_manuscript_structure.md as authoritative source for section order"
+
+  - issue: "empirical_characterization.tex not in structure doc"
+    resolution: "Retained after protocol section; content describes sweep methodology"
+
+  - issue: "limitations.tex content vs 'Failure Modes' title mismatch"
+    resolution: "Renamed section header only; content preserved verbatim"
+
+confidence_in_alignment:
+  structural_match: high
+  terminology_compliance: high
+  scope_compliance: high
+  notes:
+    - Section order now matches structure doc sections 0-11
+    - All required sections present (some with TODO placeholders)
+    - Working notes (figure_captions, figure_placeholders) commented out
+
+glossary_compliance:
+  source: /Users/gilraitses/decisiondb/docs/agent-protocols/GLOSSARY.md
+  modification_applied: false
+  status: unchanged
+
+scope_compliance:
+  ai_claims: none
+  learning_language: none
+  cognition_language: none
+  optimization_claims: none
+
+structural_decisions_made:
+  - decision: extract_invariants
+    rationale: Structure doc specifies standalone "System Invariants" section
+
+  - decision: retain_empirical_characterization
+    rationale: Contains sweep methodology not duplicated elsewhere
+
+  - decision: rename_section_titles_only
+    rationale: Per constraint "do NOT modify terminology definitions"
+
+  - decision: comment_out_working_notes
+    rationale: figure_captions and figure_placeholders are not in structure doc
+
+deliverables_produced:
+  work_tree:
+    path: /Users/gilraitses/decisiondb/scripts/2026-01-23/agents/work-tree/roland/2041-manuscript-alignment.yaml
+
+sections_ready_for_population:
+  - sections/abstract.tex (empty)
+  - sections/example_route.tex (TODO placeholder)
+  - sections/conclusion.tex (TODO placeholder)
+
+compilation_status:
+  pdflatex_exit: 0
+  pages_output: 7
+  errors: 0
+  warnings: 1
+  warning_detail: "Empty thebibliography environment"
+
+flags_for_review:
+  - abstract.tex still empty
+  - example_route.tex needs empirical content
+  - conclusion.tex needs closing statement
+  - Bibliography entries present but not cited
+
+repo_readiness:
+  ready_for_coding_agent: true
+  empirical_artifacts_pending: true

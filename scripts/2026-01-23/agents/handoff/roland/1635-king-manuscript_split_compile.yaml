@@ -1,0 +1,114 @@
+handoff:
+  id: "1635-king-manuscript_split_compile"
+  author: king-dolphin
+  date_ny: "2026-01-23"
+  time_ny: "16:35"
+  target_agent: roland
+
+context:
+  project: decisiondb
+  manuscript_root: /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript
+  primary_file: comprhensive-draft.tex
+  supporting_files:
+    - decisiondb_manuscript_structure.md
+    - sections/
+  governing_docs:
+    - /Users/gilraitses/decisiondb/docs/agent-protocols/STYLE_GUIDE.md
+    - /Users/gilraitses/decisiondb/docs/agent-protocols/STYLE_RULES.md
+    - /Users/gilraitses/decisiondb/docs/agent-protocols/GLOSSARY.md
+    - /Users/gilraitses/decisiondb/docs/agent-protocols/FIGURE_CHECKLIST.md
+    - /Users/gilraitses/decisiondb/docs/agent-protocols/FIGURE_CONVENTIONS.md
+    - /Users/gilraitses/decisiondb/docs/internal/PATENT_SAFE_LANGUAGE.md
+
+role_definition:
+  role: manuscript_writer_compiler
+  mandate:
+    - operate only on manuscript source files
+    - do not alter technical content, definitions, or scope
+    - do not introduce new claims, framing, or interpretation
+  exclusions:
+    - no experimental code
+    - no data generation
+    - no figure creation
+    - no terminology changes
+
+objectives:
+  - id: obj_01
+    description: >
+      Split the comprehensive LaTeX draft into section-specific .tex files
+      under manuscript/sections without changing wording, ordering, or content.
+    constraints:
+      - verbatim transfer only
+      - preserve labels, equations, glossary terms
+      - no stylistic edits
+
+  - id: obj_02
+    description: >
+      Create a master manuscript file that inputs the section files in
+      the correct order, matching decisiondb_manuscript_structure.md exactly.
+    constraints:
+      - no content duplication
+      - no restructuring
+      - no renaming of sections
+
+  - id: obj_03
+    description: >
+      Verify internal consistency of references, glossary usage, and
+      figure callouts against the frozen glossary and caption templates.
+    constraints:
+      - flag inconsistencies only
+      - do not resolve by rewriting unless explicitly instructed
+
+  - id: obj_04
+    description: >
+      Produce a minimal compile-check log indicating whether the manuscript
+      builds cleanly or where LaTeX structural issues occur.
+    constraints:
+      - no content fixes unless necessary for compilation
+      - report issues categorically, not narratively
+
+inputs_locked:
+  terminology:
+    source: /Users/gilraitses/decisiondb/docs/agent-protocols/GLOSSARY.md
+    modification_allowed: false
+  figures:
+    caption_template_locked: true
+    new_figures_allowed: false
+  scope_language:
+    ai_claims_allowed: false
+    learning_cognition_language_allowed: false
+
+deliverables:
+  - path: /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript/sections/
+    type: directory
+    contents: sectionX.tex files split verbatim
+  - path: /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript/main.tex
+    type: file
+    description: master compiler file
+  - path: /Users/gilraitses/decisiondb/scripts/2026-01-23/agents/work-tree/roland/1635-manuscript-split.yaml
+    type: work_tree
+  - path: /Users/gilraitses/decisiondb/scripts/2026-01-23/agents/handoff/king-dolphin/1635-roland-manuscript_exec_report.yaml
+    type: exec_report
+
+exec_report_requirements:
+  required_fields:
+    - dominant_mode_of_work
+    - deviation_flags
+    - glossary_compliance
+    - scope_compliance
+    - structural_decisions_made
+  forbidden_fields:
+    - prose_summary
+    - content_evaluation
+    - interpretive_comments
+
+handoff_readiness:
+  dependencies_satisfied:
+    - levi_log_created
+    - strauss_equivalence_policy_template_created
+  blocking_dependencies:
+    - none
+
+signoff:
+  handoff_complete: true
+  awaiting_exec_report: true

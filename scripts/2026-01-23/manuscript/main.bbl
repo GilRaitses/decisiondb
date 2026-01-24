@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{gray1993tp}
+Jim Gray and Andreas Reuter.
+\newblock {\em Transaction Processing: Concepts and Techniques}.
+\newblock Morgan Kaufmann, 1993.
+
+\bibitem{liskov1978adt}
+Barbara Liskov and John Guttag.
+\newblock {\em Programming with Abstract Data Types}.
+\newblock Addison-Wesley, 1978.
+
+\bibitem{simonsohn2018spec}
+Uri Simonsohn, Joseph Simmons, and Leif Nelson.
+\newblock Specification curve analysis.
+\newblock {\em PsyArXiv}, 2018.
+
+\end{thebibliography}

@@ -1,0 +1,22 @@
+2026-01-23.yaml
+
+
+
+manuscript/
+  sections/
+    abstract.tex
+    introduction.tex
+    problem_scope.tex
+    core_object.tex
+    invariants.tex
+    system_design.tex
+    protocol.tex
+    example_route.tex
+    failure_modes.tex
+    prior_infrastructure.tex
+    discussion.tex
+    conclusion.tex
+  figures/
+  tables/
+  bibliography.bib
+  main.tex

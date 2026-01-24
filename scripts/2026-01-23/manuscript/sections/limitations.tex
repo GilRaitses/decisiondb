@@ -1,0 +1,25 @@
+\section{Failure Modes and Misinterpretations}
+
+This section delineates the boundaries of applicability of the diagnostic framework and clarifies what claims are not made.
+
+\subsection{Discrete Outcome Requirement}
+
+DecisionDB applies only to systems where outputs can be reduced to discrete identities via a declared equivalence policy. Continuous outputs are out of scope unless such a reduction is explicitly defined.
+
+\subsection{Fixed Snapshot and Engine Assumption}
+
+All empirical results assume a frozen snapshot and a fixed engine. Changes to data, model parameters, or execution logic constitute a new analytical context and require a new analysis.
+
+\subsection{No Claims About Optimization or Learning}
+
+This framework does not improve outcomes, select better representations, or introduce learning dynamics. Any apparent performance effects observed in sweeps are incidental and not interpreted as optimization results.
+
+\subsection{Empirical Coverage Limits}
+
+Empirical Result Placeholder:
+\begin{itemize}
+  \item Representation families evaluated: \texttt{<REP\_FAMILY\_LIST>}
+  \item Regions not evaluated: \texttt{<UNEXPLORED\_REGIONS>}
+\end{itemize}
+
+Reported sweeps cover only declared representation families and parameter ranges. Unobserved regions of representation space remain unconstrained.

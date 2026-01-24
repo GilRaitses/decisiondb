@@ -1,0 +1,87 @@
+# Equivalence Policy Table Template
+# Schema: decisiondb.equivalence_policy.v1
+# Purpose: Define how decision identity is compared across levels
+# Author: strauss
+# Date: 2026-01-23
+
+schema: decisiondb.equivalence_policy.v1
+
+description: >
+  An equivalence policy defines the rules for determining when two
+  decisions are considered identical at a given level of abstraction.
+  Policies are applied during diagnostic comparisons and stability analysis.
+
+policy_levels:
+  - level_id: exact
+    description: >
+      Bit-for-bit identity. Two decisions are equivalent if and only if
+      their canonical JSON representations produce the same sha256 hash.
+    hash_source: decision.identity
+    canonicalization: json_sorted_keys_utf8
+    match_rule: sha256_equality
+
+  - level_id: corridor
+    description: >
+      Structural equivalence at the corridor or region level. Two decisions
+      are equivalent if they share the same high-level corridor or zone
+      traversal, even if low-level node sequences differ.
+    hash_source: decision.equivalence.corridor
+    canonicalization: json_sorted_keys_utf8
+    match_rule: sha256_equality
+    optional: true
+
+  - level_id: semantic
+    description: >
+      Domain-specific equivalence. Two decisions are equivalent if they
+      produce the same outcome according to domain-defined rules (e.g.,
+      same destination reached, same regime assigned, same policy selected).
+    hash_source: decision.equivalence.semantic
+    canonicalization: domain_specific
+    match_rule: custom
+    optional: true
+
+policy_application:
+  default_level: exact
+  fallback_chain:
+    - exact
+    - corridor
+    - semantic
+  notes: >
+    When comparing decisions, start at the strictest level (exact) and
+    fall back through the chain only if explicitly requested by the
+    diagnostic query.
+
+hash_computation:
+  algorithm: sha256
+  truncation: 16
+  encoding: hex_lowercase
+  prefix_map:
+    exact: "dec_"
+    corridor: "cor_"
+    semantic: "sem_"
+
+usage_example:
+  context: >
+    Given two runs with different representations, determine if they
+    produced the same decision at the corridor level.
+  steps:
+    - extract decision.equivalence.corridor from each run
+    - compute sha256 of each canonical JSON
+    - compare first 16 hex chars
+    - match if equal
+
+cross_repo_sync:
+  applicable_repos:
+    - decisiondb
+    - pax
+    - indysim
+  sync_policy: >
+    This template is the canonical source for equivalence policy definitions.
+    When adopted in other repositories, the schema version must match.
+    Local extensions are allowed under decision.equivalence.local but
+    must not override the core levels (exact, corridor, semantic).
+
+validation_rules:
+  - every decision record must populate decision.equivalence.exact
+  - corridor and semantic are optional but must follow schema if present
+  - hash prefixes must match the level being computed

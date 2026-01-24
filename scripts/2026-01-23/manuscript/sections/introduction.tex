@@ -1,0 +1,7 @@
+\section{Introduction}
+
+Complex analytical pipelines deployed in scientific, engineering, and policy settings routinely produce discrete outcome identities that appear stable under nominal conditions yet remain sensitive to subtle representational choices. Small variations in encoding, preprocessing rules, aggregation policies, or structural descriptions can induce qualitatively different outcomes, even when the underlying data snapshot and computational engine are unchanged. Because these dependencies are rarely recorded or examined as first-class objects of analysis, they are often discovered only after deployment, failure, or post-hoc audit.
+
+Current practice tends to focus on optimizing performance with respect to fixed representations, while representational choices themselves are treated as incidental implementation details. As a result, the mapping between families of representations and the resulting discrete outcomes remains implicit. This limits the ability to assess persistence, detect boundary formation, or anticipate fracture points where outcome identity changes.
+
+This paper introduces a diagnostic perspective centered on making such dependencies observable. We formalize a decision-valued mapping from representations to discrete outcome identities and describe a minimal infrastructure for logging, replaying, and auditing this mapping under controlled variation. The contribution is not a new model, learning rule, or optimization procedure, but a system-level abstraction that renders representational dependence empirically testable.

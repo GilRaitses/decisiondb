@@ -1,0 +1,92 @@
+work_tree:
+  id: "2041-manuscript-alignment"
+  agent: roland
+  date_ny: "2026-01-23"
+  time_started: "20:41"
+  handoff_source: "2041-king-manuscript_alignment_and_gatin"
+
+task_summary:
+  objective: Align manuscript structure with decisiondb_manuscript_structure.md
+
+files_created:
+  - sections/invariants.tex
+  - sections/example_route.tex
+  - sections/conclusion.tex
+
+files_modified:
+  - main.tex (section order updated)
+  - sections/system_design.tex (invariants extracted)
+  - sections/prior_infrastructure.tex (section title renamed)
+  - sections/limitations.tex (section title renamed to "Failure Modes and Misinterpretations")
+  - sections/implications.tex (section title renamed to "Discussion: What This Enables")
+
+section_order_changes:
+  previous_order:
+    - abstract
+    - introduction
+    - problem_scope
+    - core_object
+    - protocol
+    - prior_infrastructure
+    - system_design
+    - figure_captions
+    - empirical_characterization
+    - implications
+    - limitations
+    - glossary
+    - figure_placeholders
+
+  new_order:
+    - abstract
+    - introduction
+    - problem_scope
+    - core_object
+    - invariants
+    - system_design
+    - protocol
+    - empirical_characterization
+    - example_route
+    - limitations (now "Failure Modes and Misinterpretations")
+    - prior_infrastructure (now "Relation to Prior Infrastructure Work")
+    - implications (now "Discussion: What This Enables")
+    - conclusion
+    - glossary
+
+  working_notes_commented_out:
+    - figure_captions
+    - figure_placeholders
+
+invariant_extraction:
+  source: sections/system_design.tex (subsection "Protocol Enforcement")
+  destination: sections/invariants.tex (section "System Invariants")
+  content_modified: false
+  wording_unchanged: true
+
+section_renames:
+  - file: prior_infrastructure.tex
+    old_title: "Related Infrastructural Precedents"
+    new_title: "Relation to Prior Infrastructure Work"
+
+  - file: limitations.tex
+    old_title: "Limitations and Scope Constraints"
+    new_title: "Failure Modes and Misinterpretations"
+
+  - file: implications.tex
+    old_title: "Implications for Auditability and Reliability"
+    new_title: "Discussion: What This Enables"
+
+placeholder_format:
+  pattern: "<UPPERCASE_TOKEN>"
+  examples:
+    - "<EXP_ID_PRIMARY>"
+    - "<SNAPSHOT_ID>"
+    - "<REP_FAMILY>"
+    - "<PARAM_LIST>"
+  status: consistent
+
+compile_status:
+  pdflatex_exit: 0
+  pages_output: 7
+  errors: 0
+  warnings:
+    - "Empty thebibliography environment (no citations in text)"

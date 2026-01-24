@@ -1,0 +1,293 @@
+\section{Introduction}
+
+Complex analytical pipelines deployed in scientific, engineering, and policy settings routinely produce discrete outcome identities that appear stable under nominal conditions yet remain sensitive to subtle representational choices. Small variations in encoding, preprocessing rules, aggregation policies, or structural descriptions can induce qualitatively different outcomes, even when the underlying data snapshot and computational engine are unchanged. Because these dependencies are rarely recorded or examined as first-class objects of analysis, they are often discovered only after deployment, failure, or post-hoc audit.
+
+Current practice tends to focus on optimizing performance with respect to fixed representations, while representational choices themselves are treated as incidental implementation details. As a result, the mapping between families of representations and the resulting discrete outcomes remains implicit. This limits the ability to assess persistence, detect boundary formation, or anticipate fracture points where outcome identity changes.
+
+This paper introduces a diagnostic perspective centered on making such dependencies observable. We formalize a decision-valued mapping from representations to discrete outcome identities and describe a minimal infrastructure for logging, replaying, and auditing this mapping under controlled variation. The contribution is not a new model, learning rule, or optimization procedure, but a system-level abstraction that renders representational dependence empirically testable.
+
+\section{Problem Setting and Scope}
+
+We consider systems that operate on a frozen snapshot of the world and produce discrete outcome identities via a fixed computational engine. A snapshot is a bounded, immutable slice of inputs over a specified time window. A representation is a deterministic encoding of that snapshot, defined by explicit structural choices such as kernels, thresholds, weighting rules, or aggregation policies. An engine is a fixed solver, simulator, or inference routine that consumes a representation and produces raw output. A decision is a discrete identity extracted from this output according to a declared equivalence policy.
+
+The focus of this work is diagnostic rather than prescriptive. We do not introduce training procedures, adaptive updates, gradient-based optimization, or online learning. Each change to the world state is treated as a new snapshot, and each representational variation is explicitly declared. The goal is to characterize when outcome identities persist across representational variation and when they fracture, not to improve or optimize the outcomes themselves.
+
+This scope intentionally excludes continuous outputs unless they are reduced to discrete identities via a declared policy. It also excludes claims about cognition, intelligence, or learning. The framework applies wherever discrete outcomes are produced by complex pipelines and where representational choices may influence those outcomes in non-obvious ways.
+
+\section{Core Object: Decision-Valued Maps}
+
+The central object of study is a decision-valued map
+\[
+f : \mathcal{R} \rightarrow \mathcal{D},
+\]
+where $\mathcal{R}$ denotes a family of representations over a fixed snapshot and $\mathcal{D}$ denotes a set of discrete decision identities.
+
+Each element $r \in \mathcal{R}$ is a fully specified, deterministic representation derived from the snapshot. The engine consumes $r$ and produces raw output, which is then reduced to a decision identity $d \in \mathcal{D}$ according to an equivalence policy. The equivalence policy defines when two raw outputs are considered to represent the same decision identity, independent of incidental numerical differences.
+
+The purpose of the system is to make the mapping $f$ queryable, replayable, and auditable. By materializing this map across controlled variation in $\mathcal{R}$, it becomes possible to observe regions of identity persistence, identify boundary formation, and detect fractures where small representational changes induce discrete outcome changes.
+
+\section{Experimental Protocol for Representational Sweeps}
+
+The diagnostic protocol proceeds in five stages. First, a snapshot is frozen and assigned a content-addressed identifier. Second, a representation family is declared, along with a deterministic factory that generates individual representations from parameter settings. Third, a sweep plan specifies the set of representational variants to be evaluated. Fourth, the fixed engine is executed independently for each representation, producing raw outputs that are stored as immutable artifacts. Fifth, a decision extractor applies a declared equivalence policy to produce discrete decision identities.
+
+All artifacts are versioned and linked through content-addressed identifiers. Representations are distinct from tuning parameters, and engine configuration is held fixed across the sweep. The resulting materialized map from representations to decision identities supports reproducible replay and post-hoc analysis without re-running the engine.
+
+\section{Related Infrastructural Precedents}
+
+The perspective advanced here follows a recurring pattern in the development of technical infrastructure, in which latent dependencies within complex systems are rendered explicit, inspectable, and stable enough to support collective use. In software engineering, abstract data types formalized the separation between representation and observable behavior, allowing systems to evolve internally without collapsing external guarantees. In database systems, write-ahead logging transformed durability and recovery from ad-hoc mechanisms into auditable, replayable state transitions. In empirical research, specification-curve analysis made visible the dependence of reported conclusions on analytic choices that were previously implicit.
+
+These precedents are not treated as peer systems or comparable products, but as examples of a shared infrastructural sensibility. In each case, the primary contribution was not a novel computational procedure or performance improvement, but the introduction of a diagnostic layer that made structural dependence observable and testable. Decision-valued mapping extends this tradition to settings where discrete outcomes emerge from complex analytical pipelines, and where representational choices exert nontrivial influence on outcome identity.
+
+\section{DecisionDB System Architecture}
+
+DecisionDB implements a minimal diagnostic infrastructure for materializing and auditing decision-valued maps of the form
+\[
+f : \mathcal{R} \rightarrow \mathcal{D},
+\]
+where representations vary under a fixed snapshot and a fixed engine. The system is designed to make representational dependence observable without introducing new models, performance targets, or adaptive procedures.
+
+\subsection{Identifiers and Content Addressing}
+
+All core objects in DecisionDB are identified using content-addressed hashes computed over canonical JSON encodings. Canonicalization rules enforce deterministic serialization by sorting keys, preserving array order, excluding whitespace, serializing floats as strings, and including explicit version fields. Hashes are computed using SHA-256, and identifiers are formed by prefixing the first sixteen hexadecimal characters of the digest with a type-specific tag.
+
+This scheme ensures that identical content always produces identical identifiers, enabling reproducible replay and audit across runs and environments.
+
+\subsection{Core Entities}
+
+DecisionDB tracks five primary entities.
+
+\textbf{Snapshots} represent frozen slices of the world over a declared time window. A snapshot captures all external inputs required for downstream processing and is treated as immutable once created.
+
+\textbf{Representations} are deterministic encodings of a snapshot. Each representation is generated by a declared factory and fully specified by its representation specification, namespace, and factory version. Representation parameters are explicitly separated from tuning or engine parameters.
+
+\textbf{Engine runs} record executions of a fixed computational engine on a specific representation. Engine configuration and version are held constant across representational sweeps. Raw outputs are stored as immutable artifacts and linked by content hash.
+
+\textbf{Decisions} are discrete outcome identities extracted from raw engine output using a declared equivalence policy. The equivalence policy defines when two outputs correspond to the same identity, independent of incidental numerical differences.
+
+\textbf{Decision maps} materialize the mapping between representations, engine runs, and decision identities. This table constitutes the empirical object of analysis and supports queries over persistence, boundary formation, and fracture.
+
+\subsection{Protocol Enforcement}
+
+DecisionDB enforces four invariants. First, reproducibility requires identical inputs to yield identical identifiers. Second, auditability requires that every mapping link to versioned artifacts and policies. Third, separation ensures that representation parameters are not conflated with engine tuning. Fourth, identity stability requires that decision identity be defined by policy rather than raw output.
+
+By enforcing these constraints at the infrastructure level, DecisionDB supports empirical analysis of representational dependence without requiring reinterpretation of system behavior or rerunning engines post hoc.
+
+\section{Reviewer-Safe Figure Captions}
+
+\textbf{Figure 1:} Schematic of the decision-valued mapping $f : \mathcal{R} \rightarrow \mathcal{D}$. A fixed snapshot is encoded into multiple representations, each consumed by a fixed engine. Discrete decision identities are extracted via an equivalence policy, making outcome dependence on representation explicit.
+
+\textbf{Figure 2:} Example representational sweep showing regions of decision identity persistence and boundary formation. Each point corresponds to a representation variant; color indicates discrete decision identity.
+
+\textbf{Figure 3:} System architecture for logging and replaying decision-valued maps. Content-addressed identifiers link snapshots, representations, engine runs, and decisions to ensure reproducibility and auditability.
+
+\section{Empirical Characterization via Representational Sweeps}
+
+Empirical analysis proceeds by materializing decision-valued maps across controlled representational sweeps. For a fixed snapshot and engine, a declared representation family defines a finite or discretized set of representations. Each representation is evaluated independently, and a decision identity is extracted using a fixed equivalence policy.
+
+The resulting map partitions representation space into regions of identity persistence, separated by boundaries where decision identity changes. Persistence regions indicate ranges of representational variation over which outcome identity remains stable. Boundaries mark loci of sensitivity where small representational changes induce discrete outcome changes. Fractures correspond to abrupt transitions in identity that cannot be explained by gradual variation in representation parameters.
+
+Analysis focuses on describing the geometry and topology of these regions rather than optimizing outcomes. No performance metrics, loss functions, or preference orderings are introduced. The empirical object is the structure of the decision-valued map itself.
+
+By comparing sweeps across different representation families applied to the same snapshot and engine, it becomes possible to distinguish representation-induced variability from changes attributable to the underlying world state. This supports diagnostic assessment of robustness, auditability, and failure modes in complex analytical pipelines.
+
+\subsection{Canonical Sweep Visualization}
+
+All empirical results in this work are expressed through a single canonical visualization of a representational sweep. The purpose of this visualization is not to summarize performance or optimize outcomes, but to make the structure of the decision-valued map observable.
+
+Each sweep visualization corresponds to a fixed snapshot, a fixed engine, and a declared family of representations. The axes of the visualization are defined by explicit representation parameters drawn from the representation specification. Each evaluated representation occupies a single point in this parameter space.
+
+Decision identity is encoded categorically, for example by color or region label. No continuous performance metric is displayed. The visualization is constructed such that identical decision identities are visually grouped, making regions of persistence immediately apparent. Boundaries correspond to loci where decision identity changes as representation parameters vary. Fractures correspond to abrupt identity changes induced by small representational variation.
+
+All sweep visualizations conform to this structure. Differences between figures reflect differences in snapshots, engines, representation families, or equivalence policies, not changes in visualization semantics. This constraint ensures that figures remain comparable across experiments, manuscripts, proposals, and presentations.
+
+
+\section*{Remaining Manuscript Structure}
+
+The remainder of the manuscript is organized to clarify implications, boundaries, and constraints of the diagnostic perspective introduced above.
+
+Section~8 discusses practical implications for auditability, reproducibility, and reliability in complex analytical systems. The emphasis is on failure prevention, post-hoc inspection, and system understanding rather than on outcome improvement or optimization.
+
+Section~9 summarizes limitations and scope constraints, specifying where the diagnostic framing applies and where it does not. In particular, this section delineates exclusions related to learning, adaptation, and continuous outcome spaces.
+
+A bibliography follows, containing only canonical references required to situate the infrastructural lineage and empirical protocol described in this work.
+
+\section*{Glossary}
+
+\textbf{Snapshot}: A frozen, immutable slice of the world over a declared time window. Changes to the world state produce a new snapshot.
+
+\textbf{Representation}: A deterministic encoding of a snapshot defined by explicit structural choices such as kernels, thresholds, weighting rules, or aggregation policies.
+
+\textbf{Engine}: A fixed computational procedure that consumes a representation and produces raw output. Engine configuration and version are held constant during analysis.
+
+\textbf{Decision Identity}: A discrete outcome extracted from engine output according to a declared equivalence policy, independent of incidental numerical variation.
+
+\textbf{Equivalence Policy}: A declared rule that defines when two raw outputs correspond to the same decision identity.
+
+\textbf{Decision-Valued Map}: The materialized mapping from representations to decision identities under a fixed snapshot and engine.
+
+\textbf{Representational Sweep}: A controlled evaluation of a family of representations over a fixed snapshot and engine.
+
+\textbf{Persistence}: A region of representational variation over which decision identity remains unchanged.
+
+\textbf{Boundary}: A locus in representation space where decision identity changes.
+
+\textbf{Fracture}: A discrete transition in decision identity induced by small representational variation.
+
+% Bibliography policy:
+% References are included only to situate infrastructural lineage
+% and empirical protocol. No reference should be cited as a peer
+% system, competing method, or theoretical foundation.
+\bibliographystyle{plain}
+\bibliography{references}
+@book{liskov1978adt,
+  title={Programming with Abstract Data Types},
+  author={Liskov, Barbara and Guttag, John},
+  year={1978},
+  publisher={Addison-Wesley}
+}
+
+@book{gray1993tp,
+  title={Transaction Processing: Concepts and Techniques},
+  author={Gray, Jim and Reuter, Andreas},
+  year={1993},
+  publisher={Morgan Kaufmann}
+}
+
+@article{simonsohn2018spec,
+  title={Specification Curve Analysis},
+  author={Simonsohn, Uri and Simmons, Joseph and Nelson, Leif},
+  journal={PsyArXiv},
+  year={2018}
+}
+
+@article{stone1974cv,
+  title={Cross-validatory choice and assessment of statistical predictions},
+  author={Stone, M.},
+  journal={Journal of the Royal Statistical Society, Series B},
+  year={1974},
+  volume={36},
+  pages={111--147}
+}
+% ------------------------------------------------------------------
+% CANONICAL FIGURE CAPTION TEMPLATE (MANDATORY)
+% All figures in this manuscript MUST use this caption structure.
+% Any mention of performance, accuracy, loss, optimization, learning,
+% or intelligence is a violation of manuscript scope.
+%
+% \textbf{Figure X:} Canonical representational sweep for a fixed snapshot and engine.
+% Each point corresponds to a deterministic representation drawn from the declared
+% representation family. Axes denote representation parameters. Color encodes discrete
+% decision identity as defined by the equivalence policy. Contiguous regions indicate
+% identity persistence; boundaries indicate identity change induced by representational
+% variation.
+% ------------------------------------------------------------------
+% == BEGIN INSERT ==
+
+\section{Implications for Auditability and Reliability}
+
+This section interprets the empirical structure of decision-valued maps produced by representational sweeps in terms of auditability, reproducibility, and system reliability. The emphasis is on diagnosing failure modes and structural sensitivity rather than improving outcomes or performance.
+
+\subsection{Auditability via Explicit Decision Provenance}
+
+Empirical Result Placeholder:
+\begin{itemize}
+  \item Experiment ID: \texttt{<EXP\_ID\_AUDIT>}
+  \item Snapshot: \texttt{<SNAPSHOT\_ID>}
+  \item Representation family: \texttt{<REP\_FAMILY>}
+  \item Decision type: \texttt{<DECISION\_TYPE>}
+\end{itemize}
+
+This subsection will report how decision identities can be traced deterministically to representation specifications, engine versions, and equivalence policies. The empirical contribution will consist of a verified replay in which identical identifiers are recovered across independent executions, demonstrating end-to-end auditability.
+
+\subsection{Reliability as Identity Persistence Under Variation}
+
+Empirical Result Placeholder:
+\begin{itemize}
+  \item Experiment ID: \texttt{<EXP\_ID\_PERSISTENCE>}
+  \item Representation parameters swept: \texttt{<PARAM\_LIST>}
+\end{itemize}
+
+This subsection will characterize regions of representation space over which decision identity remains unchanged. Persistence will be reported descriptively, without ranking or optimization, as a property of the materialized decision-valued map.
+
+\subsection{Failure Precursors and Boundary Localization}
+
+Empirical Result Placeholder:
+\begin{itemize}
+  \item Experiment ID: \texttt{<EXP\_ID\_BOUNDARY>}
+  \item Observed boundary parameters: \texttt{<BOUNDARY\_PARAM\_RANGE>}
+\end{itemize}
+
+This subsection will document loci in representation space where decision identity changes. These boundaries will be interpreted as potential failure precursors that can be diagnosed prior to deployment or incident occurrence.
+
+\section{Limitations and Scope Constraints}
+
+This section delineates the boundaries of applicability of the diagnostic framework and clarifies what claims are not made.
+
+\subsection{Discrete Outcome Requirement}
+
+DecisionDB applies only to systems where outputs can be reduced to discrete identities via a declared equivalence policy. Continuous outputs are out of scope unless such a reduction is explicitly defined.
+
+\subsection{Fixed Snapshot and Engine Assumption}
+
+All empirical results assume a frozen snapshot and a fixed engine. Changes to data, model parameters, or execution logic constitute a new analytical context and require a new analysis.
+
+\subsection{No Claims About Optimization or Learning}
+
+This framework does not improve outcomes, select better representations, or introduce learning dynamics. Any apparent performance effects observed in sweeps are incidental and not interpreted as optimization results.
+
+\subsection{Empirical Coverage Limits}
+
+Empirical Result Placeholder:
+\begin{itemize}
+  \item Representation families evaluated: \texttt{<REP\_FAMILY\_LIST>}
+  \item Regions not evaluated: \texttt{<UNEXPLORED\_REGIONS>}
+\end{itemize}
+
+Reported sweeps cover only declared representation families and parameter ranges. Unobserved regions of representation space remain unconstrained.
+
+\section*{Planned Figures and Empirical Placeholders}
+
+\textbf{Figure 1: Canonical Decision-Valued Mapping Schematic}
+
+Placeholder:
+\begin{itemize}
+  \item Conceptual diagram only (no empirical data)
+\end{itemize}
+
+\textbf{Figure 2: Primary Representational Sweep}
+
+Placeholder:
+\begin{itemize}
+  \item Experiment ID: \texttt{<EXP\_ID\_PRIMARY>}
+  \item Snapshot: \texttt{<SNAPSHOT\_ID>}
+  \item Representation family: \texttt{<REP\_FAMILY>}
+  \item Decision type: \texttt{<DECISION\_TYPE>}
+\end{itemize}
+
+\textbf{Figure 3: Identity Persistence Regions}
+
+Placeholder:
+\begin{itemize}
+  \item Derived from Figure 2
+  \item Highlight contiguous regions of identical decision identity
+\end{itemize}
+
+\textbf{Figure 4: Boundary and Fracture Localization}
+
+Placeholder:
+\begin{itemize}
+  \item Derived from Figure 2
+  \item Annotate parameter values at which decision identity changes
+\end{itemize}
+
+\textbf{Figure 5: Reproducibility Replay Verification}
+
+Placeholder:
+\begin{itemize}
+  \item Experiment ID: \texttt{<EXP\_ID\_REPLAY>}
+  \item Independent rerun confirming identical identifiers
+\end{itemize}
+
+All figures will use the canonical caption template defined at the end of this manuscript. No figure will introduce performance metrics, optimization criteria, or learning claims.
+
+% == END INSERT ==

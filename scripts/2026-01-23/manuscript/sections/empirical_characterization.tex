@@ -1,0 +1,19 @@
+\section{Empirical Characterization via Representational Sweeps}
+
+Empirical analysis proceeds by materializing decision-valued maps across controlled representational sweeps. For a fixed snapshot and engine, a declared representation family defines a finite or discretized set of representations. Each representation is evaluated independently, and a decision identity is extracted using a fixed equivalence policy.
+
+The resulting map partitions representation space into regions of identity persistence, separated by boundaries where decision identity changes. Persistence regions indicate ranges of representational variation over which outcome identity remains stable. Boundaries mark loci of sensitivity where small representational changes induce discrete outcome changes. Fractures correspond to abrupt transitions in identity that cannot be explained by gradual variation in representation parameters.
+
+Analysis focuses on describing the geometry and topology of these regions rather than optimizing outcomes. No performance metrics, loss functions, or preference orderings are introduced. The empirical object is the structure of the decision-valued map itself.
+
+By comparing sweeps across different representation families applied to the same snapshot and engine, it becomes possible to distinguish representation-induced variability from changes attributable to the underlying world state. This supports diagnostic assessment of robustness, auditability, and failure modes in complex analytical pipelines.
+
+\subsection{Canonical Sweep Visualization}
+
+All empirical results in this work are expressed through a single canonical visualization of a representational sweep. The purpose of this visualization is not to summarize performance or optimize outcomes, but to make the structure of the decision-valued map observable.
+
+Each sweep visualization corresponds to a fixed snapshot, a fixed engine, and a declared family of representations. The axes of the visualization are defined by explicit representation parameters drawn from the representation specification. Each evaluated representation occupies a single point in this parameter space.
+
+Decision identity is encoded categorically, for example by color or region label. No continuous performance metric is displayed. The visualization is constructed such that identical decision identities are visually grouped, making regions of persistence immediately apparent. Boundaries correspond to loci where decision identity changes as representation parameters vary. Fractures correspond to abrupt identity changes induced by small representational variation.
+
+All sweep visualizations conform to this structure. Differences between figures reflect differences in snapshots, engines, representation families, or equivalence policies, not changes in visualization semantics. This constraint ensures that figures remain comparable across experiments, manuscripts, proposals, and presentations.

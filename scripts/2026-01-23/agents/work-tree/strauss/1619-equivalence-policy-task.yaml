@@ -1,0 +1,63 @@
+work_tree:
+  agent: strauss
+  task_id: 1619-king-equivalence-policy-table-templ
+  date_ny: 2026-01-23
+  time_start_ny: "16:19"
+
+objectives:
+  - id: obj_01
+    description: Read related handoff files to understand task context
+    status: completed
+    tool_calls:
+      - LS /scripts/2026-01-23/agents/handoff
+      - Glob **/handoff/**/*strauss*
+      - Read handoff/levi/1611-king-log_update.yaml
+      - Read handoff/king-dolphin/1619-levi-log_entry_created.yaml
+      - Read handoff/roland/2111-king-spin-up-decisiondb.yaml
+
+  - id: obj_02
+    description: Identify strauss role and task scope from handoff context
+    status: completed
+    findings:
+      strauss_role: cross-repo artifacts, templates, synchronization
+      strauss_boundaries: no experimental execution, no manuscript prose
+      task_inferred: create equivalence policy table template based on decision schema equivalence field
+
+  - id: obj_03
+    description: Create equivalence policy table template artifact
+    status: completed
+    deliverable: /scripts/2026-01-23/templates/equivalence-policy-table.yaml
+
+  - id: obj_04
+    description: Submit exec report to king-dolphin
+    status: completed
+    deliverable: /scripts/2026-01-23/agents/handoff/king-dolphin/1619-strauss-equivalence_policy_template.yaml
+
+tool_call_sequence:
+  - tool: LS
+    path: /scripts/2026-01-23/agents/handoff
+    purpose: discover handoff structure
+  - tool: Glob
+    pattern: "**/handoff/**/*strauss*"
+    purpose: find strauss-related handoffs
+  - tool: Read
+    path: handoff/levi/1611-king-log_update.yaml
+    purpose: understand agent roles and task context
+  - tool: Read
+    path: handoff/king-dolphin/1619-levi-log_entry_created.yaml
+    purpose: see exec report format in practice
+  - tool: Read
+    path: handoff/roland/2111-king-spin-up-decisiondb.yaml
+    purpose: find decision schema with equivalence field
+  - tool: LS
+    path: /scripts/2026-01-23
+    purpose: verify directory structure for outputs
+  - tool: Write
+    path: work-tree/strauss/1619-equivalence-policy-task.yaml
+    purpose: document this work tree
+  - tool: Write
+    path: templates/equivalence-policy-table.yaml
+    purpose: create the equivalence policy table template
+  - tool: Write
+    path: handoff/king-dolphin/1619-strauss-equivalence_policy_template.yaml
+    purpose: submit exec report

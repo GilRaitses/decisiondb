@@ -1,0 +1,80 @@
+agent: roland
+role: manuscript_mechanics_and_alignment
+confidence_level: strict
+output_mode: mechanical_edits_only
+
+objective:
+  Bring the manuscript into exact structural and terminological alignment
+  with the DecisionDB architecture and the architecture review findings,
+  without adding interpretation, theory, or new claims.
+
+inputs:
+  manuscript:
+    - /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript/main.tex
+    - /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript/sections/
+    - /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript/decisiondb_manuscript_structure.md
+
+  architecture_review:
+    - deep_research_alignment_findings.yaml   # this document
+
+  infrastructure_locks:
+    - /Users/gilraitses/decisiondb/docs/agent-protocols/STYLE_GUIDE.md
+    - /Users/gilraitses/decisiondb/docs/agent-protocols/STYLE_RULES.md
+    - /Users/gilraitses/decisiondb/docs/agent-protocols/GLOSSARY.md
+    - /Users/gilraitses/decisiondb/docs/git/hooks/pre-commit
+
+tasks:
+  1. Section Order Enforcement
+     - Reorder sections in main.tex to exactly match REQUIRED_SECTION_ORDER
+       from the architecture review.
+     - Add empty section files where required:
+         * Introduction
+         * Problem Setting and Scope
+         * System Invariants
+         * Failure Modes and Misinterpretations
+     - Do NOT write prose in new sections.
+     - Insert TODO placeholders only.
+
+  2. Invariant Refactoring
+     - Extract the four invariants currently embedded in §6.3
+       into a standalone "System Invariants" section.
+     - Ensure wording is unchanged except for relocation.
+
+  3. Precedent Section Repositioning
+     - Move or relabel “Related Infrastructural Precedents” so it appears
+       after architecture and protocol sections.
+     - Rename section to “Relation to Prior Infrastructure Work” if needed.
+     - Do NOT add or remove citations.
+
+  4. Placeholder Normalization
+     - Ensure all placeholders follow a consistent token format:
+         <EXP_ID_PRIMARY>, <SNAPSHOT_ID>, <REP_FAMILY>, <PARAM_LIST>, etc.
+     - Do NOT resolve placeholders to concrete values.
+
+  5. Bibliography Wiring
+     - Ensure all bibliography entries compile correctly.
+     - Do NOT add new citations.
+     - Do NOT interpret uncited references.
+
+constraints:
+  - Do NOT add new prose beyond section headers and TODO placeholders.
+  - Do NOT reinterpret results or implications.
+  - Do NOT modify terminology definitions.
+  - Treat the architecture review as authoritative.
+  - All edits must compile cleanly in LaTeX.
+
+deliverables:
+  - Updated main.tex with correct section order
+  - New empty section files (if missing)
+  - Compile log confirming success
+  - Work-tree YAML documenting file moves and edits
+  - Exec report assessing:
+      * drift risk
+      * ambiguity encountered
+      * confidence in alignment
+
+success_criteria:
+  - Manuscript structure matches REQUIRED_SECTION_ORDER exactly
+  - No terminology drift introduced
+  - No claim expansion
+  - Repo is ready for a coding agent to populate empirical artifacts

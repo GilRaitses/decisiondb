@@ -1,0 +1,70 @@
+exec_report:
+  id: "<hhmm>-<author>-<short_subject>.yaml"
+  author: "<agent_name>"
+  supervising_author: king-dolphin
+  date_ny: "<YYYY-MM-DD>"
+  time_ny: "<HH:MM>"
+
+handoff_reference:
+  id: "<handoff_id>"
+  objective_understood_as: >
+    Agent restates the objective in one sentence.
+
+reasoning_audit:
+  dominant_mode:
+    enum:
+      - mechanical_execution
+      - interpretive_judgment
+      - boundary_enforcement
+      - synthesis
+      - speculative_extension
+  confidence_level:
+    enum:
+      - high
+      - medium
+      - low
+  ambiguity_encountered:
+    enum:
+      - none
+      - minor
+      - significant
+
+constraint_compliance:
+  stayed_within_scope:
+    boolean: true
+  attempted_out_of_scope_actions:
+    boolean: false
+  if_yes_describe: "<string or null>"
+
+language_drift_check:
+  introduced_new_terms:
+    boolean: false
+  softened_fixed_definitions:
+    boolean: false
+  theoretical_framing_added:
+    boolean: false
+
+decision_points:
+  count: <integer>
+  required_interpretation:
+    boolean: false
+  notes: >
+    Describe any point where multiple reasonable actions existed.
+
+self_assessed_risk:
+  enum:
+    - none
+    - low
+    - moderate
+    - high
+  rationale: >
+    Why this level was selected.
+
+handoff_readiness:
+  ready_for_next_agent:
+    boolean: true
+  dependencies_for_next_step:
+    - "<dependency or none>"
+
+signoff:
+  agent_confirms_no_hidden_work: true

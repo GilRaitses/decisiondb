@@ -1,57 +1,80 @@
-# decisiondb system design
+# DecisionDB
 
-this repository is the decisiondb mirror and is intended to run from `/Users/gilraitses/decisiondb` as a standalone, auditable subsystem.
+DecisionDB is a diagnostic infrastructure for tracking how discrete outcome identities depend on representational choices within complex analytical pipelines. Many systems exhibit apparent stability across inputs while remaining sensitive to subtle changes in encoding, preprocessing, or structural description. DecisionDB makes these dependencies explicit by recording outcome identities across controlled representational variation, enabling empirical assessment of persistence, boundary formation, and fracture without introducing new models, performance targets, or theoretical claims.
 
-this page defines the minimal, reproducible system for logging and analyzing decision-valued maps of the form **f : R → D**, where **R** is a family of representations over a fixed snapshot and **D** is a discrete decision identity extracted from a fixed engine run.
+---
 
-this document is written so a pax-embedded agent can implement a first working slice without prior context.
+## decisiondb system design
+
+This document defines a minimal, reproducible system for logging and analyzing decision-valued maps of the form **f : R → D**, where **R** is a family of representations constructed over a fixed snapshot and **D** is a discrete decision identity extracted from a fixed engine run.
 
 ---
 
 ## 1) core object
 
-we study a decision-valued map:
+DecisionDB studies a decision-valued map:
 
 **f : R → D**
 
-- **snapshot**: a frozen slice of the world at some time window
-- **representation (R)**: a deterministic encoding of that snapshot (kernels, thresholds, aggregation rules, graph weight policies)
-- **engine**: a fixed solver or simulator that consumes the representation
-- **decision (D)**: a discrete identity extracted from engine output, using a declared equivalence policy
+where:
 
-the system exists to make the mapping **queryable**, **replayable**, and **auditable**.
+- **snapshot** is a frozen slice of the world over a declared time window
+- **representation (R)** is a deterministic encoding of that snapshot, such as kernels, thresholds, aggregation rules, or graph weight policies
+- **engine** is a fixed solver or simulator that consumes the representation
+- **decision (D)** is a discrete identity extracted from engine output using a declared equivalence policy
+
+The system exists to make this mapping queryable, replayable, and auditable.
 
 ---
 
 ## 2) invariants and design rules
 
 ### invariants
-1. reproducibility: identical inputs must yield identical ids
-2. auditability: every mapping links to versioned artifacts and policies
-3. separation: representation parameters are distinct from tuning parameters
-4. identity stability: decision identity is defined by policy, not raw output
+
+1. reproducibility  
+identical inputs must yield identical identifiers
+
+2. auditability  
+every mapping must link to versioned artifacts, policies, and configuration state
+
+3. separation  
+representation parameters are distinct from tuning or optimization parameters
+
+4. identity stability  
+decision identity is defined by equivalence policy rather than raw engine output
 
 ### naming rule
+
 - pax is always lowercase when referenced as the modeling system
 
 ---
 
 ## 3) identifiers and hashing
 
-all identifiers are content-addressed hashes over canonical json.
+All identifiers in DecisionDB are content-addressed hashes computed over canonical json.
 
 ### canonical json rules
-- keys sorted
-- no whitespace
+
+- keys are sorted
+- no whitespace is permitted
 - arrays preserve order
-- floats serialized as strings
-- version strings always included
+- floating-point values are serialized as strings
+- version strings are always included
 
-hash function: `sha256(canonical_json_bytes)`
+Hash function:
 
-id format: `<prefix>_<sha256[:16]>`
+```
+sha256(canonical_json_bytes)
+```
 
-prefixes:
+Identifier format:
+
+```
+<prefix>_<sha256[:16]>
+```
+
+Prefixes:
+
 - snap_
 - repr_
 - run_
@@ -63,9 +86,11 @@ prefixes:
 ## 4) data model
 
 ### snapshots
-stores frozen inputs.
 
-fields:
+Stores frozen inputs.
+
+Fields:
+
 - snapshot_id (pk)
 - created_at
 - time_window_start
@@ -76,9 +101,11 @@ fields:
 - notes
 
 ### representations
-stores deterministic encodings of snapshots.
 
-fields:
+Stores deterministic encodings of snapshots.
+
+Fields:
+
 - representation_id (pk)
 - snapshot_id (fk)
 - representation_spec_json
@@ -90,9 +117,11 @@ fields:
 - error_text
 
 ### engine_runs
-records fixed-engine executions.
 
-fields:
+Records fixed-engine executions.
+
+Fields:
+
 - engine_run_id (pk)
 - representation_id (fk)
 - engine_name
@@ -105,9 +134,11 @@ fields:
 - error_text
 
 ### decisions
-stores discrete identities extracted from outputs.
 
-fields:
+Stores discrete identities extracted from engine outputs.
+
+Fields:
+
 - decision_id (pk)
 - decision_type
 - equivalence_policy_version
@@ -115,9 +146,11 @@ fields:
 - decision_payload_json
 
 ### f_map
-materializes **f : R → D**.
 
-fields:
+Materializes the mapping **f : R → D**.
+
+Fields:
+
 - representation_id (fk)
 - engine_run_id (fk)
 - decision_id (fk)
@@ -161,11 +194,17 @@ decisiondb/
 
 ## 6) minimal first experiment
 
-**goal:** produce a nontrivial f_map with at least two distinct decision identities.
+**goal**  
+Produce a nontrivial **f_map** with at least two distinct decision identities.
 
-experiment name: `exp0001_pax_route_sweep`
+Experiment name:
+
+```
+exp0001_pax_route_sweep
+```
 
 ### experiment.json (minimal)
+
 ```
 {
   "experiment_version": "1",
@@ -195,27 +234,30 @@ experiment name: `exp0001_pax_route_sweep`
 ```
 
 ### success criteria
-- at least two distinct decision_ids appear
-- reruns produce identical ids and mappings
+
+- at least two distinct decision_id values appear
+- repeated runs produce identical identifiers and mappings
 
 ---
 
 ## 7) non-goals for v0
 
-- no training
-- no gradients
-- no hyperparameter optimization
-- no continuous ingestion
+DecisionDB explicitly does not include:
 
-each update to the world becomes a new snapshot.
+- training procedures
+- gradient computation
+- hyperparameter optimization
+- continuous ingestion or streaming updates
+
+Each update to the world is represented as a new snapshot.
 
 ---
 
 ## 8) summary
 
-decisiondb makes representation-induced decision changes visible.
+DecisionDB makes representation-induced changes in discrete outcomes visible.
 
-it is not an optimizer.
+It does not optimize outcomes.
 
-it is an audit layer for discrete identity.
-
+It provides an audit layer for discrete identity under representational variation.
+ 

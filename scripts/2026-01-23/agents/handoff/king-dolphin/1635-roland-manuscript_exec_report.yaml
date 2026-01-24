@@ -1,0 +1,68 @@
+exec_report:
+  id: "1635-roland-manuscript_exec_report"
+  agent: roland
+  date_ny: "2026-01-23"
+  responding_to: "1635-king-manuscript_split_compile"
+
+dominant_mode_of_work: verbatim_transfer
+
+deviation_flags:
+  content_modified: false
+  section_renamed: false
+  section_reordered: false
+  terminology_changed: false
+  new_claims_introduced: false
+
+glossary_compliance:
+  glossary_source: /Users/gilraitses/decisiondb/docs/agent-protocols/GLOSSARY.md
+  modification_applied: false
+  terms_in_manuscript_glossary: 10
+  alignment_status: consistent
+
+scope_compliance:
+  ai_claims: none
+  learning_language: none
+  cognition_language: none
+  optimization_claims: none
+
+structural_decisions_made:
+  - decision: split_by_section_command
+    rationale: each \section or \section* in draft becomes separate .tex file
+    
+  - decision: preserve_working_notes
+    rationale: figure_captions.tex and figure_placeholders.tex contain draft working notes; included verbatim per constraint
+
+  - decision: bibliography_separated
+    rationale: bibtex entries extracted to bibliography.bib; original inline placement was non-standard
+
+  - decision: abstract_empty
+    rationale: sections/abstract.tex exists but contains no content; preserved as-is without modification
+
+  - decision: section_order_from_draft
+    rationale: main.tex inputs sections in order they appear in comprhensive-draft.tex, not in order specified by decisiondb_manuscript_structure.md
+
+deliverables_produced:
+  sections_directory:
+    path: /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript/sections/
+    files_created: 12
+  master_file:
+    path: /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript/main.tex
+  compile_log:
+    path: /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript/compile-check.log
+  work_tree:
+    path: /Users/gilraitses/decisiondb/scripts/2026-01-23/agents/work-tree/roland/1635-manuscript-split.yaml
+
+compilation_status:
+  pdflatex_exit: 0
+  pages_output: 7
+  errors: 0
+  warnings: 1
+  warning_detail: "No file main.bbl (bibliography entries not cited)"
+
+flags_for_review:
+  - abstract.tex is empty
+  - bibliography entries present but not cited
+  - section order in draft differs from structure document
+  - invariants section not present as standalone
+  - example_route section not present
+  - conclusion section not present

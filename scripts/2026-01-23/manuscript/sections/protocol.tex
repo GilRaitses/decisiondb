@@ -1,0 +1,5 @@
+\section{Experimental Protocol for Representational Sweeps}
+
+The diagnostic protocol proceeds in five stages. First, a snapshot is frozen and assigned a content-addressed identifier. Second, a representation family is declared, along with a deterministic factory that generates individual representations from parameter settings. Third, a sweep plan specifies the set of representational variants to be evaluated. Fourth, the fixed engine is executed independently for each representation, producing raw outputs that are stored as immutable artifacts. Fifth, a decision extractor applies a declared equivalence policy to produce discrete decision identities.
+
+All artifacts are versioned and linked through content-addressed identifiers. Representations are distinct from tuning parameters, and engine configuration is held fixed across the sweep. The resulting materialized map from representations to decision identities supports reproducible replay and post-hoc analysis without re-running the engine.

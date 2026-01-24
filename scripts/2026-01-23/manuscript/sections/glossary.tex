@@ -1,0 +1,21 @@
+\section*{Glossary}
+
+\textbf{Snapshot}: A frozen, immutable slice of the world over a declared time window. Changes to the world state produce a new snapshot.
+
+\textbf{Representation}: A deterministic encoding of a snapshot defined by explicit structural choices such as kernels, thresholds, weighting rules, or aggregation policies.
+
+\textbf{Engine}: A fixed computational procedure that consumes a representation and produces raw output. Engine configuration and version are held constant during analysis.
+
+\textbf{Decision Identity}: A discrete outcome extracted from engine output according to a declared equivalence policy, independent of incidental numerical variation.
+
+\textbf{Equivalence Policy}: A declared rule that defines when two raw outputs correspond to the same decision identity.
+
+\textbf{Decision-Valued Map}: The materialized mapping from representations to decision identities under a fixed snapshot and engine.
+
+\textbf{Representational Sweep}: A controlled evaluation of a family of representations over a fixed snapshot and engine.
+
+\textbf{Persistence}: A region of representational variation over which decision identity remains unchanged.
+
+\textbf{Boundary}: A locus in representation space where decision identity changes.
+
+\textbf{Fracture}: A discrete transition in decision identity induced by small representational variation.

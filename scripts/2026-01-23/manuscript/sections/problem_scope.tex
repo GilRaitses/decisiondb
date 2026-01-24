@@ -1,0 +1,7 @@
+\section{Problem Setting and Scope}
+
+We consider systems that operate on a frozen snapshot of the world and produce discrete outcome identities via a fixed computational engine. A snapshot is a bounded, immutable slice of inputs over a specified time window. A representation is a deterministic encoding of that snapshot, defined by explicit structural choices such as kernels, thresholds, weighting rules, or aggregation policies. An engine is a fixed solver, simulator, or inference routine that consumes a representation and produces raw output. A decision is a discrete identity extracted from this output according to a declared equivalence policy.
+
+The focus of this work is diagnostic rather than prescriptive. We do not introduce training procedures, adaptive updates, gradient-based optimization, or online learning. Each change to the world state is treated as a new snapshot, and each representational variation is explicitly declared. The goal is to characterize when outcome identities persist across representational variation and when they fracture, not to improve or optimize the outcomes themselves.
+
+This scope intentionally excludes continuous outputs unless they are reduced to discrete identities via a declared policy. It also excludes claims about cognition, intelligence, or learning. The framework applies wherever discrete outcomes are produced by complex pipelines and where representational choices may influence those outcomes in non-obvious ways.

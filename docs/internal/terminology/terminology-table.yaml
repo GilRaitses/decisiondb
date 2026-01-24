@@ -1,0 +1,136 @@
+terminology_policy:
+  purpose: >
+    Standardize language across specs, grants, papers, and repositories
+    to prevent agentic, political, or theoretical drift and to ensure
+    EPO- and NSF-safe framing.
+
+  allowed:
+    - term: persistence
+      use: >
+        Describes conditional continuation of an outcome identity under
+        variation.
+      notes: >
+        Prefer "persistence under representation variation" or
+        "conditional persistence".
+
+    - term: outcome identity
+      use: >
+        Discrete identity selected by a resolution procedure.
+      notes: >
+        Default noun phrase for all core objects.
+
+    - term: resolution
+      use: >
+        A procedure that maps a representation to a discrete outcome.
+      notes: >
+        Non-agentic, non-learning, suitable for biological, computational,
+        and analytical systems.
+
+    - term: resolution procedure
+      use: >
+        The invariant mapping mechanism used for comparison across
+        representations.
+      notes: >
+        May be algorithmic, biological, statistical, or formal.
+
+    - term: representation variation
+      use: >
+        Changes in encoding, parameterization, feature space, or abstraction.
+      notes: >
+        Treated as an experimental axis, not noise.
+
+    - term: conditional
+      use: >
+        Explicitly signals dependence on stated constraints or invariants.
+      notes: >
+        Use to avoid implied universality.
+
+    - term: mapping
+      use: >
+        Structural relation between representations and outcome identities.
+      notes: >
+        Safe and neutral across domains.
+
+    - term: fixed engine
+      use: >
+        A computational procedure held constant during analysis, consuming
+        representations and producing raw output.
+      notes: >
+        Core invariant assumption in DecisionDB. Engine configuration and
+        version are fixed across representational sweeps.
+
+  discouraged:
+    - term: stability
+      reason: >
+        Implies equilibrium, robustness, or control-theoretic guarantees.
+      replacement: persistence
+      notes: >
+        If used, must be explicitly defined as shorthand for persistence.
+
+    - term: decision
+      reason: >
+        Sounds agent-centric or psychological without qualification.
+      replacement: outcome identity or resolved identity
+      notes: >
+        May appear in compound terms only if defined formally.
+
+    - term: regime
+      reason: >
+        Carries political and dynamical-systems connotations.
+      replacement: outcome identity or identity region
+      notes: >
+        Acceptable only as a derived analogy in explanatory text.
+
+    - term: state
+      reason: >
+        Suggests continuous dynamics rather than discrete identity.
+      replacement: outcome identity
+      notes: >
+        Avoid unless explicitly modeling continuous systems.
+
+    - term: learning
+      reason: >
+        Implies adaptation or training over time.
+      replacement: resolution or inference
+      notes: >
+        Learning systems may be analyzed, but the framework itself is not
+        a learning method.
+
+  banned:
+    - term: regime change
+      reason: >
+        Political meaning overwhelms technical intent.
+      replacement: identity transition or identity boundary
+
+    - term: induction
+      reason: >
+        Incorrectly frames the method as a learning process.
+      replacement: resolution or inference
+
+  restricted:
+    - term: decision-making
+      reason: >
+        Anthropomorphic connotation; avoid in normative or algorithmic claims.
+      allowed_context: >
+        Permitted when describing what the framework does NOT do, or when
+        explicitly tied to decision identity as a formal object.
+      notes: >
+        Example allowed: "not a decision-making rule"
+        Example banned: "improves decision-making"
+
+  enforcement:
+    scope:
+      - specs
+      - grant abstracts
+      - award narratives
+      - repositories
+      - figures
+    rule: >
+      Discouraged terms must be justified inline.
+      Banned terms must not appear.
+    tooling_hint: >
+      Enforce via pre-commit hooks, doc linting, or CI checks.
+
+  canonical_core_sentence: >
+    The work studies the persistence of discrete outcome identities under
+    representation variation, conditional on an invariant resolution procedure.
