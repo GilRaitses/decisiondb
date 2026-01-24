@@ -1,0 +1,100 @@
+work_tree_id: 0925-replay_expansion_v3
+agent: michelle
+date: 2026-01-24
+handoff_ref: 0925-king-replay_authorization_expansion_v3.yaml
+
+authorization_scope:
+  type: REPLAY_VERIFICATION_ONLY (LIMITED)
+  decision_count: 3
+  policy_count: 1
+  database_count: 3
+  engine_execution: forbidden
+  database_writes: forbidden
+  policy_modifications: forbidden
+
+preconditions_verified:
+  - check: validate_unlock.py exit code 0
+    result: PASS
+    evidence: "12 PASS, 1 WARN, 0 FAIL"
+  
+  - check: Maria decision persistence forward-growth frozen and PASS
+    result: PASS
+    evidence: "0923-maria-decision_persistence_forward_growth_exec_report.yaml"
+  
+  - check: Equivalence policy frozen
+    result: PASS
+    evidence: "pol_d8da3e00e9584eb1 unchanged"
+
+decisions_replayed:
+  total_count: 3
+  policy_id: pol_d8da3e00e9584eb1
+  
+  decisions:
+    - decision_id: dec_e28092c4dc33b8f1
+      experiment_id: exp_20260124T102432Z
+      database: outputs/engine/exp_20260124T102432Z/decisiondb.sqlite
+      decision_type: route
+      node_count: 29
+      replay_verdict: PASS
+      payload_hash:
+        recomputed: 3a9d63ac28378116
+        persisted: 3a9d63ac28378116
+        match: true
+      policy_id:
+        recomputed: pol_d8da3e00e9584eb1
+        persisted: pol_d8da3e00e9584eb1
+        match: true
+
+    - decision_id: dec_c2dda068734c9107
+      experiment_id: exp_probe_promotion_20260124
+      database: outputs/probe_promotion/decisiondb.sqlite
+      decision_type: route
+      node_count: 20
+      replay_verdict: PASS
+      payload_hash:
+        recomputed: 20f25c3e653d86e6
+        persisted: 20f25c3e653d86e6
+        match: true
+      policy_id:
+        recomputed: pol_d8da3e00e9584eb1
+        persisted: pol_d8da3e00e9584eb1
+        match: true
+
+    - decision_id: dec_bd75e5723d8af952
+      experiment_id: exp_20260124T142041Z
+      database: outputs/engine/exp_20260124T142041Z/decisiondb.sqlite
+      decision_type: route
+      node_count: 11
+      replay_verdict: PASS
+      payload_hash:
+        recomputed: c648a71dcdbf4790
+        persisted: c648a71dcdbf4790
+        match: true
+      policy_id:
+        recomputed: pol_d8da3e00e9584eb1
+        persisted: pol_d8da3e00e9584eb1
+        match: true
+      note: NEW (forward growth decision)
+
+databases_enumerated:
+  - path: outputs/engine/exp_20260124T102432Z/decisiondb.sqlite
+    decisions: 1
+  - path: outputs/probe_promotion/decisiondb.sqlite
+    decisions: 1
+  - path: outputs/engine/exp_20260124T142041Z/decisiondb.sqlite
+    decisions: 1
+
+reproducibility_check:
+  runs_performed: 2
+  all_runs_passed: true
+  verdict_consistent: true
+
+verification_script: 0925-replay_expansion_v3.py
+
+notes:
+  - Forward growth decision (dec_bd75e5723d8af952) included and verified
+  - All 3 decisions use identical equivalence policy
+  - Hash stability verified across node counts (29, 20, 11)
+  - No database rows modified (read-only verification)
+  - Verification reproducible across multiple runs
+  - Decision materialization remains stable as system grows forward
