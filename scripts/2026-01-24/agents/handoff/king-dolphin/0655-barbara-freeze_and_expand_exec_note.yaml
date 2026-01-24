@@ -1,0 +1,116 @@
+exec_note_id: 0655-barbara-freeze_and_expand
+author: barbara
+date: 2026-01-24
+status: COMPLETE
+
+authorization_ref: 0655-king-replay_authorization_freeze_and_expand.yaml
+task: Freeze replay authorization v1 and prepare expansion template
+
+# --- PHASE BOUNDARY CONFIRMATION ---
+
+phase_boundaries_unchanged: true
+
+closed_loop_completed:
+  loop: "materialization → replay verification"
+  decision: dec_e28092c4dc33b8f1
+  policy: pol_d8da3e00e9584eb1
+  verdict: PASS
+  frozen: true
+
+current_authorization_state:
+  execution_authorizations: NONE
+  persistence_authorizations: NONE
+  replay_authorizations:
+    - scope: "single decision (dec_e28092c4dc33b8f1)"
+      status: COMPLETE
+      verdict: PASS
+      frozen: true
+
+  expansion_authorizations:
+    - scope: "replay expansion template created"
+      status: TEMPLATE_READY
+      activation_requires: "explicit handoff using template"
+      does_not_self_activate: true
+
+# --- WHAT REPLAY EXPANSION DOES NOT AUTHORIZE ---
+
+explicit_non_authorizations:
+  new_decision_persistence: false
+  new_f_map_creation: false
+  engine_execution: false
+  schema_modifications: false
+  policy_evolution: false
+  canonicalization_changes: false
+
+rationale: |
+  Replay expansion is a verification activity, not a production activity.
+  It confirms that previously materialized decisions are deterministic
+  and hash-stable. It does not create new state.
+
+  Any future authorization to write new decisions or f_map rows requires
+  a separate, explicit DECISION_PERSISTENCE_AUTHORIZATION handoff.
+
+# --- FROZEN ARTIFACTS ---
+
+frozen_artifacts:
+  work_tree_log:
+    path: scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+    frozen: true
+
+  verification_script:
+    path: scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.py
+    frozen: true
+
+  exec_report:
+    path: scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+    frozen: true
+
+  replay_expansion_template:
+    path: scripts/2026-01-24/contracts/replay_expansion_handoff_template.yaml
+    version: "1.0.0"
+    reviewable: true
+
+# --- COMMIT PREPARATION ---
+
+commit_scope:
+  files_to_commit:
+    - scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+    - scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.py
+    - scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+    - scripts/2026-01-24/contracts/replay_expansion_handoff_template.yaml
+    - scripts/2026-01-24/agents/work-tree/barbara/0655-freeze_and_expand.yaml
+    - scripts/2026-01-24/agents/handoff/king-dolphin/0655-barbara-freeze_and_expand_exec_note.yaml
+
+  commit_message: |
+    Freeze replay verification v1 and create expansion template
+
+    Closes first loop: materialization → replay verification
+    - Decision dec_e28092c4dc33b8f1 verified under pol_d8da3e00e9584eb1
+    - All hashes match: payload, policy, decision ID
+    - Replay expansion template defined for future authorizations
+
+    Phase boundaries unchanged. No new execution or persistence authorized.
+
+# --- SUCCESS CRITERIA ---
+
+success_criteria:
+  - criterion: "Replay Authorization v1 artifacts are frozen and committed"
+    result: PASS
+
+  - criterion: "A replay-expansion handoff template exists and is reviewable"
+    result: PASS
+    template: scripts/2026-01-24/contracts/replay_expansion_handoff_template.yaml
+
+  - criterion: "No new rows are written to any DecisionDB tables"
+    result: PASS
+    evidence: "Governance task only; no database operations"
+
+  - criterion: "No engine code paths are exercised"
+    result: PASS
+    evidence: "Governance task only; no engine imports"
+
+notes:
+  - First closed loop (materialization → replay) is complete
+  - Replay expansion template is ready for use with future handoffs
+  - Phase hygiene preserved; no scope creep
+  - All artifacts are self-documenting and reconstructible

@@ -1,0 +1,131 @@
+exec_report_id: 0711-michelle-replay_authorization_expansion
+author: michelle
+date: 2026-01-24
+status: COMPLETE_WITH_FINDING
+
+authorization_ref: 0711-king-replay_authorization_expansion.yaml
+task: Replay expansion verification for additional decisions
+
+verdict: PASS_SINGLE
+finding: EXPANSION_BLOCKED
+
+summary: |
+  Replay verification confirms determinism for the single existing decision.
+  Expansion beyond one decision is blocked because no additional decisions
+  have been materialized in the system. This is not a verification failure;
+  the precondition for expansion (multiple decisions) is not met.
+
+decisions_verified:
+  count: 1
+  limit: "bounded (all existing)"
+  decisions:
+    - decision_id: dec_e28092c4dc33b8f1
+      experiment_id: exp_20260124T102432Z
+      verdict: PASS
+
+policy_used:
+  policy_id: pol_d8da3e00e9584eb1
+  policy_version: "1.0.0"
+  policy_type: exact
+  canonicalization: json_sorted_keys_utf8
+  match_rule: sha256_equality
+
+hashes_compared:
+  decision_01:
+    decision_id:
+      recomputed: dec_e28092c4dc33b8f1
+      persisted: dec_e28092c4dc33b8f1
+      match: true
+    payload_hash:
+      recomputed: 3a9d63ac28378116
+      persisted: 3a9d63ac28378116
+      match: true
+    policy_id_hash:
+      recomputed: pol_d8da3e00e9584eb1
+      persisted: pol_d8da3e00e9584eb1
+      match: true
+
+signature_verified:
+  decision_01:
+    node_count: 29
+    path_found: true
+    payload_hash: 3a9d63ac28378116
+    match: true
+
+database_state_check:
+  databases_scanned: 3
+  databases:
+    - path: outputs/persistence/exp_20260124T075856Z/decisiondb.sqlite
+      decision_count: 0
+    - path: outputs/engine/exp_20260124T081644Z/decisiondb.sqlite
+      decision_count: 0
+    - path: outputs/engine/exp_20260124T102432Z/decisiondb.sqlite
+      decision_count: 1
+  total_decisions: 1
+  no_additional_rows: true
+
+preconditions_met:
+  - validate_unlock.py exit code 0 (non-strict mode)
+  - Replay Authorization v1 (single-decision) marked PASS
+  - equivalence_policy_id matches: pol_d8da3e00e9584eb1
+  - canonicalization rules unchanged from v1
+
+success_criteria:
+  - criterion: "All replayed decisions recompute identical decision_id values"
+    result: PASS
+    evidence: "dec_e28092c4dc33b8f1 recomputed identically"
+
+  - criterion: "All payload_hash values match persisted records"
+    result: PASS
+    evidence: "3a9d63ac28378116 matches for all decisions"
+
+  - criterion: "No new rows appear in any database table"
+    result: PASS
+    evidence: "Read-only verification, no writes performed"
+
+  - criterion: "Replay verification produces a PASS verdict"
+    result: PASS
+    evidence: "verdict: PASS_SINGLE (single decision passed)"
+
+expansion_analysis:
+  goal: "Establish that replay correctness scales beyond a single decision"
+  result: BLOCKED
+  reason: |
+    The system contains exactly 1 persisted decision. To verify that replay
+    correctness scales, additional decisions must first be materialized.
+    This handoff forbids engine execution and persistence, so additional
+    decisions cannot be created within this authorization scope.
+  
+  recommendation: |
+    Before further expansion verification can proceed:
+    1. Authorize engine execution for additional experiments
+    2. Authorize decision materialization for those experiments
+    3. Re-invoke replay expansion verification on the expanded set
+  
+  note: |
+    The single-decision verification confirms that the replay mechanism
+    is sound. Barbara's v1 verification and this independent v2 verification
+    both produce identical results, demonstrating consistency across
+    verification runs.
+
+independent_verification:
+  comparison_with_v1: |
+    This verification was performed independently from Barbara's v1.
+    Both produce identical results:
+    - Same decision_id recomputed
+    - Same payload_hash recomputed
+    - Same policy_id recomputed
+    - Same signature verified
+    
+    This provides evidence that the verification process itself is deterministic.
+
+artifacts:
+  work_tree: scripts/2026-01-24/agents/work-tree/michelle/0711-replay_expansion.yaml
+  verification_script: scripts/2026-01-24/agents/work-tree/michelle/0711-replay_expansion_verification.py
+
+notes:
+  - All verification performed read-only
+  - No engine execution, database writes, or policy modifications
+  - Determinism confirmed for single decision under declared equivalence policy
+  - Hash stability verified across independent verification
+  - Expansion requires precondition: multiple persisted decisions

@@ -1,0 +1,186 @@
+work_tree_id: 0440-decision_materialization_readiness
+handoff_ref: scripts/2026-01-24/agents/handoff/sarah/0440-king-decision_materialization_readi.yaml
+author: sarah
+date: 2026-01-24
+status: COMPLETED
+
+purpose: |
+  Document decision materialization wiring for DecisionDB.
+  This work-tree log records the preparation of decision extraction pathways,
+  equivalence policy interfaces, and persistence guards without materializing
+  any decisions or f_map entries.
+
+scope: PREP_ONLY
+
+authorization_boundary:
+  type: PREPARATION_ONLY
+  permits:
+    - Define decision extraction code paths with explicit guards
+    - Wire equivalence policy interfaces into sweep runner
+    - Add persistence guards to insert_decision and insert_f_map
+    - Demonstrate extraction pathway in dry-run mode
+  does_not_permit:
+    - Writing to decisions table
+    - Writing to f_map table
+    - Materializing decision identities
+    - Removing or bypassing execution guards
+
+preconditions_verified:
+  - check: Pax mirror completion and audit passed
+    evidence: scripts/2026-01-24/agents/handoff/king-dolphin/0411-anon-pax_mirror_completion_exec_report.yaml
+    status: SATISFIED
+
+  - check: Engine boundary test completed with exactly one guarded run
+    evidence: scripts/2026-01-24/agents/handoff/king-dolphin/0312-julia-execution_authorization_first_engine_exec_report.yaml
+    status: SATISFIED
+
+  - check: engine_runs persistence verified
+    evidence: |
+      engine_run_id: run_36a0c96b084b2ffd
+      table_counts.engine_runs: 1
+    status: SATISFIED
+
+  - check: validate_unlock.py passes with exit code 0 (non-strict)
+    evidence: |
+      Exit code: 0
+      Summary: 12 PASS, 1 WARN, 0 FAIL
+    status: SATISFIED
+
+  - check: Unlock Checklist v1.0 frozen
+    evidence: scripts/2026-01-23/agents/notes/unlock_checklist.md
+    status: SATISFIED
+
+files_modified:
+  - path: decisiondb/decision/extract.py
+    changes:
+      - Added DecisionStub dataclass for dry-run extraction preview
+      - Added prepare_decision_stub() function to demonstrate pathway
+      - Enhanced extract_decision() with explicit guard message referencing authorization
+      - Added materialize_decision() with hard guard for full pathway demonstration
+    guard_status: NotImplementedError raised before any materialization
+
+  - path: decisiondb/sweeps/run.py
+    changes:
+      - Updated module docstring to document decision materialization wiring
+      - Imported prepare_decision_stub and DecisionStub from extract module
+      - Imported EquivalencePolicy for mock policy creation
+      - Enhanced run_sweep_dry() to demonstrate extraction pathway with decision stub
+      - Stage 4 (decision) now shows extraction_pathway=wired, extraction_guard=NotImplementedError
+      - Stage 5 (f_map) now shows f_map_pathway=wired, projected_decision_id
+    guard_status: Dry-run only; execution path still raises NotImplementedError
+
+  - path: decisiondb/store/db.py
+    changes:
+      - Added bypass_guard parameter to insert_decision() (default False)
+      - Added bypass_guard parameter to insert_f_map() (default False)
+      - Both methods raise NotImplementedError unless bypass_guard=True
+      - Guard messages reference DECISION_PERSISTENCE_AUTHORIZATION requirement
+    guard_status: NotImplementedError raised on any insert attempt without explicit authorization
+
+wiring_summary:
+  decision_extraction_pathway:
+    entry_point: decisiondb/decision/extract.py
+    functions:
+      - prepare_decision_stub: Returns DecisionStub for dry-run preview
+      - extract_decision: Hard-guarded, raises NotImplementedError
+      - materialize_decision: Hard-guarded, raises NotImplementedError
+      - compute_decision_id: Implemented, computes content-addressed ID
+    status: Fully wired, hard-guarded
+
+  equivalence_policy_interface:
+    entry_point: decisiondb/decision/equivalence.py
+    functions:
+      - EquivalencePolicy: Dataclass with policy_id, policy_version, policy_type, spec
+      - load_equivalence_policy: Loads from YAML/JSON file
+      - compute_policy_id: Content-addressed policy ID computation
+    status: Implemented, version-tracked
+
+  sweep_runner_integration:
+    entry_point: decisiondb/sweeps/run.py
+    dry_run_behavior: |
+      - Creates mock EquivalencePolicy for demonstration
+      - Calls prepare_decision_stub to show extraction pathway
+      - Logs decision_stub with projected_decision_id
+      - Shows extraction_pathway=wired, extraction_guard=NotImplementedError
+    execute_behavior: |
+      - Raises NotImplementedError immediately
+      - No decisions or f_map entries written
+    status: Dry-run demonstrates pathway; execution is guarded
+
+  persistence_guards:
+    entry_point: decisiondb/store/db.py
+    insert_decision:
+      guard: NotImplementedError unless bypass_guard=True
+      message: "GUARD: Decision persistence is not authorized..."
+    insert_f_map:
+      guard: NotImplementedError unless bypass_guard=True
+      message: "GUARD: f_map persistence is not authorized..."
+    status: Guards prevent any unauthorized writes
+
+validator_results:
+  pre_changes:
+    exit_code: 0
+    summary: 12 PASS, 1 WARN, 0 FAIL
+  post_changes:
+    exit_code: 0
+    summary: 12 PASS, 1 WARN, 0 FAIL
+  behavior_change: none
+
+success_criteria_evaluation:
+  - criterion: Decision schema exists and is validator-visible
+    result: PASS
+    evidence: M04 PASS (Decisions schema found)
+
+  - criterion: Decision extraction pathway is fully wired but hard-guarded
+    result: PASS
+    evidence: |
+      - prepare_decision_stub demonstrates pathway in dry-run
+      - extract_decision raises NotImplementedError
+      - materialize_decision raises NotImplementedError
+      - Sweep runner integrates with extraction module
+
+  - criterion: Equivalence policy version is referenced but not executed
+    result: PASS
+    evidence: |
+      - EquivalencePolicy.policy_version stored in schema
+      - Decision.equivalence_policy_version column exists
+      - Policy is created for preview but not applied
+
+  - criterion: No decision or f_map rows are written
+    result: PASS
+    evidence: |
+      - insert_decision raises NotImplementedError by default
+      - insert_f_map raises NotImplementedError by default
+      - No database writes occurred during this handoff
+
+  - criterion: No execution or persistence behavior changes occur
+    result: PASS
+    evidence: |
+      - All existing execution paths unchanged
+      - Validator output identical before and after
+      - Guards prevent any new execution capabilities
+
+table_counts:
+  snapshots: 0
+  representations: 0
+  engine_runs: 0
+  decisions: 0
+  f_map: 0
+  note: No writes performed during this handoff
+
+conclusion: |
+  Decision materialization readiness preparation complete.
+  
+  The decision extraction pathway is now fully wired:
+  - DecisionStub provides dry-run preview of extraction
+  - extract_decision and materialize_decision are hard-guarded
+  - Sweep runner demonstrates pathway with projected_decision_id
+  - Persistence layer guards both insert_decision and insert_f_map
+  
+  All guards are explicit and reference DECISION_PERSISTENCE_AUTHORIZATION.
+  No decisions or f_map entries were written.
+  No execution behavior was changed.
+  
+  The system is ready for decision persistence when authorized.
+  A separate DECISION_PERSISTENCE_AUTHORIZATION handoff is required
+  before any decisions may be materialized.

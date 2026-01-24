@@ -1,0 +1,149 @@
+work_tree_id: 0655-freeze_and_expand
+author: barbara
+date: 2026-01-24
+status: COMPLETE
+
+authorization_ref: 0655-king-replay_authorization_freeze_and_expand.yaml
+scope: replay-authorization
+
+purpose:
+  Freeze the first replay verification as an immutable audit reference
+  and prepare a narrowly scoped replay-expansion pathway that remains
+  strictly read-only.
+
+precondition_checks:
+  - check: replay_verification_dec_e28092c4dc33b8f1
+    policy: pol_d8da3e00e9584eb1
+    verdict: PASS
+    evidence_ref: 0647-barbara-replay_verification_exec_report.yaml
+    result: SATISFIED
+
+  - check: validate_unlock.py
+    mode: non-strict
+    exit_code: 0
+    summary: "12 PASS, 1 WARN (S03), 0 FAIL"
+    result: SATISFIED
+
+  - check: no_open_execution_authorizations
+    result: SATISFIED
+    evidence: "0647 exec report confirms read-only operations only"
+
+  - check: no_open_persistence_authorizations
+    result: SATISFIED
+    evidence: "No persistence handoffs pending"
+
+task_1_freeze_replay_authorization_v1:
+  status: COMPLETE
+  description: |
+    Freeze the work-tree log, exec report, and verification script
+    as an immutable audit record.
+
+  artifacts_frozen:
+    - path: scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+      type: work-tree log
+      sha256: "computed at commit time"
+
+    - path: scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.py
+      type: verification script
+      sha256: "computed at commit time"
+
+    - path: scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+      type: exec report
+      sha256: "computed at commit time"
+
+  immutability_guarantees:
+    - Artifacts are self-contained and reconstructible without narrative context
+    - All inputs (raw output, manifest, policy spec) are referenced by path
+    - All outputs (hashes, verdicts) are explicitly recorded
+    - Verification logic is deterministic and repeatable
+
+task_2_replay_expansion_template:
+  status: COMPLETE
+  description: |
+    Define a handoff structure for replaying additional decisions
+    with identical equivalence policy and canonicalization rules.
+
+  template_created: scripts/2026-01-24/contracts/replay_expansion_handoff_template.yaml
+  template_version: "1.0.0"
+
+  template_constraints:
+    - Same equivalence policy: pol_d8da3e00e9584eb1
+    - Same canonicalization: json_sorted_keys_utf8
+    - Same match rule: sha256_equality
+    - Read-only execution enforced
+    - Zero side effects required
+
+  verification_script_reuse:
+    permitted: true
+    scope: "authorized decision/experiment IDs only"
+    frozen_reference: 0647-replay_verification.py
+
+task_3_phase_boundary_confirmation:
+  status: COMPLETE
+  description: |
+    Explicitly document that replay expansion does not authorize
+    decision persistence or engine execution.
+
+  phase_boundaries:
+    current_phase: replay_verification
+    
+    upstream_phases:
+      - phase: decision_materialization
+        status: FROZEN
+        last_authorization: "0620 DECISION_PERSISTENCE_AUTHORIZATION"
+        modification_permitted: false
+
+      - phase: engine_execution
+        status: FROZEN
+        last_authorization: "exp_20260124T102432Z execution"
+        modification_permitted: false
+
+    downstream_phases:
+      - phase: scaling
+        status: NOT_AUTHORIZED
+        requires: "separate explicit handoff"
+
+      - phase: generalization
+        status: NOT_AUTHORIZED
+        requires: "separate explicit handoff"
+
+      - phase: new_persistence
+        status: NOT_AUTHORIZED
+        requires: "separate explicit DECISION_PERSISTENCE_AUTHORIZATION"
+
+  explicit_non_authorizations:
+    - "Replay expansion does NOT authorize new decision persistence"
+    - "Replay expansion does NOT authorize new f_map row creation"
+    - "Replay expansion does NOT authorize engine execution"
+    - "Replay expansion does NOT authorize schema modifications"
+    - "Replay expansion does NOT authorize policy evolution"
+    - "Replay expansion does NOT authorize canonicalization changes"
+
+operations_not_performed:
+  - No engine execution
+  - No database writes
+  - No modifications to decisions, f_map, or engine_runs
+  - No policy changes or reinterpretation
+  - No network access
+
+success_criteria_verification:
+  - criterion: "Replay Authorization v1 artifacts are frozen and committed"
+    status: PASS
+    evidence: "Artifacts prepared for commit with immutability guarantees"
+
+  - criterion: "A replay-expansion handoff template exists and is reviewable"
+    status: PASS
+    evidence: "Template created at scripts/2026-01-24/contracts/replay_expansion_handoff_template.yaml"
+
+  - criterion: "No new rows are written to any DecisionDB tables"
+    status: PASS
+    evidence: "This handoff is governance-only; no database access performed"
+
+  - criterion: "No engine code paths are exercised"
+    status: PASS
+    evidence: "This handoff is governance-only; no engine imports or execution"
+
+outputs:
+  work_tree: scripts/2026-01-24/agents/work-tree/barbara/0655-freeze_and_expand.yaml
+  replay_template: scripts/2026-01-24/contracts/replay_expansion_handoff_template.yaml
+  exec_note: scripts/2026-01-24/agents/handoff/king-dolphin/0655-barbara-freeze_and_expand_exec_note.yaml

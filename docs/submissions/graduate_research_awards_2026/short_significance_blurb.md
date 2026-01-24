@@ -1,0 +1,1 @@
+This work addresses a foundational gap in how complex analytical systems are evaluated: the lack of tools for diagnosing how representational choices determine discrete outcomes. By making representational dependence observable and auditable, the framework supports more transparent, reliable, and accountable analytical practice across scientific and technical domains.

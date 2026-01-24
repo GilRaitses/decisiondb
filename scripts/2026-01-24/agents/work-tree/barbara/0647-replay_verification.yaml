@@ -1,0 +1,127 @@
+work_tree_id: 0647-replay_verification
+author: barbara
+date: 2026-01-24
+status: COMPLETE
+
+authorization_ref: 0647-king-replay_authorization_single_de.yaml
+scope: replay-verification
+
+purpose:
+  Verify deterministic replay for decision dec_e28092c4dc33b8f1 under
+  equivalence policy pol_d8da3e00e9584eb1 without modifying system state.
+
+precondition_checks:
+  - check: validate_unlock.py
+    mode: non-strict
+    exit_code: 0
+    result: PASS
+    summary: "12 PASS, 1 WARN (S03), 0 FAIL"
+
+  - check: decision_materialization_complete
+    result: PASS
+    evidence: decision_manifest.json exists in experiment directory
+
+  - check: decision_id_matches_authorization
+    authorized: dec_e28092c4dc33b8f1
+    found: dec_e28092c4dc33b8f1
+    result: PASS
+
+  - check: policy_id_matches_authorization
+    authorized: pol_d8da3e00e9584eb1
+    found: pol_d8da3e00e9584eb1
+    result: PASS
+
+  - check: experiment_id_matches_authorization
+    authorized: exp_20260124T102432Z
+    found: exp_20260124T102432Z
+    result: PASS
+
+inputs:
+  experiment_dir: scripts/2026-01-24/outputs/engine/exp_20260124T102432Z
+  artifacts_read:
+    - decision_manifest.json
+    - engine_output.json
+    - representation_artifact.json
+    - manifest.json
+    - decisiondb.sqlite (read-only table counts)
+
+equivalence_policy:
+  policy_id: pol_d8da3e00e9584eb1
+  policy_version: "1.0.0"
+  policy_type: exact
+  hash_source: route.nodes
+  canonicalization: json_sorted_keys_utf8
+  match_rule: sha256_equality
+
+verification_steps:
+  - step: 1
+    action: Load raw engine output
+    file: engine_output.json
+    nodes_count: 29
+    path_found: true
+
+  - step: 2
+    action: Recompute equivalence policy ID
+    input: EQUIVALENCE_POLICY_SPEC
+    algorithm: "pol_{sha256(canonical_json(spec))[:16]}"
+    result: pol_d8da3e00e9584eb1
+
+  - step: 3
+    action: Extract decision payload
+    input: raw_output
+    output: "{nodes: [...], path_found: true}"
+
+  - step: 4
+    action: Recompute payload hash
+    input: payload
+    algorithm: "sha256(canonical_json(payload))[:16]"
+    result: 3a9d63ac28378116
+
+  - step: 5
+    action: Recompute decision ID
+    input: "{policy_id, payload}"
+    algorithm: "dec_{sha256(canonical_json({policy_id, payload}))[:16]}"
+    result: dec_e28092c4dc33b8f1
+
+  - step: 6
+    action: Compare recomputed values against persisted manifest
+    comparisons:
+      - field: policy_id
+        recomputed: pol_d8da3e00e9584eb1
+        persisted: pol_d8da3e00e9584eb1
+        match: true
+      - field: payload_hash
+        recomputed: 3a9d63ac28378116
+        persisted: 3a9d63ac28378116
+        match: true
+      - field: decision_id
+        recomputed: dec_e28092c4dc33b8f1
+        persisted: dec_e28092c4dc33b8f1
+        match: true
+
+  - step: 7
+    action: Verify database table counts unchanged
+    expected:
+      snapshots: 0
+      representations: 0
+      engine_runs: 1
+      decisions: 1
+      f_map: 1
+    actual:
+      snapshots: 0
+      representations: 0
+      engine_runs: 1
+      decisions: 1
+      f_map: 1
+    match: true
+
+operations_not_performed:
+  - No engine execution
+  - No database writes
+  - No modifications to decisions, f_map, or engine_runs
+  - No policy changes or reinterpretation
+  - No network access
+
+outputs:
+  verification_script: 0647-replay_verification.py
+  exec_report: 0647-barbara-replay_verification_exec_report.yaml

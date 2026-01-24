@@ -1,0 +1,64 @@
+handoff_id: 0655-king-replay_authorization_freeze_and_expand
+author: king-dolphin
+assignee: barbara
+date: 2026-01-24
+scope: replay-authorization
+status: LIMITED_AUTHORIZATION
+
+purpose:
+  Freeze the first replay verification as an immutable audit reference
+  and prepare a narrowly scoped replay-expansion pathway that remains
+  strictly read-only.
+
+explicit_authorization:
+  allowed:
+    - Finalize and commit replay verification artifacts for the single
+      authorized decision as a permanent audit record.
+    - Define a replay-expansion handoff template that applies identical
+      recomputation and hash checks to additional decisions under the
+      same equivalence policy.
+    - Re-run replay verification logic in read-only mode for future
+      authorized decisions when explicitly handed off.
+  forbidden:
+    - Any engine execution.
+    - Any database writes or schema changes.
+    - Any modification to persisted decisions, f_map rows, or policies.
+    - Any change to canonicalization or hashing rules.
+    - Network access of any kind.
+
+preconditions:
+  - Replay verification for dec_e28092c4dc33b8f1 under
+    pol_d8da3e00e9584eb1 completed with PASS verdict.
+  - validate_unlock.py passes with exit code 0 in non-strict mode.
+  - No open execution or persistence authorizations.
+
+tasks:
+  - Freeze Replay Authorization v1:
+      * Commit the work-tree log, exec report, and verification script
+        into the same dated audit lane.
+      * Ensure artifacts are immutable and reconstructible without
+        narrative context.
+  - Draft Replay Expansion Template:
+      * Define a handoff structure for replaying additional decisions.
+      * Require the same equivalence policy id and canonicalization rules.
+      * Enforce read-only execution and zero side effects.
+  - Phase Boundary Confirmation:
+      * Explicitly document that replay expansion does not authorize
+        decision persistence or engine execution.
+
+success_criteria:
+  - Replay Authorization v1 artifacts are frozen and committed.
+  - A replay-expansion handoff template exists and is reviewable.
+  - No new rows are written to any DecisionDB tables.
+  - No engine code paths are exercised.
+
+required_outputs:
+  - Commit confirmation for frozen replay artifacts.
+  - Replay expansion handoff template (YAML).
+  - Exec note confirming phase boundaries remain unchanged.
+
+notes:
+  This handoff completes the first closed loop:
+  materialization → replay verification.
+  Any future authorization to write new decisions or f_map rows
+  requires a separate, explicit persistence handoff.

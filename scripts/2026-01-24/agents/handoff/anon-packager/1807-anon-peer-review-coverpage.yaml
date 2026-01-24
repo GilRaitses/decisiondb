@@ -1,0 +1,62 @@
+handoff:
+  id: "1807-anon-peer-review-coverpage"
+  author: king-dolphin
+  date_ny: "2026-01-24"
+  target_agent: anon_packager
+
+context:
+  project: decisiondb
+  submission_root: /Users/gilraitses/decisiondb/docs/submissions/peer_review
+  canonical_pdf: decisiondb_manuscript_peer_review.pdf
+  source_notes:
+    - peer_review_context.md
+    - peer_review_sharing_note.md
+
+role_definition:
+  role: submission_packager
+  mandate:
+    - create auxiliary submission materials only
+    - do not modify manuscript content or layout
+    - do not introduce new claims or language
+  exclusions:
+    - no edits to manuscript PDF
+    - no regeneration of figures
+    - no content rewriting
+
+objective:
+  description: >
+    Create a single-page, LaTeX-compiled PDF cover for peer-review circulation
+    that combines the peer review context and sharing note into a formal cover page.
+
+requirements:
+  content:
+    - verbatim reuse of text from peer_review_context.md
+    - verbatim reuse of text from peer_review_sharing_note.md
+    - no new wording except section headers (e.g. "Technical Summary")
+  format:
+    - one page only
+    - LaTeX article class
+    - no figures, no citations
+    - conservative academic styling
+    - do not include author names or author fields
+    - do not repeat manuscript title block metadata
+    - cover page must stand alone as contextual material
+  output:
+    - filename: peer_review_cover.pdf
+    - location: docs/submissions/peer_review/
+
+verification:
+  - page_count == 1
+  - manuscript PDF unchanged (byte-identical)
+  - no patent-safe language violations
+  - compilation succeeds with 0 warnings
+
+deliverables:
+  - peer_review_cover.pdf
+  - exec_report documenting:
+      * inputs used
+      * verification checks
+      * confirmation of non-modification of manuscript
+
+signoff:
+  ready_for_peer_distribution: true

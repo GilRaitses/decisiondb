@@ -1,0 +1,57 @@
+handoff_id: PEV1-king-policy_evolution_authorization_v1
+author: king-dolphin
+assignee: <agent_name>
+date: 2026-01-24
+scope: policy-evolution
+status: LIMITED_AUTHORIZATION
+
+purpose:
+  Establish a safe, auditable mechanism for introducing or revising equivalence
+  policies without affecting existing decisions, replay guarantees, or execution
+  behavior.
+
+explicit_authorization:
+  allowed:
+    - Create new policy documentation artifacts.
+    - Register a new policy as DRAFT or FROZEN in the policy registry.
+    - Declare lineage relationships between policies (parent_policy_id).
+    - Perform read-only analysis of existing decisions to assess compatibility.
+  forbidden:
+    - Any decision persistence.
+    - Any f_map persistence.
+    - Any engine execution.
+    - Any replay verification framed as PASS under a different policy than the one
+      bound to the decision.
+    - Any modification to existing frozen policy definitions.
+    - Any network access of any kind.
+
+preconditions:
+  - validate_unlock.py passes with exit code 0 in non-strict mode.
+  - At least one Growth Cycle is fully closed:
+      - execution → decision → replay PASS
+  - All referenced policies are content-addressed and immutable once frozen.
+
+policy_constraints:
+  policy_states:
+    - DRAFT
+    - FROZEN
+  rules:
+    - Semantic changes require a new policy_id.
+    - Frozen policies may not be edited in place.
+    - Cross-policy replay is forbidden in v1.
+    - Policy compatibility claims must be explicitly stated and justified.
+
+authorization_scope:
+  policy_count: explicit (must be enumerated in exec report)
+  decision_impact: none
+  replay_impact: none
+
+success_criteria:
+  - New or revised policy artifacts exist and are internally consistent.
+  - Policy lineage is explicitly documented.
+  - No changes occur to decisions, f_map, engine_runs, snapshots, or representations.
+  - Exec report clearly states whether the policy remains DRAFT or is FROZEN.
+
+required_outputs:
+  - Work-tree log documenting policy analysis and creation.
+  - Exec report summarizing policy identifiers, lineage, and state.

@@ -1,0 +1,54 @@
+{
+  "manifest_version": "1.0.0",
+  "authorization": "LIMITED_AUTHORIZATION",
+  "authorization_type": "PROBE_PROMOTION",
+  "handoff_id": "0804-king-probe_promotion_engine_runs_only",
+  "experiment_id": "exp_probe_promotion_20260124",
+  "created_at": "2026-01-24T13:08:42.282904+00:00",
+  "probe": {
+    "probe_id": "probe_20260124_052401",
+    "probe_dir": "scripts/2026-01-24/outputs/probe_20260124_052401",
+    "raw_output_path": "scripts/2026-01-24/outputs/probe_20260124_052401/raw_output.json",
+    "raw_output_sha256": "0c515e41e5f3e039d419779299585156c6180ba86513116c4a2146ecb2e5d7d2"
+  },
+  "engine_run": {
+    "engine_run_id": "run_promoted_5167394a7e5fc6b1",
+    "representation_id": "cb9f8c1d418c4678",
+    "engine_name": "pax_pathfinder",
+    "engine_version": "1.0.0",
+    "engine_config_hash": "a5ecc09429ac27a29ac881f177b5b58a946fd79569dd851f90ac23a7dcdafd45",
+    "runtime_ms": 1,
+    "status": "complete"
+  },
+  "database": {
+    "path": "scripts/2026-01-24/outputs/probe_promotion/decisiondb.sqlite",
+    "before_counts": {
+      "snapshots": 0,
+      "representations": 0,
+      "engine_runs": 0,
+      "decisions": 0,
+      "f_map": 0
+    },
+    "after_counts": {
+      "snapshots": 0,
+      "representations": 0,
+      "engine_runs": 1,
+      "decisions": 0,
+      "f_map": 0
+    }
+  },
+  "verification": {
+    "hash_verified": true,
+    "insert_count": 1,
+    "no_decisions_written": true,
+    "no_fmap_written": true,
+    "no_snapshots_modified": true,
+    "no_representations_modified": true
+  },
+  "notes": [
+    "This is a one-time bridge operation.",
+    "No engine execution was performed.",
+    "The raw_output was sourced from an existing probe artifact.",
+    "Decision extraction requires a separate authorization."
+  ]
+}

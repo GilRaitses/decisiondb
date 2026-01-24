@@ -1,0 +1,71 @@
+handoff:
+  id: "1748-anon-submission-packaging"
+  author: king-dolphin
+  date_ny: "2026-01-24"
+  time_ny: "18:02"
+  target_agent: anon-packager
+
+context:
+  project: decisiondb
+  submissions_root: /Users/gilraitses/decisiondb/docs/submissions/graduate_research_awards_2026
+  manuscript_root: /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript
+  canonical_pdf: /Users/gilraitses/decisiondb/scripts/2026-01-23/manuscript/main.pdf
+
+governing_declarations:
+  - /Users/gilraitses/decisiondb/docs/internal/layout_freeze.yaml
+  - /Users/gilraitses/decisiondb/docs/internal/content_review_complete.yaml
+  - /Users/gilraitses/decisiondb/docs/internal/pre_submission_checklist_v1.md
+
+role_definition:
+  role: submission_packager
+  mandate:
+    - prepare submission-ready artifacts only
+    - do not alter technical content, structure, or layout
+    - do not introduce new claims or interpretations
+  exclusions:
+    - no edits to manuscript sections
+    - no figure changes
+    - no bibliography changes
+    - no terminology changes
+
+objectives:
+  - id: pkg_01
+    description: >
+      Package Graduate Research Awards submission materials using the
+      award-aligned abstract variant, preserving the canonical manuscript.
+    deliverables:
+      - decisiondb_manuscript_award_abstract.pdf
+      - award_aligned_abstract.md
+      - one_paragraph_research_statement.md
+      - short_significance_blurb.md
+      - submission_cover_letter.md
+
+  - id: pkg_02
+    description: >
+      Package a peer-review-ready manuscript using the untailored canonical
+      abstract and layout-frozen PDF.
+    deliverables:
+      - decisiondb_manuscript_peer_review.pdf
+
+constraints:
+  - award version may substitute abstract only
+  - peer-review version must be byte-identical to canonical manuscript
+  - filenames must encode purpose clearly
+  - no regeneration of figures or layout
+
+verification:
+  required_checks:
+    - page_count_consistency
+    - figure_page_consistency
+    - first_person_pronoun_check
+    - layout_freeze_respected
+
+outputs:
+  - path: /Users/gilraitses/decisiondb/docs/submissions/graduate_research_awards_2026
+    type: directory
+  - path: /Users/gilraitses/decisiondb/scripts/2026-01-24/agents/handoff/king-dolphin/1802-anon-packaging_exec_report.yaml
+    type: exec_report
+
+signoff:
+  packaging_complete: false
+  awaiting_exec_report: true

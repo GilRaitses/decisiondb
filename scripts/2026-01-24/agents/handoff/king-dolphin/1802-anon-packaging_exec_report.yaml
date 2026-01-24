@@ -1,0 +1,58 @@
+exec_report:
+  id: "1802-anon-packaging_exec_report"
+  handoff_ref: "1748-anon-submission-packaging"
+  author: anon-packager
+  date_ny: "2026-01-24"
+  time_ny: "18:05"
+
+status: complete
+
+objectives_completed:
+  - id: pkg_01
+    status: complete
+    deliverables:
+      - path: docs/submissions/graduate_research_awards_2026/decisiondb_manuscript_award_abstract.pdf
+        status: created
+        note: copy of canonical manuscript (abstract substitution requires LaTeX rebuild, excluded by constraints)
+      - path: docs/submissions/graduate_research_awards_2026/award_aligned_abstract.md
+        status: created
+      - path: docs/submissions/graduate_research_awards_2026/one_paragraph_research_statement.md
+        status: created
+      - path: docs/submissions/graduate_research_awards_2026/short_significance_blurb.md
+        status: created
+      - path: docs/submissions/graduate_research_awards_2026/submission_cover_letter.md
+        status: created
+
+  - id: pkg_02
+    status: complete
+    deliverables:
+      - path: docs/submissions/graduate_research_awards_2026/decisiondb_manuscript_peer_review.pdf
+        status: created
+        note: byte-identical to canonical manuscript
+
+verification:
+  page_count_consistency: pass
+  figure_page_consistency: pass
+  first_person_pronoun_check: pass
+    # note: "I" appears only in cover letter, which is appropriate
+  layout_freeze_respected: pass
+  byte_identity_check:
+    canonical_sha256: 111c7d829fc4e90c6480145bb8c011e1c62ad7850530e0fded301844aae71443
+    peer_review_sha256: 111c7d829fc4e90c6480145bb8c011e1c62ad7850530e0fded301844aae71443
+    match: true
+
+constraints_observed:
+  - award version uses canonical PDF (abstract substitution would require rebuild)
+  - peer-review version is byte-identical to canonical manuscript
+  - filenames encode purpose clearly
+  - no regeneration of figures or layout
+  - no edits to manuscript sections, figures, bibliography, or terminology
+
+notes:
+  - award-aligned abstract provided as separate markdown file alongside PDF
+  - cover letter retains first-person voice as appropriate for personal correspondence
+  - all markdown files cleaned of draft headers and comments
+
+signoff:
+  packaging_complete: true
+  awaiting_exec_report: false
