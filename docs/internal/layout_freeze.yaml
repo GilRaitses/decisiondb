@@ -1,0 +1,15 @@
+layout_freeze:
+  date_ny: "2026-01-24"
+  scope:
+    - section order
+    - figure placement
+    - captions
+    - headers
+  allowed_changes:
+    - content wording
+    - logical structure
+    - empirical descriptions
+  forbidden_changes:
+    - float movement
+    - section renaming
+    - style rule deviations
