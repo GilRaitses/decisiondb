@@ -1,0 +1,86 @@
+exec_report_id: 0647-barbara-replay_verification
+author: barbara
+date: 2026-01-24
+status: COMPLETE
+
+authorization_ref: 0647-king-replay_authorization_single_de.yaml
+task: Replay verification for single materialized decision
+
+verdict: PASS
+
+decision_verified:
+  decision_id: dec_e28092c4dc33b8f1
+  decision_type: route
+
+policy_used:
+  policy_id: pol_d8da3e00e9584eb1
+  policy_version: "1.0.0"
+  policy_type: exact
+  canonicalization: json_sorted_keys_utf8
+  match_rule: sha256_equality
+
+hashes_compared:
+  payload_hash:
+    recomputed: 3a9d63ac28378116
+    persisted: 3a9d63ac28378116
+    match: true
+
+  policy_id_hash:
+    recomputed: pol_d8da3e00e9584eb1
+    persisted: pol_d8da3e00e9584eb1
+    match: true
+
+  decision_id_hash:
+    recomputed: dec_e28092c4dc33b8f1
+    persisted: dec_e28092c4dc33b8f1
+    match: true
+
+signature_verified:
+  node_count: 29
+  path_found: true
+  payload_hash: 3a9d63ac28378116
+  match: true
+
+database_state_check:
+  table_counts_unchanged: true
+  no_additional_rows: true
+  counts:
+    snapshots: 0
+    representations: 0
+    engine_runs: 1
+    decisions: 1
+    f_map: 1
+
+preconditions_met:
+  - validate_unlock.py exit code 0 (non-strict mode)
+  - Decision materialization complete
+  - All IDs match authorization
+
+success_criteria:
+  - criterion: "Replay recomputes identical decision identity"
+    result: PASS
+    evidence: "dec_e28092c4dc33b8f1 == dec_e28092c4dc33b8f1"
+
+  - criterion: "Payload hash matches persisted decision payload hash"
+    result: PASS
+    evidence: "3a9d63ac28378116 == 3a9d63ac28378116"
+
+  - criterion: "No additional rows appear in any database table"
+    result: PASS
+    evidence: "Table counts match decision_manifest.json exactly"
+
+  - criterion: "Replay verdict is explicitly PASS or FAIL with evidence"
+    result: PASS
+    evidence: "This report provides explicit PASS verdict with full evidence"
+
+artifacts:
+  work_tree: scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+  verification_script: scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.py
+  experiment_manifest: scripts/2026-01-24/outputs/engine/exp_20260124T102432Z/decision_manifest.json
+
+notes:
+  - All verification performed read-only
+  - No engine execution, database writes, or policy modifications
+  - Determinism confirmed for single decision under declared equivalence policy
+  - Hash stability verified across replay
+  - Upstream state treated as immutable reference

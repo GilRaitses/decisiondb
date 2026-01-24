@@ -1,0 +1,112 @@
+# Replay Expansion Handoff Template v1.0
+# 
+# This template defines the structure for authorizing replay verification
+# of additional decisions under the same equivalence policy. It enforces
+# read-only execution and zero side effects.
+#
+# USAGE:
+#   Copy this template and fill in the decision-specific fields.
+#   All replay authorizations must reference this template version.
+#
+# CONSTRAINTS:
+#   - Same equivalence policy (pol_d8da3e00e9584eb1)
+#   - Same canonicalization rules (json_sorted_keys_utf8)
+#   - Read-only execution only
+#   - No database writes permitted
+#   - No engine execution permitted
+#   - No policy modifications permitted
+
+template_version: "1.0.0"
+template_type: replay_expansion_handoff
+frozen_reference: 0647-barbara-replay_verification_exec_report.yaml
+
+# --- BEGIN TEMPLATE FIELDS ---
+
+handoff_id: "HHMM-author-replay_expansion_decision_N"
+author: "<author-agent>"
+assignee: "<target-agent>"
+date: "<YYYY-MM-DD>"
+scope: replay-verification
+status: LIMITED_AUTHORIZATION
+
+purpose: |
+  Verify deterministic replay for decision <decision_id> under
+  equivalence policy pol_d8da3e00e9584eb1 without modifying system state.
+
+explicit_authorization:
+  allowed:
+    - Replay verification for the specified decision identity.
+    - Hash recomputation and comparison against persisted artifacts.
+    - Read-only access to experiment outputs, manifests, and database state.
+  forbidden:
+    - Any engine execution.
+    - Any database writes of any kind.
+    - Any modification to decisions, f_map, or engine_runs.
+    - Any policy changes or reinterpretation.
+    - Network access of any kind.
+
+preconditions:
+  - validate_unlock.py passes with exit code 0 in non-strict mode.
+  - Decision materialization completed for target decision.
+  - decision_id: "<dec_xxxxxxxxxxxxxxxx>"  # FILL IN
+  - equivalence_policy_id: pol_d8da3e00e9584eb1  # FIXED - do not change
+  - experiment_id: "<exp_YYYYMMDDTHHMMSSZ>"  # FILL IN
+
+authorization_scope:
+  decision_limit: 1
+  experiment_limit: 1
+  replay_mode: deterministic_only
+
+equivalence_policy_binding:
+  policy_id: pol_d8da3e00e9584eb1
+  policy_version: "1.0.0"
+  policy_type: exact
+  canonicalization: json_sorted_keys_utf8
+  match_rule: sha256_equality
+  frozen: true
+  modification_permitted: false
+
+success_criteria:
+  - Replay recomputes identical decision identity.
+  - Payload hash matches persisted decision payload hash.
+  - No additional rows appear in any database table.
+  - Replay verdict is explicitly PASS or FAIL with evidence.
+
+required_outputs:
+  - Work-tree log documenting replay inputs and verification steps.
+  - Exec report stating replay verdict, hashes compared, and policy used.
+
+verification_script_reference:
+  # The verification script from the frozen v1 replay can be reused
+  # with minimal modifications to the authorized constants.
+  frozen_script: scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.py
+  reuse_permitted: true
+  modification_scope: "authorized decision/experiment IDs only"
+
+# --- PHASE BOUNDARY ENFORCEMENT ---
+
+phase_boundary:
+  current_phase: replay_verification
+  upstream_phases_frozen:
+    - decision_materialization
+    - engine_execution
+    - representation_generation
+  downstream_phases_blocked:
+    - scaling
+    - generalization
+    - new_persistence
+
+does_not_authorize:
+  - New decision persistence
+  - New f_map row creation
+  - Engine execution of any kind
+  - Schema modifications
+  - Policy evolution or versioning
+  - Canonicalization rule changes
+
+failure_behavior: |
+  If replay verification fails, the correct action is to report failure
+  with full evidence. Do not attempt repair, re-run any prior phase,
+  or modify any artifacts. Treat all upstream state as immutable reference.
+
+# --- END TEMPLATE FIELDS ---
