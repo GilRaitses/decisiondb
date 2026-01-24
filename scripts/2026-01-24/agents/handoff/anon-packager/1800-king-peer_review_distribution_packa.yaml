@@ -1,0 +1,71 @@
+1800-king-peer_review_distribution_package.yaml
+handoff:
+  id: "1800-king-peer_review_distribution_package"
+  author: king-dolphin
+  date_ny: "2026-01-24"
+  target_agent: anon-packager
+  continuation: true
+
+context:
+  project: decisiondb
+  canonical_manuscript:
+    pdf: docs/submissions/graduate_research_awards_2026/decisiondb_manuscript_peer_review.pdf
+    constraint: byte-identical, no regeneration
+  governing_docs:
+    - docs/internal/layout_freeze.yaml
+    - docs/internal/content_review_complete.yaml
+    - docs/internal/pre_submission_checklist_v1.md
+    - docs/internal/PATENT_SAFE_LANGUAGE.md
+
+objective:
+  description: >
+    Create a separate peer-review sharing package, distinct from
+    graduate research awards materials, suitable for controlled
+    academic circulation.
+
+tasks:
+  - Create directory:
+      path: docs/submissions/peer_review/
+      constraints:
+        - do not modify existing graduate_research_awards_2026 directory
+        - additive only
+
+  - Populate peer_review directory with:
+      files:
+        - decisiondb_manuscript_peer_review.pdf
+        - peer_review_context.md
+        - peer_review_sharing_note.md
+
+  - peer_review_context.md must include:
+      - one-paragraph technical summary (drawn from manuscript abstract)
+      - clarification that this is a diagnostic infrastructure paper
+      - explicit statement: no performance, learning, or optimization claims
+      - note that layout and content are frozen
+
+  - peer_review_sharing_note.md must include:
+      - intended audience: trusted academic peers only
+      - request not to redistribute
+      - notice that the work is covered by a filed U.S. provisional patent
+      - neutral, non-legal tone (informational, not restrictive)
+
+constraints:
+  - No edits to manuscript text or figures
+  - No abstract substitution
+  - No language implying public release
+  - No claims beyond what appears in the manuscript
+  - Must pass patent-safe language check
+
+verification:
+  - SHA256 hash of PDF matches canonical
+  - Directory contains exactly 3 files
+  - No references to awards or internal governance language
+
+deliverables:
+  - path: docs/submissions/peer_review/
+    type: directory
+  - path: scripts/2026-01-24/agents/handoff/king-dolphin/1815-anon-peer_review_packaging_exec_report.yaml
+    type: exec_report
+
+signoff:
+  handoff_complete: true
+  awaiting_exec_report: true
