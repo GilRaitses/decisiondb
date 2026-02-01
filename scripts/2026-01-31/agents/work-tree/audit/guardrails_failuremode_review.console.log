@@ -1,43 +1,44 @@
 ## COMMAND EQUIVALENCE NOTE:
 ls/find/grep/sed/printf/rm/mv commands were executed with tool equivalents due to environment guidance (LS/Glob/rg/ReadFile/ApplyPatch/Delete). "python" commands were executed with python3. The checklist path "phase_crosslineage_map.yaml" was substituted with "scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml". "scripts/2026-01-31/agents/tools/abstract_lint.py" was substituted with "scripts/2026-01-31/agents/tools/lint_abstract_against_map.py". The missing-map test was executed by pointing the linter to a non-existent map path instead of moving the map file. git remote output was redacted to avoid secret exposure.
 
+## CMD: git status -sb
+## main...origin/main
+
 ## CMD: mkdir -p scripts/2026-01-31/agents/work-tree/audit
 
 ## CMD: date
-Sun Feb  1 06:10:12 AM UTC 2026
+Sun Feb  1 06:54:08 AM UTC 2026
 
 ## CMD: git rev-parse --show-toplevel
 /workspace
-
-## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
- M .github/workflows/phase_crosslineage_invariant.yml
- M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
- M scripts/2026-01-31/agents/tools/README.md
 
 ## CMD: git remote -v | sed -E "s/x-access-token:[^@]+/x-access-token:<REDACTED_TOKEN>/"
 origin	https://x-access-token:<REDACTED_TOKEN>@github.com/GilRaitses/decisiondb (fetch)
 origin	https://x-access-token:<REDACTED_TOKEN>@github.com/GilRaitses/decisiondb (push)
 
 ## CMD: git branch --show-current
-cursor/confidence-reuse-conditions-fe3c
+main
 
 ## CMD: git log -n 3 --oneline
-f6f1ee2 Add phase1.5 context compatibility trace artifacts
-4521d94 Add guardrails failure mode review audit
-9b4643b Add arco cover note for guardrails review
+2312625 Add phase 2 phase 0 inventory handoff
+bde755f Declare crosslineage map freeze
+5b63a5c Merge branch 'cursor/confidence-reuse-conditions-fe3c'
 
 ## CMD: ls -la phase_crosslineage_map.yaml
 L1:handoff_id: phase_crosslineage_alignment
 L2:date: "2026-01-31"
 L3:agent_role: consolidation_only
-... 244 lines not shown ...
+L4:scope_level: read_only
+L5:status: authorized
+... 242 lines not shown ...
 
 ## CMD: ls -la scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml
 L1:handoff_id: phase_crosslineage_alignment
 L2:date: "2026-02-01"
 L3:assigned_agent: suit
-... 38 lines not shown ...
+L4:agent_role: consolidation_only
+L5:scope_level: read_only
+... 36 lines not shown ...
 
 ## CMD: ls -la .githooks
 /workspace/.githooks/
@@ -48,7 +49,8 @@ Result of search in '/workspace/.githooks' (total 1 file):
 - pre-commit
 
 ## CMD: find .github -maxdepth 4 -type f -print
-Result of search in '/workspace/.github' (total 1 file):
+Result of search in '/workspace/.github' (total 2 files):
+- override/phase_crosslineage_map_edit.override
 - workflows/phase_crosslineage_invariant.yml
 
 ## CMD: ls -la scripts/2026-01-31/agents/tools
@@ -235,23 +237,18 @@ No matches found
 </workspace_result>
 
 ## CMD: rm -f .github/override/phase_crosslineage_map_edit.override || true
-Error deleting file : File not found: /workspace/.github/override/phase_crosslineage_map_edit.override
+Successfully deleted file: /workspace/.github/override/phase_crosslineage_map_edit.override (24 bytes)
 
 ## CMD: mkdir -p .github/override
-Success. Updated the following files:
-A /workspace/.github/override/.keep_override_dir
 
 ## CMD: printf "" > .github/override/.keep_override_dir
 Success. Updated the following files:
 A /workspace/.github/override/.keep_override_dir
 
 ## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
- M .github/workflows/phase_crosslineage_invariant.yml
- M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
- M scripts/2026-01-31/agents/tools/README.md
- D scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
-?? .github/override/
+## main...origin/main
+ D .github/override/phase_crosslineage_map_edit.override
+?? .github/override/.keep_override_dir
 
 ## CMD: printf "ALLOW_MAP_EDIT_OVERRIDE" > .github/override/phase_crosslineage_map_edit.override.TMP_WRONG
 Success. Updated the following files:
@@ -281,7 +278,7 @@ A /workspace/.github/override/phase_crosslineage_map_edit.override.WRONG_TRUNC
 Success. Updated the following files:
 A /workspace/.github/override/phase_crosslineage_map_edit.override
 
-## CMD: python -c "p=open('.github/override/phase_crosslineage_map_edit.override','rb').read(); print(p);"
+## CMD: python3 -c "p=open('.github/override/phase_crosslineage_map_edit.override','rb').read(); print(p);"
 b'ALLOW_MAP_EDIT_OVERRIDE\n'
 
 ## CMD: ls -la .github/override/phase_crosslineage_map_edit.override
@@ -331,24 +328,24 @@ scripts/2026-01-31/agents/tools/lint_abstract_against_map.py
 128:    print("PASS: abstract terms align with map")
 </workspace_result>
 
-## CMD: python scripts/2026-01-31/agents/tools/abstract_lint.py --help || true
+## CMD: python3 scripts/2026-01-31/agents/tools/lint_abstract_against_map.py --help || true
 usage: lint_abstract_against_map.py <phase_crosslineage_map.yaml> <abstract.txt|directory>
 
 ## CMD: mkdir -p /tmp/abstractlint_empty_dir
 
-## CMD: python scripts/2026-01-31/agents/tools/abstract_lint.py /tmp/abstractlint_empty_dir || true
+## CMD: python3 scripts/2026-01-31/agents/tools/lint_abstract_against_map.py scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml /tmp/abstractlint_empty_dir || true
 SKIP: no abstract files found
 
 ## CMD: mkdir -p /tmp/abstractlint_one_dir
 
 ## CMD: printf "Confidence becomes uninterpretable when it propagates across tasks." > /tmp/abstractlint_one_dir/abstract_test.txt
 
-## CMD: python scripts/2026-01-31/agents/tools/abstract_lint.py /tmp/abstractlint_one_dir || true
+## CMD: python3 scripts/2026-01-31/agents/tools/lint_abstract_against_map.py scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml /tmp/abstractlint_one_dir || true
 FAIL: abstract contains out of map terms
 /tmp/abstractlint_one_dir/abstract_test.txt:
 - Confidence
 
-## CMD: python scripts/2026-01-31/agents/tools/abstract_lint.py /tmp/abstractlint_one_dir || true
+## CMD: python3 scripts/2026-01-31/agents/tools/lint_abstract_against_map.py /tmp/phase_crosslineage_map.yaml.moved /tmp/abstractlint_one_dir || true
 Traceback (most recent call last):
   File "/workspace/scripts/2026-01-31/agents/tools/lint_abstract_against_map.py", line 133, in <module>
     raise SystemExit(main())
@@ -367,122 +364,45 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 FileNotFoundError: [Errno 2] No such file or directory: '/tmp/phase_crosslineage_map.yaml.moved'
 
-## CMD: python scripts/2026-01-31/agents/tools/abstract_lint.py . || true
+## CMD: python3 scripts/2026-01-31/agents/tools/lint_abstract_against_map.py scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml . || true
 SKIP: no abstract files found
 
 ## CMD: ls -la phase_crosslineage_map.yaml
 L1:handoff_id: phase_crosslineage_alignment
 ... 246 lines not shown ...
 
-## CMD: python -c "import os,stat; p='phase_crosslineage_map.yaml'; m=os.stat(p).st_mode; print(oct(m));"
-0o100444
+## CMD: python3 -c "import os,stat; p='phase_crosslineage_map.yaml'; m=os.stat(p).st_mode; print(oct(m));"
+0o100644
 
 ## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
- M .github/workflows/phase_crosslineage_invariant.yml
- M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
- M scripts/2026-01-31/agents/tools/README.md
- D scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
+## main...origin/main
+?? .github/override/.keep_override_dir
+?? .github/override/phase_crosslineage_map_edit.override.TMP_WRONG
+?? .github/override/phase_crosslineage_map_edit.override.WRONG_NEWLINE
+?? .github/override/phase_crosslineage_map_edit.override.WRONG_TRUNC
 
 ## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
- M .github/workflows/phase_crosslineage_invariant.yml
- M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
- M scripts/2026-01-31/agents/tools/README.md
- D scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
+## main...origin/main
+?? .github/override/.keep_override_dir
+?? .github/override/phase_crosslineage_map_edit.override.TMP_WRONG
+?? .github/override/phase_crosslineage_map_edit.override.WRONG_NEWLINE
+?? .github/override/phase_crosslineage_map_edit.override.WRONG_TRUNC
 
 ## CMD: git diff --stat
- .github/workflows/phase_crosslineage_invariant.yml |  10 +-
- .../agents/notes/phase_crosslineage_map.yaml       |   8 +-
- scripts/2026-01-31/agents/tools/README.md          |   3 +
- .../guardrails_failuremode_review.console.log      | 632 ---------------------
- 4 files changed, 15 insertions(+), 638 deletions(-)
 
 ## CMD: git diff
-diff --git a/.github/workflows/phase_crosslineage_invariant.yml b/.github/workflows/phase_crosslineage_invariant.yml
-index 91185cb..2e57612 100644
---- a/.github/workflows/phase_crosslineage_invariant.yml
-+++ b/.github/workflows/phase_crosslineage_invariant.yml
-@@ -16,8 +16,14 @@ jobs:
-       - name: Enforce crosslineage map invariant
-         shell: bash
-         run: |
--          git fetch origin main
--          diff_scope="origin/main...HEAD"
-+          base_ref="${GITHUB_BASE_REF:-}"
-+          if [ -n "${base_ref}" ]; then
-+            git fetch origin "${base_ref}"
-+            diff_scope="origin/${base_ref}...HEAD"
-+          else
-+            git fetch origin main
-+            diff_scope="origin/main...HEAD"
-+          fi
-           map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
-           override_path=".github/override/phase_crosslineage_map_edit.override"
-           override_token="ALLOW_MAP_EDIT_OVERRIDE"
-diff --git a/scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml b/scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
-index 52d5d3c..adfd755 100644
---- a/scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
-+++ b/scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
-@@ -186,25 +186,25 @@ figure_concept_alignment:
-     anchored_concept: Canonical Decision-Valued Mapping Schematic
-     used_in:
-       - context_type: manuscript
--        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 1
-+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 1"
-   - figure_id: 2
-     figure_path: scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
-     anchored_concept: Primary Representational Sweep
-     used_in:
-       - context_type: manuscript
--        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 2
-+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 2"
-   - figure_id: 3
-     figure_path: scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
-     anchored_concept: Identity Persistence Regions
-     used_in:
-       - context_type: manuscript
--        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 3
-+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 3"
-   - figure_id: 4
-     figure_path: scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
-     anchored_concept: Boundary and Fracture Localization
-     used_in:
-       - context_type: manuscript
--        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 4
-+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 4"
- interface_inventory:
-   - interface_name: decision identity
-     defined_in:
-diff --git a/scripts/2026-01-31/agents/tools/README.md b/scripts/2026-01-31/agents/tools/README.md
-index 0dd160b..68d0a0e 100644
---- a/scripts/2026-01-31/agents/tools/README.md
-+++ b/scripts/2026-01-31/agents/tools/README.md
-@@ -35,3 +35,6 @@ ALLOW_MAP_EDIT_OVERRIDE
- The repository includes a convenience pre-commit hook in `.githooks/pre-commit`.
- If you already use a hooks manager, integrate the logic there instead of
- overriding your hooks path.
-+
-+File mode is not used for enforcement. CI and the pre-commit hook are the
-+authoritative guardrails.
-diff --git a/scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log b/scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
-deleted file mode 100644
-index e20260a..0000000
---- a/scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
-+++ /dev/null
-@@ -1,632 +0,0 @@
 
 ## CMD: git log --oneline --decorate -n 10
-f6f1ee2 (HEAD -> cursor/confidence-reuse-conditions-fe3c, origin/cursor/confidence-reuse-conditions-fe3c) Add phase1.5 context compatibility trace artifacts
+2312625 (HEAD -> main, origin/main, origin/HEAD) Add phase 2 phase 0 inventory handoff
+bde755f Declare crosslineage map freeze
+5b63a5c Merge branch 'cursor/confidence-reuse-conditions-fe3c'
+4af1ca9 (origin/cursor/confidence-reuse-conditions-fe3c, cursor/confidence-reuse-conditions-fe3c) Refresh guardrails failure mode review
+2f1f272 Normalize map values and update CI base
+f6f1ee2 Add phase1.5 context compatibility trace artifacts
 4521d94 Add guardrails failure mode review audit
 9b4643b Add arco cover note for guardrails review
 8c11483 Move merge handoff to arco
 7faad05 Add crosslineage guardrails failuremode handoff
-a487f3f Tighten crosslineage map guardrails
-f0f05d8 Add crosslineage map guardrails
-8ebec1c Add crosslineage alignment report
-831026b Add phase crosslineage synthesis map
-b6ec4e8 Freeze phase 7 outputs and add status report
 
 ## CMD: rm -f .github/override/phase_crosslineage_map_edit.override.TMP_WRONG || true
 Successfully deleted file: /workspace/.github/override/phase_crosslineage_map_edit.override.TMP_WRONG (24 bytes)
@@ -499,21 +419,11 @@ Successfully deleted file: /workspace/.github/override/.keep_override_dir (1 byt
 ## CMD: rm -f .github/override/phase_crosslineage_map_edit.override || true
 Successfully deleted file: /workspace/.github/override/phase_crosslineage_map_edit.override (24 bytes)
 
-## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
- M .github/workflows/phase_crosslineage_invariant.yml
- M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
- M scripts/2026-01-31/agents/tools/README.md
- D scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
-
 ## CMD: rmdir .github/override
 
 ## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
- M .github/workflows/phase_crosslineage_invariant.yml
- M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
- M scripts/2026-01-31/agents/tools/README.md
- D scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
+## main...origin/main
+ D .github/override/phase_crosslineage_map_edit.override
 
 ## CMD: date
-Sun Feb  1 06:20:50 AM UTC 2026
+Sun Feb  1 07:07:19 AM UTC 2026

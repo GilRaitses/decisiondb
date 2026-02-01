@@ -1,6 +1,5 @@
 merge_allowed: "true"
-merge_preconditions:
-  - include override file when committing map edits
+merge_preconditions: []
 merge_method: "merge_commit"
 post_merge_steps:
   - "declare map + report frozen"
