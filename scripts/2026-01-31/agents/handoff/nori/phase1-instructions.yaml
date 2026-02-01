@@ -1,0 +1,128 @@
+phase: 1
+phase_name: toy_model_materialization
+agent: nori
+date: 2026-01-31
+
+purpose:
+  Produce minimal toy-model artifacts and figure scaffolds that make existing
+  manuscript mechanisms inspectable, without modifying claims, analysis logic,
+  or narrative framing.
+
+inputs:
+  phase0_index:
+    path: scripts/2026-01-31/agents/notes/phase0_index.yaml
+    status: authoritative
+    mutability: read_only
+    description: >
+      Repository-wide inventory produced in Phase-0. This file defines the
+      complete and only allowed source universe for Phase-1 artifacts.
+
+immediate_actions:
+  - action: relocate_phase0_index
+    description: >
+      Move the Phase-0 index from the erroneous repo-root location into the
+      correct script-day workspace.
+    from: agents/notes/phase0_index.yaml
+    to: scripts/2026-01-31/agents/notes/phase0_index.yaml
+    constraints:
+      - preserve_file_contents: true
+      - do_not_edit: true
+
+  - action: remove_erroneous_root_agents_dir
+    description: >
+      Remove the top-level agents/ directory created during Phase-0 after
+      confirming it contains no additional artifacts.
+    path: agents/
+    constraints:
+      - confirm_only_phase0_index_present: true
+      - delete_after_verification: true
+
+workspace_constraints:
+  allowed_directories:
+    - scripts/2026-01-31/agents/notes/
+    - scripts/2026-01-31/agents/work-tree/
+  forbidden_actions:
+    - create_directories_at_repo_root
+    - modify_existing_manuscript_files
+    - modify_existing_analysis_code
+    - modify_logged_results
+    - introduce_new_metrics_or_thresholds
+
+outputs:
+  required_manifests:
+    - name: reusable_artifacts_manifest
+      path: scripts/2026-01-31/agents/notes/phase1_reusable_artifacts.yaml
+      description: >
+        Enumerates existing logs, traces, or audits that can be reused directly
+        for toy-model figures without transformation.
+
+    - name: toy_model_requirements_manifest
+      path: scripts/2026-01-31/agents/notes/phase1_toy_model_requirements.yaml
+      description: >
+        Specifies which figures require synthetic or reduced-scope toy artifacts
+        and why reuse is insufficient.
+
+    - name: transformation_map
+      path: scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+      description: >
+        For each toy artifact: source file paths, transformation steps, and
+        resulting visual or table.
+
+  prose_outputs:
+    - name: draft_figure_captions
+      path: scripts/2026-01-31/agents/notes/phase1_figure_captions.md
+      description: >
+        Draft captions written in neutral technical prose. Captions must name
+        interfaces and flows without asserting new results or expanding scope.
+
+figure_intent_constraints:
+  allowed:
+    - expose_confidence_reuse_paths
+    - show_where_reuse_breaks_or_remains_admissible
+    - surface invariants implied by existing analysis
+  forbidden:
+    - introduce_new_evaluative_claims
+    - improve_results_or_performance
+    - add_new_theoretical framing
+    - reinterpret existing conclusions
+
+toy_model_constraints:
+  - every_toy_artifact_must_reference_phase0_index: true
+  - no_artifact_without_source_path: true
+  - prefer_omission_over_speculation: true
+  - document_impossibility_explicitly_if_blocked: true
+
+documentation_rules:
+  manifests_format: yaml
+  prose_format: markdown
+  tone: austere
+  audience: internal_phase_review
+  avoid_terms:
+    - optimization
+    - performance_improvement
+    - better_than
+    - state_of_the_art
+
+drift_control:
+  validation_rule:
+    description: >
+      Every Phase-1 output must be traceable to at least one file path listed in
+      phase0_index.yaml. If no such path exists, the output must be excluded.
+  review_check:
+    - verify_no_scope_expansion
+    - verify_no_claim_changes
+    - verify_all_paths_resolve
+
+completion_criteria:
+  phase_complete_when:
+    - all_required_manifests_present: true
+    - draft_figure_captions_complete: true
+    - reuse_vs_toy_boundary_explicit: true
+    - human_reviewer_can_identify_missing_figures_and_sources: true
+
+handoff_notes:
+  next_phase: phase_1_5
+  next_agent: to_be_assigned
+  phase_boundary_statement: >
+    Phase-1 ends with figure intent and artifact feasibility made explicit.
+    No Phase-2 questions or claims are to be drafted in this phase.
