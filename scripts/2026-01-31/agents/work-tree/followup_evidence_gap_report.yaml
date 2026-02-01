@@ -1,0 +1,23 @@
+phase: phase_7
+artifact: followup_evidence_gap_report
+date: "2026-02-01"
+inputs_frozen:
+  - scripts/2026-01-31/agents/work-tree/followup_paper_outline.yaml
+  - scripts/2026-01-31/agents/work-tree/followup_claim_seeds.yaml
+  - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+gaps:
+  - section_id: F1
+    status: complete_with_existing_evidence
+    gap_items: []
+  - section_id: F2
+    status: incomplete_without_additional_evidence
+    gap_items:
+      - additional trace coverage beyond Phase 4 extended trace set is not available in frozen artifacts
+  - section_id: F3
+    status: complete_with_existing_evidence
+    gap_items: []
+  - section_id: F4
+    status: complete_with_existing_evidence
+    gap_items: []
+overall_status: requires_additional_phase_for_trace_expansion
+recommended_next_phase: phase_8_revision_or_parallel_execution

@@ -1,0 +1,19 @@
+phase: 6
+artifact: phase6_freeze_ack
+timestamp_utc: "2026-02-01T03:48:44Z"
+commit_hash: 2382335ad1423d971ac65009900146b4ead56ff2
+status: frozen
+scope:
+  base_path: scripts/2026-01-31/agents/work-tree/
+  frozen_files:
+    - scripts/2026-01-31/agents/work-tree/submission_bundle/metadata.yaml
+    - scripts/2026-01-31/agents/work-tree/submission_log.yaml
+    - scripts/2026-01-31/agents/work-tree/venue_cover_letters.yaml
+    - scripts/2026-01-31/agents/work-tree/followup_paper_outline.yaml
+    - scripts/2026-01-31/agents/work-tree/followup_claim_seeds.yaml
+freeze_terms:
+  - do_not_modify
+  - do_not_regenerate
+  - do_not_rename
+  - do_not_reorder
+  - read_only_inputs_for_phase_7

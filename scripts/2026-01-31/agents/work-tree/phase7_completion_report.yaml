@@ -1,0 +1,21 @@
+phase: phase_7
+artifact: phase7_completion_report
+date: "2026-02-01"
+status: complete_with_gaps
+inputs_frozen:
+  - scripts/2026-01-31/agents/work-tree/phase6_freeze_ack.yaml
+  - scripts/2026-01-31/agents/work-tree/followup_paper_outline.yaml
+  - scripts/2026-01-31/agents/work-tree/followup_claim_seeds.yaml
+  - scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+deliverables:
+  - scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+  - scripts/2026-01-31/agents/work-tree/followup_claim_to_section_map.yaml
+  - scripts/2026-01-31/agents/work-tree/followup_evidence_gap_report.yaml
+  - scripts/2026-01-31/agents/work-tree/phase7_completion_report.yaml
+summary:
+  draft_coherent: true
+  gaps_enumerated: true
+  followup_ready_without_additional_phase: false
+next_phase:
+  recommended: phase_8_revision_or_parallel_execution
+  reason: additional trace coverage requires new evidence outside frozen artifacts
