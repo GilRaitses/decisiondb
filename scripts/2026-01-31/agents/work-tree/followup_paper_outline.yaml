@@ -1,0 +1,20 @@
+phase: 6
+artifact: followup_paper_outline
+date: "2026-02-01"
+status: outline_only
+separation_policy:
+  primary_submission_unchanged: true
+  no_claims_in_primary_modified: true
+outline_sections:
+  - section_id: F1
+    title: Motivation and scope boundary
+    notes: Follow-up scope is separate from primary submission and does not alter Phase 5 claims.
+  - section_id: F2
+    title: Trace coverage expansion plan
+    notes: Expansion plan refers to Phase 4 trace structure and preserves existing invariants.
+  - section_id: F3
+    title: Observables and boundary visibility
+    notes: Observables remain those defined in observables_map.yaml without new terms.
+  - section_id: F4
+    title: Open questions and limitations
+    notes: Open questions are listed without adding new claims or mechanisms.

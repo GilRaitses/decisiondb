@@ -1,0 +1,26 @@
+phase: 6
+artifact: followup_claim_seeds
+date: "2026-02-01"
+status: placeholder_only
+seed_policy:
+  no_new_claims_in_phase6: true
+  seeds_reference_existing_claims_only: true
+seeds:
+  - seed_id: S1
+    source_claim_id: PC1
+    purpose: traceability_extension
+  - seed_id: S2
+    source_claim_id: PC2
+    purpose: traceability_extension
+  - seed_id: S3
+    source_claim_id: PC3
+    purpose: trace_coverage_extension
+  - seed_id: S4
+    source_claim_id: PC4
+    purpose: boundary_visibility_extension
+  - seed_id: S5
+    source_claim_id: TC4
+    purpose: cross_context_trace_extension
+  - seed_id: S6
+    source_claim_id: TC5
+    purpose: decision_context_trace_extension
