@@ -1,0 +1,67 @@
+phase: phase_7
+name: followup_execution
+status: authorized_pending_start
+depends_on:
+  - phase_6_submission_bundle_frozen
+
+intent:
+  Execute the first follow-up paper using only claim seeds and outlines
+  produced in Phase 6, without modifying or extending submitted claims.
+
+scope:
+  include:
+    - followup_paper_outline.yaml
+    - followup_claim_seeds.yaml
+    - phase5_hardened_claims.yaml
+    - phase4_trace_artifacts
+  exclude:
+    - changes to Phase 1–6 manuscripts
+    - new empirical claims
+    - new figures requiring data not already materialized
+
+objectives:
+  - Expand followup_paper_outline into a full draft manuscript
+  - Map each section explicitly to existing claim seeds
+  - Identify which claims require additional evidence versus exposition only
+  - Produce a submission-ready draft or a clearly scoped gap report
+
+deliverables:
+  required:
+    - agents/work-tree/followup_manuscript_draft.tex
+    - agents/work-tree/followup_claim_to_section_map.yaml
+    - agents/work-tree/followup_evidence_gap_report.yaml
+    - agents/work-tree/phase7_completion_report.yaml
+  optional:
+    - agents/work-tree/followup_figures_manifest.yaml
+
+guardrails:
+  - Do not revise, reinterpret, or restate Phase 6 claims
+  - Do not introduce new terminology that reframes alignment scope
+  - Do not add citations that imply dependency on unpublished results
+  - Do not create new datasets, simulations, or traces
+  - Treat Phase 6 submission as immutable
+
+execution_steps:
+  - Load followup_paper_outline.yaml as structural skeleton
+  - For each section, bind text to followup_claim_seeds.yaml entries
+  - Mark any section that cannot be completed without new evidence
+  - Produce draft text in neutral academic register
+  - Record all decisions and omissions explicitly in gap report
+
+validation:
+  checks:
+    - every section maps to at least one existing claim seed
+    - no claim appears that is absent from Phase 5 or Phase 6 artifacts
+    - language does not weaken or extend original scope
+  failure_conditions:
+    - draft introduces new claims
+    - draft depends on future experimental results
+    - draft alters interpretation of submitted work
+
+handoff_criteria:
+  success:
+    - draft is internally coherent
+    - all gaps are explicitly enumerated
+    - follow-up paper can be scheduled without revisiting Phase 6
+  next_phase:
+    - phase_8_revision_or_parallel_execution
