@@ -1,0 +1,49 @@
+phase: 2
+artifact: reuse_invariants
+date: "2026-02-01"
+source_phase: phase_1_5
+source_artifacts:
+  - id: fig1_canonical_schematic
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+  - id: fig2_primary_sweep
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+  - id: fig3_identity_persistence
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+  - id: fig4_boundary_fracture
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+invariants:
+  decision_context:
+    - id: identity_defined_by_path_nodes
+      invariant: Decision identity equality is defined by exact path_nodes sequence equality.
+      evidence:
+        - fig2_primary_sweep.decision_label_rule.method
+    - id: identity_depends_on_equivalence_policy
+      invariant: Equivalence policy is a required input to decision identity assignment.
+      evidence:
+        - fig1_canonical_schematic.links.policy_to_identity
+    - id: decision_map_inputs_fixed
+      invariant: Decision map depends only on representation and decision identity.
+      evidence:
+        - fig1_canonical_schematic.links.representation_to_map
+        - fig1_canonical_schematic.links.identity_to_map
+  abstraction_level:
+    - id: single_representation_stage
+      invariant: Representation is a single stage in the canonical mapping.
+      evidence:
+        - fig1_canonical_schematic.entities.representation
+  task_framing:
+    - id: framing_tied_to_identity_label
+      invariant: Task framing must preserve the identity label for reuse to remain interpretable.
+      evidence:
+        - fig2_primary_sweep.decision_labels
+        - fig3_identity_persistence.regions
+  input_regime:
+    - id: identity_persists_within_regions
+      invariant: Within each identity persistence region, the decision label is constant.
+      evidence:
+        - fig3_identity_persistence.regions
+    - id: boundary_crossing_breaks_identity
+      invariant: A boundary with route_changed or edge_order_changed true breaks identity persistence.
+      evidence:
+        - fig4_boundary_fracture.boundaries
+        - fig2_primary_sweep.sweeps
