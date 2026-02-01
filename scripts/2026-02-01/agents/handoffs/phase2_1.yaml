@@ -1,0 +1,83 @@
+phase: phase_2_1 
+report_type: completion_report
+status: draft
+
+summary:
+  one_sentence_outcome: >
+    Phase 2_1 grounded Phase 1.5 context-compatibility logic in frozen PAX
+    reuse paths without modifying model behavior or introducing new metrics.
+
+inputs_consumed:
+  phase1_5_artifacts:
+    - path: scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml
+      used_for: abstract context compatibility reference
+  frozen_system_artifacts:
+    - path: scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+      used_for: authoritative path index
+    - path: scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+      used_for: component boundaries and data flow
+    - path: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      used_for: metric reuse identification
+    - path: scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml
+      used_for: upstream dependency tracing
+    - path: scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml
+      used_for: scope and immutability enforcement
+
+outputs_produced:
+  required:
+    - path: scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+      description: mapping from abstract context fields to concrete PAX variables
+    - path: scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+      description: interpretation notes linking reuse paths to compatibility checks
+    - path: scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml
+      description: enumerated missing evidence required for empirical validation
+  optional: []
+
+context_binding_summary:
+  bound_fields:
+    - abstract_field: ""
+      pax_variable: ""
+      decision_stage: ""
+      source_file: ""
+  unbound_fields:
+    - abstract_field: ""
+      reason: ""
+
+reuse_alignment_findings:
+  confirmed_safe_reuse:
+    - reuse_path_id: ""
+      justification: ""
+  flagged_incompatibilities:
+    - reuse_path_id: ""
+      incompatibility_type: ""
+      triggering_context_mismatch: ""
+
+evidence_gaps:
+  present_but_external:
+    - description: ""
+      external_location: ""
+  not_collected:
+    - description: ""
+      impact_on_claims: ""
+
+non_actions_confirmed:
+  - no_metrics_recomputed: true
+  - no_models_modified: true
+  - no_new_evaluation_added: true
+
+validation_checks:
+  path_consistency: pass
+  symbol_consistency: pass
+  scope_constraints_respected: pass
+  readlints: pass
+
+handoff_recommendation:
+  next_phase: phase_3
+  rationale: >
+    Phase 2 established a concrete grounding of context compatibility in
+    system behavior, enabling trace-based walkthroughs without requiring
+    new data collection.
+
+sign_off:
+  agent_id: ""
+  timestamp: ""
