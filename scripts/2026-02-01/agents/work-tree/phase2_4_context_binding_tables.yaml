@@ -1,0 +1,68 @@
+phase: phase_2_4
+artifact: phase2_4_context_binding_tables
+
+required_context_fields:
+  - task_id
+  - abstraction_level
+  - input_regime
+  - assumption_set
+  - downstream_task
+
+bindings:
+  - slice_id: camera_stress_scores_to_route_selection
+    fields:
+      - field: task_id
+        status: missing
+        missing_reason: no task identifier in reuse_paths or architecture_map
+        evidence_paths:
+          - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+          - scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+      - field: abstraction_level
+        status: missing
+        missing_reason: no abstraction level field in Phase 2 artifacts
+        evidence_paths:
+          - scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+      - field: input_regime
+        status: mapped
+        pax_source_path: /workspace/data/stress_scores_updated.json
+        evidence_paths:
+          - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      - field: assumption_set
+        status: mapped
+        pax_source_path: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+        evidence_paths:
+          - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      - field: downstream_task
+        status: mapped
+        pax_source_path: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+        evidence_paths:
+          - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+
+  - slice_id: weighted_zone_stress_to_route_selection
+    fields:
+      - field: task_id
+        status: missing
+        missing_reason: no task identifier in reuse_paths or architecture_map
+        evidence_paths:
+          - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+          - scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+      - field: abstraction_level
+        status: missing
+        missing_reason: no abstraction level field in Phase 2 artifacts
+        evidence_paths:
+          - scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+      - field: input_regime
+        status: mapped
+        pax_source_path: src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress
+        evidence_paths:
+          - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      - field: assumption_set
+        status: mapped
+        pax_source_path: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+        evidence_paths:
+          - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      - field: downstream_task
+        status: mapped
+        pax_source_path: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+        evidence_paths:
+          - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml

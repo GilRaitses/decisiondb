@@ -96,6 +96,41 @@ files:
     exists: true
     evidence:
       - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/handoffs/phase2-4.yaml"
+    relative_path: "scripts/2026-02-01/agents/handoffs/phase2-4.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_4_selected_reuse_slices.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_4_selected_reuse_slices.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_4_context_binding_tables.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_4_context_binding_tables.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_4_compatibility_evaluations.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_4_compatibility_evaluations.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_4_cross_slice_comparison.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_4_cross_slice_comparison.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_4_completion_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_4_completion_report.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+    relative_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
   - path: "/workspace/scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
     relative_path: "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
     exists: true

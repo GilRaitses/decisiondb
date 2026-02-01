@@ -1,0 +1,40 @@
+phase: phase_2_4
+report_type: completion_report
+status: complete_with_gaps
+
+summary:
+  outcome_consistency: consistent
+  basis: missing_context_only
+  additional_slices_required: 2
+  additional_slices_found: 1
+
+outputs:
+  - scripts/2026-02-01/agents/work-tree/phase2_4_selected_reuse_slices.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_4_context_binding_tables.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_4_compatibility_evaluations.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_4_cross_slice_comparison.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_4_completion_report.yaml
+
+scope_attestations:
+  - no_rule_modification: true
+  - no_context_schema_change: true
+  - no_metric_computation: true
+  - no_calibration: true
+
+validation_checks:
+  no_new_context_fields: pass
+  outcomes_from_missing_context_only: pass
+  bindings_consistent_with_phase2_3: pass
+  differences_explained_by_context: pass
+  outputs_registered_in_inventory: pass
+  readlints: pass
+
+gaps:
+  - description: only one additional reuse slice available in reuse_paths.yaml
+    impact: additional_slices_requirement_unmet
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+
+signoff:
+  agent_signature: cursor-cloud-agent
+  timestamp: "2026-02-01T19:11:30Z"

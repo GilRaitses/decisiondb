@@ -1,0 +1,22 @@
+phase: phase_2_4
+artifact: phase2_4_selected_reuse_slices
+
+selection_basis: reuse_paths.yaml entries with Phase 2-3 anchor slice
+
+selected_slices:
+  - slice_id: camera_stress_scores_to_route_selection
+    role: anchor
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml
+  - slice_id: weighted_zone_stress_to_route_selection
+    role: additional
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+
+additional_required_count: 2
+additional_found_count: 1
+selection_gap:
+  status: unmet_additional_count
+  reason: reuse_paths.yaml lists two reuse_id entries total
+  evidence_paths:
+    - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
