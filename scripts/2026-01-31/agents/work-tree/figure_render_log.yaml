@@ -1,0 +1,37 @@
+phase: 1.5
+artifact: figure_render_log
+date: "2026-02-01"
+render_method: manual_svg_from_yaml_spec
+style_constraints:
+  fixed_dimensions: true
+  stylistic_embellishment: none
+  palette: black_and_white
+figures:
+  - figure_id: 1
+    artifact_id: fig1_canonical_schematic
+    spec_path: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+    output_path: scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+    dimensions:
+      width: 900
+      height: 210
+  - figure_id: 2
+    artifact_id: fig2_primary_sweep
+    spec_path: scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+    output_path: scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+    dimensions:
+      width: 700
+      height: 180
+  - figure_id: 3
+    artifact_id: fig3_identity_persistence
+    spec_path: scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+    output_path: scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+    dimensions:
+      width: 640
+      height: 160
+  - figure_id: 4
+    artifact_id: fig4_boundary_fracture
+    spec_path: scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+    output_path: scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+    dimensions:
+      width: 640
+      height: 160

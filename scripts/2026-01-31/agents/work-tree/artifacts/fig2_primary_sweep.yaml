@@ -1,0 +1,182 @@
+phase: 1.5
+artifact_id: fig2_primary_sweep
+figure_id: 2
+figure_name: Primary Representational Sweep
+source_map: scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+source_files:
+  - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+  - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+decision_label_rule:
+  method: path_nodes_sequence_equality
+  label_assignment: first_seen_order
+decision_labels:
+  - label: A
+    path_nodes:
+      - 85
+      - 176
+      - 463
+      - 14
+      - 404
+      - 76
+      - 406
+      - 407
+      - 223
+      - 200
+      - 311
+      - 310
+      - 314
+      - 322
+      - 323
+      - 50
+  - label: B
+    path_nodes:
+      - 85
+      - 411
+      - 419
+      - 422
+      - 332
+      - 204
+      - 500
+      - 369
+      - 79
+      - 402
+      - 473
+      - 502
+      - 501
+      - 50
+sweeps:
+  - sweep_id: neighbor_weight
+    parameter: neighbor_weight
+    fixed_parameters:
+      second_order_weight: 0.25
+    variants:
+      - variant_id: neighbor_weight_baseline
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+        decision_label: A
+        path_nodes:
+          - 85
+          - 176
+          - 463
+          - 14
+          - 404
+          - 76
+          - 406
+          - 407
+          - 223
+          - 200
+          - 311
+          - 310
+          - 314
+          - 322
+          - 323
+          - 50
+      - variant_id: neighbor_weight_perturbed
+        neighbor_weight: 1.0
+        second_order_weight: 0.25
+        decision_label: A
+        path_nodes:
+          - 85
+          - 176
+          - 463
+          - 14
+          - 404
+          - 76
+          - 406
+          - 407
+          - 223
+          - 200
+          - 311
+          - 310
+          - 314
+          - 322
+          - 323
+          - 50
+  - sweep_id: second_order_weight
+    parameter: second_order_weight
+    fixed_parameters:
+      neighbor_weight: 0.5
+    variants:
+      - variant_id: second_order_weight_baseline
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+        decision_label: A
+        path_nodes:
+          - 85
+          - 176
+          - 463
+          - 14
+          - 404
+          - 76
+          - 406
+          - 407
+          - 223
+          - 200
+          - 311
+          - 310
+          - 314
+          - 322
+          - 323
+          - 50
+      - variant_id: second_order_weight_perturbed
+        neighbor_weight: 0.5
+        second_order_weight: 0.5
+        decision_label: B
+        path_nodes:
+          - 85
+          - 411
+          - 419
+          - 422
+          - 332
+          - 204
+          - 500
+          - 369
+          - 79
+          - 402
+          - 473
+          - 502
+          - 501
+          - 50
+render_spec:
+  canvas:
+    width: 700
+    height: 180
+    background: "#ffffff"
+  style:
+    stroke: "#000000"
+    fill: "#ffffff"
+    stroke_width: 1
+    font_family: Arial
+    font_size: 12
+  table:
+    origin:
+      x: 20
+      y: 20
+    column_headers:
+      - sweep_variant
+      - neighbor_weight
+      - second_order_weight
+      - decision_label
+    column_widths:
+      - 200
+      - 130
+      - 170
+      - 120
+    row_height: 24
+    rows:
+      - - neighbor_weight baseline
+        - "0.5"
+        - "0.25"
+        - A
+      - - neighbor_weight perturbed
+        - "1.0"
+        - "0.25"
+        - A
+      - - second_order_weight baseline
+        - "0.5"
+        - "0.25"
+        - A
+      - - second_order_weight perturbed
+        - "0.5"
+        - "0.5"
+        - B

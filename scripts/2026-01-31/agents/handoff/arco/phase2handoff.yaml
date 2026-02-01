@@ -1,0 +1,88 @@
+phase: phase_2
+agent_name: TBD
+date: 2026-01-31
+source_phase: phase_1_5
+authorization:
+  granted_by: phase1_5_completion_report.yaml
+  scope: formalization_and_analysis_only
+
+objective:
+  Formalize compatibility conditions and reuse criteria implied by Phase 1.5 artifacts,
+  using the existing figures as fixed anchors. Phase 2 converts the schematic logic
+  into explicit decision rules, invariants, and failure boundaries without introducing
+  new system components or implementation commitments.
+
+inputs:
+  required:
+    - scripts/2026-01-31/agents/work-tree/artifacts_manifest.yaml
+    - scripts/2026-01-31/agents/work-tree/figure_inventory.yaml
+    - scripts/2026-01-31/agents/work-tree/validation_report.yaml
+    - scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+    - scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+    - scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+    - scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+    - scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+
+constraints:
+  hard:
+    - Do not modify or regenerate Phase 1.5 figures or specs.
+    - Do not introduce training, optimization, or reward-related concepts.
+    - Do not propose new infrastructure, storage systems, or APIs.
+    - Do not restate Phase 1 concepts; build directly on them.
+  soft:
+    - Keep all outputs interpretable as analysis artifacts, not product designs.
+    - Prefer invariants, conditions, and interfaces over narratives.
+
+tasks:
+  - name: compatibility_formalization
+    description: >
+      Define explicit compatibility conditions under which confidence may be reused
+      across tasks and timescales, grounded in the decision context elements shown in
+      Phase 1.5 figures.
+    outputs:
+      - scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+
+  - name: reuse_invariants
+    description: >
+      Identify invariants that must hold for confidence reuse to remain interpretable.
+      Express these as logical or structural constraints tied to abstraction level,
+      task framing, and input regime.
+    outputs:
+      - scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml
+
+  - name: boundary_characterization
+    description: >
+      Formalize boundary and fracture conditions where reuse fails, corresponding
+      directly to fig4_boundary_fracture.
+    outputs:
+      - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+
+  - name: observables_mapping
+    description: >
+      Specify what becomes observable at each decision boundary and which violations
+      surface when compatibility checks fail.
+    outputs:
+      - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+
+deliverables:
+  required:
+    - compatibility_conditions.yaml
+    - reuse_invariants.yaml
+    - reuse_failure_conditions.yaml
+    - observables_map.yaml
+  optional:
+    - phase2_summary.yaml
+
+storage_rules:
+  notes: scripts/2026-01-31/agents/notes/
+  work_tree: scripts/2026-01-31/agents/work-tree/
+  format: yaml_only
+
+success_criteria:
+  - All outputs reference Phase 1.5 artifacts explicitly.
+  - No new diagrams are required to understand the analysis.
+  - A reviewer can determine reuse admissibility from the written conditions alone.
+
+handoff_after_phase:
+  next_phase: phase_2_review
+  authorization_condition: all_required_deliverables_present

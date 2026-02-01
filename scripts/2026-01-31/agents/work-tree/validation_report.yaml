@@ -1,0 +1,78 @@
+phase: 1.5
+artifact: validation_report
+date: "2026-02-01"
+checksum_method: sha256
+inputs:
+  - path: scripts/2026-01-31/agents/notes/phase0_index.yaml
+    exists: true
+    sha256: 9677702fbb73d8435f7ab83f9fdc0e9f233b4ebd87eb0658803d21ebf4d80ce5
+    schema_check:
+      status: pass
+      required_keys:
+        - phase
+        - agent
+        - role
+        - repo_root
+        - head_commit
+        - generated_at
+        - files
+        - entrypoints
+      observed_keys:
+        - phase
+        - agent
+        - role
+        - repo_root
+        - head_commit
+        - generated_at
+        - files
+        - entrypoints
+  - path: scripts/2026-01-31/agents/notes/phase1_validation_checklist_eval.yaml
+    exists: true
+    sha256: 61c06e39b42f70f361f7f994090b721390c2390689b90d34206b334e6e863190
+    schema_check:
+      status: pass
+      required_keys:
+        - phase
+        - artifact
+        - results
+        - phase_gate
+        - handoff_decision
+      observed_keys:
+        - phase
+        - artifact
+        - results
+        - phase_gate
+        - handoff_decision
+  - path: scripts/2026-01-31/agents/notes/phase1_toy_model_requirements.yaml
+    exists: true
+    sha256: 1f8925fa5d1d553a6083d8d39c69ca023f9eaab4e435b5c4db0b2dc827585216
+    schema_check:
+      status: pass
+      required_keys:
+        - phase
+        - manifest
+        - figures_requiring_toy_artifacts
+        - figures_not_requiring_toy_artifacts
+      observed_keys:
+        - phase
+        - manifest
+        - figures_requiring_toy_artifacts
+        - figures_not_requiring_toy_artifacts
+  - path: scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+    exists: true
+    sha256: 0d9b0ed99e14f050a33fc448e6687ac4462aaf3caecfe0f32741bf94744ae0d8
+    schema_check:
+      status: pass
+      required_keys:
+        - phase
+        - manifest
+        - source_index
+        - toy_artifacts
+      observed_keys:
+        - phase
+        - manifest
+        - source_index
+        - toy_artifacts
+preconditions:
+  no_root_agents_dir: true
+  work_root: scripts/2026-01-31/agents/work-tree/
