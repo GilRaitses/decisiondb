@@ -1,0 +1,71 @@
+phase: 1
+phase_name: toy_model_materialization
+agent: Nori
+date: "2026-02-01"
+manifest: reusable_artifacts
+source_index: scripts/2026-01-31/agents/notes/phase0_index.yaml
+artifacts:
+  - id: replay_verification_exec_report
+    path: scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+    type: exec_report
+    figure_targets:
+      - figure_id: 5
+        figure_name: Reproducibility Replay Verification
+    reuse_mode: direct_table
+    fields_used:
+      - decision_verified.decision_id
+      - policy_used.policy_id
+      - hashes_compared.payload_hash
+      - hashes_compared.policy_id_hash
+      - hashes_compared.decision_id_hash
+      - database_state_check.counts
+      - verdict
+  - id: replay_verification_work_tree
+    path: scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+    type: work_tree_log
+    figure_targets:
+      - figure_id: 5
+        figure_name: Reproducibility Replay Verification
+    reuse_mode: direct_steps_list
+    fields_used:
+      - equivalence_policy
+      - verification_steps
+      - operations_not_performed
+  - id: neighbor_weight_variation_results
+    path: scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+    type: results_json
+    figure_targets:
+      - figure_id: 2
+        figure_name: Primary Representational Sweep
+      - figure_id: 3
+        figure_name: Identity Persistence Regions
+      - figure_id: 4
+        figure_name: Boundary and Fracture Localization
+    reuse_mode: direct_values
+    fields_used:
+      - metadata.neighbor_weight_baseline
+      - metadata.neighbor_weight_perturbed
+      - metadata.second_order_weight
+      - baseline.path_nodes
+      - perturbed.path_nodes
+      - route_changed
+      - edge_order_changed
+  - id: second_order_weight_variation_results
+    path: scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+    type: results_json
+    figure_targets:
+      - figure_id: 2
+        figure_name: Primary Representational Sweep
+      - figure_id: 3
+        figure_name: Identity Persistence Regions
+      - figure_id: 4
+        figure_name: Boundary and Fracture Localization
+    reuse_mode: direct_values
+    fields_used:
+      - metadata.second_order_weight_baseline
+      - metadata.second_order_weight_perturbed
+      - metadata.neighbor_weight
+      - baseline.path_nodes
+      - perturbed.path_nodes
+      - route_changed
+      - edge_order_changed

@@ -1,0 +1,75 @@
+phase: 1
+phase_name: toy_model_materialization
+agent: Nori
+date: "2026-02-01"
+manifest: transformation_map
+source_index: scripts/2026-01-31/agents/notes/phase0_index.yaml
+toy_artifacts:
+  - id: fig1_canonical_schematic
+    figure_id: 1
+    figure_name: Canonical Decision-Valued Mapping Schematic
+    source_files:
+      - scripts/2026-01-23/manuscript/sections/core_object.tex
+      - scripts/2026-01-23/manuscript/sections/protocol.tex
+      - scripts/2026-01-23/manuscript/sections/system_design.tex
+      - docs/DecisionDB_reference_architecture.md
+    transformation_steps:
+      - step: 1
+        action: Extract entities and relations defined for snapshot, representation, engine run, equivalence policy, decision identity, and decision map.
+      - step: 2
+        action: Draft a schematic with nodes for the entities and links in the order snapshot, representation, engine run, raw output, equivalence policy, decision identity, decision map.
+      - step: 3
+        action: Label each link with the artifact type described in the source text.
+    output:
+      type: diagram
+      intent: Canonical decision-valued mapping schematic for Figure 1.
+  - id: fig2_primary_sweep
+    figure_id: 2
+    figure_name: Primary Representational Sweep
+    source_files:
+      - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+      - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+    transformation_steps:
+      - step: 1
+        action: For each results file, read baseline and perturbed path_nodes with the associated weight values.
+      - step: 2
+        action: Assign a decision identity label using exact path_nodes sequence equality only.
+      - step: 3
+        action: Order variants by the recorded weight change to form a minimal sweep axis.
+      - step: 4
+        action: Render a small grid or table with one row per variant and a symbol per decision identity label.
+    output:
+      type: table_or_grid
+      intent: Minimal representational sweep for Figure 2.
+  - id: fig3_identity_persistence
+    figure_id: 3
+    figure_name: Identity Persistence Regions
+    source_files:
+      - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+      - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+    transformation_steps:
+      - step: 1
+        action: Start from the ordered sweep table produced for Figure 2.
+      - step: 2
+        action: Group consecutive variants with identical decision identity labels.
+      - step: 3
+        action: Render grouped variants as contiguous regions with labels that match Figure 2.
+    output:
+      type: region_strip
+      intent: Identity persistence regions derived from Figure 2.
+  - id: fig4_boundary_fracture
+    figure_id: 4
+    figure_name: Boundary and Fracture Localization
+    source_files:
+      - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+      - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+    transformation_steps:
+      - step: 1
+        action: Read route_changed and edge_order_changed flags for each weight variation.
+      - step: 2
+        action: Mark boundaries at the weight transitions where route_changed is true.
+      - step: 3
+        action: Annotate boundaries with the baseline and perturbed weight values only.
+    output:
+      type: annotated_strip_or_table
+      intent: Boundary and fracture localization derived from Figure 2.
