@@ -1,0 +1,312 @@
+handoff_id: phase_crosslineage_guardrails_failuremode_review
+agent_name: suit
+created_at_local: "2026-02-01"
+repo_scope:
+  repo_name: decisiondb
+  allowed_paths:
+    - ".githooks/"
+    - ".github/"
+    - "scripts/2026-01-31/agents/tools/"
+    - "scripts/2026-01-31/agents/notes/"
+    - "scripts/2026-01-31/agents/work-tree/"
+    - "phase_crosslineage_map.yaml"
+    - "scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml"
+  forbidden_actions:
+    - "edit:phase_crosslineage_map.yaml"
+    - "edit:scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml"
+    - "disable pre-commit hook"
+    - "weaken CI invariant checks"
+    - "change override sentinel string"
+    - "rename override file path"
+guardrails:
+  invariants:
+    map_file_path: "phase_crosslineage_map.yaml"
+    map_report_path: "scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml"
+    override_file_path: ".github/override/phase_crosslineage_map_edit.override"
+    override_file_required_contents: "ALLOW_MAP_EDIT_OVERRIDE"
+  audit_log_requirements:
+    audit_root: "scripts/2026-01-31/agents/work-tree/audit/"
+    audit_file: "scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log"
+    format_rules:
+      - "capture raw console output"
+      - "prefix each command with a comment line '## CMD:' in the log"
+      - "do not redact paths"
+      - "do not paraphrase outputs"
+      - "append-only log for this run"
+deliverables:
+  - "scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log"
+  - "scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.summary.yaml"
+  - "scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.findings.yaml"
+  - "scripts/2026-01-31/agents/work-tree/audit/guardrails_merge_readiness.yaml"
+objectives:
+  primary:
+    - "Run a failure mode review of crosslineage guardrails, focused on bypass risk and false positives"
+    - "Verify pre-commit and CI enforce the same override mechanism"
+    - "Verify map edit detection and diff base correctness"
+    - "Verify abstract lint behavior under empty, missing, and large-tree conditions"
+    - "Prepare merge readiness decision and evidence bundle"
+  secondary:
+    - "If any defect is found, propose the smallest patch that preserves invariants and improves determinism"
+    - "Keep changes minimal and localized"
+procedure:
+  - step_id: 00_prepare_audit
+    intent: "Start audit logging and freeze run context"
+    commands:
+      - "mkdir -p scripts/2026-01-31/agents/work-tree/audit"
+      - "date"
+      - "git rev-parse --show-toplevel"
+      - "git status -sb"
+      - "git remote -v"
+      - "git branch --show-current"
+      - "git log -n 3 --oneline"
+    evidence_expected:
+      - "audit directory exists"
+      - "repo root confirmed"
+      - "current branch and recent commits recorded"
+    audit_logging:
+      required: true
+  - step_id: 01_identify_guardrails_files
+    intent: "Locate and print the exact files under review"
+    commands:
+      - "ls -la phase_crosslineage_map.yaml"
+      - "ls -la scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml"
+      - "ls -la .githooks || true"
+      - "find .githooks -maxdepth 2 -type f -print || true"
+      - "find .github -maxdepth 4 -type f -print"
+      - "ls -la scripts/2026-01-31/agents/tools || true"
+      - "find scripts/2026-01-31/agents/tools -maxdepth 2 -type f -print || true"
+    evidence_expected:
+      - "map file exists"
+      - "alignment report exists"
+      - "hook files discovered"
+      - "CI workflow files discovered"
+    audit_logging:
+      required: true
+  - step_id: 02_precommit_symmetry_check
+    intent: "Confirm pre-commit enforces the same override rule as CI"
+    commands:
+      - "git config --get core.hooksPath || true"
+      - "ls -la .githooks || true"
+      - "sed -n '1,220p' .githooks/pre-commit"
+      - "grep -n \"phase_crosslineage_map.yaml\" -n .githooks/pre-commit || true"
+      - "grep -n \"phase_crosslineage_map_edit.override\" -n .githooks/pre-commit || true"
+      - "grep -n \"ALLOW_MAP_EDIT_OVERRIDE\" -n .githooks/pre-commit || true"
+    checks:
+      - check_id: hooks_path_set
+        pass_condition: "core.hooksPath equals .githooks"
+      - check_id: precommit_targets_map
+        pass_condition: "pre-commit explicitly matches map_file_path"
+      - check_id: precommit_requires_override_file
+        pass_condition: "pre-commit requires override file path exactly"
+      - check_id: precommit_requires_exact_sentinel
+        pass_condition: "pre-commit checks file contents equals sentinel exactly"
+      - check_id: precommit_scope_limited
+        pass_condition: "pre-commit does not block unrelated commits"
+    audit_logging:
+      required: true
+  - step_id: 03_ci_symmetry_check
+    intent: "Confirm CI uses the same override rule and blocks map edits deterministically"
+    commands:
+      - "find .github/workflows -maxdepth 1 -type f -print"
+      - "for f in .github/workflows/*.yml .github/workflows/*.yaml; do [ -f \"$f\" ] && echo \"--- $f\" && sed -n '1,260p' \"$f\"; done"
+      - "grep -RIn \"phase_crosslineage_map.yaml\" .github/workflows || true"
+      - "grep -RIn \"phase_crosslineage_map_edit.override\" .github/workflows || true"
+      - "grep -RIn \"ALLOW_MAP_EDIT_OVERRIDE\" .github/workflows || true"
+      - "grep -RIn \"pull_request\" .github/workflows || true"
+      - "grep -RIn \"push\" .github/workflows || true"
+    checks:
+      - check_id: ci_runs_on_pr
+        pass_condition: "workflow triggers on pull_request"
+      - check_id: ci_runs_on_push
+        pass_condition: "workflow triggers on push to main or protected branches"
+      - check_id: ci_requires_override_file
+        pass_condition: "workflow checks override file path exactly"
+      - check_id: ci_requires_exact_sentinel
+        pass_condition: "workflow checks file contents equals sentinel exactly"
+      - check_id: ci_error_message_actionable
+        pass_condition: "workflow failure message points to exact override file path and sentinel"
+    audit_logging:
+      required: true
+  - step_id: 04_diff_base_correctness
+    intent: "Verify map edit detection compares against the correct base ref under PR and push"
+    commands:
+      - "git show -p --stat -- .github/workflows || true"
+      - "grep -RIn \"git diff\" .githooks/pre-commit .github/workflows scripts/2026-01-31/agents/tools || true"
+      - "grep -RIn \"origin/main\\|HEAD\\^\\|github.base_ref\\|GITHUB_BASE_REF\\|GITHUB_SHA\\|merge-base\" .github/workflows .githooks/pre-commit scripts/2026-01-31/agents/tools || true"
+    checks:
+      - check_id: pr_base_ref_used
+        pass_condition: "PR path uses base ref semantics, not HEAD^ heuristics"
+      - check_id: push_base_ref_safe
+        pass_condition: "push path uses merge-base against main or compares against previous SHA in a safe way"
+      - check_id: squash_merge_safe
+        pass_condition: "squash merges still detect map edits"
+    audit_logging:
+      required: true
+  - step_id: 05_override_mechanism_failure_modes
+    intent: "Test the override mechanism as a failure mode matrix without committing any map edits"
+    constraints:
+      - "Do not modify map file"
+      - "If you need a test, use a temporary branch and revert before leaving the step"
+    subtests:
+      - subtest_id: override_absent_behavior
+        commands:
+          - "rm -f .github/override/phase_crosslineage_map_edit.override || true"
+          - "mkdir -p .github/override"
+          - "printf \"\" > .github/override/.keep_override_dir"
+          - "git status -sb"
+      - subtest_id: override_wrong_path
+        commands:
+          - "printf \"ALLOW_MAP_EDIT_OVERRIDE\" > .github/override/phase_crosslineage_map_edit.override.TMP_WRONG"
+          - "ls -la .github/override"
+      - subtest_id: override_wrong_contents
+        commands:
+          - "printf \"ALLOW_MAP_EDIT_OVERRIDE\\n\" > .github/override/phase_crosslineage_map_edit.override.WRONG_NEWLINE"
+          - "printf \"ALLOW_MAP_EDIT_OVERRID\" > .github/override/phase_crosslineage_map_edit.override.WRONG_TRUNC"
+          - "ls -la .github/override"
+      - subtest_id: override_exact_contents
+        commands:
+          - "printf \"ALLOW_MAP_EDIT_OVERRIDE\" > .github/override/phase_crosslineage_map_edit.override"
+          - "python -c \"p=open('.github/override/phase_crosslineage_map_edit.override','rb').read(); print(p);\""
+          - "ls -la .github/override/phase_crosslineage_map_edit.override"
+    evidence_expected:
+      - "agent records whether hooks and CI checks treat newline as mismatch"
+      - "agent records whether wrong path fails as expected"
+      - "agent records whether exact content passes the guard condition check logic"
+    audit_logging:
+      required: true
+  - step_id: 06_abstract_lint_failure_modes
+    intent: "Validate abstract lint behavior for empty, missing map, and large directory scan"
+    commands:
+      - "python --version || true"
+      - "ls -la scripts/2026-01-31/agents/tools || true"
+      - "find scripts/2026-01-31/agents/tools -maxdepth 2 -type f -print || true"
+      - "grep -RIn \"abstract\" scripts/2026-01-31/agents/tools || true"
+      - "python scripts/2026-01-31/agents/tools/abstract_lint.py --help || true"
+    subtests:
+      - subtest_id: no_abstract_files
+        commands:
+          - "mkdir -p /tmp/abstractlint_empty_dir"
+          - "python scripts/2026-01-31/agents/tools/abstract_lint.py /tmp/abstractlint_empty_dir || true"
+      - subtest_id: minimal_abstract_file
+        commands:
+          - "mkdir -p /tmp/abstractlint_one_dir"
+          - "printf \"Confidence becomes uninterpretable when it propagates across tasks.\" > /tmp/abstractlint_one_dir/abstract_test.txt"
+          - "python scripts/2026-01-31/agents/tools/abstract_lint.py /tmp/abstractlint_one_dir || true"
+      - subtest_id: missing_map_file_expected_fail
+        commands:
+          - "cp phase_crosslineage_map.yaml /tmp/phase_crosslineage_map.yaml.backup"
+          - "mv phase_crosslineage_map.yaml /tmp/phase_crosslineage_map.yaml.moved"
+          - "python scripts/2026-01-31/agents/tools/abstract_lint.py /tmp/abstractlint_one_dir || true"
+          - "mv /tmp/phase_crosslineage_map.yaml.moved phase_crosslineage_map.yaml"
+      - subtest_id: large_tree_guard
+        commands:
+          - "python scripts/2026-01-31/agents/tools/abstract_lint.py . || true"
+    checks:
+      - check_id: no_abstract_skips_cleanly
+        pass_condition: "no abstract files yields clean exit or explicit skip"
+      - check_id: missing_map_fails_loudly
+        pass_condition: "missing map file yields non-zero or explicit error"
+      - check_id: large_tree_runtime_reasonable
+        pass_condition: "scan does not take unexpectedly long and does not traverse huge artifacts blindly"
+    audit_logging:
+      required: true
+  - step_id: 07_readonly_mode_reality_check
+    intent: "Confirm read-only file mode does not create friction for normal work but signals intent"
+    commands:
+      - "ls -la phase_crosslineage_map.yaml"
+      - "python -c \"import os,stat; p='phase_crosslineage_map.yaml'; m=os.stat(p).st_mode; print(oct(m));\""
+      - "git status -sb"
+    checks:
+      - check_id: map_readonly_present
+        pass_condition: "map file is non-writable for user or has intended mode"
+      - check_id: git_tracked_mode_ok
+        pass_condition: "chmod does not create noisy diffs unless intended"
+    audit_logging:
+      required: true
+  - step_id: 08_merge_readiness_and_freeze_declaration_plan
+    intent: "Prepare the merge plan and institutional freeze statement, without executing merge unless authorized"
+    commands:
+      - "git status -sb"
+      - "git diff --stat"
+      - "git diff"
+      - "git log --oneline --decorate -n 10"
+    outputs:
+      merge_readiness_yaml_fields:
+        - "ready_to_merge: true|false"
+        - "blocking_issues: []"
+        - "nonblocking_notes: []"
+        - "recommended_merge_method: merge_commit|squash|rebase"
+        - "post_merge_freeze_message: string"
+        - "post_merge_tag_name: optional"
+    audit_logging:
+      required: true
+  - step_id: 09_cleanup_temp_override_files
+    intent: "Remove temporary override test files so no accidental override stays in tree"
+    commands:
+      - "rm -f .github/override/phase_crosslineage_map_edit.override.TMP_WRONG || true"
+      - "rm -f .github/override/phase_crosslineage_map_edit.override.WRONG_NEWLINE || true"
+      - "rm -f .github/override/phase_crosslineage_map_edit.override.WRONG_TRUNC || true"
+      - "rm -f .github/override/.keep_override_dir || true"
+      - "rm -f .github/override/phase_crosslineage_map_edit.override || true"
+      - "git status -sb"
+    audit_logging:
+      required: true
+summary_yaml_template:
+  path: "scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.summary.yaml"
+  fields:
+    run_context:
+      branch: ""
+      head_commit: ""
+      timestamp_start: ""
+      timestamp_end: ""
+    pass_fail:
+      precommit_symmetry: "pass|fail"
+      ci_symmetry: "pass|fail"
+      diff_base_correctness: "pass|fail"
+      override_mechanism: "pass|fail"
+      abstract_lint_behavior: "pass|fail"
+      readonly_signal: "pass|fail"
+    merge_readiness:
+      ready_to_merge: false
+      blocking_issues: []
+      recommended_fix: []
+      merge_recommendation: ""
+      freeze_declaration_text: ""
+findings_yaml_template:
+  path: "scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.findings.yaml"
+  fields:
+    - id: ""
+      severity: "blocker|warning|note"
+      area: "precommit|ci|diffbase|override|lint|permissions|docs"
+      description: ""
+      evidence_pointer: "console_log line range or command id"
+      recommended_action: ""
+merge_readiness_yaml_template:
+  path: "scripts/2026-01-31/agents/work-tree/audit/guardrails_merge_readiness.yaml"
+  fields:
+    merge_allowed: "true|false"
+    merge_preconditions: []
+    merge_method: ""
+    post_merge_steps:
+      - "declare map + report frozen"
+      - "protect main or require PR if available"
+      - "optional: tag freeze commit"
+    freeze_statement:
+      short: ""
+      long: ""
+completion_criteria:
+  - "Console log exists and contains outputs for every step"
+  - "Summary YAML filled with pass/fail for each category"
+  - "Findings YAML lists all issues with evidence pointers"
+  - "Merge readiness YAML declares merge_allowed with clear justification"
+  - "No edits to map or alignment report"
+  - "No lingering override file in tree after cleanup"
+authorization:
+  merge_execution:
+    allowed: false
+    note: "Agent prepares merge readiness only. User executes merge."
+  map_edit_override:
+    allowed: false
+    note: "Map edits remain disallowed during this handoff."
+cover_note_for_cloud_agent: |
+  Run the failure mode review exactly as specified in the YAML and capture raw console output into the required log path. Keep phase_crosslineage_map.yaml and the alignment report unchanged. Treat any mismatch between pre-commit and CI override logic as a blocker. End by producing the three YAML deliverables plus the console log, then stop without merging.

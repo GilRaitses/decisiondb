@@ -1,0 +1,61 @@
+phase: 2
+artifact: reuse_failure_conditions
+date: "2026-02-01"
+source_phase: phase_1_5
+source_artifacts:
+  - id: fig1_canonical_schematic
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+  - id: fig2_primary_sweep
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+  - id: fig3_identity_persistence
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+  - id: fig4_boundary_fracture
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+failure_logic:
+  rule: any_of
+  description: Confidence reuse fails when any failure condition holds.
+failure_conditions:
+  decision_context:
+    - id: equivalence_policy_changed
+      trigger: Equivalence policy used for decision identity is not the same as the source context.
+      evidence:
+        - fig1_canonical_schematic.links.policy_to_identity
+    - id: decision_identity_label_changed
+      trigger: Decision identity label differs between source and target contexts.
+      evidence:
+        - fig2_primary_sweep.decision_labels
+        - fig3_identity_persistence.regions
+  abstraction_level:
+    - id: representation_stage_changed
+      trigger: Representation stage differs from the canonical mapping.
+      evidence:
+        - fig1_canonical_schematic.entities.representation
+  task_framing:
+    - id: framing_remaps_identity
+      trigger: Task framing maps to a different decision identity label under the same equivalence rule.
+      evidence:
+        - fig2_primary_sweep.decision_label_rule
+        - fig2_primary_sweep.decision_labels
+  input_regime:
+    - id: boundary_route_changed
+      trigger: Transition shows route_changed true.
+      evidence:
+        - fig4_boundary_fracture.boundaries
+    - id: boundary_edge_order_changed
+      trigger: Transition shows edge_order_changed true.
+      evidence:
+        - fig4_boundary_fracture.boundaries
+    - id: outside_identity_region
+      trigger: Parameter value lies outside the identity persistence region for the label.
+      evidence:
+        - fig3_identity_persistence.regions
+boundary_examples:
+  - sweep_id: second_order_weight
+    baseline_value: 0.25
+    perturbed_value: 0.5
+    route_changed: true
+    edge_order_changed: true
+    observed_label_change: "A to B"
+    evidence:
+      - fig4_boundary_fracture.boundaries.second_order_weight
+      - fig2_primary_sweep.sweeps.second_order_weight

@@ -8,9 +8,24 @@ authorization:
 
 objective:
   Formalize compatibility conditions and reuse criteria implied by Phase 1.5 artifacts,
-  using the existing figures as fixed anchors. Phase 2 converts the schematic logic
-  into explicit decision rules, invariants, and failure boundaries without introducing
-  new system components or implementation commitments.
+  using the existing figures as fixed anchors. Phase 2 makes explicit the conditions
+  under which confidence reuse is admissible and the boundaries where reuse fails,
+  focused on decision context, abstraction level, task framing, and input regime.
+
+scope_intent:
+  summary: Formalize reuse admissibility and failure boundaries from fixed figures.
+  analytic_focus:
+    - decision_context
+    - abstraction_level
+    - task_framing
+    - input_regime
+  exclusions:
+    - capability_claims
+    - optimization
+    - calibration_procedures
+    - evaluation_tooling
+    - new_components
+    - new_diagrams
 
 inputs:
   required:
@@ -26,7 +41,9 @@ inputs:
 constraints:
   hard:
     - Do not modify or regenerate Phase 1.5 figures or specs.
+    - Do not introduce new diagrams.
     - Do not introduce training, optimization, or reward-related concepts.
+    - Do not introduce capability, calibration, or evaluation tooling concepts.
     - Do not propose new infrastructure, storage systems, or APIs.
     - Do not restate Phase 1 concepts; build directly on them.
   soft:
@@ -38,7 +55,8 @@ tasks:
     description: >
       Define explicit compatibility conditions under which confidence may be reused
       across tasks and timescales, grounded in the decision context elements shown in
-      Phase 1.5 figures.
+      Phase 1.5 figures, with conditions framed by decision context, abstraction level,
+      task framing, and input regime.
     outputs:
       - scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
 
@@ -46,7 +64,7 @@ tasks:
     description: >
       Identify invariants that must hold for confidence reuse to remain interpretable.
       Express these as logical or structural constraints tied to abstraction level,
-      task framing, and input regime.
+      task framing, input regime, and decision context.
     outputs:
       - scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml
 
@@ -82,6 +100,7 @@ success_criteria:
   - All outputs reference Phase 1.5 artifacts explicitly.
   - No new diagrams are required to understand the analysis.
   - A reviewer can determine reuse admissibility from the written conditions alone.
+  - A reviewer can answer when reuse no longer holds without inference.
 
 handoff_after_phase:
   next_phase: phase_2_review

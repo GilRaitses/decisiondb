@@ -1,0 +1,94 @@
+phase: 2
+artifact: observables_map
+date: "2026-02-01"
+source_phase: phase_1_5
+source_artifacts:
+  - id: fig1_canonical_schematic
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+  - id: fig2_primary_sweep
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+  - id: fig3_identity_persistence
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+  - id: fig4_boundary_fracture
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+observables:
+  - id: equivalence_policy_reference
+    observable: Equivalence policy reference used for decision identity.
+    source:
+      - fig1_canonical_schematic.links.policy_to_identity
+    indicates:
+      admissibility: policy unchanged
+      failure: policy differs from source context
+    related_conditions:
+      - decision_identity_equivalence_policy_fixed
+      - equivalence_policy_changed
+  - id: path_nodes_sequence
+    observable: Path_nodes sequence used for decision identity labeling.
+    source:
+      - fig2_primary_sweep.decision_labels.path_nodes
+      - fig2_primary_sweep.decision_label_rule.method
+    indicates:
+      admissibility: sequence equality holds
+      failure: sequence inequality across contexts
+    related_conditions:
+      - decision_identity_labeling_rule
+      - decision_identity_label_changed
+  - id: decision_identity_label
+    observable: Decision identity label assigned to a variant.
+    source:
+      - fig2_primary_sweep.sweeps.variants.decision_label
+    indicates:
+      admissibility: label matches source context
+      failure: label differs
+    related_conditions:
+      - decision_identity_match
+      - decision_identity_label_changed
+  - id: identity_persistence_region
+    observable: Parameter ranges that preserve each decision label.
+    source:
+      - fig3_identity_persistence.regions
+    indicates:
+      admissibility: parameter value within region
+      failure: parameter value outside region
+    related_conditions:
+      - within_identity_persistence_region
+      - outside_identity_region
+  - id: route_changed_flag
+    observable: Route change flag at parameter transition.
+    source:
+      - fig4_boundary_fracture.boundaries.route_changed
+    indicates:
+      admissibility: route_changed false
+      failure: route_changed true
+    related_conditions:
+      - no_boundary_crossing
+      - boundary_route_changed
+  - id: edge_order_changed_flag
+    observable: Edge order change flag at parameter transition.
+    source:
+      - fig4_boundary_fracture.boundaries.edge_order_changed
+    indicates:
+      admissibility: edge_order_changed false
+      failure: edge_order_changed true
+    related_conditions:
+      - no_boundary_crossing
+      - boundary_edge_order_changed
+decision_boundaries:
+  - boundary_id: second_order_weight_transition
+    boundary_marker: "0.25 | 0.5"
+    observables:
+      - route_changed_flag
+      - edge_order_changed_flag
+      - decision_identity_label
+    evidence:
+      - fig4_boundary_fracture.boundaries.second_order_weight
+      - fig2_primary_sweep.sweeps.second_order_weight
+  - boundary_id: neighbor_weight_transition
+    boundary_marker: "0.5 | 1.0"
+    observables:
+      - route_changed_flag
+      - edge_order_changed_flag
+      - decision_identity_label
+    evidence:
+      - fig4_boundary_fracture.boundaries.neighbor_weight
+      - fig2_primary_sweep.sweeps.neighbor_weight

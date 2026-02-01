@@ -1,0 +1,37 @@
+phase: 6
+artifact: submission_log
+date: "2026-02-01"
+status: plan_ready
+bundle_reference: scripts/2026-01-31/agents/work-tree/submission_bundle/metadata.yaml
+submission_targets:
+  - target_id: preprint
+    selection_status: pending_owner_selection
+  - target_id: venue
+    selection_status: pending_owner_selection
+steps:
+  - step_id: bundle_assembly
+    action: assemble submission bundle from frozen sources
+    guardrails:
+      - no_content_changes
+      - formatting_only
+      - no_scope_expansion
+  - step_id: compile_manuscript_pdf
+    action: compile scripts/2026-01-23/manuscript/main.tex to manuscript.pdf
+    guardrails:
+      - no_content_changes
+      - build_only
+  - step_id: submit_preprint
+    action: submit bundle to preprint target
+    guardrails:
+      - use_existing_metadata_only
+  - step_id: submit_venue
+    action: submit bundle to selected venue
+    guardrails:
+      - use_existing_metadata_only
+flags:
+  - flag_id: venue_requirements_scope_risk
+    description: If a venue requires new claims, figures, or reframing, stop and surface the requirement.
+decisions_pending:
+  - venue_selection
+  - preprint_platform_selection
+  - cover_letter_finalization

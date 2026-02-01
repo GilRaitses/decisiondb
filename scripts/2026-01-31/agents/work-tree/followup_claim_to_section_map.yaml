@@ -1,0 +1,39 @@
+phase: phase_7
+artifact: followup_claim_to_section_map
+date: "2026-02-01"
+inputs_frozen:
+  - scripts/2026-01-31/agents/work-tree/followup_paper_outline.yaml
+  - scripts/2026-01-31/agents/work-tree/followup_claim_seeds.yaml
+  - scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+sections:
+  - section_id: F1
+    title: Motivation and scope boundary
+    claim_seeds:
+      - seed_id: S1
+        source_claim_id: PC1
+      - seed_id: S2
+        source_claim_id: PC2
+  - section_id: F2
+    title: Trace coverage expansion plan
+    claim_seeds:
+      - seed_id: S3
+        source_claim_id: PC3
+      - seed_id: S5
+        source_claim_id: TC4
+  - section_id: F3
+    title: Observables and boundary visibility
+    claim_seeds:
+      - seed_id: S4
+        source_claim_id: PC4
+      - seed_id: S6
+        source_claim_id: TC5
+  - section_id: F4
+    title: Open questions and limitations
+    claim_seeds:
+      - seed_id: S3
+        source_claim_id: PC3
+      - seed_id: S4
+        source_claim_id: PC4
+validation:
+  every_section_has_seed: true
+  no_new_claim_ids: true

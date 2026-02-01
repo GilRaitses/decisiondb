@@ -1,0 +1,74 @@
+phase: 6
+name: submission_and_followup
+status: authorized
+preconditions:
+  - phase5_publication_alignment_complete
+  - phase4_artifacts_frozen
+  - figures_and_traces_locked
+  - claims_hardened_against_stress_envelopes
+
+intent:
+  - Prepare primary manuscript for submission without modifying claims, figures, or mechanisms
+  - Execute controlled submission path (preprint + venue)
+  - Scaffold follow-up paper without scope bleed into primary submission
+
+scope:
+  included:
+    - formatting manuscript to target venues
+    - assembling submission metadata
+    - drafting venue-specific cover letters
+    - generating reproducible submission bundles
+    - outlining follow-up paper as separate artifact
+  excluded:
+    - new experiments
+    - new figures
+    - new claims
+    - claim generalization or expansion
+    - benchmark addition
+    - reframing motivation beyond frozen thesis
+
+inputs:
+  required:
+    - scripts/2026-01-31/agents/work-tree/paper_section_map.yaml
+    - scripts/2026-01-31/agents/work-tree/claim_to_figure_map.yaml
+    - scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+    - scripts/2026-01-31/agents/work-tree/stress_envelope_definitions.yaml
+    - scripts/2026-01-31/agents/work-tree/publication_readiness_report.yaml
+    - frozen manuscript source
+  optional:
+    - venue_style_templates
+    - arxiv_metadata_template
+
+outputs:
+  primary:
+    - submission_bundle/
+        - manuscript.pdf
+        - figures/
+        - supplementary/
+        - metadata.yaml
+    - venue_cover_letters.yaml
+    - submission_log.yaml
+  secondary:
+    - followup_paper_outline.yaml
+    - followup_claim_seeds.yaml
+
+process_constraints:
+  - Do not alter semantic content of any claim
+  - Do not reinterpret figures
+  - Do not rename concepts
+  - Do not add comparative framing
+  - All edits must be formatting, ordering, or venue compliance only
+
+validation_checks:
+  - claims_match_phase5_hardened_claims
+  - figures_match_phase4_inventory
+  - no_new_scope_introduced
+  - submission_bundle_reproducible
+
+handoff_condition:
+  - primary_submission_ready
+  - followup_outline_complete
+  - submission_log_written
+
+next_phase:
+  - phase7_followup_execution

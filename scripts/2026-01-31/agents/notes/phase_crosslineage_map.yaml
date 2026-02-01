@@ -1,0 +1,246 @@
+handoff_id: phase_crosslineage_alignment
+date: "2026-01-31"
+agent_role: consolidation_only
+scope_level: read_only
+status: authorized
+intent:
+  - Produce a single cross-phase synthesis artifact that stabilizes concept usage,
+    figure grounding, and interface definitions across all frozen and draft phases,
+    without generating new claims, text, or figures.
+constraints:
+  - Do not modify, regenerate, or reinterpret any existing artifact
+  - Do not introduce new terminology, interfaces, or conceptual abstractions
+  - Do not paraphrase existing concepts or captions
+  - Do not speculate about reviewers, venues, or future phases
+  - Do not merge phases or collapse distinctions
+  - All outputs must reference existing artifact paths or figure IDs only
+output_location:
+  root: scripts/2026-01-31/agents/notes
+  filename: phase_crosslineage_map.yaml
+output_format:
+  type: yaml
+  sections_required:
+    - concept_lineage
+    - figure_concept_alignment
+    - interface_inventory
+concept_lineage:
+  - concept_name: decision identity
+    first_appearance:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+    operationalized_in:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+    reused_in:
+      - phase: phase_4
+        artifact_path: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - phase: phase_5
+        artifact_path: scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+      - phase: phase_7
+        artifact_path: scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+  - concept_name: equivalence policy
+    first_appearance:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+    operationalized_in:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+    reused_in:
+      - phase: phase_2
+        artifact_path: scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+      - phase: phase_2
+        artifact_path: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+      - phase: phase_5
+        artifact_path: scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+      - phase: phase_7
+        artifact_path: scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+  - concept_name: equivalence policy reference
+    first_appearance:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+    operationalized_in:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+    reused_in:
+      - phase: phase_4
+        artifact_path: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - phase: phase_5
+        artifact_path: scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+      - phase: phase_7
+        artifact_path: scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+  - concept_name: decision identity label
+    first_appearance:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+    operationalized_in:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+    reused_in:
+      - phase: phase_4
+        artifact_path: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - phase: phase_5
+        artifact_path: scripts/2026-01-31/agents/work-tree/stress_envelope_definitions.yaml
+      - phase: phase_7
+        artifact_path: scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+  - concept_name: path_nodes sequence
+    first_appearance:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+    operationalized_in:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+    reused_in:
+      - phase: phase_2
+        artifact_path: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+      - phase: phase_4
+        artifact_path: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - phase: phase_5
+        artifact_path: scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+      - phase: phase_7
+        artifact_path: scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+  - concept_name: confidence reuse
+    first_appearance:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+    operationalized_in:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+    reused_in:
+      - phase: phase_4
+        artifact_path: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - phase: phase_5
+        artifact_path: scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+      - phase: phase_7
+        artifact_path: scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+  - concept_name: identity persistence regions
+    first_appearance:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+    operationalized_in:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+    reused_in:
+      - phase: phase_2
+        artifact_path: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+      - phase: phase_4
+        artifact_path: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - phase: phase_5
+        artifact_path: scripts/2026-01-31/agents/work-tree/stress_envelope_definitions.yaml
+  - concept_name: boundary transitions
+    first_appearance:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+    operationalized_in:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+    reused_in:
+      - phase: phase_4
+        artifact_path: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - phase: phase_5
+        artifact_path: scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+      - phase: phase_7
+        artifact_path: scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+  - concept_name: route_changed
+    first_appearance:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+    operationalized_in:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+    reused_in:
+      - phase: phase_2
+        artifact_path: scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+      - phase: phase_4
+        artifact_path: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - phase: phase_5
+        artifact_path: scripts/2026-01-31/agents/work-tree/stress_envelope_definitions.yaml
+  - concept_name: edge_order_changed
+    first_appearance:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+    operationalized_in:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+    reused_in:
+      - phase: phase_2
+        artifact_path: scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+      - phase: phase_4
+        artifact_path: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - phase: phase_5
+        artifact_path: scripts/2026-01-31/agents/work-tree/stress_envelope_definitions.yaml
+  - concept_name: observables
+    first_appearance:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+    operationalized_in:
+      phase: phase_3
+      artifact_path: scripts/2026-01-31/agents/work-tree/phase3_observables_failure_mapping.yaml
+    reused_in:
+      - phase: phase_4
+        artifact_path: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - phase: phase_7
+        artifact_path: scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+figure_concept_alignment:
+  - figure_id: 1
+    figure_path: scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+    anchored_concept: Canonical Decision-Valued Mapping Schematic
+    used_in:
+      - context_type: manuscript
+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 1"
+  - figure_id: 2
+    figure_path: scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+    anchored_concept: Primary Representational Sweep
+    used_in:
+      - context_type: manuscript
+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 2"
+  - figure_id: 3
+    figure_path: scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+    anchored_concept: Identity Persistence Regions
+    used_in:
+      - context_type: manuscript
+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 3"
+  - figure_id: 4
+    figure_path: scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+    anchored_concept: Boundary and Fracture Localization
+    used_in:
+      - context_type: manuscript
+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 4"
+interface_inventory:
+  - interface_name: decision identity
+    defined_in:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+    fields_or_signals:
+      - name: raw_output
+        source_artifact: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+      - name: equivalence_policy
+        source_artifact: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+    invariance_statement: No new fields beyond fig1_canonical_schematic.yaml.
+  - interface_name: decision map
+    defined_in:
+      phase: phase_1_5
+      artifact_path: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+    fields_or_signals:
+      - name: representation
+        source_artifact: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+      - name: decision_identity
+        source_artifact: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+    invariance_statement: No new fields beyond fig1_canonical_schematic.yaml.
+  - interface_name: observables
+    defined_in:
+      phase: phase_2
+      artifact_path: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+    fields_or_signals:
+      - name: equivalence_policy_reference
+        source_artifact: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+      - name: path_nodes_sequence
+        source_artifact: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+      - name: decision_identity_label
+        source_artifact: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+      - name: identity_persistence_region
+        source_artifact: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+      - name: route_changed_flag
+        source_artifact: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+      - name: edge_order_changed_flag
+        source_artifact: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+    invariance_statement: No new fields beyond observables_map.yaml.

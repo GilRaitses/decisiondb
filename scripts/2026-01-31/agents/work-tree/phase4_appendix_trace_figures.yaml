@@ -1,0 +1,53 @@
+phase: 4
+artifact: phase4_appendix_trace_figures
+date: "2026-02-01"
+source_phase: phase_3
+inputs:
+  - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+  - scripts/2026-01-31/agents/work-tree/phase3_trace_walkthroughs.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+appendix_trace_figures:
+  - trace_id: neighbor_weight_baseline_to_perturbed
+    figure_references:
+      - fig2_primary_sweep.sweeps.neighbor_weight
+      - fig3_identity_persistence.regions.neighbor_weight
+      - fig4_boundary_fracture.boundaries.neighbor_weight
+  - trace_id: neighbor_weight_perturbed_to_baseline
+    figure_references:
+      - fig2_primary_sweep.sweeps.neighbor_weight
+      - fig3_identity_persistence.regions.neighbor_weight
+      - fig4_boundary_fracture.boundaries.neighbor_weight
+  - trace_id: neighbor_weight_baseline_to_baseline
+    figure_references:
+      - fig2_primary_sweep.sweeps.neighbor_weight
+      - fig3_identity_persistence.regions.neighbor_weight
+  - trace_id: second_order_weight_baseline_to_baseline
+    figure_references:
+      - fig2_primary_sweep.sweeps.second_order_weight
+      - fig3_identity_persistence.regions.second_order_weight
+  - trace_id: second_order_weight_perturbed_to_perturbed
+    figure_references:
+      - fig2_primary_sweep.sweeps.second_order_weight
+      - fig3_identity_persistence.regions.second_order_weight
+  - trace_id: second_order_weight_baseline_to_perturbed
+    figure_references:
+      - fig2_primary_sweep.sweeps.second_order_weight
+      - fig3_identity_persistence.regions.second_order_weight
+      - fig4_boundary_fracture.boundaries.second_order_weight
+  - trace_id: second_order_weight_perturbed_to_baseline
+    figure_references:
+      - fig2_primary_sweep.sweeps.second_order_weight
+      - fig3_identity_persistence.regions.second_order_weight
+      - fig4_boundary_fracture.boundaries.second_order_weight
+  - trace_id: cross_sweep_A_to_B
+    figure_references:
+      - fig2_primary_sweep.decision_labels
+  - trace_id: cross_sweep_B_to_A
+    figure_references:
+      - fig2_primary_sweep.decision_labels
+  - trace_id: equivalence_policy_reference_mismatch
+    figure_references:
+      - fig1_canonical_schematic.links.policy_to_identity

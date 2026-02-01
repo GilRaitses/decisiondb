@@ -1,0 +1,40 @@
+handoff_id: phase_crosslineage_alignment
+date: "2026-02-01"
+assigned_agent: suit
+agent_role: consolidation_only
+scope_level: read_only
+authorization: granted
+authoritative_map: scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+validation_scope:
+  artifacts_checked:
+    - scripts/2026-01-31/agents/work-tree/followup_paper_outline.yaml
+    - scripts/2026-01-31/agents/work-tree/followup_claim_seeds.yaml
+    - scripts/2026-01-31/agents/work-tree/followup_claim_to_section_map.yaml
+    - scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+results:
+  unmapped_terms:
+    - term: "claim seeds"
+      found_in:
+        - scripts/2026-01-31/agents/work-tree/followup_claim_seeds.yaml
+        - scripts/2026-01-31/agents/work-tree/followup_claim_to_section_map.yaml
+        - scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+      status: incompatibility
+    - term: "Trace coverage expansion plan"
+      found_in:
+        - scripts/2026-01-31/agents/work-tree/followup_paper_outline.yaml
+      status: incompatibility
+    - term: "Motivation and scope boundary"
+      found_in:
+        - scripts/2026-01-31/agents/work-tree/followup_paper_outline.yaml
+      status: incompatibility
+    - term: "Open questions and limitations"
+      found_in:
+        - scripts/2026-01-31/agents/work-tree/followup_paper_outline.yaml
+      status: incompatibility
+  interface_check:
+    all_interfaces_mapped: true
+    source: scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+  figure_concept_alignment_check:
+    all_figures_mapped: true
+    source: scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+status: complete_with_incompatibilities

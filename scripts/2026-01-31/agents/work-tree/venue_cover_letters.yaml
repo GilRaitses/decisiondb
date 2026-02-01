@@ -1,0 +1,12 @@
+phase: 6
+artifact: venue_cover_letters
+date: "2026-02-01"
+letters:
+  - venue_id: preprint
+    status: draft
+    text: |
+      This submission provides a bounded analysis of confidence reuse based on fixed figures and trace evidence. The manuscript does not introduce new mechanisms, claims, or evaluations. All claims are tied to explicit conditions and observables with documented limits.
+  - venue_id: venue
+    status: draft
+    text: |
+      Please consider this manuscript for review. The work formalizes when confidence reuse is admissible and when it fails, using fixed artifacts and trace evidence. Claims are bounded, falsifiable, and aligned to the accompanying figures and trace set.

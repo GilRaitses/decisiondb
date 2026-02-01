@@ -1,0 +1,11 @@
+merge_allowed: "true"
+merge_preconditions:
+  - include override file when committing map edits
+merge_method: "merge_commit"
+post_merge_steps:
+  - "declare map + report frozen"
+  - "protect main or require PR if available"
+  - "optional: tag freeze commit"
+freeze_statement:
+  short: "phase_crosslineage_map.yaml and alignment report are institutionally frozen."
+  long: "The crosslineage map and alignment report are locked by CI and local hooks; edits require an explicit override file."

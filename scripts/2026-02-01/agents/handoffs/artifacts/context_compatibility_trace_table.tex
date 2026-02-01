@@ -1,0 +1,13 @@
+\begin{table}[t]
+\centering
+\caption{A minimal trace where confidence reuse depends on context compatibility and mismatch triggers new justification.}
+\label{tab:context-compatibility-trace}
+\begin{tabular}{lllllllll}
+\hline
+trace\_id & task\_id & abstraction\_level & input\_regime & assumption\_set & confidence & downstream\_task & compatibility\_result & action\_required \\
+\hline
+T1 & A & event-level & regime\_1 & S\_1 & 0.82 & B & compatible & reuse\_allowed \\
+T2 & A & event-level & regime\_2 & S\_1 & 0.79 & B & incompatible & new\_justification \\
+\hline
+\end{tabular}
+\end{table}

@@ -1,0 +1,31 @@
+phase: 6
+artifact: submission_bundle_metadata
+date: "2026-02-01"
+status: bundle_ready_for_submission
+bundle_root: scripts/2026-01-31/agents/work-tree/submission_bundle/
+inputs_frozen:
+  - scripts/2026-01-31/agents/work-tree/paper_section_map.yaml
+  - scripts/2026-01-31/agents/work-tree/claim_to_figure_map.yaml
+  - scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+  - scripts/2026-01-31/agents/work-tree/stress_envelope_definitions.yaml
+  - scripts/2026-01-31/agents/work-tree/publication_readiness_report.yaml
+manuscript:
+  source_tex: scripts/2026-01-23/manuscript/main.tex
+  output_pdf: scripts/2026-01-31/agents/work-tree/submission_bundle/manuscript.pdf
+  build_rule: compile_main_tex_no_content_changes
+figures:
+  - source: scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+    bundle_path: scripts/2026-01-31/agents/work-tree/submission_bundle/figures/figure1_canonical_schematic.svg
+  - source: scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+    bundle_path: scripts/2026-01-31/agents/work-tree/submission_bundle/figures/figure2_primary_sweep.svg
+  - source: scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+    bundle_path: scripts/2026-01-31/agents/work-tree/submission_bundle/figures/figure3_identity_persistence.svg
+  - source: scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+    bundle_path: scripts/2026-01-31/agents/work-tree/submission_bundle/figures/figure4_boundary_fracture.svg
+supplementary:
+  - source: scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+    bundle_path: scripts/2026-01-31/agents/work-tree/submission_bundle/supplementary/phase4_extended_trace_set.yaml
+  - source: scripts/2026-01-31/agents/work-tree/phase4_appendix_trace_figures.yaml
+    bundle_path: scripts/2026-01-31/agents/work-tree/submission_bundle/supplementary/phase4_appendix_trace_figures.yaml
+  - source: scripts/2026-01-31/agents/work-tree/observables_map.yaml
+    bundle_path: scripts/2026-01-31/agents/work-tree/submission_bundle/supplementary/observables_map.yaml

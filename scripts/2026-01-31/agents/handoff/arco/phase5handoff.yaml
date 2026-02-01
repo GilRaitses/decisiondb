@@ -1,0 +1,42 @@
+phase: phase_5
+name: claim_hardening_and_publication_alignment
+status: authorized
+
+intent:
+  - Harden all claims against Phase 4 stress envelopes
+  - Align artifacts deterministically to paper sections
+  - Produce submission-ready manuscript components
+
+inputs_frozen:
+  - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+  - scripts/2026-01-31/agents/work-tree/phase4_review_readiness_report.yaml
+  - scripts/2026-01-31/agents/work-tree/figures/*
+  - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+
+outputs_required:
+  - paper_section_map.yaml
+  - claim_to_figure_map.yaml
+  - stress_envelope_definitions.yaml
+  - hardened_claims.yaml
+  - publication_readiness_report.yaml
+
+constraints:
+  - No new mechanisms
+  - No new figures
+  - No expansion of scope beyond Phase 4
+  - Claims must be falsifiable and bounded
+  - All language must be publication-appropriate
+
+non_goals:
+  - No additional experiments
+  - No optimization or capability claims
+  - No speculative extensions
+
+validation:
+  - Each claim references at least one trace or figure
+  - Each figure supports exactly one primary claim
+  - All failure modes are explicitly bounded
+
+handoff_after:
+  next_phase: publication_submission
+  condition: publication_readiness_report == pass

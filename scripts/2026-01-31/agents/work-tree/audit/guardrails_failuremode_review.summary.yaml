@@ -1,0 +1,19 @@
+run_context:
+  branch: cursor/confidence-reuse-conditions-fe3c
+  head_commit: f6f1ee2
+  timestamp_start: "Sun Feb  1 06:10:12 AM UTC 2026"
+  timestamp_end: "Sun Feb  1 06:20:50 AM UTC 2026"
+pass_fail:
+  precommit_symmetry: pass
+  ci_symmetry: pass
+  diff_base_correctness: pass
+  override_mechanism: pass
+  abstract_lint_behavior: pass
+  readonly_signal: pass
+merge_readiness:
+  ready_to_merge: true
+  blocking_issues: []
+  recommended_fix:
+    - include override file when committing map edits
+  merge_recommendation: merge_commit
+  freeze_declaration_text: phase_crosslineage_map.yaml and alignment report remain frozen

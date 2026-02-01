@@ -1,0 +1,114 @@
+phase: 5
+artifact: hardened_claims
+date: "2026-02-01"
+source_phase: phase_4
+inputs_frozen:
+  - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+  - scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+claims:
+  - claim_id: PC1
+    claim_type: primary
+    statement: Decision identity assignment depends on the equivalence policy and the canonical mapping chain.
+    scope:
+      mapping_chain: snapshot_to_representation_to_engine_to_output_to_identity
+      equivalence_policy_input: required
+    evidence:
+      figures:
+        - fig1_canonical_schematic.links.policy_to_identity
+        - fig1_canonical_schematic.links.snapshot_to_representation
+        - fig1_canonical_schematic.links.engine_to_output
+    falsifiability:
+      observable: equivalence_policy_reference
+      failure_mode: equivalence_policy_changed
+  - claim_id: PC2
+    claim_type: primary
+    statement: Decision identity labels are assigned by exact path_nodes sequence equality across sweep variants.
+    scope:
+      sweep_variants: fig2_primary_sweep.sweeps
+      label_rule: path_nodes_sequence_equality
+    evidence:
+      figures:
+        - fig2_primary_sweep.decision_label_rule.method
+        - fig2_primary_sweep.decision_labels
+    falsifiability:
+      observable: path_nodes_sequence
+      failure_mode: decision_identity_label_changed
+  - claim_id: PC3
+    claim_type: primary
+    statement: Confidence reuse is admissible when decision identity labels remain constant within identity persistence regions and no boundary crossing is observed.
+    scope:
+      admissible_regions:
+        - neighbor_weight: "0.5 to 1.0"   # label A
+        - second_order_weight: "0.25"     # label A
+        - second_order_weight: "0.5"      # label B
+    evidence:
+      traces:
+        - neighbor_weight_baseline_to_perturbed
+        - neighbor_weight_perturbed_to_baseline
+        - second_order_weight_baseline_to_baseline
+        - second_order_weight_perturbed_to_perturbed
+      figures:
+        - fig3_identity_persistence.regions
+        - fig4_boundary_fracture.boundaries.neighbor_weight
+    falsifiability:
+      observables:
+        - decision_identity_label
+        - identity_persistence_region
+        - route_changed_flag
+        - edge_order_changed_flag
+      failure_modes:
+        - decision_identity_label_changed
+        - outside_identity_region
+        - boundary_route_changed
+        - boundary_edge_order_changed
+  - claim_id: PC4
+    claim_type: primary
+    statement: Confidence reuse is inadmissible across boundary transitions with route_changed or edge_order_changed true.
+    scope:
+      boundary_marker: "0.25 | 0.5"
+      sweep_id: second_order_weight
+    evidence:
+      traces:
+        - second_order_weight_baseline_to_perturbed
+        - second_order_weight_perturbed_to_baseline
+      figures:
+        - fig4_boundary_fracture.boundaries.second_order_weight
+    falsifiability:
+      observables:
+        - route_changed_flag
+        - edge_order_changed_flag
+      failure_modes:
+        - boundary_route_changed
+        - boundary_edge_order_changed
+  - claim_id: TC4
+    claim_type: trace
+    statement: Confidence reuse is inadmissible when crossing sweeps with a decision identity label change.
+    scope:
+      cross_sweep_contexts:
+        - neighbor_weight to second_order_weight
+        - second_order_weight to neighbor_weight
+    evidence:
+      traces:
+        - cross_sweep_A_to_B
+        - cross_sweep_B_to_A
+    falsifiability:
+      observables:
+        - decision_identity_label
+        - path_nodes_sequence
+      failure_modes:
+        - decision_identity_label_changed
+  - claim_id: TC5
+    claim_type: trace
+    statement: Confidence reuse is inadmissible when the equivalence policy reference differs across contexts.
+    scope:
+      decision_context_shift: equivalence_policy_reference
+    evidence:
+      traces:
+        - equivalence_policy_reference_mismatch
+      figures:
+        - fig1_canonical_schematic.links.policy_to_identity
+    falsifiability:
+      observable: equivalence_policy_reference
+      failure_mode: equivalence_policy_changed

@@ -1,0 +1,18 @@
+phase: 7
+artifact: phase7_freeze_ack
+timestamp_utc: "2026-02-01T03:54:04Z"
+commit_hash: f6d0f827ec0bb056a34a1cf3568396aa923b703c
+status: frozen_draft_state
+scope:
+  base_path: scripts/2026-01-31/agents/work-tree/
+  frozen_files:
+    - scripts/2026-01-31/agents/work-tree/followup_manuscript_draft.tex
+    - scripts/2026-01-31/agents/work-tree/followup_claim_to_section_map.yaml
+    - scripts/2026-01-31/agents/work-tree/followup_evidence_gap_report.yaml
+    - scripts/2026-01-31/agents/work-tree/phase7_completion_report.yaml
+freeze_terms:
+  - do_not_modify
+  - do_not_regenerate
+  - do_not_rename
+  - do_not_reorder
+  - draft_only

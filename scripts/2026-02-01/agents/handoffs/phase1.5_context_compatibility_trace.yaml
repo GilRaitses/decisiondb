@@ -1,0 +1,53 @@
+artifact_id: phase1_5_context_compatibility_trace
+version: 1
+outputs:
+  csv_path: artifacts/context_compatibility_trace.csv
+  latex_path: artifacts/context_compatibility_trace_table.tex
+columns:
+  - trace_id
+  - task_id
+  - abstraction_level
+  - input_regime
+  - assumption_set
+  - confidence
+  - downstream_task
+  - compatibility_result
+  - action_required
+rows:
+  - trace_id: T1
+    task_id: A
+    abstraction_level: event-level
+    input_regime: regime_1
+    assumption_set: S_1
+    confidence: 0.82
+    downstream_task: B
+    compatibility_result: compatible
+    action_required: reuse_allowed
+  - trace_id: T2
+    task_id: A
+    abstraction_level: event-level
+    input_regime: regime_2
+    assumption_set: S_1
+    confidence: 0.79
+    downstream_task: B
+    compatibility_result: incompatible
+    action_required: new_justification
+determinism:
+  randomness: none
+  sort_rule: preserve_rows_order
+  numeric_format:
+    confidence: "%.2f"
+latex_table: |
+  \begin{table}[t]
+  \centering
+  \caption{A minimal trace where confidence reuse depends on context compatibility and mismatch triggers new justification.}
+  \label{tab:context-compatibility-trace}
+  \begin{tabular}{lllllllll}
+  \hline
+  trace\_id & task\_id & abstraction\_level & input\_regime & assumption\_set & confidence & downstream\_task & compatibility\_result & action\_required \\
+  \hline
+  T1 & A & event-level & regime\_1 & S\_1 & 0.82 & B & compatible & reuse\_allowed \\
+  T2 & A & event-level & regime\_2 & S\_1 & 0.79 & B & incompatible & new\_justification \\
+  \hline
+  \end{tabular}
+  \end{table}

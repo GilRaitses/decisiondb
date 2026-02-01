@@ -1,0 +1,79 @@
+phase: 5
+artifact: publication_readiness_report
+date: "2026-02-01"
+status: pass
+source_phase: phase_4
+inputs_frozen:
+  - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+  - scripts/2026-01-31/agents/work-tree/phase4_review_readiness_report.yaml
+  - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+  - scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+phase5_outputs:
+  - scripts/2026-01-31/agents/work-tree/paper_section_map.yaml
+  - scripts/2026-01-31/agents/work-tree/claim_to_figure_map.yaml
+  - scripts/2026-01-31/agents/work-tree/stress_envelope_definitions.yaml
+  - scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+  - scripts/2026-01-31/agents/work-tree/publication_readiness_report.yaml
+checks:
+  claims_falsifiable_and_bounded:
+    status: pass
+    evidence:
+      source: hardened_claims.yaml
+      fields_present:
+        - scope
+        - falsifiability
+  each_claim_references_trace_or_figure:
+    status: pass
+    evidence:
+      source: claim_to_figure_map.yaml
+      claim_sets:
+        - primary_claims
+        - trace_claims
+  each_figure_supports_exactly_one_primary_claim:
+    status: pass
+    evidence:
+      source: claim_to_figure_map.yaml
+      figure_to_primary_claim:
+        figure1_canonical_schematic.svg: PC1
+        figure2_primary_sweep.svg: PC2
+        figure3_identity_persistence.svg: PC3
+        figure4_boundary_fracture.svg: PC4
+  stress_envelopes_defined:
+    status: pass
+    evidence:
+      source: stress_envelope_definitions.yaml
+      envelope_ids:
+        - admissible_neighbor_weight_label_A
+        - admissible_second_order_weight_label_A
+        - admissible_second_order_weight_label_B
+        - inadmissible_second_order_weight_boundary
+        - inadmissible_cross_sweep_label_change
+        - inadmissible_equivalence_policy_mismatch
+  failure_modes_explicitly_bounded:
+    status: pass
+    evidence:
+      source: hardened_claims.yaml
+      failure_modes_listed: true
+  section_alignment_complete:
+    status: pass
+    evidence:
+      source: paper_section_map.yaml
+      section_ids:
+        - S1
+        - S2
+        - S3
+        - S4
+        - S5
+        - S6
+        - S7
+constraints_review:
+  no_new_mechanisms: pass
+  no_new_figures: pass
+  no_scope_expansion: pass
+  publication_appropriate_language: pass
+authorization:
+  next_phase: publication_submission
+  condition: publication_readiness_report == pass

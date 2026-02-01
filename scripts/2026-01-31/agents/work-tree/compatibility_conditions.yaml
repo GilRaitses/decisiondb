@@ -1,0 +1,81 @@
+phase: 2
+artifact: compatibility_conditions
+date: "2026-02-01"
+source_phase: phase_1_5
+source_artifacts:
+  - id: fig1_canonical_schematic
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+  - id: fig2_primary_sweep
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+  - id: fig3_identity_persistence
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+  - id: fig4_boundary_fracture
+    path: scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+axes:
+  - decision_context
+  - abstraction_level
+  - task_framing
+  - input_regime
+admissibility_logic:
+  rule: all_of
+  description: Confidence reuse is admissible only when all conditions hold.
+conditions:
+  decision_context:
+    - id: decision_identity_equivalence_policy_fixed
+      condition: Equivalence policy used for decision identity assignment is unchanged.
+      evidence:
+        - fig1_canonical_schematic.links.policy_to_identity
+    - id: decision_identity_labeling_rule
+      condition: Decision identity equality uses exact path_nodes sequence equality.
+      evidence:
+        - fig2_primary_sweep.decision_label_rule.method
+    - id: decision_map_dependency
+      condition: Decision map is derived from representation and decision identity only.
+      evidence:
+        - fig1_canonical_schematic.links.representation_to_map
+        - fig1_canonical_schematic.links.identity_to_map
+    - id: raw_output_chain_consistency
+      condition: Identity assignment follows the snapshot to representation to engine run to raw output chain.
+      evidence:
+        - fig1_canonical_schematic.links.snapshot_to_representation
+        - fig1_canonical_schematic.links.representation_to_engine
+        - fig1_canonical_schematic.links.engine_to_output
+        - fig1_canonical_schematic.links.output_to_identity
+  abstraction_level:
+    - id: representation_stage_stable
+      condition: Representation stage is the same abstraction level across tasks.
+      evidence:
+        - fig1_canonical_schematic.entities.representation
+    - id: representation_to_map_relation_stable
+      condition: Representation to decision_map relation is unchanged.
+      evidence:
+        - fig1_canonical_schematic.links.representation_to_map
+  task_framing:
+    - id: decision_identity_match
+      condition: Task framing maps to the same decision identity label under the equivalence policy.
+      evidence:
+        - fig2_primary_sweep.decision_labels
+        - fig3_identity_persistence.regions
+  input_regime:
+    - id: within_identity_persistence_region
+      condition: Input parameters remain within identity persistence regions for the label.
+      evidence:
+        - fig3_identity_persistence.regions
+    - id: no_boundary_crossing
+      condition: No boundary transition with route_changed or edge_order_changed set true.
+      evidence:
+        - fig4_boundary_fracture.boundaries
+examples_from_figures:
+  - decision_label: A
+    admissible_regions:
+      - sweep_id: neighbor_weight
+        parameter_range: "0.5 to 1.0"
+        evidence: fig3_identity_persistence.regions.neighbor_weight.A
+      - sweep_id: second_order_weight
+        parameter_range: "0.25 to 0.25"
+        evidence: fig3_identity_persistence.regions.second_order_weight.A
+  - decision_label: B
+    admissible_regions:
+      - sweep_id: second_order_weight
+        parameter_range: "0.5 to 0.5"
+        evidence: fig3_identity_persistence.regions.second_order_weight.B

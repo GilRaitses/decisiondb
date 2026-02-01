@@ -1,0 +1,1 @@
+Run the failure mode review exactly as specified in the YAML and capture raw console output into the required log path. Keep phase_crosslineage_map.yaml and the alignment report unchanged. Treat any mismatch between pre-commit and CI override logic as a blocker. End by producing the three YAML deliverables plus the console log, then stop without merging.
