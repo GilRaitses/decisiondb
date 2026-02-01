@@ -9,6 +9,7 @@ figures_requiring_toy_artifacts:
     figure_name: Canonical Decision-Valued Mapping Schematic
     requirement_type: synthetic_diagram
     reason: No existing schematic asset in repository. Only textual definitions are present.
+    insufficiency_reason: No existing schematic asset in repository. Only textual definitions are present.
     source_files:
       - scripts/2026-01-23/manuscript/sections/core_object.tex
       - scripts/2026-01-23/manuscript/sections/protocol.tex
@@ -18,6 +19,7 @@ figures_requiring_toy_artifacts:
     figure_name: Primary Representational Sweep
     requirement_type: reduced_scope_toy_sweep
     reason: No full sweep artifacts in repository. Use a minimal sweep from weight variation results.
+    insufficiency_reason: No full sweep artifacts in repository. Use a minimal sweep from weight variation results.
     source_files:
       - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
       - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
@@ -25,6 +27,7 @@ figures_requiring_toy_artifacts:
     figure_name: Identity Persistence Regions
     requirement_type: derived_toy_regions
     reason: Requires aggregation of sweep variants into persistence regions. No standalone artifact exists.
+    insufficiency_reason: Requires aggregation of sweep variants into persistence regions. No standalone artifact exists.
     source_files:
       - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
       - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
@@ -32,6 +35,7 @@ figures_requiring_toy_artifacts:
     figure_name: Boundary and Fracture Localization
     requirement_type: derived_toy_boundaries
     reason: Requires explicit boundary annotations from route_changed and edge_order_changed fields. No standalone artifact exists.
+    insufficiency_reason: Requires explicit boundary annotations from route_changed and edge_order_changed fields. No standalone artifact exists.
     source_files:
       - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
       - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
