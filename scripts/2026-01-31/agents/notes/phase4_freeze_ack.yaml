@@ -1,0 +1,22 @@
+phase: 4
+artifact: phase4_freeze_ack
+timestamp_utc: "2026-02-01T03:26:04Z"
+commit_hash: cfe3857ca76ecfb9c117f8cb6a22bc1b8ea34d6a
+status: frozen
+scope:
+  base_path: scripts/2026-01-31/agents/work-tree/
+  frozen_files:
+    - scripts/2026-01-31/agents/work-tree/phase4_appendix_trace_figures.yaml
+    - scripts/2026-01-31/agents/work-tree/phase4_comparison_section_draft.md
+    - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+    - scripts/2026-01-31/agents/work-tree/phase4_limitations_section_draft.md
+    - scripts/2026-01-31/agents/work-tree/phase4_review_readiness_report.yaml
+freeze_terms:
+  - do_not_modify
+  - do_not_regenerate
+  - do_not_rename
+  - do_not_reorder
+  - read_only_inputs_for_phase_5
+next_action:
+  await_phase_5_handoff: true
+  no_further_work_without_authorization: true
