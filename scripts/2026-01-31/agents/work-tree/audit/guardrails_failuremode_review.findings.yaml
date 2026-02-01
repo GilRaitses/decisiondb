@@ -1,0 +1,25 @@
+findings:
+  - id: FM-1
+    severity: blocker
+    area: lint
+    description: Abstract lint fails to parse phase_crosslineage_map.yaml due to YAML ScannerError at figure_concept_alignment values containing unquoted colons.
+    evidence_pointer: console_log CMD "python scripts/2026-01-31/agents/tools/abstract_lint.py /tmp/abstractlint_empty_dir"
+    recommended_action: Keep map unchanged; adjust linter to accept the map syntax or add a non-invasive parsing strategy.
+  - id: FM-2
+    severity: warning
+    area: diffbase
+    description: CI diff scope is fixed to origin/main...HEAD and does not use a PR base ref when the base is not main.
+    evidence_pointer: console_log CMD "for f in .github/workflows/*.yml .github/workflows/*.yaml; do ..."
+    recommended_action: Update workflow to use PR base ref semantics when available while keeping push behavior stable.
+  - id: FM-3
+    severity: note
+    area: permissions
+    description: phase_crosslineage_map.yaml is writable (mode 100644) and does not carry a read-only signal.
+    evidence_pointer: console_log CMD "python -c \"import os,stat; p='phase_crosslineage_map.yaml'...\""
+    recommended_action: Optional; rely on CI/pre-commit guardrails instead of file mode.
+  - id: FM-4
+    severity: warning
+    area: docs
+    description: Console log contains a redacted token to comply with repository push protection, so output is not strictly raw.
+    evidence_pointer: console_log CMD "git remote -v"
+    recommended_action: Replace remote URL with a non-secret form before logging or use sanitized remotes for audit runs.

@@ -1,0 +1,12 @@
+merge_allowed: "false"
+merge_preconditions:
+  - abstract_lint_behavior passes against phase_crosslineage_map.yaml
+  - diff base logic uses PR base ref semantics when available
+merge_method: ""
+post_merge_steps:
+  - "declare map + report frozen"
+  - "protect main or require PR if available"
+  - "optional: tag freeze commit"
+freeze_statement:
+  short: "phase_crosslineage_map.yaml remains invariant behind an override gate."
+  long: "The crosslineage map is enforced by CI and local hooks; edits require an explicit override file and are otherwise rejected."

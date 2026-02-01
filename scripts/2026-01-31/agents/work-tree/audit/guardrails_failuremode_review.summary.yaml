@@ -1,0 +1,22 @@
+run_context:
+  branch: cursor/confidence-reuse-conditions-fe3c
+  head_commit: 5c06b56
+  timestamp_start: "Sun Feb  1 05:29:16 AM UTC 2026"
+  timestamp_end: "Sun Feb  1 05:41:49 AM UTC 2026"
+pass_fail:
+  precommit_symmetry: pass
+  ci_symmetry: pass
+  diff_base_correctness: fail
+  override_mechanism: pass
+  abstract_lint_behavior: fail
+  readonly_signal: fail
+merge_readiness:
+  ready_to_merge: false
+  blocking_issues:
+    - abstract_lint_behavior fails due to YAML parse error in phase_crosslineage_map.yaml
+    - diff_base_correctness uses origin/main only and does not reference PR base ref
+  recommended_fix:
+    - quote colon-bearing strings in phase_crosslineage_map.yaml or adjust linter to tolerate them without modifying the map
+    - update CI diff scope to use base ref semantics for PRs while preserving push behavior
+  merge_recommendation: do_not_merge_until_blockers_resolved
+  freeze_declaration_text: phase_crosslineage_map.yaml remains invariant with override gate
