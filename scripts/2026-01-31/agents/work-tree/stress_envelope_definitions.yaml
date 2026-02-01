@@ -1,0 +1,110 @@
+phase: 5
+artifact: stress_envelope_definitions
+date: "2026-02-01"
+source_phase: phase_4
+inputs_frozen:
+  - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+  - scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+envelopes:
+  - envelope_id: admissible_neighbor_weight_label_A
+    scope: admissible
+    description: neighbor_weight transitions within label A when boundary flags remain false.
+    bounded_parameters:
+      neighbor_weight: "0.5 to 1.0"
+      second_order_weight: "0.25"
+      decision_identity_label: A
+    conditions_required:
+      - decision_identity_match
+      - within_identity_persistence_region
+      - no_boundary_crossing
+    observables_required:
+      - decision_identity_label
+      - identity_persistence_region
+      - route_changed_flag
+      - edge_order_changed_flag
+    trace_evidence:
+      - neighbor_weight_baseline_to_perturbed
+      - neighbor_weight_perturbed_to_baseline
+  - envelope_id: admissible_second_order_weight_label_A
+    scope: admissible
+    description: fixed second_order_weight at label A within persistence region.
+    bounded_parameters:
+      neighbor_weight: "0.5"
+      second_order_weight: "0.25"
+      decision_identity_label: A
+    conditions_required:
+      - decision_identity_match
+      - within_identity_persistence_region
+    observables_required:
+      - decision_identity_label
+      - identity_persistence_region
+    trace_evidence:
+      - second_order_weight_baseline_to_baseline
+  - envelope_id: admissible_second_order_weight_label_B
+    scope: admissible
+    description: fixed second_order_weight at label B within persistence region.
+    bounded_parameters:
+      neighbor_weight: "0.5"
+      second_order_weight: "0.5"
+      decision_identity_label: B
+    conditions_required:
+      - decision_identity_match
+      - within_identity_persistence_region
+    observables_required:
+      - decision_identity_label
+      - identity_persistence_region
+    trace_evidence:
+      - second_order_weight_perturbed_to_perturbed
+  - envelope_id: inadmissible_second_order_weight_boundary
+    scope: inadmissible
+    description: boundary transition between labels A and B with route and edge order changes.
+    bounded_parameters:
+      boundary_marker: "0.25 | 0.5"
+      neighbor_weight: "0.5"
+    conditions_failed:
+      - decision_identity_match
+      - within_identity_persistence_region
+      - no_boundary_crossing
+    failure_conditions_triggered:
+      - decision_identity_label_changed
+      - boundary_route_changed
+      - boundary_edge_order_changed
+      - outside_identity_region
+    observables_required:
+      - decision_identity_label
+      - route_changed_flag
+      - edge_order_changed_flag
+    trace_evidence:
+      - second_order_weight_baseline_to_perturbed
+      - second_order_weight_perturbed_to_baseline
+  - envelope_id: inadmissible_cross_sweep_label_change
+    scope: inadmissible
+    description: cross-sweep context change with decision identity label change.
+    bounded_parameters:
+      source_label: A
+      target_label: B
+    conditions_failed:
+      - decision_identity_match
+    failure_conditions_triggered:
+      - decision_identity_label_changed
+    observables_required:
+      - decision_identity_label
+      - path_nodes_sequence
+    trace_evidence:
+      - cross_sweep_A_to_B
+      - cross_sweep_B_to_A
+  - envelope_id: inadmissible_equivalence_policy_mismatch
+    scope: inadmissible
+    description: decision identity equivalence policy reference differs across contexts.
+    bounded_parameters:
+      equivalence_policy_reference: "source_policy_reference | target_policy_reference"
+    conditions_failed:
+      - decision_identity_equivalence_policy_fixed
+    failure_conditions_triggered:
+      - equivalence_policy_changed
+    observables_required:
+      - equivalence_policy_reference
+    trace_evidence:
+      - equivalence_policy_reference_mismatch

@@ -1,0 +1,50 @@
+phase: 5
+artifact: paper_section_map
+date: "2026-02-01"
+source_phase: phase_4
+inputs_frozen:
+  - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+  - scripts/2026-01-31/agents/work-tree/phase4_review_readiness_report.yaml
+  - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+sections:
+  - section_id: S1
+    title: Canonical mapping and decision identity
+    primary_artifacts:
+      - scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+      - scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml
+  - section_id: S2
+    title: Decision identity assignment from sweep variants
+    primary_artifacts:
+      - scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+      - scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+  - section_id: S3
+    title: Identity persistence regions and admissibility bounds
+    primary_artifacts:
+      - scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+      - scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+  - section_id: S4
+    title: Boundary and fracture localization for reuse failure
+    primary_artifacts:
+      - scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+      - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+  - section_id: S5
+    title: Trace evidence for admissible and inadmissible reuse
+    primary_artifacts:
+      - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+      - scripts/2026-01-31/agents/work-tree/phase4_appendix_trace_figures.yaml
+  - section_id: S6
+    title: Observables and failure mappings
+    primary_artifacts:
+      - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+      - scripts/2026-01-31/agents/work-tree/phase3_observables_failure_mapping.yaml
+  - section_id: S7
+    title: Limitations and comparison to adjacent framings
+    primary_artifacts:
+      - scripts/2026-01-31/agents/work-tree/phase4_limitations_section_draft.md
+      - scripts/2026-01-31/agents/work-tree/phase4_comparison_section_draft.md

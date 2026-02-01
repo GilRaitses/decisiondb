@@ -1,0 +1,62 @@
+phase: 5
+artifact: claim_to_figure_map
+date: "2026-02-01"
+source_phase: phase_4
+inputs_frozen:
+  - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+  - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+primary_claims:
+  - claim_id: PC1
+    statement: Decision identity assignment depends on the equivalence policy and the canonical mapping chain.
+    primary_figure: figure1_canonical_schematic.svg
+    evidence:
+      - fig1_canonical_schematic.links.policy_to_identity
+      - fig1_canonical_schematic.links.snapshot_to_representation
+      - fig1_canonical_schematic.links.engine_to_output
+  - claim_id: PC2
+    statement: Decision identity labels are assigned by exact path_nodes sequence equality across sweep variants.
+    primary_figure: figure2_primary_sweep.svg
+    evidence:
+      - fig2_primary_sweep.decision_label_rule.method
+      - fig2_primary_sweep.decision_labels
+  - claim_id: PC3
+    statement: Identity persistence regions define admissible parameter ranges for a fixed decision identity label.
+    primary_figure: figure3_identity_persistence.svg
+    evidence:
+      - fig3_identity_persistence.regions
+  - claim_id: PC4
+    statement: Boundary transitions with route_changed or edge_order_changed mark reuse failure transitions.
+    primary_figure: figure4_boundary_fracture.svg
+    evidence:
+      - fig4_boundary_fracture.boundaries
+trace_claims:
+  - claim_id: TC1
+    statement: Confidence reuse is admissible for neighbor_weight transitions within label A when no boundary crossing is observed.
+    trace_evidence:
+      - neighbor_weight_baseline_to_perturbed
+      - neighbor_weight_perturbed_to_baseline
+  - claim_id: TC2
+    statement: Confidence reuse is admissible for fixed second_order_weight values within labels A and B.
+    trace_evidence:
+      - second_order_weight_baseline_to_baseline
+      - second_order_weight_perturbed_to_perturbed
+  - claim_id: TC3
+    statement: Confidence reuse is inadmissible across the second_order_weight boundary between labels A and B.
+    trace_evidence:
+      - second_order_weight_baseline_to_perturbed
+      - second_order_weight_perturbed_to_baseline
+  - claim_id: TC4
+    statement: Confidence reuse is inadmissible when moving across sweeps with a decision identity label change.
+    trace_evidence:
+      - cross_sweep_A_to_B
+      - cross_sweep_B_to_A
+  - claim_id: TC5
+    statement: Confidence reuse is inadmissible when the equivalence policy reference differs across contexts.
+    trace_evidence:
+      - equivalence_policy_reference_mismatch
