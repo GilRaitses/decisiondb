@@ -1,0 +1,48 @@
+phase: 1
+phase_name: toy_model_materialization
+agent: Nori
+date: "2026-02-01"
+manifest: toy_model_requirements
+source_index: scripts/2026-01-31/agents/notes/phase0_index.yaml
+figures_requiring_toy_artifacts:
+  - figure_id: 1
+    figure_name: Canonical Decision-Valued Mapping Schematic
+    requirement_type: synthetic_diagram
+    reason: No existing schematic asset in repository. Only textual definitions are present.
+    insufficiency_reason: No existing schematic asset in repository. Only textual definitions are present.
+    source_files:
+      - scripts/2026-01-23/manuscript/sections/core_object.tex
+      - scripts/2026-01-23/manuscript/sections/protocol.tex
+      - scripts/2026-01-23/manuscript/sections/system_design.tex
+      - docs/DecisionDB_reference_architecture.md
+  - figure_id: 2
+    figure_name: Primary Representational Sweep
+    requirement_type: reduced_scope_toy_sweep
+    reason: No full sweep artifacts in repository. Use a minimal sweep from weight variation results.
+    insufficiency_reason: No full sweep artifacts in repository. Use a minimal sweep from weight variation results.
+    source_files:
+      - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+      - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+  - figure_id: 3
+    figure_name: Identity Persistence Regions
+    requirement_type: derived_toy_regions
+    reason: Requires aggregation of sweep variants into persistence regions. No standalone artifact exists.
+    insufficiency_reason: Requires aggregation of sweep variants into persistence regions. No standalone artifact exists.
+    source_files:
+      - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+      - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+  - figure_id: 4
+    figure_name: Boundary and Fracture Localization
+    requirement_type: derived_toy_boundaries
+    reason: Requires explicit boundary annotations from route_changed and edge_order_changed fields. No standalone artifact exists.
+    insufficiency_reason: Requires explicit boundary annotations from route_changed and edge_order_changed fields. No standalone artifact exists.
+    source_files:
+      - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+      - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+figures_not_requiring_toy_artifacts:
+  - figure_id: 5
+    figure_name: Reproducibility Replay Verification
+    reuse_sources:
+      - scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+      - scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+    reason: Replay verification evidence is already logged with recomputed identifiers and table counts.

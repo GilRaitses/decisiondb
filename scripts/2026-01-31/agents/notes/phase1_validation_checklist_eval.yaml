@@ -1,0 +1,136 @@
+phase: 1
+artifact: validation_checklist_evaluation
+date: "2026-02-01"
+checklist_path: scripts/2026-01-31/agents/notes/phase1_validation_checklist.yaml
+inputs_checked:
+  - scripts/2026-01-31/agents/notes/phase0_index.yaml
+  - scripts/2026-01-31/agents/notes/phase1_reusable_artifacts.yaml
+  - scripts/2026-01-31/agents/notes/phase1_toy_model_requirements.yaml
+  - scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+  - scripts/2026-01-31/agents/notes/phase1_figure_captions.md
+results:
+  - id: RH-1
+    description: Phase-0 index exists only at the correct script-day path
+    status: pass
+    evidence:
+      must_exist: scripts/2026-01-31/agents/notes/phase0_index.yaml
+      must_not_exist: agents/notes/phase0_index.yaml
+      observed:
+        phase0_index_paths:
+          - scripts/2026-01-31/agents/notes/phase0_index.yaml
+  - id: RH-2
+    description: No agent-created directories exist at repo root
+    status: pass
+    evidence:
+      forbidden_paths:
+        - agents/
+      observed_root_entries:
+        - checksums.sha256
+        - data/
+        - docs/
+        - inventory.txt
+        - scripts/
+        - src/
+  - id: ST-1
+    description: Every Phase-1 artifact references a source path in phase0_index
+    status: pass
+    evidence:
+      checked_paths:
+        - docs/DecisionDB_reference_architecture.md
+        - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+        - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+        - scripts/2026-01-23/manuscript/sections/core_object.tex
+        - scripts/2026-01-23/manuscript/sections/protocol.tex
+        - scripts/2026-01-23/manuscript/sections/system_design.tex
+        - scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+        - scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+      all_present_in_phase0_index: true
+  - id: ST-2
+    description: No artifact references files outside the indexed repository
+    status: pass
+    evidence:
+      forbidden_reference_types:
+        - external_urls
+        - untracked_paths
+        - hypothetical_sources
+      observed_reference_types: repo_relative_paths_only
+  - id: RT-1
+    description: Reusable artifacts are explicitly separated from toy-required artifacts
+    status: pass
+    evidence:
+      manifests_present:
+        - scripts/2026-01-31/agents/notes/phase1_reusable_artifacts.yaml
+        - scripts/2026-01-31/agents/notes/phase1_toy_model_requirements.yaml
+  - id: RT-2
+    description: Each toy requirement states why reuse is insufficient
+    status: pass
+    evidence:
+      insufficiency_reason_field_present: true
+      figures_checked:
+        - figure_id: 1
+        - figure_id: 2
+        - figure_id: 3
+        - figure_id: 4
+  - id: TS-1
+    description: Transformation map contains only reduction or projection steps
+    status: pass
+    evidence:
+      allowed_operations:
+        - subsampling
+        - aggregation
+        - abstraction
+        - projection
+      observed_steps_summary:
+        - abstraction: entity and relation extraction for schematic
+        - projection: reading and ordering recorded weight variants
+        - aggregation: grouping identical decision identities into regions
+        - projection: boundary marks from recorded change flags
+  - id: TS-2
+    description: No transformation introduces new metrics or claims
+    status: pass
+    evidence:
+      no_new_fields_detected:
+        - performance_metrics
+        - accuracy_scores
+        - comparative_claims
+  - id: FC-1
+    description: Captions describe interfaces and flows, not conclusions
+    status: pass
+    evidence:
+      disallowed_language_detected: false
+  - id: FC-2
+    description: Captions remain consistent with manuscript terminology
+    status: pass
+    evidence:
+      terminology_sources:
+        - scripts/2026-01-23/manuscript/sections/core_object.tex
+        - scripts/2026-01-23/manuscript/sections/system_design.tex
+        - scripts/2026-01-23/manuscript/sections/protocol.tex
+  - id: SC-1
+    description: No modification to existing manuscript files
+    status: pass
+    evidence:
+      modified_paths:
+        - scripts/2026-01-31/agents/notes/phase1_toy_model_requirements.yaml
+        - scripts/2026-01-31/agents/notes/phase1_validation_checklist_eval.yaml
+  - id: SC-2
+    description: No Phase-2 questions or speculative directions introduced
+    status: pass
+    evidence:
+      forbidden_sections_detected: false
+  - id: DD-1
+    description: All outputs can be explained without referencing intent beyond Phase-1
+    status: pass
+    evidence:
+      explanation_scope: phase1_only
+  - id: DD-2
+    description: Omissions are explicitly documented rather than inferred
+    status: pass
+    evidence:
+      missing_artifacts_listed: false
+      note: No missing artifacts were listed in Phase-1 outputs.
+phase_gate:
+  all_required_checks_pass: true
+handoff_decision:
+  next_phase: phase_1_5
+  authorization: granted
