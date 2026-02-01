@@ -1,0 +1,185 @@
+phase: 3
+artifact: reuse_trace_evaluation
+date: "2026-02-01"
+source_phase: phase_2
+inputs:
+  - scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+trace_chain_reference:
+  source: fig1_canonical_schematic
+  chain:
+    - snapshot
+    - representation
+    - engine_run
+    - raw_output
+    - decision_identity
+    - decision_map
+admissibility_rules:
+  - rule_id: compatibility_all_of
+    rule: all_of
+    source: compatibility_conditions.admissibility_logic.rule
+  - rule_id: failure_any_of
+    rule: any_of
+    source: reuse_failure_conditions.failure_logic.rule
+traces:
+  - trace_id: neighbor_weight_baseline_to_perturbed
+    sweep_id: neighbor_weight
+    baseline_variant: neighbor_weight_baseline
+    perturbed_variant: neighbor_weight_perturbed
+    parameters:
+      neighbor_weight:
+        baseline: 0.5
+        perturbed: 1.0
+      second_order_weight: 0.25
+    decision_labels:
+      baseline: A
+      perturbed: A
+    path_nodes_sequence:
+      - 85
+      - 176
+      - 463
+      - 14
+      - 404
+      - 76
+      - 406
+      - 407
+      - 223
+      - 200
+      - 311
+      - 310
+      - 314
+      - 322
+      - 323
+      - 50
+    observables:
+      boundary_marker: "0.5 | 1.0"
+      decision_identity_label: A
+      route_changed_flag: false
+      edge_order_changed_flag: false
+      evidence:
+        - fig2_primary_sweep.sweeps.neighbor_weight
+        - fig4_boundary_fracture.boundaries.neighbor_weight
+        - observables_map.decision_boundaries.neighbor_weight_transition
+    condition_checks:
+      - condition_id: decision_identity_equivalence_policy_fixed
+        status: pass
+        evidence: fig1_canonical_schematic.links.policy_to_identity
+      - condition_id: decision_identity_labeling_rule
+        status: pass
+        evidence: fig2_primary_sweep.decision_label_rule.method
+      - condition_id: decision_map_dependency
+        status: pass
+        evidence: fig1_canonical_schematic.links.representation_to_map
+      - condition_id: raw_output_chain_consistency
+        status: pass
+        evidence: fig1_canonical_schematic.links.snapshot_to_representation
+      - condition_id: representation_stage_stable
+        status: pass
+        evidence: fig1_canonical_schematic.entities.representation
+      - condition_id: representation_to_map_relation_stable
+        status: pass
+        evidence: fig1_canonical_schematic.links.representation_to_map
+      - condition_id: decision_identity_match
+        status: pass
+        evidence: fig2_primary_sweep.sweeps.neighbor_weight
+      - condition_id: within_identity_persistence_region
+        status: pass
+        evidence: fig3_identity_persistence.regions.neighbor_weight.A
+      - condition_id: no_boundary_crossing
+        status: pass
+        evidence: fig4_boundary_fracture.boundaries.neighbor_weight
+    failure_conditions_triggered: []
+    confidence_reuse_admissible: true
+  - trace_id: second_order_weight_baseline_to_perturbed
+    sweep_id: second_order_weight
+    baseline_variant: second_order_weight_baseline
+    perturbed_variant: second_order_weight_perturbed
+    parameters:
+      neighbor_weight: 0.5
+      second_order_weight:
+        baseline: 0.25
+        perturbed: 0.5
+    decision_labels:
+      baseline: A
+      perturbed: B
+    path_nodes_sequence_baseline:
+      - 85
+      - 176
+      - 463
+      - 14
+      - 404
+      - 76
+      - 406
+      - 407
+      - 223
+      - 200
+      - 311
+      - 310
+      - 314
+      - 322
+      - 323
+      - 50
+    path_nodes_sequence_perturbed:
+      - 85
+      - 411
+      - 419
+      - 422
+      - 332
+      - 204
+      - 500
+      - 369
+      - 79
+      - 402
+      - 473
+      - 502
+      - 501
+      - 50
+    observables:
+      boundary_marker: "0.25 | 0.5"
+      decision_identity_label: B
+      route_changed_flag: true
+      edge_order_changed_flag: true
+      evidence:
+        - fig2_primary_sweep.sweeps.second_order_weight
+        - fig4_boundary_fracture.boundaries.second_order_weight
+        - observables_map.decision_boundaries.second_order_weight_transition
+    condition_checks:
+      - condition_id: decision_identity_equivalence_policy_fixed
+        status: pass
+        evidence: fig1_canonical_schematic.links.policy_to_identity
+      - condition_id: decision_identity_labeling_rule
+        status: pass
+        evidence: fig2_primary_sweep.decision_label_rule.method
+      - condition_id: decision_map_dependency
+        status: pass
+        evidence: fig1_canonical_schematic.links.representation_to_map
+      - condition_id: raw_output_chain_consistency
+        status: pass
+        evidence: fig1_canonical_schematic.links.snapshot_to_representation
+      - condition_id: representation_stage_stable
+        status: pass
+        evidence: fig1_canonical_schematic.entities.representation
+      - condition_id: representation_to_map_relation_stable
+        status: pass
+        evidence: fig1_canonical_schematic.links.representation_to_map
+      - condition_id: decision_identity_match
+        status: fail
+        evidence: fig2_primary_sweep.sweeps.second_order_weight
+      - condition_id: within_identity_persistence_region
+        status: fail
+        evidence: fig3_identity_persistence.regions.second_order_weight
+      - condition_id: no_boundary_crossing
+        status: fail
+        evidence: fig4_boundary_fracture.boundaries.second_order_weight
+    failure_conditions_triggered:
+      - decision_identity_label_changed
+      - boundary_route_changed
+      - boundary_edge_order_changed
+      - outside_identity_region
+    confidence_reuse_admissible: false
