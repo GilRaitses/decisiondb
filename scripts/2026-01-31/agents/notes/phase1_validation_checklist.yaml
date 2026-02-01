@@ -1,0 +1,158 @@
+phase: 1
+artifact: validation_checklist
+date: "2026-01-31"
+
+purpose:
+  Verify that Phase-1 outputs correctly materialize toy-model intent and figure
+  feasibility without altering claims, scope, or analysis, and that they are
+  safe to hand off to Phase-1.5.
+
+inputs_required:
+  - scripts/2026-01-31/agents/notes/phase0_index.yaml
+  - scripts/2026-01-31/agents/notes/phase1_reusable_artifacts.yaml
+  - scripts/2026-01-31/agents/notes/phase1_toy_model_requirements.yaml
+  - scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+  - scripts/2026-01-31/agents/notes/phase1_figure_captions.md
+
+checks:
+  repository_hygiene:
+    - id: RH-1
+      description: Phase-0 index exists only at the correct script-day path
+      condition:
+        must_exist: scripts/2026-01-31/agents/notes/phase0_index.yaml
+        must_not_exist: agents/notes/phase0_index.yaml
+      status: required
+
+    - id: RH-2
+      description: No agent-created directories exist at repo root
+      condition:
+        forbidden_paths:
+          - agents/
+      status: required
+
+  source_traceability:
+    - id: ST-1
+      description: Every Phase-1 artifact references a source path in phase0_index
+      condition:
+        each_entry_in:
+          - phase1_reusable_artifacts.yaml
+          - phase1_transformation_map.yaml
+        must_reference: phase0_index.yaml
+      status: required
+
+    - id: ST-2
+      description: No artifact references files outside the indexed repository
+      condition:
+        forbidden_reference_types:
+          - external_urls
+          - untracked_paths
+          - hypothetical_sources
+      status: required
+
+  reuse_vs_toy_boundary:
+    - id: RT-1
+      description: Reusable artifacts are explicitly separated from toy-required artifacts
+      condition:
+        manifests_present:
+          - phase1_reusable_artifacts.yaml
+          - phase1_toy_model_requirements.yaml
+      status: required
+
+    - id: RT-2
+      description: Each toy requirement states why reuse is insufficient
+      condition:
+        each_entry_has:
+          - insufficiency_reason
+      status: required
+
+  transformation_safety:
+    - id: TS-1
+      description: Transformation map contains only reduction or projection steps
+      condition:
+        allowed_operations:
+          - subsampling
+          - aggregation
+          - abstraction
+          - projection
+        forbidden_operations:
+          - reoptimization
+          - relabeling
+          - threshold_tuning
+      status: required
+
+    - id: TS-2
+      description: No transformation introduces new metrics or claims
+      condition:
+        no_new_fields:
+          - performance_metrics
+          - accuracy_scores
+          - comparative_claims
+      status: required
+
+  figure_caption_integrity:
+    - id: FC-1
+      description: Captions describe interfaces and flows, not conclusions
+      condition:
+        captions_must_not_contain:
+          - improvement_language
+          - comparative_language
+          - evaluative_adjectives
+      status: required
+
+    - id: FC-2
+      description: Captions remain consistent with manuscript terminology
+      condition:
+        no_new_terms_introduced: true
+      status: required
+
+  scope_control:
+    - id: SC-1
+      description: No modification to existing manuscript files
+      condition:
+        unchanged_paths:
+          - manuscript/
+          - analysis/
+      status: required
+
+    - id: SC-2
+      description: No Phase-2 questions or speculative directions introduced
+      condition:
+        forbidden_sections:
+          - future_work
+          - open_questions
+          - extensions
+      status: required
+
+  drift_detection:
+    - id: DD-1
+      description: All outputs can be explained without referencing intent beyond Phase-1
+      condition:
+        explanation_scope: phase1_only
+      status: required
+
+    - id: DD-2
+      description: Omissions are explicitly documented rather than inferred
+      condition:
+        missing_artifacts_have:
+          - explicit_block_reason
+      status: required
+
+phase_gate:
+  pass_conditions:
+    - all_required_checks_pass: true
+  fail_conditions:
+    - any_required_check_fails: true
+
+handoff_decision:
+  if_pass:
+    next_phase: phase_1_5
+    authorization: granted
+  if_fail:
+    next_phase: phase_1
+    authorization: denied
+    action: revise_phase1_outputs
+
+reviewer_note:
+  instruction: >
+    This checklist evaluates correctness and containment only. It does not
+    assess usefulness, novelty, or readiness for publication.
