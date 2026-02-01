@@ -1,0 +1,34 @@
+phase: phase_2_3
+report_type: completion_report
+status: complete
+
+summary:
+  outcome: new_justification_required
+  basis: context_presence_or_mismatch_only
+  slice_id: camera_stress_scores_to_route_selection
+
+outputs:
+  - scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_3_compatibility_evaluation.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_3_trace_walkthrough.yaml
+
+scope_attestations:
+  - no_model_modification: true
+  - no_metric_recomputation: true
+  - no_calibration: true
+  - no_logging_change: true
+
+inputs_used:
+  - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+
+inputs_missing_from_handoff:
+  - scripts/2026-02-01/agents/work-tree/audit/phase2_2a_path_resolution.completion_report.yaml
+  - scripts/2026-02-01/agents/work-tree/audit/phase2_2a_candidate_path_map.yaml
+  - scripts/2026-02-01/agents/work-tree/audit/phase2_2a_missing_paths.yaml
+
+audit_log:
+  path: scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log

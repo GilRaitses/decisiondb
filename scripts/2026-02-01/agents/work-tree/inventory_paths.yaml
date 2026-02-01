@@ -66,6 +66,36 @@ files:
     exists: true
     evidence:
       - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_3_compatibility_evaluation.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_3_compatibility_evaluation.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_3_trace_walkthrough.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_3_trace_walkthrough.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_3_completion_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_3_completion_report.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+    relative_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
   - path: "/workspace/scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
     relative_path: "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
     exists: true

@@ -1,0 +1,126 @@
+# scripts/2026-02-01/agents/handoffs/phase2-3.yaml
+# STATUS: AUTHORIZED - EXECUTE AS WRITTEN
+# PHASE: 2-3
+# NAME: Pax Grounding Slice
+
+phase: "2-3"
+agent_codename: "<agent_name>"
+execution_window: "<start_date> -> <end_date>"
+
+mission:
+  objective: >
+    Ground Phase 2-2 context sufficiency and compatibility rules in one concrete Pax reuse slice.
+    Produce a deterministic trace walkthrough that ends in one of two outcomes.
+    Outcome A is admissible reuse.
+    Outcome B is new justification required.
+  success_criterion: >
+    The outcome must be derived from context presence or mismatch alone.
+    No confidence magnitude, accuracy, recalibration, or model change may be used.
+
+scope_constraints:
+  allowed_actions:
+    - "Read and reference frozen Phase 2_0, Phase 2_1, Phase 2_2, and Phase 2_2a artifacts"
+    - "Select exactly one Pax reuse path for the grounding slice"
+    - "Bind Pax objects to the Phase 2 context schema fields"
+    - "Apply Phase 2 compatibility rules to the chosen slice"
+    - "Write a trace walkthrough with explicit field-level justification for the final outcome"
+    - "Update inventory_paths.yaml only to add references to Phase 2-3 outputs"
+  prohibited_actions:
+    - "Any model modification"
+    - "Any metric recomputation"
+    - "Any calibration or recalibration"
+    - "Any changes to logging or instrumentation"
+    - "Any schema restructuring"
+    - "Any edits to frozen artifacts"
+    - "Any new data capture requirements stated as a requirement for phase completion"
+
+authoritative_inputs:
+  frozen_artifacts:
+    phase2_0:
+      - "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+      - "scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml"
+      - "scripts/2026-02-01/agents/work-tree/architecture_map.yaml"
+      - "scripts/2026-02-01/agents/work-tree/reuse_paths.yaml"
+      - "scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml"
+    phase2_1:
+      - "scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+      - "scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml"
+      - "scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml"
+    phase2_2:
+      - "scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+      - "scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+      - "scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+      - "scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+    phase2_2a:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2a_path_resolution.completion_report.yaml"
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2a_candidate_path_map.yaml"
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2a_missing_paths.yaml"
+
+selection_rule:
+  pax_reuse_slice:
+    choose_from: "scripts/2026-02-01/agents/work-tree/reuse_paths.yaml"
+    choose_exactly_one: true
+    selection_record_path: "scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml"
+    selection_record_fields:
+      - "slice_id"
+      - "source_artifacts"
+      - "target_artifacts"
+      - "intended_reuse_claim"
+
+required_outputs:
+  pax_context_binding_table:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml"
+    description: >
+      A field-by-field binding table.
+      Each required context field must map to a concrete Pax source path or to explicit missingness.
+  compatibility_evaluation:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_3_compatibility_evaluation.yaml"
+    description: >
+      Deterministic application of Phase 2 compatibility rules to the chosen slice.
+      Must produce a final decision plus the exact fields that drove it.
+  reuse_trace_walkthrough:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_3_trace_walkthrough.yaml"
+    description: >
+      A short trace narrative in YAML.
+      It must name the reuse slice, list required context, list present context, list missing context,
+      and end with either admissible_reuse or new_justification_required.
+  completion_report:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_3_completion_report.yaml"
+    description: >
+      Phase 2-3 completion report with scope attestations and a clean pointer set.
+  inventory_update:
+    path: "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+    description: >
+      Update is limited to adding references to Phase 2-3 outputs.
+
+execution_requirements:
+  basis_of_decision: "context_presence_or_mismatch_only"
+  confidence_values_used: false
+  accuracy_metrics_used: false
+  recalibration_used: false
+  model_changes_used: false
+
+validation_checks:
+  - "Selected slice is recorded in phase2_3_selected_reuse_slice.yaml"
+  - "Every required context field has a binding or explicit missingness"
+  - "Compatibility decision cites only context fields and rule ids"
+  - "Trace walkthrough decision matches compatibility_evaluation decision"
+  - "inventory_paths.yaml lists all Phase 2-3 outputs"
+  - "ReadLints clean on all produced YAML"
+
+handoff_conditions:
+  completion_requires:
+    - "All required outputs exist at the declared paths"
+    - "Completion report includes truthful scope attestations"
+    - "No prohibited actions occurred"
+  authorize_next_phase: "2-4"
+
+logging:
+  audit_log_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  record_commands: true
+  record_decisions: true
+  record_file_diffs: true
+
+signoff:
+  agent_signature: "<agent_name>"
+  timestamp: "<ISO-8601>"
