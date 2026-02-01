@@ -1,0 +1,3 @@
+trace_id,task_id,abstraction_level,input_regime,assumption_set,confidence,downstream_task,compatibility_result,action_required
+T1,A,event-level,regime_1,S_1,0.82,B,compatible,reuse_allowed
+T2,A,event-level,regime_2,S_1,0.79,B,incompatible,new_justification
