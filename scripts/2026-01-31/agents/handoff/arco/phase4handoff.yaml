@@ -1,0 +1,94 @@
+phase: 4
+name: phase4_external_review_readiness
+owner: agent_phase4
+authorization: granted_after_phase3
+
+intent:
+  Prepare the project for external technical review by hardening trace coverage,
+  clarifying boundaries, and eliminating common misinterpretations without introducing
+  new mechanisms or claims.
+
+inputs:
+  required:
+    - scripts/2026-01-31/agents/work-tree/phase1_5_completion_report.yaml
+    - scripts/2026-01-31/agents/work-tree/figure_inventory.yaml
+    - scripts/2026-01-31/agents/work-tree/validation_report.yaml
+    - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+    - scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml
+    - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+    - scripts/2026-01-31/agents/work-tree/phase3_trace_walkthroughs.yaml
+    - scripts/2026-01-31/agents/work-tree/phase3_observables_failure_mapping.yaml
+
+scope:
+  include:
+    - expansion_of_admissible_reuse_traces
+    - expansion_of_inadmissible_reuse_traces
+    - variation_across_task_structure
+    - variation_across_abstraction_levels
+    - clarification_of_what_becomes_observable
+    - strengthening_reviewer_facing_boundaries
+  exclude:
+    - new_mechanisms
+    - new_design_principles
+    - model_capability_claims
+    - performance_optimization
+    - reward_design
+    - deployment_guarantees
+    - naming_or_implying_internal_systems
+
+deliverables:
+  required:
+    - extended_trace_set.yaml
+    - appendix_trace_figures.yaml
+    - limitations_section_draft.md
+    - comparison_section_draft.md
+    - phase4_review_readiness_report.yaml
+  optional:
+    - reviewer_confusion_matrix.yaml
+
+constraints:
+  invariants:
+    - preserve_phase1_5_mechanism
+    - preserve_phase3_interfaces
+    - confidence_reuse_requires_context
+    - compatibility_checks_precede_reuse
+  prohibitions:
+    - do_not_reframe_as_calibration
+    - do_not_reframe_as_logging
+    - do_not_reframe_as_evaluation
+    - do_not_introduce_new_terms
+    - do_not_add_quantitative_claims
+
+checks:
+  trace_coverage:
+    - at_least_three_new_admissible_traces
+    - at_least_three_new_inadmissible_traces
+    - at_least_two_task_structure_variations
+    - at_least_two_abstraction_transitions
+  observability:
+    - each_trace_identifies_newly_visible_condition
+    - no_trace_described_only_as_accuracy_drop
+  reviewer_defensibility:
+    - failure_modes_not_reducible_to_overfitting
+    - failure_modes_not_reducible_to_distribution_shift
+    - novelty_claim_supported_by_reuse_traceability
+
+output_rules:
+  format:
+    - yaml_for_structured_artifacts
+    - markdown_for_section_drafts
+  location:
+    base: scripts/2026-01-31/agents/work-tree
+    notes: scripts/2026-01-31/agents/notes
+  naming:
+    - use_phase4_prefix
+    - deterministic_filenames_only
+
+handoff_conditions:
+  completion_requires:
+    - all_required_deliverables_present
+    - all_checks_passed
+    - phase4_review_readiness_report.yaml_authorizes_next_phase
+  next_phase:
+    authorized: phase_5
+    blocked_until: explicit_owner_approval
