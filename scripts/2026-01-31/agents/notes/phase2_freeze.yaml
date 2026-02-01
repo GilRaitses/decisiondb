@@ -1,0 +1,19 @@
+phase: 2
+artifact: phase2_freeze
+date: "2026-02-01"
+status: complete
+frozen_artifacts:
+  - scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+  - scripts/2026-01-31/agents/notes/phase2_review_checklist_eval.yaml
+scope_exclusions:
+  - no_new_concepts_beyond_phase_1_5_figures
+  - no_training_optimization_reward
+  - no_capability_calibration_evaluation_tooling
+  - no_new_components_or_infrastructure
+  - no_storage_or_api_commitments
+  - no_new_diagrams_or_figures
+recommendation_non_binding:
+  phase_3_consideration: Review admissibility decisions using Phase 2 conditions, invariants, failure conditions, and observables only.
