@@ -1,0 +1,42 @@
+phase: 3
+artifact: phase3_observables_failure_mapping
+date: "2026-02-01"
+source_phase: phase_2
+inputs:
+  - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+mapping:
+  - observable_id: equivalence_policy_reference
+    observable_source: observables_map.observables.equivalence_policy_reference
+    failure_condition_id: equivalence_policy_changed
+    failure_source: reuse_failure_conditions.failure_conditions.decision_context
+    figure_reference: fig1_canonical_schematic.links.policy_to_identity
+  - observable_id: path_nodes_sequence
+    observable_source: observables_map.observables.path_nodes_sequence
+    failure_condition_id: decision_identity_label_changed
+    failure_source: reuse_failure_conditions.failure_conditions.decision_context
+    figure_reference: fig2_primary_sweep.decision_labels
+  - observable_id: decision_identity_label
+    observable_source: observables_map.observables.decision_identity_label
+    failure_condition_id: decision_identity_label_changed
+    failure_source: reuse_failure_conditions.failure_conditions.decision_context
+    figure_reference: fig2_primary_sweep.sweeps
+  - observable_id: identity_persistence_region
+    observable_source: observables_map.observables.identity_persistence_region
+    failure_condition_id: outside_identity_region
+    failure_source: reuse_failure_conditions.failure_conditions.input_regime
+    figure_reference: fig3_identity_persistence.regions
+  - observable_id: route_changed_flag
+    observable_source: observables_map.observables.route_changed_flag
+    failure_condition_id: boundary_route_changed
+    failure_source: reuse_failure_conditions.failure_conditions.input_regime
+    figure_reference: fig4_boundary_fracture.boundaries
+  - observable_id: edge_order_changed_flag
+    observable_source: observables_map.observables.edge_order_changed_flag
+    failure_condition_id: boundary_edge_order_changed
+    failure_source: reuse_failure_conditions.failure_conditions.input_regime
+    figure_reference: fig4_boundary_fracture.boundaries
