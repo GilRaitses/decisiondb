@@ -1,0 +1,207 @@
+handoff_id: phase2_phase0_inventory
+phase: "phase_2"
+subphase: "phase_2_phase_0_inventory"
+agent_codename: "phase2-scout"
+date: "2026-02-01"
+
+intent:
+  primary: "Produce a deterministic inventory map of the Pax project frozen snapshot, with file paths, data lineage edges, and execution entrypoints."
+  secondary: "Produce a schema-ready mapping that lets Phase 2 apply the Phase 1.5 context compatibility artifact to real Pax reuse paths."
+
+scope:
+  in_scope:
+    - "Repo inventory of code, data, configs, notebooks, and build scripts."
+    - "Locate the frozen snapshot inputs used for the Pax project."
+    - "Map architectures at the level of modules, interfaces, and data objects."
+    - "Identify reuse paths where intermediate metrics become downstream decision inputs."
+    - "Identify where context variables exist or can be derived without new collection."
+  out_of_scope:
+    - "Training, tuning, or recalibration of any model."
+    - "Editing frozen artifacts, figures, or manuscripts."
+    - "Adding new claims, benchmarks, or performance results."
+    - "Collecting new data or expanding labeling."
+    - "Renaming files or reorganizing directories."
+
+hard_constraints:
+  no_modification_targets:
+    - "phase_crosslineage_map.yaml"
+    - "scripts/**/agents/**/phase*_freeze*.yaml"
+    - "scripts/**/agents/**/completion_report.yaml"
+    - "submission_bundle/**"
+    - "manuscript sources and compiled PDFs"
+  output_format:
+    - "All deliverables as YAML unless the artifact is inherently binary."
+    - "All paths must be absolute from repo root and also recorded as relative."
+  language_style:
+    - "Avoid triads with comma and."
+    - "Avoid backward-pointing pronouns that require cross paragraph resolution."
+
+calibration_and_validation:
+  goal: "Prove you can enumerate repo structure, extract path references, and map lineage without altering content."
+  required_checks:
+    - id: CAL-1
+      name: "read_only_safety_check"
+      method: "Confirm git status clean before and after. Confirm no tracked file content changes."
+      evidence:
+        - "audit/console.log contains git status output at start and end"
+    - id: CAL-2
+      name: "path_resolution_check"
+      method: "Every recorded path must exist. Provide existence checks for each path."
+      evidence:
+        - "inventory_paths.yaml includes exists: true for each path"
+    - id: CAL-3
+      name: "entrypoint_verification"
+      method: "Identify at least one reproducible entrypoint for each major pipeline stage, without running heavy jobs."
+      evidence:
+        - "architecture_map.yaml lists entrypoints with command stubs"
+    - id: CAL-4
+      name: "frozen_snapshot_identification"
+      method: "Locate the frozen snapshot reference, record commit tag, or frozen artifact pointer used by Pax."
+      evidence:
+        - "frozen_snapshot.yaml records refs and provenance"
+    - id: CAL-5
+      name: "reuse_path_extraction"
+      method: "Extract at least two candidate reuse paths that match the Phase 1.5 artifact shape."
+      evidence:
+        - "reuse_paths.yaml includes two paths with upstream metric and downstream decision usage"
+
+inputs_known:
+  repo_root_hint: "."
+  src_folder_hint: "src/"
+  prior_phase_artifacts_hint:
+    - "scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml"
+    - "scripts/2026-02-01/agents/handoffs/artifacts/context_compatibility_trace_table.tex"
+  invariants_hint:
+    - "phase_crosslineage_map.yaml"
+    - "scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml"
+
+work_locations:
+  base_dir: "scripts/2026-02-01/agents"
+  notes_dir: "scripts/2026-02-01/agents/notes"
+  work_tree_dir: "scripts/2026-02-01/agents/work-tree"
+  handoffs_dir: "scripts/2026-02-01/agents/handoffs"
+  audit_dir: "scripts/2026-02-01/agents/work-tree/audit"
+
+deliverables:
+  - path: "scripts/2026-02-01/agents/work-tree/audit/phase2_phase0.console.log"
+    type: "text"
+    required_content:
+      - "All shell commands run with raw output"
+      - "Start and end git status"
+  - path: "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+    type: "yaml"
+    purpose: "Deterministic path inventory with existence checks."
+    required_fields:
+      - "files"
+      - "directories"
+      - "data_assets"
+      - "configs"
+      - "notebooks"
+      - "scripts"
+  - path: "scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml"
+    type: "yaml"
+    purpose: "Where Pax frozen snapshot lives and how it is referenced."
+    required_fields:
+      - "snapshot_ref_type"
+      - "snapshot_ref_value"
+      - "paths"
+      - "provenance_notes"
+  - path: "scripts/2026-02-01/agents/work-tree/architecture_map.yaml"
+    type: "yaml"
+    purpose: "High level module map plus entrypoints and data objects."
+    required_fields:
+      - "modules"
+      - "interfaces"
+      - "data_objects"
+      - "entrypoints"
+  - path: "scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml"
+    type: "yaml"
+    purpose: "Edges from raw inputs to intermediate metrics to downstream decisions."
+    required_fields:
+      - "nodes"
+      - "edges"
+      - "node_types"
+      - "edge_types"
+  - path: "scripts/2026-02-01/agents/work-tree/reuse_paths.yaml"
+    type: "yaml"
+    purpose: "Candidate reuse paths suitable for Phase 2 context compatibility application."
+    required_fields:
+      - "reuse_paths"
+      - "upstream_metric"
+      - "downstream_decision"
+      - "context_variables"
+      - "evidence_paths"
+  - path: "scripts/2026-02-01/agents/work-tree/phase2_phase0_completion_report.yaml"
+    type: "yaml"
+    purpose: "Declare readiness for Phase 2 proper."
+    required_fields:
+      - "calibration_results"
+      - "blockers"
+      - "ready_for_phase2"
+      - "recommended_next_steps"
+
+procedure:
+  - step_id: P0-1
+    name: "initialize_audit"
+    actions:
+      - "Create audit directory under work-tree."
+      - "Start console log."
+      - "Record repo root, current branch, git status."
+  - step_id: P0-2
+    name: "inventory_repo"
+    actions:
+      - "Enumerate top level directories."
+      - "Enumerate src tree."
+      - "Enumerate scripts tree for frozen artifacts."
+      - "Write inventory_paths.yaml with exists checks."
+  - step_id: P0-3
+    name: "locate_frozen_snapshot"
+    actions:
+      - "Search configs, manifests, and scripts for snapshot refs."
+      - "Record snapshot ref in frozen_snapshot.yaml."
+      - "Do not edit refs."
+  - step_id: P0-4
+    name: "map_architecture"
+    actions:
+      - "Identify pipeline stages as modules."
+      - "Identify data objects passed between stages."
+      - "Identify entrypoints and expected inputs."
+      - "Write architecture_map.yaml."
+  - step_id: P0-5
+    name: "extract_lineage_and_reuse_paths"
+    actions:
+      - "Build nodes and edges for lineage graph."
+      - "Select at least two reuse paths where an upstream metric influences a downstream decision."
+      - "For each reuse path, list candidate context variables available from existing artifacts."
+      - "Write data_lineage_graph.yaml and reuse_paths.yaml."
+  - step_id: P0-6
+    name: "calibration_checks"
+    actions:
+      - "Run CAL-1 through CAL-5 and record evidence pointers."
+      - "If any check fails, list blockers and stop."
+  - step_id: P0-7
+    name: "completion_report"
+    actions:
+      - "Write phase2_phase0_completion_report.yaml."
+      - "Set ready_for_phase2 true only if all checks pass."
+
+success_criteria:
+  must_pass:
+    - "All CAL checks pass."
+    - "At least two reuse paths recorded with evidence paths."
+    - "Frozen snapshot reference located and recorded."
+    - "No tracked file content changes."
+  nice_to_have:
+    - "A minimal mapping from reuse path context variables to Phase 1.5 table fields."
+
+phase2_phase0_authorization:
+  allowed_to_merge: false
+  allowed_to_open_pr: true
+  allowed_to_run_heavy_jobs: false
+  allowed_to_add_new_code: false
+  allowed_to_add_yaml_only: true
+
+cover_note_for_new_agent: |
+  You are running Phase 2 Phase 0. The job is inventory and mapping only. You will locate the frozen snapshot inputs for the Pax project. You will map how data, code, configs, and artifacts relate. You will not change any frozen files. You will write YAML outputs that let the next phase apply the Phase 1.5 context compatibility artifact without guessing paths or architecture.
+
+  Store all work under scripts/2026-02-01/agents/. Put notes in scripts/2026-02-01/agents/notes/. Put deliverables in scripts/2026-02-01/agents/work-tree/. Put the handoff outputs in scripts/2026-02-01/agents/handoffs/. Maintain an audit log of every command you run and capture raw console output.
