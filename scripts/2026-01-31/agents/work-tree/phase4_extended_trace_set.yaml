@@ -1,0 +1,389 @@
+phase: 4
+artifact: phase4_extended_trace_set
+date: "2026-02-01"
+source_phase: phase_3
+inputs:
+  - scripts/2026-01-31/agents/work-tree/phase3_trace_walkthroughs.yaml
+  - scripts/2026-01-31/agents/work-tree/phase3_observables_failure_mapping.yaml
+  - scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml
+  - scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml
+  - scripts/2026-01-31/agents/work-tree/observables_map.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+trace_counts:
+  admissible_total: 5
+  inadmissible_total: 5
+  new_admissible_in_phase4: 4
+  new_inadmissible_in_phase4: 4
+trace_set:
+  - trace_id: neighbor_weight_baseline_to_perturbed
+    reuse_decision: admissible
+    new_in_phase4: false
+    task_structure_variant: within_sweep_transition
+    abstraction_level_focus: representation_stage
+    source_context:
+      sweep_id: neighbor_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    target_context:
+      sweep_id: neighbor_weight
+      parameters:
+        neighbor_weight: 1.0
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    observables:
+      decision_identity_label:
+        source: A
+        target: A
+        evidence: fig2_primary_sweep.sweeps.neighbor_weight
+      identity_persistence_region:
+        label: A
+        evidence: fig3_identity_persistence.regions.neighbor_weight
+      route_changed_flag:
+        value: false
+        evidence: fig4_boundary_fracture.boundaries.neighbor_weight
+      edge_order_changed_flag:
+        value: false
+        evidence: fig4_boundary_fracture.boundaries.neighbor_weight
+    newly_visible_condition: within_identity_persistence_region
+    condition_checks:
+      - id: decision_identity_match
+        status: pass
+      - id: within_identity_persistence_region
+        status: pass
+      - id: no_boundary_crossing
+        status: pass
+    failure_conditions_triggered: []
+  - trace_id: neighbor_weight_perturbed_to_baseline
+    reuse_decision: admissible
+    new_in_phase4: true
+    task_structure_variant: within_sweep_transition
+    abstraction_level_focus: representation_stage
+    source_context:
+      sweep_id: neighbor_weight
+      parameters:
+        neighbor_weight: 1.0
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    target_context:
+      sweep_id: neighbor_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    observables:
+      decision_identity_label:
+        source: A
+        target: A
+        evidence: fig2_primary_sweep.sweeps.neighbor_weight
+      identity_persistence_region:
+        label: A
+        evidence: fig3_identity_persistence.regions.neighbor_weight
+      route_changed_flag:
+        value: false
+        evidence: fig4_boundary_fracture.boundaries.neighbor_weight
+      edge_order_changed_flag:
+        value: false
+        evidence: fig4_boundary_fracture.boundaries.neighbor_weight
+    newly_visible_condition: no_boundary_crossing
+    condition_checks:
+      - id: decision_identity_match
+        status: pass
+      - id: within_identity_persistence_region
+        status: pass
+      - id: no_boundary_crossing
+        status: pass
+    failure_conditions_triggered: []
+  - trace_id: neighbor_weight_baseline_to_baseline
+    reuse_decision: admissible
+    new_in_phase4: true
+    task_structure_variant: within_sweep_static
+    abstraction_level_focus: decision_map_relation
+    source_context:
+      sweep_id: neighbor_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    target_context:
+      sweep_id: neighbor_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    observables:
+      decision_identity_label:
+        source: A
+        target: A
+        evidence: fig2_primary_sweep.sweeps.neighbor_weight
+      identity_persistence_region:
+        label: A
+        evidence: fig3_identity_persistence.regions.neighbor_weight
+    newly_visible_condition: decision_identity_match
+    condition_checks:
+      - id: decision_identity_match
+        status: pass
+      - id: within_identity_persistence_region
+        status: pass
+    failure_conditions_triggered: []
+  - trace_id: second_order_weight_baseline_to_baseline
+    reuse_decision: admissible
+    new_in_phase4: true
+    task_structure_variant: within_sweep_static
+    abstraction_level_focus: decision_map_relation
+    source_context:
+      sweep_id: second_order_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    target_context:
+      sweep_id: second_order_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    observables:
+      decision_identity_label:
+        source: A
+        target: A
+        evidence: fig2_primary_sweep.sweeps.second_order_weight
+      identity_persistence_region:
+        label: A
+        evidence: fig3_identity_persistence.regions.second_order_weight
+    newly_visible_condition: within_identity_persistence_region
+    condition_checks:
+      - id: decision_identity_match
+        status: pass
+      - id: within_identity_persistence_region
+        status: pass
+    failure_conditions_triggered: []
+  - trace_id: second_order_weight_perturbed_to_perturbed
+    reuse_decision: admissible
+    new_in_phase4: true
+    task_structure_variant: within_sweep_static
+    abstraction_level_focus: decision_map_relation
+    source_context:
+      sweep_id: second_order_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.5
+      decision_identity_label: B
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.B
+    target_context:
+      sweep_id: second_order_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.5
+      decision_identity_label: B
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.B
+    observables:
+      decision_identity_label:
+        source: B
+        target: B
+        evidence: fig2_primary_sweep.sweeps.second_order_weight
+      identity_persistence_region:
+        label: B
+        evidence: fig3_identity_persistence.regions.second_order_weight
+    newly_visible_condition: decision_identity_match
+    condition_checks:
+      - id: decision_identity_match
+        status: pass
+      - id: within_identity_persistence_region
+        status: pass
+    failure_conditions_triggered: []
+  - trace_id: second_order_weight_baseline_to_perturbed
+    reuse_decision: inadmissible
+    new_in_phase4: false
+    task_structure_variant: within_sweep_transition
+    abstraction_level_focus: representation_stage
+    source_context:
+      sweep_id: second_order_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    target_context:
+      sweep_id: second_order_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.5
+      decision_identity_label: B
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.B
+    observables:
+      decision_identity_label:
+        source: A
+        target: B
+        evidence: fig2_primary_sweep.sweeps.second_order_weight
+      identity_persistence_region:
+        label: B
+        evidence: fig3_identity_persistence.regions.second_order_weight
+      route_changed_flag:
+        value: true
+        evidence: fig4_boundary_fracture.boundaries.second_order_weight
+      edge_order_changed_flag:
+        value: true
+        evidence: fig4_boundary_fracture.boundaries.second_order_weight
+    newly_visible_condition: boundary_route_changed
+    condition_checks:
+      - id: decision_identity_match
+        status: fail
+      - id: within_identity_persistence_region
+        status: fail
+      - id: no_boundary_crossing
+        status: fail
+    failure_conditions_triggered:
+      - decision_identity_label_changed
+      - boundary_route_changed
+      - boundary_edge_order_changed
+      - outside_identity_region
+  - trace_id: second_order_weight_perturbed_to_baseline
+    reuse_decision: inadmissible
+    new_in_phase4: true
+    task_structure_variant: within_sweep_transition
+    abstraction_level_focus: representation_stage
+    source_context:
+      sweep_id: second_order_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.5
+      decision_identity_label: B
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.B
+    target_context:
+      sweep_id: second_order_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    observables:
+      decision_identity_label:
+        source: B
+        target: A
+        evidence: fig2_primary_sweep.sweeps.second_order_weight
+      identity_persistence_region:
+        label: A
+        evidence: fig3_identity_persistence.regions.second_order_weight
+      route_changed_flag:
+        value: true
+        evidence: fig4_boundary_fracture.boundaries.second_order_weight
+      edge_order_changed_flag:
+        value: true
+        evidence: fig4_boundary_fracture.boundaries.second_order_weight
+    newly_visible_condition: boundary_edge_order_changed
+    condition_checks:
+      - id: decision_identity_match
+        status: fail
+      - id: within_identity_persistence_region
+        status: fail
+      - id: no_boundary_crossing
+        status: fail
+    failure_conditions_triggered:
+      - decision_identity_label_changed
+      - boundary_route_changed
+      - boundary_edge_order_changed
+      - outside_identity_region
+  - trace_id: cross_sweep_A_to_B
+    reuse_decision: inadmissible
+    new_in_phase4: true
+    task_structure_variant: cross_sweep_context
+    abstraction_level_focus: decision_map_relation
+    source_context:
+      sweep_id: neighbor_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    target_context:
+      sweep_id: second_order_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.5
+      decision_identity_label: B
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.B
+    observables:
+      decision_identity_label:
+        source: A
+        target: B
+        evidence: fig2_primary_sweep.decision_labels
+      path_nodes_sequence:
+        source: fig2_primary_sweep.decision_labels.A
+        target: fig2_primary_sweep.decision_labels.B
+    newly_visible_condition: decision_identity_label_changed
+    condition_checks:
+      - id: decision_identity_match
+        status: fail
+    failure_conditions_triggered:
+      - decision_identity_label_changed
+  - trace_id: cross_sweep_B_to_A
+    reuse_decision: inadmissible
+    new_in_phase4: true
+    task_structure_variant: cross_sweep_context
+    abstraction_level_focus: decision_map_relation
+    source_context:
+      sweep_id: second_order_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.5
+      decision_identity_label: B
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.B
+    target_context:
+      sweep_id: neighbor_weight
+      parameters:
+        neighbor_weight: 0.5
+        second_order_weight: 0.25
+      decision_identity_label: A
+      path_nodes_sequence_ref: fig2_primary_sweep.decision_labels.A
+    observables:
+      decision_identity_label:
+        source: B
+        target: A
+        evidence: fig2_primary_sweep.decision_labels
+      path_nodes_sequence:
+        source: fig2_primary_sweep.decision_labels.B
+        target: fig2_primary_sweep.decision_labels.A
+    newly_visible_condition: decision_identity_label_changed
+    condition_checks:
+      - id: decision_identity_match
+        status: fail
+    failure_conditions_triggered:
+      - decision_identity_label_changed
+  - trace_id: equivalence_policy_reference_mismatch
+    reuse_decision: inadmissible
+    new_in_phase4: true
+    task_structure_variant: decision_context_shift
+    abstraction_level_focus: representation_stage
+    source_context:
+      decision_identity_label: A
+      equivalence_policy_reference: source_policy_reference
+      evidence: fig1_canonical_schematic.links.policy_to_identity
+    target_context:
+      decision_identity_label: A
+      equivalence_policy_reference: target_policy_reference
+      evidence: fig1_canonical_schematic.links.policy_to_identity
+    observables:
+      equivalence_policy_reference:
+        source: source_policy_reference
+        target: target_policy_reference
+        evidence: fig1_canonical_schematic.links.policy_to_identity
+    newly_visible_condition: decision_identity_equivalence_policy_fixed
+    condition_checks:
+      - id: decision_identity_equivalence_policy_fixed
+        status: fail
+    failure_conditions_triggered:
+      - equivalence_policy_changed

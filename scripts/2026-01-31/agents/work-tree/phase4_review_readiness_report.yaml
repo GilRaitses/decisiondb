@@ -1,0 +1,81 @@
+phase: 4
+artifact: phase4_review_readiness_report
+date: "2026-02-01"
+status: ready_for_owner_approval
+inputs:
+  - scripts/2026-01-31/agents/work-tree/phase4_extended_trace_set.yaml
+  - scripts/2026-01-31/agents/work-tree/phase4_appendix_trace_figures.yaml
+  - scripts/2026-01-31/agents/work-tree/phase4_limitations_section_draft.md
+  - scripts/2026-01-31/agents/work-tree/phase4_comparison_section_draft.md
+deliverables_present:
+  - phase4_extended_trace_set.yaml
+  - phase4_appendix_trace_figures.yaml
+  - phase4_limitations_section_draft.md
+  - phase4_comparison_section_draft.md
+  - phase4_review_readiness_report.yaml
+checks:
+  trace_coverage:
+    at_least_three_new_admissible_traces:
+      status: pass
+      evidence:
+        new_admissible_trace_ids:
+          - neighbor_weight_perturbed_to_baseline
+          - neighbor_weight_baseline_to_baseline
+          - second_order_weight_baseline_to_baseline
+          - second_order_weight_perturbed_to_perturbed
+    at_least_three_new_inadmissible_traces:
+      status: pass
+      evidence:
+        new_inadmissible_trace_ids:
+          - second_order_weight_perturbed_to_baseline
+          - cross_sweep_A_to_B
+          - cross_sweep_B_to_A
+          - equivalence_policy_reference_mismatch
+    at_least_two_task_structure_variations:
+      status: pass
+      evidence:
+        task_structure_variants:
+          - within_sweep_transition
+          - within_sweep_static
+          - cross_sweep_context
+          - decision_context_shift
+    at_least_two_abstraction_transitions:
+      status: pass
+      evidence:
+        abstraction_level_focus_values:
+          - representation_stage
+          - decision_map_relation
+  observability:
+    each_trace_identifies_newly_visible_condition:
+      status: pass
+      evidence:
+        field: trace_set.newly_visible_condition
+    no_trace_described_only_as_accuracy_drop:
+      status: pass
+      evidence:
+        accuracy_terms_present: false
+  reviewer_defensibility:
+    failure_modes_not_reducible_to_overfitting:
+      status: pass
+      evidence:
+        basis: failure conditions reference decision identity and boundary observables only
+    failure_modes_not_reducible_to_distribution_shift:
+      status: pass
+      evidence:
+        basis: failure conditions are tied to identity label changes and boundary flags
+    novelty_claim_supported_by_reuse_traceability:
+      status: pass
+      evidence:
+        basis: reuse decisions are derived from Phase 2 conditions and observables
+constraints_review:
+  no_new_mechanisms_or_terms: pass
+  no_quantitative_claims: pass
+  no_reframe_as_calibration_logging_evaluation: pass
+flagged_misinterpretations:
+  - calibration
+  - logging
+  - evaluation
+authorization:
+  next_phase: phase_5
+  status: authorized_pending_owner_approval
+  blocked_until: explicit_owner_approval
