@@ -1,0 +1,37 @@
+calibration_results:
+  - id: "CAL-1"
+    name: "read_only_safety_check"
+    status: "pass"
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_phase0.console.log#git-status-start"
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_phase0.console.log#git-status-end"
+  - id: "CAL-2"
+    name: "path_resolution_check"
+    status: "pass"
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+  - id: "CAL-3"
+    name: "entrypoint_verification"
+    status: "pass"
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/architecture_map.yaml#entrypoints"
+  - id: "CAL-4"
+    name: "frozen_snapshot_identification"
+    status: "pass"
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml"
+  - id: "CAL-5"
+    name: "reuse_path_extraction"
+    status: "pass"
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/reuse_paths.yaml"
+
+blockers: []
+
+ready_for_phase2: true
+
+recommended_next_steps:
+  - "Confirm availability of data/voronoi_zones/voronoi_zones.json."
+  - "Confirm availability of data/config/stress_weights.yaml."
+  - "Confirm availability of data/intersection_scores_from_dynamics.json."
+  - "Validate whether external Pax snapshot references can be mirrored into repo."

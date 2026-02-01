@@ -1,0 +1,116 @@
+scope:
+  project: "pax"
+  repo_root: "/workspace"
+
+modules:
+  - module_id: "pax.scripts.voronoi_stress_scoring"
+    path: "/workspace/src/pax/scripts/voronoi_stress_scoring.py"
+    role: "Compute weighted stress scores from Voronoi zones."
+    inputs:
+      - "/workspace/data/geojson/voronoi_zones.geojson"
+      - "/workspace/data/geojson/intersections.json"
+      - "/workspace/data/stress_scores_updated.json"
+    outputs:
+      - "data/voronoi_zones/weighted_stress_scores.json"
+    evidence_paths:
+      - "src/pax/scripts/voronoi_stress_scoring.py#build_parser"
+      - "src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress"
+
+  - module_id: "pax.stress.intersection_stress"
+    path: "/workspace/src/pax/stress/intersection_stress.py"
+    role: "Intersection stress diagnostics and route stress aggregation."
+    inputs:
+      - "intersection_stress_map"
+      - "graph"
+      - "stress_weight"
+    outputs:
+      - "route_diagnostics"
+    evidence_paths:
+      - "src/pax/stress/intersection_stress.py#IntersectionStressModel"
+
+  - module_id: "pax.pathfinding.learned_heuristic"
+    path: "/workspace/src/pax/pathfinding/learned_heuristic.py"
+    role: "Stress-weighted A* pathfinding."
+    inputs:
+      - "/workspace/data/stress_scores_updated.json"
+      - "/workspace/data/manifests/corridor_cameras_numbered.json"
+      - "optional:/workspace/data/intersection_scores_from_dynamics.json"
+    outputs:
+      - "PathResult.nodes"
+      - "PathResult.total_stress"
+    evidence_paths:
+      - "src/pax/pathfinding/learned_heuristic.py#LearnedHeuristicPathfinder"
+      - "src/pax/pathfinding/learned_heuristic.py#find_path"
+
+interfaces:
+  - name: "LearnedHeuristicPathfinder"
+    type: "class"
+    path: "/workspace/src/pax/pathfinding/learned_heuristic.py"
+    key_methods:
+      - "find_path"
+    evidence_paths:
+      - "src/pax/pathfinding/learned_heuristic.py#LearnedHeuristicPathfinder"
+
+  - name: "IntersectionStressModel"
+    type: "class"
+    path: "/workspace/src/pax/stress/intersection_stress.py"
+    key_methods:
+      - "from_precomputed"
+      - "from_voronoi_zones"
+      - "build_route_diagnostics"
+    evidence_paths:
+      - "src/pax/stress/intersection_stress.py#IntersectionStressModel"
+
+  - name: "IntersectionStressDiagnostics"
+    type: "dataclass"
+    path: "/workspace/src/pax/stress/intersection_stress.py"
+    evidence_paths:
+      - "src/pax/stress/intersection_stress.py#IntersectionStressDiagnostics"
+
+data_objects:
+  - name: "camera_stress_scores"
+    type: "dict[str, float]"
+    source_path: "/workspace/data/stress_scores_updated.json"
+    produced_by: "learned_heuristic._load_stress_scores"
+  - name: "camera_positions"
+    type: "dict[str, tuple[float, float]]"
+    source_path: "/workspace/data/manifests/corridor_cameras_numbered.json"
+    produced_by: "learned_heuristic._load_camera_positions"
+  - name: "weighted_zone_stress_scores"
+    type: "list[dict]"
+    produced_by: "voronoi_stress_scoring.calculate_weighted_stress"
+  - name: "intersection_stress_map"
+    type: "dict[int, float]"
+    produced_by: "learned_heuristic._map_intersections_to_stress"
+  - name: "edge_stress_penalty"
+    type: "float"
+    produced_by: "learned_heuristic.find_path"
+  - name: "route_nodes"
+    type: "list[int]"
+    produced_by: "learned_heuristic.find_path"
+  - name: "route_diagnostics"
+    type: "dict[str, Any]"
+    produced_by: "intersection_stress.build_route_diagnostics"
+
+entrypoints:
+  - entry_id: "weighted_stress_scoring_cli"
+    stage: "stress_scoring"
+    command_stub: "python3 src/pax/scripts/voronoi_stress_scoring.py --zones data/geojson/voronoi_zones.geojson --zones-json data/voronoi_zones/voronoi_zones.json --output data/voronoi_zones/weighted_stress_scores.json"
+    expected_inputs:
+      - "data/geojson/voronoi_zones.geojson"
+      - "data/voronoi_zones/voronoi_zones.json"
+      - "data/stress_scores_updated.json"
+    expected_outputs:
+      - "data/voronoi_zones/weighted_stress_scores.json"
+    notes:
+      - "data/voronoi_zones/voronoi_zones.json is not present in repo."
+
+  - entry_id: "learned_pathfinding_library"
+    stage: "pathfinding"
+    command_stub: "python3 -c \"from pax.pathfinding.learned_heuristic import LearnedHeuristicPathfinder; finder=LearnedHeuristicPathfinder(); finder.find_path(1, 2)\""
+    expected_inputs:
+      - "data/stress_scores_updated.json"
+      - "data/manifests/corridor_cameras_numbered.json"
+    expected_outputs:
+      - "PathResult.nodes"
+      - "PathResult.total_stress"

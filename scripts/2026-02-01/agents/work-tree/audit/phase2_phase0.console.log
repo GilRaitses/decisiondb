@@ -1,0 +1,1099 @@
+## COMMAND EQUIVALENCE NOTE:
+ls/find/grep/sed/printf/rm/mv commands were executed with tool equivalents due to environment guidance (LS/Glob/rg/ReadFile/ApplyPatch/Delete).
+
+## CMD: git status -sb
+## main...origin/main
+
+## CMD: sed -n '1,220p' scripts/2026-02-01/agents/handoffs/phase2-0.yaml
+L1:handoff_id: phase2_phase0_inventory
+L2:phase: "phase_2"
+L3:subphase: "phase_2_phase_0_inventory"
+L4:agent_codename: "phase2-scout"
+L5:date: "2026-02-01"
+L6:
+L7:intent:
+L8:  primary: "Produce a deterministic inventory map of the Pax project frozen snapshot, with file paths, data lineage edges, and execution entrypoints."
+L9:  secondary: "Produce a schema-ready mapping that lets Phase 2 apply the Phase 1.5 context compatibility artifact to real Pax reuse paths."
+L10:
+L11:scope:
+L12:  in_scope:
+L13:    - "Repo inventory of code, data, configs, notebooks, and build scripts."
+L14:    - "Locate the frozen snapshot inputs used for the Pax project."
+L15:    - "Map architectures at the level of modules, interfaces, and data objects."
+L16:    - "Identify reuse paths where intermediate metrics become downstream decision inputs."
+L17:    - "Identify where context variables exist or can be derived without new collection."
+L18:  out_of_scope:
+L19:    - "Training, tuning, or recalibration of any model."
+L20:    - "Editing frozen artifacts, figures, or manuscripts."
+L21:    - "Adding new claims, benchmarks, or performance results."
+L22:    - "Collecting new data or expanding labeling."
+L23:    - "Renaming files or reorganizing directories."
+L24:
+L25:hard_constraints:
+L26:  no_modification_targets:
+L27:    - "phase_crosslineage_map.yaml"
+L28:    - "scripts/**/agents/**/phase*_freeze*.yaml"
+L29:    - "scripts/**/agents/**/completion_report.yaml"
+L30:    - "submission_bundle/**"
+L31:    - "manuscript sources and compiled PDFs"
+L32:  output_format:
+L33:    - "All deliverables as YAML unless the artifact is inherently binary."
+L34:    - "All paths must be absolute from repo root and also recorded as relative."
+L35:  language_style:
+L36:    - "Avoid triads with comma and."
+L37:    - "Avoid backward-pointing pronouns that require cross paragraph resolution."
+L38:
+L39:calibration_and_validation:
+L40:  goal: "Prove you can enumerate repo structure, extract path references, and map lineage without altering content."
+L41:  required_checks:
+L42:    - id: CAL-1
+L43:      name: "read_only_safety_check"
+L44:      method: "Confirm git status clean before and after. Confirm no tracked file content changes."
+L45:      evidence:
+L46:        - "audit/console.log contains git status output at start and end"
+L47:    - id: CAL-2
+L48:      name: "path_resolution_check"
+L49:      method: "Every recorded path must exist. Provide existence checks for each path."
+L50:      evidence:
+L51:        - "inventory_paths.yaml includes exists: true for each path"
+L52:    - id: CAL-3
+L53:      name: "entrypoint_verification"
+L54:      method: "Identify at least one reproducible entrypoint for each major pipeline stage, without running heavy jobs."
+L55:      evidence:
+L56:        - "architecture_map.yaml lists entrypoints with command stubs"
+L57:    - id: CAL-4
+L58:      name: "frozen_snapshot_identification"
+L59:      method: "Locate the frozen snapshot reference, record commit tag, or frozen artifact pointer used by Pax."
+L60:      evidence:
+L61:        - "frozen_snapshot.yaml records refs and provenance"
+L62:    - id: CAL-5
+L63:      name: "reuse_path_extraction"
+L64:      method: "Extract at least two candidate reuse paths that match the Phase 1.5 artifact shape."
+L65:      evidence:
+L66:        - "reuse_paths.yaml includes two paths with upstream metric and downstream decision usage"
+L67:
+L68:inputs_known:
+L69:  repo_root_hint: "."
+L70:  src_folder_hint: "src/"
+L71:  prior_phase_artifacts_hint:
+L72:    - "scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml"
+L73:    - "scripts/2026-02-01/agents/handoffs/artifacts/context_compatibility_trace_table.tex"
+L74:  invariants_hint:
+L75:    - "phase_crosslineage_map.yaml"
+L76:    - "scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml"
+L77:
+L78:work_locations:
+L79:  base_dir: "scripts/2026-02-01/agents"
+L80:  notes_dir: "scripts/2026-02-01/agents/notes"
+L81:  work_tree_dir: "scripts/2026-02-01/agents/work-tree"
+L82:  handoffs_dir: "scripts/2026-02-01/agents/handoffs"
+L83:  audit_dir: "scripts/2026-02-01/agents/work-tree/audit"
+L84:
+L85:deliverables:
+L86:  - path: "scripts/2026-02-01/agents/work-tree/audit/phase2_phase0.console.log"
+L87:    type: "text"
+L88:    required_content:
+L89:      - "All shell commands run with raw output"
+L90:      - "Start and end git status"
+L91:  - path: "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+L92:    type: "yaml"
+L93:    purpose: "Deterministic path inventory with existence checks."
+L94:    required_fields:
+L95:      - "files"
+L96:      - "directories"
+L97:      - "data_assets"
+L98:      - "configs"
+L99:      - "notebooks"
+L100:      - "scripts"
+L101:  - path: "scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml"
+L102:    type: "yaml"
+L103:    purpose: "Where Pax frozen snapshot lives and how it is referenced."
+L104:    required_fields:
+L105:      - "snapshot_ref_type"
+L106:      - "snapshot_ref_value"
+L107:      - "paths"
+L108:      - "provenance_notes"
+L109:  - path: "scripts/2026-02-01/agents/work-tree/architecture_map.yaml"
+L110:    type: "yaml"
+L111:    purpose: "High level module map plus entrypoints and data objects."
+L112:    required_fields:
+L113:      - "modules"
+L114:      - "interfaces"
+L115:      - "data_objects"
+L116:      - "entrypoints"
+L117:  - path: "scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml"
+L118:    type: "yaml"
+L119:    purpose: "Edges from raw inputs to intermediate metrics to downstream decisions."
+L120:    required_fields:
+L121:      - "nodes"
+L122:      - "edges"
+L123:      - "node_types"
+L124:      - "edge_types"
+L125:  - path: "scripts/2026-02-01/agents/work-tree/reuse_paths.yaml"
+L126:    type: "yaml"
+L127:    purpose: "Candidate reuse paths suitable for Phase 2 context compatibility application."
+L128:    required_fields:
+L129:      - "reuse_paths"
+L130:      - "upstream_metric"
+L131:      - "downstream_decision"
+L132:      - "context_variables"
+L133:      - "evidence_paths"
+L134:  - path: "scripts/2026-02-01/agents/work-tree/phase2_phase0_completion_report.yaml"
+L135:    type: "yaml"
+L136:    purpose: "Declare readiness for Phase 2 proper."
+L137:    required_fields:
+L138:      - "calibration_results"
+L139:      - "blockers"
+L140:      - "ready_for_phase2"
+L141:      - "recommended_next_steps"
+L142:
+L143:procedure:
+L144:  - step_id: P0-1
+L145:    name: "initialize_audit"
+L146:    actions:
+L147:      - "Create audit directory under work-tree."
+L148:      - "Start console log."
+L149:      - "Record repo root, current branch, git status."
+L150:  - step_id: P0-2
+L151:    name: "inventory_repo"
+L152:    actions:
+L153:      - "Enumerate top level directories."
+L154:      - "Enumerate src tree."
+L155:      - "Enumerate scripts tree for frozen artifacts."
+L156:      - "Write inventory_paths.yaml with exists checks."
+L157:  - step_id: P0-3
+L158:    name: "locate_frozen_snapshot"
+L159:    actions:
+L160:      - "Search configs, manifests, and scripts for snapshot refs."
+L161:      - "Record snapshot ref in frozen_snapshot.yaml."
+L162:      - "Do not edit refs."
+L163:  - step_id: P0-4
+L164:    name: "map_architecture"
+L165:    actions:
+L166:      - "Identify pipeline stages as modules."
+L167:      - "Identify data objects passed between stages."
+L168:      - "Identify entrypoints and expected inputs."
+L169:      - "Write architecture_map.yaml."
+L170:  - step_id: P0-5
+L171:    name: "extract_lineage_and_reuse_paths"
+L172:    actions:
+L173:      - "Build nodes and edges for lineage graph."
+L174:      - "Select at least two reuse paths where an upstream metric influences a downstream decision."
+L175:      - "For each reuse path, list candidate context variables available from existing artifacts."
+L176:      - "Write data_lineage_graph.yaml and reuse_paths.yaml."
+L177:  - step_id: P0-6
+L178:    name: "calibration_checks"
+L179:    actions:
+L180:      - "Run CAL-1 through CAL-5 and record evidence pointers."
+L181:      - "If any check fails, list blockers and stop."
+L182:  - step_id: P0-7
+L183:    name: "completion_report"
+L184:    actions:
+L185:      - "Write phase2_phase0_completion_report.yaml."
+L186:      - "Set ready_for_phase2 true only if all checks pass."
+L187:
+L188:success_criteria:
+L189:  must_pass:
+L190:    - "All CAL checks pass."
+L191:    - "At least two reuse paths recorded with evidence paths."
+L192:    - "Frozen snapshot reference located and recorded."
+L193:    - "No tracked file content changes."
+L194:  nice_to_have:
+L195:    - "A minimal mapping from reuse path context variables to Phase 1.5 table fields."
+L196:
+L197:phase2_phase0_authorization:
+L198:  allowed_to_merge: false
+L199:  allowed_to_open_pr: true
+L200:  allowed_to_run_heavy_jobs: false
+L201:  allowed_to_add_new_code: false
+L202:  allowed_to_add_yaml_only: true
+L203:
+L204:cover_note_for_new_agent: |
+L205:  You are running Phase 2 Phase 0. The job is inventory and mapping only. You will locate the frozen snapshot inputs for the Pax project. You will map how data, code, configs, and artifacts relate. You will not change any frozen files. You will write YAML outputs that let the next phase apply the Phase 1.5 context compatibility artifact without guessing paths or architecture.
+L206:
+L207:  Store all work under scripts/2026-02-01/agents/. Put notes in scripts/2026-02-01/agents/notes/. Put deliverables in scripts/2026-02-01/agents/work-tree/. Put the handoff outputs in scripts/2026-02-01/agents/handoffs/. Maintain an audit log of every command you run and capture raw console output.
+
+## CMD: ls -la scripts/2026-02-01/agents
+/workspace/scripts/2026-02-01/agents/
+  - handoffs/
+    - artifacts/
+      - context_compatibility_trace_table.tex
+      - context_compatibility_trace.csv
+    - phase1.5_context_compatibility_trace.yaml
+    - phase2-0.yaml
+
+## CMD: mkdir -p scripts/2026-02-01/agents/notes scripts/2026-02-01/agents/work-tree/audit
+
+## CMD: ls -la /workspace
+/workspace/
+  - .DS_Store
+  - .githooks/
+    [1 file in subtree: 1 *no-ext]
+  - .github/
+    - workflows/
+      - phase_crosslineage_invariant.yml
+  - checksums.sha256
+  - data/
+    - geojson/
+      - intersections.json
+      - voronoi_zones.geojson
+    - manifests/
+      - corridor_cameras_numbered.json
+    - stress_scores_updated.json
+  - docs/
+    [26 files in subtree: 16 *.md, 5 *.yaml, 4 *.pdf, ...]
+  - inventory.txt
+  - README.md
+  - scripts/
+    - 2026-01-15/
+      [23 files in subtree: 8 *.json, 8 *.tex, 3 *.txt, ...]
+    - 2026-01-16/
+      [15 files in subtree: 8 *.json, 6 *.txt, 1 *.png]
+    - 2026-01-18/
+      [1108 files in subtree: 1101 *.json, 5 *.md, 1 *.py, ...]
+    - 2026-01-23/
+      [51 files in subtree: 18 *.tex, 14 *.yaml, 10 *.md, ...]
+    - 2026-01-24/
+      [30 files in subtree: 23 *.yaml, 4 *.py, 2 *.md, ...]
+    - 2026-01-31/
+      - agents/
+        - handoff/
+          - arco/
+            - merge_cover_note.txt
+            - merge.yaml
+            - phase2handoff.yaml
+            - phase3handoff.yaml
+            - phase4handoff.yaml
+            - phase5handoff.yaml
+            - phase6handoff.yaml
+            - phase7handoff.yaml
+          - nori/
+            - phase1-instructions.yaml
+            - phase1.5-instructions-planelanding.yaml
+          - suit
+        - notes/
+          - phase_crosslineage_alignment_report.yaml
+          - phase_crosslineage_freeze.yaml
+          - phase_crosslineage_map.yaml
+          - phase0_index.yaml
+          - phase1_figure_captions.md
+          - phase1_reusable_artifacts.yaml
+          - phase1_toy_model_requirements.yaml
+          - phase1_transformation_map.yaml
+          - phase1_validation_checklist_eval.yaml
+          - phase1_validation_checklist.yaml
+          - phase2_freeze.yaml
+          - phase2_review_checklist_eval.yaml
+          - phase4_freeze_ack.yaml
+        - tools/
+          - lint_abstract_against_map.py
+          - README.md
+        - work-tree/
+          - artifacts/
+            - fig1_canonical_schematic.yaml
+            - fig2_primary_sweep.yaml
+            - fig3_identity_persistence.yaml
+            - fig4_boundary_fracture.yaml
+          - audit/
+            - guardrails_failuremode_review.console.log
+            - guardrails_failuremode_review.findings.yaml
+            - guardrails_failuremode_review.summary.yaml
+            - guardrails_merge_readiness.yaml
+          - claim_to_figure_map.yaml
+          - compatibility_conditions.yaml
+          - figure_inventory.yaml
+          - figure_render_log.yaml
+          - figures/
+            - figure4_boundary_fracture.svg
+          - followup_claim_seeds.yaml
+          - followup_claim_to_section_map.yaml
+          - followup_evidence_gap_report.yaml
+          - followup_manuscript_draft.tex
+          - followup_paper_outline.yaml
+          - hardened_claims.yaml
+          - observables_map.yaml
+          - paper_section_map.yaml
+          - phase1_5_completion_report.yaml
+          - phase3_observables_failure_mapping.yaml
+          - phase3_trace_narratives.txt
+          - phase3_trace_walkthroughs.yaml
+          - phase4_appendix_trace_figures.yaml
+          - phase4_comparison_section_draft.md
+          - phase4_extended_trace_set.yaml
+          - phase4_limitations_section_draft.md
+          - phase4_review_readiness_report.yaml
+          - phase6_freeze_ack.yaml
+          - phase7_completion_report.yaml
+          - phase7_status_report.yaml
+          - publication_readiness_report.yaml
+          - reuse_invariants.yaml
+          - stress_envelope_definitions.yaml
+          - submission_bundle/
+            - metadata.yaml
+          - submission_log.yaml
+          - validation_report.yaml
+          - venue_cover_letters.yaml
+    - 2026-02-01/
+      [4 files in subtree: 2 *.yaml, 1 *.csv, 1 *.tex]
+  - src/
+    [3 files in subtree: 3 *.py]
+    ...
+
+Note:
+ - File extension counts do not include files ignored by .gitignore.
+ - target_directory is too large (either too many children or their names are too long). Immediate children were truncated. Try doing more specific search or use terminal tool.
+
+## CMD: ls -la /workspace/src
+/workspace/src/
+  - pax/
+    - pathfinding/
+      - learned_heuristic.py
+    - scripts/
+      - voronoi_stress_scoring.py
+    - stress/
+      - intersection_stress.py
+
+## CMD: rg "__main__" /workspace/src
+<workspace_result workspace_path="/workspace">
+Found 1 matching line
+src/pax/scripts/voronoi_stress_scoring.py
+451:if __name__ == "__main__":
+</workspace_result>
+
+## CMD: sed -n '420,470p' /workspace/src/pax/scripts/voronoi_stress_scoring.py
+... 419 lines not shown ...
+L420:    output_data = {
+L421:        "metadata": {
+L422:            "total_zones": len(zones_gdf),
+L423:            "neighbor_weight": args.neighbor_weight,
+L424:            "second_order_weight": args.second_order_weight,
+L425:        },
+L426:        "zone_stress_scores": results,
+L427:    }
+L428:    
+L429:    with open(args.output, "w") as f:
+L430:        json.dump(output_data, f, indent=2)
+L431:    
+L432:    LOGGER.info("Saved weighted stress scores to %s", args.output)
+L433:    
+L434:    print("\n" + "=" * 70)
+L435:    print("WEIGHTED STRESS SCORING COMPLETE")
+L436:    print("=" * 70)
+L437:    print(f"\nProcessed {len(results)} zones")
+L438:    print(f"Neighbor weight: {args.neighbor_weight}")
+L439:    print(f"Second-order weight: {args.second_order_weight}")
+L440:    print(f"\nSample results:")
+L441:    for result in results[:3]:
+L442:        print(f"\n  Zone {result['zone_index']}: {result['camera_name']}")
+L443:        print(f"    Base stress: {result['base_stress']:.3f}")
+L444:        print(f"    Neighbor stress: {result['neighbor_stress']:.3f}")
+L445:        print(f"    Second-order stress: {result['second_order_stress']:.3f}")
+L446:        print(f"    Total weighted: {result['total_weighted_stress']:.3f}")
+L447:    
+L448:    return 0
+L449:
+L450:
+L451:if __name__ == "__main__":
+L452:    sys.exit(main())
+L453:
+L454:
+L455:
+
+## CMD: sed -n '40,130p' /workspace/src/pax/scripts/voronoi_stress_scoring.py
+... 39 lines not shown ...
+L40:
+L41:
+L42:def project_zones_for_distance(
+L43:    zones_gdf: gpd.GeoDataFrame,
+L44:    target_crs: str = DEFAULT_PROJECTED_CRS,
+L45:) -> tuple[gpd.GeoDataFrame, Transformer | None]:
+L46:    """Project zones to a projected CRS for distance calculations."""
+L47:    if zones_gdf.crs is None:
+L48:        LOGGER.warning("Zones CRS missing; using native coordinates for distance.")
+L49:        return zones_gdf, None
+L50:    if not zones_gdf.crs.is_geographic:
+L51:        return zones_gdf, None
+L52:    projected = zones_gdf.to_crs(target_crs)
+L53:    transformer = Transformer.from_crs(zones_gdf.crs, projected.crs, always_xy=True)
+L54:    return projected, transformer
+L55:
+L56:
+L57:def build_parser() -> argparse.ArgumentParser:
+L58:    parser = argparse.ArgumentParser(description=__doc__)
+L59:    parser.add_argument(
+L60:        "--zones",
+L61:        type=Path,
+L62:        default=Path("data/geojson/voronoi_zones.geojson"),
+L63:        help="Voronoi zones GeoJSON file",
+L64:    )
+L65:    parser.add_argument(
+L66:        "--zones-json",
+L67:        type=Path,
+L68:        default=Path("data/voronoi_zones/voronoi_zones.json"),
+L69:        help="Voronoi zones JSON file with coordinate arrays",
+L70:    )
+L71:    parser.add_argument(
+L72:        "--intersections",
+L73:        type=Path,
+L74:        help="Intersections file (CSV with lat/lon or GeoJSON)",
+L75:    )
+L76:    parser.add_argument(
+L77:        "--camera-stress",
+L78:        type=Path,
+L79:        help="Camera stress scores file (JSON dict: camera_id -> stress_score)",
+L80:    )
+L81:    parser.add_argument(
+L82:        "--camera-features",
+L83:        type=Path,
+L84:        help="Camera features file (JSON with YOLO/CLIP features per camera). "
+L85:             "If provided, computes stress directly using composite formula (unsupervised).",
+L86:    )
+L87:    parser.add_argument(
+L88:        "--h5",
+L89:        type=Path,
+L90:        help="H5 file with camera features (preferred over --camera-features). "
+L91:             "Supports bottleneck features (pedestrian_spacing, infrastructure).",
+L92:    )
+L93:    parser.add_argument(
+L94:        "--stress-config",
+L95:        type=Path,
+L96:        default=Path("data/config/stress_weights.yaml"),
+L97:        help="Stress computation config file (weights, normalization params)",
+L98:    )
+L99:    parser.add_argument(
+L100:        "--output",
+L101:        type=Path,
+L102:        default=Path("data/voronoi_zones/weighted_stress_scores.json"),
+L103:        help="Output file for weighted stress scores",
+L104:    )
+L105:    parser.add_argument(
+L106:        "--neighbor-weight",
+L107:        type=float,
+L108:        default=0.5,
+L109:        help="Weight for adjacent zone neighbors (default: 0.5)",
+L110:    )
+L111:    parser.add_argument(
+L112:        "--second-order-weight",
+L113:        type=float,
+L114:        default=0.25,
+L115:        help="Weight for second-order neighbors (default: 0.25)",
+L116:    )
+L117:    parser.add_argument(
+L118:        "--log-level",
+L119:        default="INFO",
+L120:        help="Logging level",
+L121:    )
+L122:    return parser
+L123:
+L124:
+L125:def compute_camera_stress_from_features(
+L126:    camera_features: dict[str, dict],
+L127:    config_path: Path | None = None,
+L128:) -> dict[str, float]:
+L129:    """Compute camera stress scores directly from features (unsupervised).
+... 326 lines not shown ...
+
+## CMD: sed -n '20,120p' /workspace/src/pax/pathfinding/learned_heuristic.py
+... 19 lines not shown ...
+L20:
+L21:
+L22:class LearnedHeuristicPathfinder(AStarPathfinder):
+L23:    """A* pathfinder with learned stress-weighted heuristic."""
+L24:
+L25:    def __init__(
+L26:        self,
+L27:        stress_scores_path: Path | str | None = None,
+L28:        intersections_path: Path | str | None = None,
+L29:        cameras_path: Path | str | None = None,
+L30:        intersection_scores_path: Path | str | None = None,
+L31:        use_empirical_scores: bool = False,
+L32:        use_regularization: bool = True,
+L33:        query_hour: int | None = None,
+L34:    ):
+L35:        """Initialize pathfinder with stress scores and camera mapping.
+L36:        
+L37:        Args:
+L38:            stress_scores_path: Path to stress scores JSON file
+L39:            intersections_path: Path to intersections JSON file
+L40:            cameras_path: Path to camera positions JSON file
+L41:            intersection_scores_path: Path to empirical intersection scores
+L42:            use_empirical_scores: Whether to use empirical intersection scores
+L43:            use_regularization: If True, apply ridge/basin detection and theater boost.
+L44:                               If False, use raw interpolated stress only.
+L45:            query_hour: Hour of day (0-23) for temporal factor lookup. If None, no temporal adjustment.
+L46:        """
+L47:        super().__init__(intersections_path)
+L48:
+L49:        if stress_scores_path is None:
+L50:            stress_scores_path = (
+L51:                Path(__file__).parent.parent.parent.parent / "data" / "stress_scores_updated.json"
+L52:            )
+L53:        if cameras_path is None:
+L54:            cameras_path = (
+L55:                Path(__file__).parent.parent.parent.parent / "data" / "manifests" / "corridor_cameras_numbered.json"
+L56:            )
+L57:
+L58:        self.stress_scores = self._load_stress_scores(stress_scores_path)
+L59:        self.camera_positions = self._load_camera_positions(cameras_path)
+L60:        self.use_regularization = use_regularization
+L61:        self.query_hour = query_hour
+L62:        self.intersection_stress = self._map_intersections_to_stress()
+L63:        self.intersection_model = IntersectionStressModel.from_precomputed(
+L64:            self.intersection_stress,
+L65:            self.graph,
+L66:            stress_source_key=getattr(self, "stress_source_key", "unknown"),
+L67:            stress_path_id="intersection_stress:street_based",
+L68:            base_source="street_based_or_idw",
+L69:        )
+L70:        self.stress_weight = self._train_stress_model()
+L71:        
+L72:        # Load empirical intersection scores if requested
+L73:        self.use_empirical_scores = use_empirical_scores
+L74:        self.intersection_scores: dict[int, float] = {}
+L75:        if use_empirical_scores:
+L76:            if intersection_scores_path is None:
+L77:                intersection_scores_path = (
+L78:                    Path(__file__).parent.parent.parent.parent / "data" / "intersection_scores_from_dynamics.json"
+L79:                )
+L80:            self.intersection_scores = self._load_intersection_scores(intersection_scores_path)
+L81:
+L82:    def _load_stress_scores(self, path: Path | str) -> dict[str, float]:
+L83:        """Load stress scores from JSON file."""
+L84:        if isinstance(path, str):
+L85:            path = Path(path)
+L86:
+L87:        with open(path) as f:
+L88:            data = json.load(f)
+L89:
+L90:        from pax.stress.stress_reader import resolve_camera_stress_map
+L91:
+L92:        camera_stress = data.get("camera_stress", {})
+L93:        stress_scores, _, summary = resolve_camera_stress_map(camera_stress)
+L94:        if summary.get("field_counts"):
+L95:            LOGGER.info("Stress field usage: %s", summary["field_counts"])
+L96:        self.stress_source_key = summary.get("chosen_key", "unknown")
+L97:
+L98:        return stress_scores
+L99:
+L100:    def _load_camera_positions(self, path: Path | str) -> dict[str, tuple[float, float]]:
+L101:        """Load camera positions from JSON file."""
+L102:        if isinstance(path, str):
+L103:            path = Path(path)
+L104:
+L105:        with open(path) as f:
+L106:            data = json.load(f)
+L107:
+L108:        camera_positions = {}
+L109:        for camera in data.get("cameras", []):
+... 504 lines not shown ...
+
+## CMD: sed -n '1,140p' /workspace/src/pax/stress/intersection_stress.py
+L1:"""Intersection-owned stress model and diagnostics."""
+L2:
+L3:from __future__ import annotations
+L4:
+L5:from dataclasses import dataclass
+L6:from typing import Any
+L7:
+L8:from shapely.geometry import Point
+L9:
+L10:from pax.scripts.voronoi_stress_scoring import calculate_weighted_stress
+L11:
+L12:
+L13:@dataclass(frozen=True)
+L14:class IntersectionStressDiagnostics:
+L15:    node_id: int
+L16:    coord: tuple[float, float]
+L17:    base_source: str
+L18:    base_stress: float
+L19:    neighbor_stress: float
+L20:    second_order_stress: float
+L21:    total_stress: float
+L22:    fallback_used: bool
+L23:    stress_source_key: str
+L24:    stress_path_id: str
+L25:    neighbor_summary: dict[str, Any]
+L26:    second_order_summary: dict[str, Any]
+L27:    zone_index: int | None = None
+L28:    camera_id: str | None = None
+L29:
+L30:
+L31:@dataclass
+L32:class IntersectionStressModel:
+L33:    intersection_stress: dict[int, float]
+L34:    diagnostics: dict[int, IntersectionStressDiagnostics]
+L35:    stress_source_key: str
+L36:    stress_path_id: str
+L37:
+L38:    def get_scalar(self, node_id: int) -> float:
+L39:        return self.intersection_stress.get(node_id, 0.0)
+L40:
+L41:    def build_route_diagnostics(
+L42:        self,
+L43:        route_nodes: list[int],
+L44:        graph: Any,
+L45:        stress_weight: float,
+L46:    ) -> dict[str, Any]:
+L47:        intersections = [
+L48:            self.diagnostics[node_id].__dict__
+L49:            for node_id in route_nodes
+L50:            if node_id in self.diagnostics
+L51:        ]
+L52:        edges = []
+L53:        for i in range(len(route_nodes) - 1):
+L54:            u = route_nodes[i]
+L55:            v = route_nodes[i + 1]
+L56:            edge_length = graph.get_edge_weight(u, v)
+L57:            edge_stress = 0.5 * (self.get_scalar(u) + self.get_scalar(v))
+L58:            edges.append(
+L59:                {
+L60:                    "edge_u": u,
+L61:                    "edge_v": v,
+L62:                    "edge_length": edge_length,
+L63:                    "edge_stress": edge_stress,
+L64:                    "stress_penalty": edge_stress * stress_weight,
+L65:                }
+L66:            )
+L67:        return {
+L68:            "stress_path_id": self.stress_path_id,
+L69:            "stress_source_key": self.stress_source_key,
+L70:            "intersections": intersections,
+L71:            "edges": edges,
+L72:        }
+L73:
+L74:    @classmethod
+L75:    def from_precomputed(
+L76:        cls,
+L77:        intersection_stress: dict[int, float],
+L78:        graph: Any,
+L79:        stress_source_key: str,
+L80:        stress_path_id: str,
+L81:        base_source: str,
+L82:    ) -> "IntersectionStressModel":
+L83:        diagnostics: dict[int, IntersectionStressDiagnostics] = {}
+L84:        for node_id, value in intersection_stress.items():
+L85:            coord = graph.intersections.get(node_id, {}).get("original_coord", (0.0, 0.0))
+L86:            diagnostics[node_id] = IntersectionStressDiagnostics(
+L87:                node_id=node_id,
+L88:                coord=tuple(coord),
+L89:                base_source=base_source,
+L90:                base_stress=float(value),
+L91:                neighbor_stress=0.0,
+L92:                second_order_stress=0.0,
+L93:                total_stress=float(value),
+L94:                fallback_used=False,
+L95:                stress_source_key=stress_source_key,
+L96:                stress_path_id=stress_path_id,
+L97:                neighbor_summary={"count": 0, "total": 0.0},
+L98:                second_order_summary={"count": 0, "total": 0.0},
+L99:            )
+L100:        return cls(
+L101:            intersection_stress=intersection_stress,
+L102:            diagnostics=diagnostics,
+L103:            stress_source_key=stress_source_key,
+L104:            stress_path_id=stress_path_id,
+L105:        )
+L106:
+L107:    @classmethod
+L108:    def from_voronoi_zones(
+L109:        cls,
+L110:        graph: Any,
+L111:        zones_gdf: Any,
+L112:        neighbors: dict[int, list[int]],
+L113:        camera_stress: dict[str, float],
+L114:        neighbor_weight: float,
+L115:        second_order_weight: float,
+L116:        transformer: Any,
+L117:        stress_source_key: str,
+L118:    ) -> "IntersectionStressModel":
+L119:        diagnostics: dict[int, IntersectionStressDiagnostics] = {}
+L120:        stress_map: dict[int, float] = {}
+... 49 lines not shown ...
+
+## CMD: ls -la /workspace/data
+/workspace/data/
+  - geojson/
+    - intersections.json
+    - voronoi_zones.geojson
+  - manifests/
+    - corridor_cameras_numbered.json
+  - stress_scores_updated.json
+
+## CMD: ls -la /workspace/data/geojson
+/workspace/data/geojson/
+  - intersections.json
+  - voronoi_zones.geojson
+
+## CMD: ls -la /workspace/data/manifests
+/workspace/data/manifests/
+  - corridor_cameras_numbered.json
+
+## CMD: ls -la /workspace/data/voronoi_zones
+Error listing directory: Path does not exist: /workspace/data/voronoi_zones
+
+## CMD: ls -la /workspace/data/config
+Error listing directory: Path does not exist: /workspace/data/config
+
+## CMD: find /workspace -name '*.ipynb'
+Result of search in '/workspace': 0 files found
+
+## CMD: rg -i "snapshot" /workspace
+<workspace_result workspace_path="/workspace">
+Found 50 matching lines
+./scripts/2026-02-01/agents/handoffs/phase2-0.yaml
+8:  primary: "Produce a deterministic inventory map of the Pax project frozen snapshot, with file paths, data lineage edges, and execution entrypoints."
+14:    - "Locate the frozen snapshot inputs used for the Pax project."
+58:      name: "frozen_snapshot_identification"
+59:      method: "Locate the frozen snapshot reference, record commit tag, or frozen artifact pointer used by Pax."
+61:        - "frozen_snapshot.yaml records refs and provenance"
+101:  - path: "scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml"
+103:    purpose: "Where Pax frozen snapshot lives and how it is referenced."
+105:      - "snapshot_ref_type"
+106:      - "snapshot_ref_value"
+158:    name: "locate_frozen_snapshot"
+160:      - "Search configs, manifests, and scripts for snapshot refs."
+161:      - "Record snapshot ref in frozen_snapshot.yaml."
+192:    - "Frozen snapshot reference located and recorded."
+205:  You are running Phase 2 Phase 0. The job is inventory and mapping only. You will locate the frozen snapshot inputs for the Pax project. You will map how data, code, configs, and artifacts relate. You will not change any frozen files. You will write YAML outputs that let the next phase apply the Phase 1.5 context compatibility artifact without guessing paths or architecture.
+
+./scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml
+38:      condition: Identity assignment follows the snapshot to representation to engine run to raw output chain.
+40:        - fig1_canonical_schematic.links.snapshot_to_representation
+
+./scripts/2026-01-31/agents/work-tree/hardened_claims.yaml
+15:      mapping_chain: snapshot_to_representation_to_engine_to_output_to_identity
+20:        - fig1_canonical_schematic.links.snapshot_to_representation
+
+./scripts/2026-01-31/agents/work-tree/claim_to_figure_map.yaml
+20:      - fig1_canonical_schematic.links.snapshot_to_representation
+
+./scripts/2026-01-31/agents/notes/phase1_figure_captions.md
+3:Figure 1. Canonical decision-valued mapping schematic. A fixed snapshot is encoded into a representation family. Each representation is executed by a fixed engine and yields raw output. An equivalence policy extracts a discrete decision identity from the raw output. The decision map links representation identifiers, engine runs, and decision identities.
+5:Figure 2. Primary representational sweep for one snapshot and engine. Each variant corresponds to a weight setting recorded in the weight variation results. Decision identity is defined by the route node sequence in each variant. Identical identities use the same label.
+
+./scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+18:        action: Extract entities and relations defined for snapshot, representation, engine run, equivalence policy, decision identity, and decision map.
+20:        action: Draft a schematic with nodes for the entities and links in the order snapshot, representation, engine run, raw output, equivalence policy, decision identity, decision map.
+
+./scripts/2026-01-31/agents/notes/phase0_index.yaml
+6033:  - path: "scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
+
+./scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+12:  - id: snapshot
+13:    label: Snapshot
+27:  - id: snapshot_to_representation
+28:    from: snapshot
+67:    - id: snapshot
+103:    - id: snapshot_to_representation
+
+./scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+10:    <text x="85" y="80" text-anchor="middle">Snapshot</text>
+
+./scripts/2026-01-24/outputs/probe_promotion/promotion_manifest.json
+26:      "snapshots": 0,
+33:      "snapshots": 0,
+45:    "no_snapshots_modified": true,
+
+./scripts/2026-01-24/agents/handoff/king-dolphin/0808-anon-probe_promotion_engine_runs_exec_report.yaml
+19:    - snapshots (0 rows)
+44:    snapshots: 0
+50:    snapshots: 0
+69:  no_snapshots_modified: true
+
+./scripts/2026-01-24/agents/work-tree/sarah/0440-decision_materialization_readiness.yaml
+164:  snapshots: 0
+
+./scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+105:      snapshots: 0
+111:      snapshots: 0
+
+./scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.py
+55:        "snapshot": "snap_",
+
+./scripts/2026-01-24/agents/work-tree/michelle/0711-replay_expansion_verification.py
+56:        "snapshot": "snap_",
+
+./scripts/2026-01-24/agents/work-tree/michelle/0925-replay_expansion_v3.py
+81:        "snapshot": "snap_",
+
+./scripts/2026-01-24/agents/work-tree/anon/0804-probe_promotion.py
+46:CREATE TABLE IF NOT EXISTS snapshots (
+47:    snapshot_id TEXT PRIMARY KEY,
+53:    snapshot_version TEXT NOT NULL DEFAULT '1',
+60:    snapshot_id TEXT NOT NULL,
+69:    FOREIGN KEY (snapshot_id) REFERENCES snapshots(snapshot_id)
+131:    tables = ["snapshots", "representations", "engine_runs", "decisions", "f_map"]
+</workspace_result>
+
+## CMD: sed -n '1,25p' /workspace/scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md
+L1:# Post-Sensitivity Snapshot Index (2026-01-18)
+L2:
+L3:This index records the frozen system state after representation sensitivity sweeps and refined breakpoint characterization.
+L4:It contains pointers only.
+L5:
+L6:## System log
+L7:- `/Users/gilraitses/pax/docs/logs/2026-01-18.yaml`
+L8:
+L9:## Snapshot PDFs (advisor review bundle)
+L10:Canonical paths requested:
+L11:- `/Users/gilraitses/pax/system_explainer.pdf` (missing at this path)
+L12:- `/Users/gilraitses/pax/reproducibility_note.pdf` (missing at this path)
+L13:- `/Users/gilraitses/pax/technical_appendix.pdf` (missing at this path)
+L14:
+L15:Existing PDF locations:
+L16:- `/Users/gilraitses/pax/scripts/2026-01-18/notes/system_explainer.pdf`
+L17:- `/Users/gilraitses/pax/scripts/2026-01-18/notes/reproducibility_note.pdf`
+L18:- `/Users/gilraitses/pax/scripts/2026-01-18/notes/technical_appendix.pdf`
+L19:
+L20:## Representation sensitivity artifacts (Garment District)
+... 8 lines not shown ...
+
+## CMD: find /workspace -name "intersection_scores_from_dynamics.json"
+Result of search in '/workspace': 0 files found
+
+## CMD: find /workspace/data -name "*intersection_scores*"
+Result of search in '/workspace/data': 0 files found
+
+## CMD: rg -i "\bpax\b" /workspace
+<workspace_result workspace_path="/workspace">
+Found 50 matching lines
+./scripts/2026-02-01/agents/handoffs/phase2-0.yaml
+8:  primary: "Produce a deterministic inventory map of the Pax project frozen snapshot, with file paths, data lineage edges, and execution entrypoints."
+9:  secondary: "Produce a schema-ready mapping that lets Phase 2 apply the Phase 1.5 context compatibility artifact to real Pax reuse paths."
+14:    - "Locate the frozen snapshot inputs used for the Pax project."
+59:      method: "Locate the frozen snapshot reference, record commit tag, or frozen artifact pointer used by Pax."
+103:    purpose: "Where Pax frozen snapshot lives and how it is referenced."
+205:  You are running Phase 2 Phase 0. The job is inventory and mapping only. You will locate the frozen snapshot inputs for the Pax project. You will map how data, code, configs, and artifacts relate. You will not change any frozen files. You will write YAML outputs that let the next phase apply the Phase 1.5 context compatibility artifact without guessing paths or architecture.
+
+./scripts/2026-01-31/agents/notes/phase0_index.yaml
+6448:  - path: "src/pax/pathfinding/learned_heuristic.py"
+6451:    owner: "pax"
+6453:  - path: "src/pax/scripts/voronoi_stress_scoring.py"
+6456:    owner: "pax"
+6458:  - path: "src/pax/stress/intersection_stress.py"
+6461:    owner: "pax"
+6465:    command: "python src/pax/scripts/voronoi_stress_scoring.py"
+
+./scripts/2026-01-31/agents/handoff/nori/phase1.5-instructions-planelanding.yaml
+35:  - Do not reference DecisionDB, PAX, or patent language explicitly
+
+./scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-02/stability/runs/lambda_0p46.json
+12:    "diagnostics_path": "/Users/gilraitses/pax/scripts/2026-01-18/artifacts/representation_sensitivity/garment_district/refined_zoom/OD-02/stability/diagnostics/lambda_0p46.json",
+... 34 lines not shown ...
+</workspace_result>
+
+## CMD: sed -n '520,610p' /workspace/src/pax/pathfinding/learned_heuristic.py
+... 519 lines not shown ...
+L520:
+L521:            if current == end_node:
+L522:                # Reconstruct path
+L523:                path = []
+L524:                node = current
+L525:                while node is not None:
+L526:                    path.append(node)
+L527:                    node = came_from[node]
+L528:                path.reverse()
+L529:
+L530:                total_distance = sum(
+L531:                    self.graph.get_edge_weight(path[i], path[i + 1]) for i in range(len(path) - 1)
+L532:                )
+L533:                # Length-weighted route stress integral
+L534:                total_stress = 0.0
+L535:                for i in range(len(path) - 1):
+L536:                    edge_length = self.graph.get_edge_weight(path[i], path[i + 1])
+L537:                    edge_stress = 0.5 * (
+L538:                        self.intersection_stress.get(path[i], 0.0) +
+L539:                        self.intersection_stress.get(path[i + 1], 0.0)
+L540:                    )
+L541:                    total_stress += edge_length * edge_stress
+L542:
+L543:                execution_time = time.time() - start_time
+L544:                return PathResult(
+L545:                    nodes=path,
+L546:                    distance=total_distance,
+L547:                    path_found=True,
+L548:                    execution_time=execution_time,
+L549:                    nodes_explored=nodes_explored,
+L550:                    total_stress=total_stress,
+L551:                )
+L552:
+L553:            for neighbor in self.graph.get_neighbors(current):
+L554:                if neighbor in closed_set:
+L555:                    continue
+L556:
+L557:                edge_weight = self.graph.get_edge_weight(current, neighbor)
+L558:                
+L559:                # Edge-level stress: average of endpoints
+L560:                current_stress = self.intersection_stress.get(current, 0.0)
+L561:                neighbor_stress = self.intersection_stress.get(neighbor, 0.0)
+L562:                edge_stress = 0.5 * (current_stress + neighbor_stress)
+L563:
+L564:                # Cost includes distance and stress penalty
+L565:                # stress_weight = 0.005 (stress contributes ~50% of typical edge cost)
+L566:                # This makes stress differences meaningful while keeping paths close to Manhattan distance
+L567:                stress_penalty = edge_stress * self.stress_weight
+L568:                tentative_g = g_score[current] + edge_weight + stress_penalty
+L569:                tentative_stress = g_stress[current] + edge_stress
+L570:
+L571:                # Use combined cost for comparison
+L572:                neighbor_key = neighbor
+L573:                if neighbor_key not in g_score or tentative_g < g_score[neighbor_key]:
+L574:                    came_from[neighbor] = current
+L575:                    g_score[neighbor] = tentative_g
+L576:                    g_stress[neighbor] = tentative_stress
+L577:                    h_score = self._heuristic_with_stress(neighbor, end_node, tentative_stress)
+L578:                    f_score[neighbor] = tentative_g + h_score  # f = g + h
+L579:                    heapq.heappush(open_set, (f_score[neighbor], neighbor))
+L580:
+L581:        # No path found
+L582:        execution_time = time.time() - start_time
+L583:        return PathResult(
+L584:            nodes=[],
+L585:            distance=0.0,
+L586:            path_found=False,
+L587:            execution_time=execution_time,
+L588:            nodes_explored=nodes_explored,
+L589:        )
+... 24 lines not shown ...
+
+## CMD: sed -n '220,330p' /workspace/src/pax/scripts/voronoi_stress_scoring.py
+... 219 lines not shown ...
+L220:    return list(second_order)
+L221:
+L222:
+L223:def calculate_weighted_stress(
+L224:    point: Point,
+L225:    zones_gdf: gpd.GeoDataFrame,
+L226:    neighbors: dict[int, list[int]],
+L227:    camera_stress: dict[str, float],
+L228:    neighbor_weight: float = 0.5,
+L229:    second_order_weight: float = 0.25,
+L230:    transformer: Transformer | None = None,
+L231:) -> dict[str, Any]:
+L232:    """Calculate weighted stress score for an intersection point.
+L233:    
+L234:    Args:
+L235:        point: Shapely Point (lon, lat order)
+L236:        zones_gdf: GeoDataFrame of Voronoi zones
+L237:        neighbors: Dictionary of zone neighbors
+L238:        camera_stress: Dictionary mapping camera_id -> stress_score
+L239:        neighbor_weight: Weight for adjacent neighbors
+L240:        second_order_weight: Weight for second-order neighbors
+L241:    
+L242:    Returns:
+L243:        Dictionary with stress score and zone information
+L244:    """
+L245:    if transformer is not None:
+L246:        projected_x, projected_y = transformer.transform(point.x, point.y)
+L247:        point = Point(projected_x, projected_y)
+L248:
+L249:    # Find containing zone
+L250:    containing = zones_gdf[zones_gdf.geometry.contains(point)]
+L251:    
+L252:    fallback_used = False
+L253:    if len(containing) == 0:
+L254:        # Find nearest zone
+L255:        distances = zones_gdf.geometry.distance(point)
+L256:        nearest_idx = distances.idxmin()
+L257:        containing = zones_gdf.loc[[nearest_idx]]
+L258:        fallback_used = True
+L259:    
+L260:    zone = containing.iloc[0]
+L261:    zone_idx = int(zone['index'])
+L262:    camera_id = zone['camera_id']
+L263:    
+L264:    # Base stress from own zone
+L265:    base_stress = camera_stress.get(camera_id, 0.0)
+L266:    
+L267:    # Stress from adjacent neighbors
+L268:    neighbor_indices = neighbors.get(zone_idx, [])
+L269:    neighbor_stress = 0.0
+L270:    neighbor_contributions = []
+L271:    
+L272:    for n_idx in neighbor_indices:
+L273:        neighbor_zone = zones_gdf[zones_gdf['index'] == n_idx].iloc[0]
+L274:        n_camera_id = neighbor_zone['camera_id']
+L275:        n_stress = camera_stress.get(n_camera_id, 0.0)
+L276:        weighted_n_stress = n_stress * neighbor_weight
+L277:        neighbor_stress += weighted_n_stress
+L278:        neighbor_contributions.append({
+L279:            "zone_index": n_idx,
+L280:            "camera_id": n_camera_id,
+L281:            "stress": n_stress,
+L282:            "weighted_stress": weighted_n_stress,
+L283:        })
+L284:    
+L285:    # Stress from second-order neighbors
+L286:    second_order_indices = find_second_order_neighbors(neighbors, zone_idx)
+L287:    second_order_stress = 0.0
+L288:    second_order_contributions = []
+L289:    
+L290:    for so_idx in second_order_indices:
+L291:        so_zone = zones_gdf[zones_gdf['index'] == so_idx].iloc[0]
+L292:        so_camera_id = so_zone['camera_id']
+L293:        so_stress = camera_stress.get(so_camera_id, 0.0)
+L294:        weighted_so_stress = so_stress * second_order_weight
+L295:        second_order_stress += weighted_so_stress
+L296:        second_order_contributions.append({
+L297:            "zone_index": so_idx,
+L298:            "camera_id": so_camera_id,
+L299:            "stress": so_stress,
+L300:            "weighted_stress": weighted_so_stress,
+L301:        })
+L302:    
+L303:    # Total weighted stress
+L304:    total_stress = base_stress + neighbor_stress + second_order_stress
+L305:    
+L306:    return {
+L307:        "point": {"lon": point.x, "lat": point.y},
+L308:        "zone_index": zone_idx,
+L309:        "camera_id": camera_id,
+L310:        "camera_name": zone['camera_name'],
+L311:        "base_stress": base_stress,
+L312:        "neighbor_stress": neighbor_stress,
+L313:        "second_order_stress": second_order_stress,
+L314:        "total_weighted_stress": total_stress,
+L315:        "fallback_used": fallback_used,
+L316:        "contributions": {
+L317:            "own_zone": {
+L318:                "camera_id": camera_id,
+L319:                "stress": base_stress,
+L320:                "weight": 1.0,
+L321:            },
+L322:            "neighbors": neighbor_contributions,
+L323:            "second_order": second_order_contributions,
+L324:        },
+L325:    }
+L326:
+L327:
+L328:def main(argv: list[str] | None = None) -> int:
+L329:    parser = build_parser()
+... 126 lines not shown ...
+
+## CMD: ApplyPatch add inventory_paths.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+
+## CMD: ApplyPatch add frozen_snapshot.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml
+
+## CMD: ApplyPatch add architecture_map.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+
+## CMD: ApplyPatch add reuse_paths.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+
+## CMD: ApplyPatch add data_lineage_graph.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml
+
+## CMD: ApplyPatch add phase2_phase0_completion_report.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/phase2_phase0_completion_report.yaml
+
+## CMD: git status -sb
+## main...origin/main
+?? scripts/2026-02-01/agents/work-tree/

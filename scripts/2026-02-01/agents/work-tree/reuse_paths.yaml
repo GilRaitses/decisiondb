@@ -1,0 +1,35 @@
+reuse_paths:
+  - reuse_id: "camera_stress_scores_to_route_selection"
+    upstream_metric:
+      name: "camera_stress_scores"
+      path: "/workspace/data/stress_scores_updated.json"
+      description: "camera_id to stress_score mapping used to build intersection stress."
+    downstream_decision:
+      name: "route_selection"
+      description: "A* path choice using stress penalty in find_path."
+      decision_artifact: "PathResult.nodes"
+    context_variables:
+      - "stress_weight"
+      - "use_regularization"
+      - "query_hour"
+      - "stress_source_key"
+    evidence_paths:
+      - "src/pax/pathfinding/learned_heuristic.py#_load_stress_scores"
+      - "src/pax/pathfinding/learned_heuristic.py#find_path"
+
+  - reuse_id: "weighted_zone_stress_to_route_selection"
+    upstream_metric:
+      name: "total_weighted_stress"
+      path: "src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress"
+      description: "base_stress plus neighbor_stress plus second_order_stress."
+    downstream_decision:
+      name: "route_selection"
+      description: "A* path choice using stress penalty in find_path."
+      decision_artifact: "PathResult.nodes"
+    context_variables:
+      - "neighbor_weight"
+      - "second_order_weight"
+      - "stress_weight"
+    evidence_paths:
+      - "src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress"
+      - "src/pax/pathfinding/learned_heuristic.py#find_path"

@@ -1,0 +1,71 @@
+node_types:
+  - raw_data
+  - metric
+  - model_state
+  - decision
+  - artifact
+
+edge_types:
+  - reads
+  - computes
+  - transforms
+  - drives
+  - reports
+
+nodes:
+  - id: "camera_stress_scores"
+    type: "raw_data"
+    path: "/workspace/data/stress_scores_updated.json"
+  - id: "camera_positions"
+    type: "raw_data"
+    path: "/workspace/data/manifests/corridor_cameras_numbered.json"
+  - id: "voronoi_zones_geojson"
+    type: "raw_data"
+    path: "/workspace/data/geojson/voronoi_zones.geojson"
+  - id: "weighted_zone_stress_scores"
+    type: "metric"
+    produced_by: "src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress"
+  - id: "intersection_stress_map"
+    type: "model_state"
+    produced_by: "src/pax/pathfinding/learned_heuristic.py#_map_intersections_to_stress"
+  - id: "edge_stress_penalty"
+    type: "metric"
+    produced_by: "src/pax/pathfinding/learned_heuristic.py#find_path"
+  - id: "route_selection"
+    type: "decision"
+    produced_by: "src/pax/pathfinding/learned_heuristic.py#find_path"
+  - id: "route_diagnostics"
+    type: "artifact"
+    produced_by: "src/pax/stress/intersection_stress.py#build_route_diagnostics"
+
+edges:
+  - from: "camera_stress_scores"
+    to: "weighted_zone_stress_scores"
+    type: "computes"
+    evidence_paths:
+      - "src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress"
+  - from: "voronoi_zones_geojson"
+    to: "weighted_zone_stress_scores"
+    type: "reads"
+    evidence_paths:
+      - "src/pax/scripts/voronoi_stress_scoring.py#build_parser"
+  - from: "weighted_zone_stress_scores"
+    to: "intersection_stress_map"
+    type: "transforms"
+    evidence_paths:
+      - "src/pax/stress/intersection_stress.py#from_voronoi_zones"
+  - from: "intersection_stress_map"
+    to: "edge_stress_penalty"
+    type: "computes"
+    evidence_paths:
+      - "src/pax/pathfinding/learned_heuristic.py#find_path"
+  - from: "edge_stress_penalty"
+    to: "route_selection"
+    type: "drives"
+    evidence_paths:
+      - "src/pax/pathfinding/learned_heuristic.py#find_path"
+  - from: "intersection_stress_map"
+    to: "route_diagnostics"
+    type: "reports"
+    evidence_paths:
+      - "src/pax/stress/intersection_stress.py#build_route_diagnostics"
