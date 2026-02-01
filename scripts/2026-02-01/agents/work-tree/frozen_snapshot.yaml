@@ -1,0 +1,31 @@
+snapshot_ref_type: "index_file"
+snapshot_ref_value:
+  path: "/workspace/scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
+  relative_path: "scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
+  exists: true
+
+paths:
+  - path: "/workspace/scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
+    relative_path: "scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
+    exists: true
+    role: "snapshot_index"
+  - path: "/Users/gilraitses/pax/docs/logs/2026-01-18.yaml"
+    relative_path: null
+    exists: false
+    role: "external_system_log_reference"
+  - path: "/Users/gilraitses/pax/system_explainer.pdf"
+    relative_path: null
+    exists: false
+    role: "external_pdf_reference"
+  - path: "/Users/gilraitses/pax/reproducibility_note.pdf"
+    relative_path: null
+    exists: false
+    role: "external_pdf_reference"
+  - path: "/Users/gilraitses/pax/technical_appendix.pdf"
+    relative_path: null
+    exists: false
+    role: "external_pdf_reference"
+
+provenance_notes:
+  - "Snapshot index exists in repo. It lists external Pax paths that are not present in this workspace."
+  - "No additional frozen snapshot file was found in repo beyond the index file."

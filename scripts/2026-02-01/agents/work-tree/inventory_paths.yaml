@@ -1,0 +1,134 @@
+inventory:
+  repo_root: "/workspace"
+
+files:
+  - path: "/workspace/README.md"
+    relative_path: "README.md"
+    exists: true
+  - path: "/workspace/inventory.txt"
+    relative_path: "inventory.txt"
+    exists: true
+  - path: "/workspace/checksums.sha256"
+    relative_path: "checksums.sha256"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/handoffs/phase2-0.yaml"
+    relative_path: "scripts/2026-02-01/agents/handoffs/phase2-0.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml"
+    relative_path: "scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/handoffs/artifacts/context_compatibility_trace.csv"
+    relative_path: "scripts/2026-02-01/agents/handoffs/artifacts/context_compatibility_trace.csv"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/handoffs/artifacts/context_compatibility_trace_table.tex"
+    relative_path: "scripts/2026-02-01/agents/handoffs/artifacts/context_compatibility_trace_table.tex"
+    exists: true
+  - path: "/workspace/scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
+    relative_path: "scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
+    exists: true
+
+directories:
+  - path: "/workspace/src"
+    relative_path: "src"
+    exists: true
+  - path: "/workspace/src/pax"
+    relative_path: "src/pax"
+    exists: true
+  - path: "/workspace/src/pax/pathfinding"
+    relative_path: "src/pax/pathfinding"
+    exists: true
+  - path: "/workspace/src/pax/scripts"
+    relative_path: "src/pax/scripts"
+    exists: true
+  - path: "/workspace/src/pax/stress"
+    relative_path: "src/pax/stress"
+    exists: true
+  - path: "/workspace/data"
+    relative_path: "data"
+    exists: true
+  - path: "/workspace/data/geojson"
+    relative_path: "data/geojson"
+    exists: true
+  - path: "/workspace/data/manifests"
+    relative_path: "data/manifests"
+    exists: true
+  - path: "/workspace/docs"
+    relative_path: "docs"
+    exists: true
+  - path: "/workspace/scripts"
+    relative_path: "scripts"
+    exists: true
+  - path: "/workspace/scripts/2026-01-31/agents"
+    relative_path: "scripts/2026-01-31/agents"
+    exists: true
+  - path: "/workspace/scripts/2026-01-31/agents/work-tree"
+    relative_path: "scripts/2026-01-31/agents/work-tree"
+    exists: true
+  - path: "/workspace/scripts/2026-01-31/agents/work-tree/artifacts"
+    relative_path: "scripts/2026-01-31/agents/work-tree/artifacts"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents"
+    relative_path: "scripts/2026-02-01/agents"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/notes"
+    relative_path: "scripts/2026-02-01/agents/notes"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree"
+    relative_path: "scripts/2026-02-01/agents/work-tree"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/audit"
+    relative_path: "scripts/2026-02-01/agents/work-tree/audit"
+    exists: true
+
+data_assets:
+  - path: "/workspace/data/stress_scores_updated.json"
+    relative_path: "data/stress_scores_updated.json"
+    exists: true
+  - path: "/workspace/data/geojson/voronoi_zones.geojson"
+    relative_path: "data/geojson/voronoi_zones.geojson"
+    exists: true
+  - path: "/workspace/data/geojson/intersections.json"
+    relative_path: "data/geojson/intersections.json"
+    exists: true
+  - path: "/workspace/data/manifests/corridor_cameras_numbered.json"
+    relative_path: "data/manifests/corridor_cameras_numbered.json"
+    exists: true
+
+configs:
+  - path: "/workspace/scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+    relative_path: "scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml"
+    relative_path: "scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml"
+    relative_path: "scripts/2026-01-31/agents/work-tree/compatibility_conditions.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml"
+    relative_path: "scripts/2026-01-31/agents/work-tree/reuse_invariants.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml"
+    relative_path: "scripts/2026-01-31/agents/work-tree/reuse_failure_conditions.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-01-31/agents/work-tree/observables_map.yaml"
+    relative_path: "scripts/2026-01-31/agents/work-tree/observables_map.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml"
+    relative_path: "scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/handoffs/phase2-0.yaml"
+    relative_path: "scripts/2026-02-01/agents/handoffs/phase2-0.yaml"
+    exists: true
+
+notebooks: []
+
+scripts:
+  - path: "/workspace/src/pax/pathfinding/learned_heuristic.py"
+    relative_path: "src/pax/pathfinding/learned_heuristic.py"
+    exists: true
+  - path: "/workspace/src/pax/scripts/voronoi_stress_scoring.py"
+    relative_path: "src/pax/scripts/voronoi_stress_scoring.py"
+    exists: true
+  - path: "/workspace/src/pax/stress/intersection_stress.py"
+    relative_path: "src/pax/stress/intersection_stress.py"
+    exists: true
