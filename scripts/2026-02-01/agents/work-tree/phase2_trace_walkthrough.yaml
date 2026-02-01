@@ -1,0 +1,36 @@
+phase: phase_2_2
+artifact: phase2_trace_walkthrough
+
+inputs:
+  - path: scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+  - path: scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+  - path: scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+
+trace:
+  reuse_id: camera_stress_scores_to_route_selection
+  description: >
+    Reuse path from camera_stress_scores to route_selection with missing
+    task_id and abstraction_level context fields.
+  context_present:
+    - trace_id: camera_stress_scores_to_route_selection
+    - input_regime: /workspace/data/stress_scores_updated.json
+    - assumption_set:
+        - stress_weight
+        - use_regularization
+        - query_hour
+        - stress_source_key
+    - downstream_task: route_selection
+  context_missing:
+    - task_id
+    - abstraction_level
+    - confidence
+    - compatibility_result
+    - action_required
+  evaluation:
+    rule_applied: R1
+    reuse_compatibility: incompatible
+    incompatibility_trigger: missing required context fields
+    basis: missing_context_only
+  evidence_paths:
+    - scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+    - scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml

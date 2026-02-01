@@ -1,0 +1,65 @@
+phase: phase_2_2
+report_type: completion_report
+status: complete_with_gaps
+
+summary:
+  one_sentence_outcome: >
+    Reuse incompatibility is mechanically detected from missing context
+    fields without using confidence values or performance metrics.
+
+inputs_consumed:
+  frozen_artifacts:
+    - path: scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+      used_for: bound and unbound context fields
+    - path: scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+      used_for: reuse path context mapping
+    - path: scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml
+      used_for: external and missing evidence inventory
+    - path: scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+      used_for: authoritative path index
+
+outputs_produced:
+  required:
+    - path: scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+    - path: scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+    - path: scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml
+    - path: scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml
+
+context_sufficiency_result:
+  required_context_fields:
+    - task_id
+    - abstraction_level
+    - input_regime
+    - assumption_set
+    - downstream_task
+  missing_context_only: true
+
+reuse_trace_result:
+  reuse_id: camera_stress_scores_to_route_selection
+  compatibility: incompatible
+  incompatibility_trigger: missing task_id and abstraction_level
+  confidence_values_used: false
+
+validation_checks:
+  symbols_align_phase1_5_and_phase2_1: pass
+  paths_exist_in_inventory_paths: fail
+  missing_context_only_basis: pass
+  readlints: pass
+  validation_notes:
+    - new Phase 2_2 outputs are not listed in inventory_paths.yaml
+
+non_actions_confirmed:
+  - no_model_modification: true
+  - no_metric_recomputation: true
+  - no_calibration: true
+  - no_logging_change: true
+
+handoff_recommendation:
+  next_phase: "2_3"
+  rationale: >
+    Context sufficiency rules and a missing context reuse incompatibility
+    walkthrough are recorded using frozen Phase 2_0 and Phase 2_1 artifacts.
+
+sign_off:
+  agent_signature: "cursor-cloud-agent"
+  timestamp: "2026-02-01T08:28:40Z"

@@ -1,0 +1,122 @@
+## COMMAND EQUIVALENCE NOTE:
+ls/find/grep/sed/printf/rm/mv commands were executed with tool equivalents due to environment guidance (LS/Glob/rg/ReadFile/ApplyPatch/Delete).
+
+## CMD: git status -sb
+## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
+
+## CMD: ApplyPatch add scripts/2026-02-01/agents/handoffs/phase2-2.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/handoffs/phase2-2.yaml
+
+## CMD: ReadFile scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+L1:phase: phase_2_1
+L2:artifact: phase2_context_binding_map
+L3:
+L4:inputs:
+L5:  - path: scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml
+L6:  - path: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+L7:  - path: scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+L8:  - path: scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml
+L9:
+L10:bindings:
+L11:  - abstract_field: trace_id
+L12:    pax_variable: reuse_paths.reuse_id
+L13:    decision_stage: reuse_path_record
+L14:    evidence_paths:
+L15:      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+L16:  - abstract_field: downstream_task
+L17:    pax_variable: reuse_paths.downstream_decision.name
+L18:    decision_stage: pathfinding
+L19:    evidence_paths:
+L20:      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+L21:      - scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+L22:  - abstract_field: input_regime
+L23:    pax_variable: reuse_paths.upstream_metric.path
+L24:    decision_stage: upstream_metric_source
+L25:    evidence_paths:
+L26:      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+L27:  - abstract_field: assumption_set
+L28:    pax_variable: reuse_paths.context_variables
+L29:    decision_stage: reuse_path_context
+L30:    evidence_paths:
+L31:      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+... 47 lines not shown ...
+
+## CMD: ReadFile scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+L1:phase: phase_2_1
+L2:artifact: phase2_reuse_alignment_notes
+L3:
+L4:inputs:
+L5:  - path: scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml
+L6:  - path: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+L7:  - path: scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml
+L8:  - path: scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+L9:
+L10:reuse_alignment:
+L11:  - reuse_id: camera_stress_scores_to_route_selection
+L12:    upstream_metric: camera_stress_scores
+L13:    upstream_metric_path: /workspace/data/stress_scores_updated.json
+L14:    downstream_decision: route_selection
+L15:    decision_stage: pathfinding
+L16:    mapped_context_fields:
+L17:      trace_id: camera_stress_scores_to_route_selection
+L18:      input_regime: /workspace/data/stress_scores_updated.json
+L19:      assumption_set:
+L20:        - stress_weight
+L21:        - use_regularization
+L22:        - query_hour
+L23:        - stress_source_key
+L24:      downstream_task: route_selection
+L25:    unmapped_context_fields:
+L26:      - task_id
+L27:      - abstraction_level
+L28:      - confidence
+L29:      - compatibility_result
+L30:      - action_required
+... 32 lines not shown ...
+
+## CMD: ReadFile scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml
+L1:phase: phase_2_1
+L2:artifact: phase2_evidence_gap_report
+L3:
+L4:inputs:
+L5:  - path: scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml
+L6:  - path: scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+L7:  - path: src/pax/scripts/voronoi_stress_scoring.py
+L8:
+L9:evidence_gaps:
+L10:  present_but_external:
+L11:    - description: frozen system log reference not present in repo
+L12:      external_location: /Users/gilraitses/pax/docs/logs/2026-01-18.yaml
+... 30 lines not shown ...
+
+## DECISION: treat inventory_paths.yaml as frozen, no edits made
+## DECISION: use reuse_id camera_stress_scores_to_route_selection for walkthrough
+## DECISION: use missing_context_only basis for incompatibility
+
+## CMD: date -u +"%Y-%m-%dT%H:%M:%SZ"
+2026-02-01T08:28:40Z
+
+## CMD: ApplyPatch add scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+
+## CMD: ApplyPatch add scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+
+## CMD: ApplyPatch add scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml
+
+## CMD: ApplyPatch add scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml
+
+## CMD: git status -sb
+## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
+?? scripts/2026-02-01/agents/handoffs/phase2-2.yaml
+?? scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml
+?? scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+?? scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+?? scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml
