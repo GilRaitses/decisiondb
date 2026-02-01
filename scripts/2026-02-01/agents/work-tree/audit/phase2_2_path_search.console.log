@@ -1,0 +1,92 @@
+## COMMAND EQUIVALENCE NOTE:
+ls/find/grep/sed/printf/rm/mv commands were executed with tool equivalents due to environment guidance (LS/Glob/rg/ReadFile/ApplyPatch/Delete).
+
+## CMD: python3 - <<'PY'
+import re
+from pathlib import Path
+
+phase2_outputs = [
+    Path('scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml'),
+    Path('scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml'),
+    Path('scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml'),
+    Path('scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml'),
+]
+inv_path = Path('scripts/2026-02-01/agents/work-tree/inventory_paths.yaml')
+
+pattern = re.compile(r'^\s*-?\s*path:\s*(.+)$')
+
+def extract_paths(path: Path):
+    if not path.exists():
+        return []
+    paths = []
+    for line in path.read_text(encoding='utf-8').splitlines():
+        match = pattern.match(line)
+        if match:
+            value = match.group(1).strip().strip('\"').strip("'")
+            paths.append(value)
+    return paths
+
+referenced = set()
+for file_path in phase2_outputs:
+    for value in extract_paths(file_path):
+        referenced.add(value)
+
+inventory = set(extract_paths(inv_path))
+missing = sorted(p for p in referenced if p not in inventory)
+
+print('REFERENCED_PATHS')
+for p in sorted(referenced):
+    print(p)
+print('MISSING_PATHS')
+for p in missing:
+    print(p)
+print('MISSING_COUNT', len(missing))
+PY
+REFERENCED_PATHS
+scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml
+scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml
+scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml
+MISSING_PATHS
+scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml
+scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml
+scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml
+MISSING_COUNT 8
+
+## CMD: rg --files -g "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+
+## CMD: rg --files -g "scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml
+
+## CMD: rg --files -g "scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+
+## CMD: rg --files -g "scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+
+## CMD: rg --files -g "scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+
+## CMD: rg --files -g "scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml"
+scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml
+
+## CMD: rg --files -g "scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml"
+scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+
+## CMD: rg --files -g "scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml
+
+## DECISION: all missing paths resolved by exact match in repo
+## DECISION: no candidate mapping required
+## DECISION: Pax audit request not required
+## DECISION: inventory_paths.yaml updated using exact match evidence

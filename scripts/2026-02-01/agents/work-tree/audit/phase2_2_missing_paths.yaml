@@ -1,0 +1,22 @@
+phase: phase_2_2a
+artifact: phase2_2_missing_paths
+
+generated_from:
+  phase2_outputs:
+    - scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+    - scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+    - scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml
+    - scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml
+  inventory: scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+
+missing_paths:
+  - scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml
+
+missing_paths_count: 8

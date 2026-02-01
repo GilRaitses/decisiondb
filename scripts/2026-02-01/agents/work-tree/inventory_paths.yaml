@@ -29,6 +29,46 @@ files:
   - path: "/workspace/scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
     relative_path: "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
     exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+    exists: true
   - path: "/workspace/scripts/2026-02-01/agents/work-tree/architecture_map.yaml"
     relative_path: "scripts/2026-02-01/agents/work-tree/architecture_map.yaml"
     exists: true
