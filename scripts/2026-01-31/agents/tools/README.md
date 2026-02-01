@@ -35,3 +35,6 @@ ALLOW_MAP_EDIT_OVERRIDE
 The repository includes a convenience pre-commit hook in `.githooks/pre-commit`.
 If you already use a hooks manager, integrate the logic there instead of
 overriding your hooks path.
+
+File mode is not used for enforcement. CI and the pre-commit hook are the
+authoritative guardrails.

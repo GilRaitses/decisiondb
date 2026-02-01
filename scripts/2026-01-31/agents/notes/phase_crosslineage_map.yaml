@@ -186,25 +186,25 @@ figure_concept_alignment:
     anchored_concept: Canonical Decision-Valued Mapping Schematic
     used_in:
       - context_type: manuscript
-        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 1
+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 1"
   - figure_id: 2
     figure_path: scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
     anchored_concept: Primary Representational Sweep
     used_in:
       - context_type: manuscript
-        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 2
+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 2"
   - figure_id: 3
     figure_path: scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
     anchored_concept: Identity Persistence Regions
     used_in:
       - context_type: manuscript
-        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 3
+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 3"
   - figure_id: 4
     figure_path: scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
     anchored_concept: Boundary and Fracture Localization
     used_in:
       - context_type: manuscript
-        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 4
+        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 4"
 interface_inventory:
   - interface_name: decision identity
     defined_in:

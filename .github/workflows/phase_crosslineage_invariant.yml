@@ -16,8 +16,14 @@ jobs:
       - name: Enforce crosslineage map invariant
         shell: bash
         run: |
-          git fetch origin main
-          diff_scope="origin/main...HEAD"
+          base_ref="${GITHUB_BASE_REF:-}"
+          if [ -n "${base_ref}" ]; then
+            git fetch origin "${base_ref}"
+            diff_scope="origin/${base_ref}...HEAD"
+          else
+            git fetch origin main
+            diff_scope="origin/main...HEAD"
+          fi
           map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
           override_path=".github/override/phase_crosslineage_map_edit.override"
           override_token="ALLOW_MAP_EDIT_OVERRIDE"
