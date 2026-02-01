@@ -1,45 +1,43 @@
 ## COMMAND EQUIVALENCE NOTE:
-ls/find/grep/sed/printf/rm/mv commands were executed with tool equivalents due to environment guidance (LS/Glob/rg/ReadFile/ApplyPatch/Delete). "python" commands were executed with python3. The checklist path "phase_crosslineage_map.yaml" was substituted with "scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml". "scripts/2026-01-31/agents/tools/abstract_lint.py" was substituted with "scripts/2026-01-31/agents/tools/lint_abstract_against_map.py". The missing-map test was executed by pointing the linter to a non-existent map path instead of moving the map file.
+ls/find/grep/sed/printf/rm/mv commands were executed with tool equivalents due to environment guidance (LS/Glob/rg/ReadFile/ApplyPatch/Delete). "python" commands were executed with python3. The checklist path "phase_crosslineage_map.yaml" was substituted with "scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml". "scripts/2026-01-31/agents/tools/abstract_lint.py" was substituted with "scripts/2026-01-31/agents/tools/lint_abstract_against_map.py". The missing-map test was executed by pointing the linter to a non-existent map path instead of moving the map file. git remote output was redacted to avoid secret exposure.
 
 ## CMD: mkdir -p scripts/2026-01-31/agents/work-tree/audit
 
 ## CMD: date
-Sun Feb  1 05:29:16 AM UTC 2026
+Sun Feb  1 06:10:12 AM UTC 2026
 
 ## CMD: git rev-parse --show-toplevel
 /workspace
 
 ## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c [ahead 1]
+## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
+ M .github/workflows/phase_crosslineage_invariant.yml
+ M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+ M scripts/2026-01-31/agents/tools/README.md
 
-## CMD: git remote -v
+## CMD: git remote -v | sed -E "s/x-access-token:[^@]+/x-access-token:<REDACTED_TOKEN>/"
 origin	https://x-access-token:<REDACTED_TOKEN>@github.com/GilRaitses/decisiondb (fetch)
 origin	https://x-access-token:<REDACTED_TOKEN>@github.com/GilRaitses/decisiondb (push)
-[NOTE] token redacted due to repository push protection.
 
 ## CMD: git branch --show-current
 cursor/confidence-reuse-conditions-fe3c
 
 ## CMD: git log -n 3 --oneline
-5c06b56 Add arco cover note for guardrails review
-8c11483 Move merge handoff to arco
-7faad05 Add crosslineage guardrails failuremode handoff
+f6f1ee2 Add phase1.5 context compatibility trace artifacts
+4521d94 Add guardrails failure mode review audit
+9b4643b Add arco cover note for guardrails review
 
 ## CMD: ls -la phase_crosslineage_map.yaml
 L1:handoff_id: phase_crosslineage_alignment
 L2:date: "2026-01-31"
 L3:agent_role: consolidation_only
-L4:scope_level: read_only
-L5:status: authorized
-... 242 lines not shown ...
+... 244 lines not shown ...
 
 ## CMD: ls -la scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml
 L1:handoff_id: phase_crosslineage_alignment
 L2:date: "2026-02-01"
 L3:assigned_agent: suit
-L4:agent_role: consolidation_only
-L5:scope_level: read_only
-... 36 lines not shown ...
+... 38 lines not shown ...
 
 ## CMD: ls -la .githooks
 /workspace/.githooks/
@@ -135,52 +133,58 @@ L15:
 L16:      - name: Enforce crosslineage map invariant
 L17:        shell: bash
 L18:        run: |
-L19:          git fetch origin main
-L20:          diff_scope="origin/main...HEAD"
-L21:          map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
-L22:          override_path=".github/override/phase_crosslineage_map_edit.override"
-L23:          override_token="ALLOW_MAP_EDIT_OVERRIDE"
-L24:          if git diff --name-only "${diff_scope}" | rg -q "^${map_path}$"; then
-L25:            if ! git diff --name-only "${diff_scope}" | rg -q "^${override_path}$"; then
-L26:              echo "FAIL: ${map_path} changed in ${diff_scope} without override ${override_path}"
-L27:              exit 1
-L28:            fi
-L29:            if ! rg -x "${override_token}" "${override_path}"; then
-L30:              echo "FAIL: ${override_path} must contain only ${override_token}"
-L31:              exit 1
-L32:            fi
-L33:            echo "ALLOW: override file present"
-L34:          else
-L35:            echo "PASS: ${map_path} unchanged in ${diff_scope}"
-L36:          fi
-L37:
-L38:      - name: Lint abstract against map
-L39:        shell: bash
-L40:        run: |
-L41:          map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
-L42:          abstract_root="scripts/2026-01-31/agents/work-tree"
-L43:          python3 scripts/2026-01-31/agents/tools/lint_abstract_against_map.py "$map_path" "$abstract_root"
+L19:          base_ref="${GITHUB_BASE_REF:-}"
+L20:          if [ -n "${base_ref}" ]; then
+L21:            git fetch origin "${base_ref}"
+L22:            diff_scope="origin/${base_ref}...HEAD"
+L23:          else
+L24:            git fetch origin main
+L25:            diff_scope="origin/main...HEAD"
+L26:          fi
+L27:          map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+L28:          override_path=".github/override/phase_crosslineage_map_edit.override"
+L29:          override_token="ALLOW_MAP_EDIT_OVERRIDE"
+L30:          if git diff --name-only "${diff_scope}" | rg -q "^${map_path}$"; then
+L31:            if ! git diff --name-only "${diff_scope}" | rg -q "^${override_path}$"; then
+L32:              echo "FAIL: ${map_path} changed in ${diff_scope} without override ${override_path}"
+L33:              exit 1
+L34:            fi
+L35:            if ! rg -x "${override_token}" "${override_path}"; then
+L36:              echo "FAIL: ${override_path} must contain only ${override_token}"
+L37:              exit 1
+L38:            fi
+L39:            echo "ALLOW: override file present"
+L40:          else
+L41:            echo "PASS: ${map_path} unchanged in ${diff_scope}"
+L42:          fi
+L43:
+L44:      - name: Lint abstract against map
+L45:        shell: bash
+L46:        run: |
+L47:          map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+L48:          abstract_root="scripts/2026-01-31/agents/work-tree"
+L49:          python3 scripts/2026-01-31/agents/tools/lint_abstract_against_map.py "$map_path" "$abstract_root"
 
 ## CMD: grep -RIn "phase_crosslineage_map.yaml" .github/workflows || true
 <workspace_result workspace_path="/workspace">
 Found 2 matching lines
 .github/workflows/phase_crosslineage_invariant.yml
-21:          map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
-41:          map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+27:          map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+47:          map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
 </workspace_result>
 
 ## CMD: grep -RIn "phase_crosslineage_map_edit.override" .github/workflows || true
 <workspace_result workspace_path="/workspace">
 Found 1 matching line
 .github/workflows/phase_crosslineage_invariant.yml
-22:          override_path=".github/override/phase_crosslineage_map_edit.override"
+28:          override_path=".github/override/phase_crosslineage_map_edit.override"
 </workspace_result>
 
 ## CMD: grep -RIn "ALLOW_MAP_EDIT_OVERRIDE" .github/workflows || true
 <workspace_result workspace_path="/workspace">
 Found 1 matching line
 .github/workflows/phase_crosslineage_invariant.yml
-23:          override_token="ALLOW_MAP_EDIT_OVERRIDE"
+29:          override_token="ALLOW_MAP_EDIT_OVERRIDE"
 </workspace_result>
 
 ## CMD: grep -RIn "pull_request" .github/workflows || true
@@ -209,8 +213,8 @@ Found 2 matching lines
 <workspace_result workspace_path="/workspace">
 Found 2 matching lines
 .github/workflows/phase_crosslineage_invariant.yml
-24:          if git diff --name-only "${diff_scope}" | rg -q "^${map_path}$"; then
-25:            if ! git diff --name-only "${diff_scope}" | rg -q "^${override_path}$"; then
+30:          if git diff --name-only "${diff_scope}" | rg -q "^${map_path}$"; then
+31:            if ! git diff --name-only "${diff_scope}" | rg -q "^${override_path}$"; then
 </workspace_result>
 <workspace_result workspace_path="/workspace">
 No matches found
@@ -218,9 +222,10 @@ No matches found
 
 ## CMD: grep -RIn "origin/main\|HEAD^\|github.base_ref\|GITHUB_BASE_REF\|GITHUB_SHA\|merge-base" .github/workflows .githooks/pre-commit scripts/2026-01-31/agents/tools || true
 <workspace_result workspace_path="/workspace">
-Found 1 matching line
+Found 2 matching lines
 .github/workflows/phase_crosslineage_invariant.yml
-20:          diff_scope="origin/main...HEAD"
+19:          base_ref="${GITHUB_BASE_REF:-}"
+25:            diff_scope="origin/main...HEAD"
 </workspace_result>
 <workspace_result workspace_path="/workspace">
 No matches found
@@ -241,7 +246,11 @@ Success. Updated the following files:
 A /workspace/.github/override/.keep_override_dir
 
 ## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c [ahead 1]
+## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
+ M .github/workflows/phase_crosslineage_invariant.yml
+ M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+ M scripts/2026-01-31/agents/tools/README.md
+ D scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
 ?? .github/override/
 
 ## CMD: printf "ALLOW_MAP_EDIT_OVERRIDE" > .github/override/phase_crosslineage_map_edit.override.TMP_WRONG
@@ -273,8 +282,7 @@ Success. Updated the following files:
 A /workspace/.github/override/phase_crosslineage_map_edit.override
 
 ## CMD: python -c "p=open('.github/override/phase_crosslineage_map_edit.override','rb').read(); print(p);"
-L1:ALLOW_MAP_EDIT_OVERRIDE
-L2:
+b'ALLOW_MAP_EDIT_OVERRIDE\n'
 
 ## CMD: ls -la .github/override/phase_crosslineage_map_edit.override
 /workspace/.github/override/
@@ -329,156 +337,16 @@ usage: lint_abstract_against_map.py <phase_crosslineage_map.yaml> <abstract.txt|
 ## CMD: mkdir -p /tmp/abstractlint_empty_dir
 
 ## CMD: python scripts/2026-01-31/agents/tools/abstract_lint.py /tmp/abstractlint_empty_dir || true
-Traceback (most recent call last):
-  File "/workspace/scripts/2026-01-31/agents/tools/lint_abstract_against_map.py", line 133, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/workspace/scripts/2026-01-31/agents/tools/lint_abstract_against_map.py", line 106, in main
-    allow = load_allowlist(map_path)
-            ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspace/scripts/2026-01-31/agents/tools/lint_abstract_against_map.py", line 25, in load_allowlist
-    data = yaml.safe_load(map_path.read_text(encoding="utf-8"))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/__init__.py", line 125, in safe_load
-    return load(stream, SafeLoader)
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/__init__.py", line 81, in load
-    return loader.get_single_data()
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/constructor.py", line 49, in get_single_data
-    node = self.get_single_node()
-           ^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 36, in get_single_node
-    document = self.compose_document()
-               ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 55, in compose_document
-    node = self.compose_node(None, None)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 84, in compose_node
-    node = self.compose_mapping_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 133, in compose_mapping_node
-    item_value = self.compose_node(node, item_key)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 82, in compose_node
-    node = self.compose_sequence_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 111, in compose_sequence_node
-    node.value.append(self.compose_node(node, index))
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 84, in compose_node
-    node = self.compose_mapping_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 133, in compose_mapping_node
-    item_value = self.compose_node(node, item_key)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 82, in compose_node
-    node = self.compose_sequence_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 111, in compose_sequence_node
-    node.value.append(self.compose_node(node, index))
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 84, in compose_node
-    node = self.compose_mapping_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 127, in compose_mapping_node
-    while not self.check_event(MappingEndEvent):
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/parser.py", line 98, in check_event
-    self.current_event = self.state()
-                         ^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/parser.py", line 428, in parse_block_mapping_key
-    if self.check_token(KeyToken):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/scanner.py", line 116, in check_token
-    self.fetch_more_tokens()
-  File "/usr/lib/python3/dist-packages/yaml/scanner.py", line 223, in fetch_more_tokens
-    return self.fetch_value()
-           ^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/scanner.py", line 577, in fetch_value
-    raise ScannerError(None, None,
-yaml.scanner.ScannerError: mapping values are not allowed here
-  in "<unicode string>", line 189, column 89:
-     ... sections/figure_placeholders.tex: Figure 1
-                                         ^
+SKIP: no abstract files found
 
 ## CMD: mkdir -p /tmp/abstractlint_one_dir
 
 ## CMD: printf "Confidence becomes uninterpretable when it propagates across tasks." > /tmp/abstractlint_one_dir/abstract_test.txt
 
 ## CMD: python scripts/2026-01-31/agents/tools/abstract_lint.py /tmp/abstractlint_one_dir || true
-Traceback (most recent call last):
-  File "/workspace/scripts/2026-01-31/agents/tools/lint_abstract_against_map.py", line 133, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/workspace/scripts/2026-01-31/agents/tools/lint_abstract_against_map.py", line 106, in main
-    allow = load_allowlist(map_path)
-            ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspace/scripts/2026-01-31/agents/tools/lint_abstract_against_map.py", line 25, in load_allowlist
-    data = yaml.safe_load(map_path.read_text(encoding="utf-8"))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/__init__.py", line 125, in safe_load
-    return load(stream, SafeLoader)
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/__init__.py", line 81, in load
-    return loader.get_single_data()
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/constructor.py", line 49, in get_single_data
-    node = self.get_single_node()
-           ^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 36, in get_single_node
-    document = self.compose_document()
-               ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 55, in compose_document
-    node = self.compose_node(None, None)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 84, in compose_node
-    node = self.compose_mapping_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 133, in compose_mapping_node
-    item_value = self.compose_node(node, item_key)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 82, in compose_node
-    node = self.compose_sequence_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 111, in compose_sequence_node
-    node.value.append(self.compose_node(node, index))
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 84, in compose_node
-    node = self.compose_mapping_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 133, in compose_mapping_node
-    item_value = self.compose_node(node, item_key)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 82, in compose_node
-    node = self.compose_sequence_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 111, in compose_sequence_node
-    node.value.append(self.compose_node(node, index))
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 84, in compose_node
-    node = self.compose_mapping_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 127, in compose_mapping_node
-    while not self.check_event(MappingEndEvent):
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/parser.py", line 98, in check_event
-    self.current_event = self.state()
-                         ^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/parser.py", line 428, in parse_block_mapping_key
-    if self.check_token(KeyToken):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/scanner.py", line 116, in check_token
-    self.fetch_more_tokens()
-  File "/usr/lib/python3/dist-packages/yaml/scanner.py", line 223, in fetch_more_tokens
-    return self.fetch_value()
-           ^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/scanner.py", line 577, in fetch_value
-    raise ScannerError(None, None,
-yaml.scanner.ScannerError: mapping values are not allowed here
-  in "<unicode string>", line 189, column 89:
-     ... sections/figure_placeholders.tex: Figure 1
-                                         ^
+FAIL: abstract contains out of map terms
+/tmp/abstractlint_one_dir/abstract_test.txt:
+- Confidence
 
 ## CMD: python scripts/2026-01-31/agents/tools/abstract_lint.py /tmp/abstractlint_one_dir || true
 Traceback (most recent call last):
@@ -500,109 +368,121 @@ Traceback (most recent call last):
 FileNotFoundError: [Errno 2] No such file or directory: '/tmp/phase_crosslineage_map.yaml.moved'
 
 ## CMD: python scripts/2026-01-31/agents/tools/abstract_lint.py . || true
-Traceback (most recent call last):
-  File "/workspace/scripts/2026-01-31/agents/tools/lint_abstract_against_map.py", line 133, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/workspace/scripts/2026-01-31/agents/tools/lint_abstract_against_map.py", line 106, in main
-    allow = load_allowlist(map_path)
-            ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspace/scripts/2026-01-31/agents/tools/lint_abstract_against_map.py", line 25, in load_allowlist
-    data = yaml.safe_load(map_path.read_text(encoding="utf-8"))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/__init__.py", line 125, in safe_load
-    return load(stream, SafeLoader)
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/__init__.py", line 81, in load
-    return loader.get_single_data()
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/constructor.py", line 49, in get_single_data
-    node = self.get_single_node()
-           ^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 36, in get_single_node
-    document = self.compose_document()
-               ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 55, in compose_document
-    node = self.compose_node(None, None)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 84, in compose_node
-    node = self.compose_mapping_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 133, in compose_mapping_node
-    item_value = self.compose_node(node, item_key)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 82, in compose_node
-    node = self.compose_sequence_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 111, in compose_sequence_node
-    node.value.append(self.compose_node(node, index))
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 84, in compose_node
-    node = self.compose_mapping_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 133, in compose_mapping_node
-    item_value = self.compose_node(node, item_key)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 82, in compose_node
-    node = self.compose_sequence_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 111, in compose_sequence_node
-    node.value.append(self.compose_node(node, index))
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 84, in compose_node
-    node = self.compose_mapping_node(anchor)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/composer.py", line 127, in compose_mapping_node
-    while not self.check_event(MappingEndEvent):
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/parser.py", line 98, in check_event
-    self.current_event = self.state()
-                         ^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/parser.py", line 428, in parse_block_mapping_key
-    if self.check_token(KeyToken):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/scanner.py", line 116, in check_token
-    self.fetch_more_tokens()
-  File "/usr/lib/python3/dist-packages/yaml/scanner.py", line 223, in fetch_more_tokens
-    return self.fetch_value()
-           ^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3/dist-packages/yaml/scanner.py", line 577, in fetch_value
-    raise ScannerError(None, None,
-yaml.scanner.ScannerError: mapping values are not allowed here
-  in "<unicode string>", line 189, column 89:
-     ... sections/figure_placeholders.tex: Figure 1
-                                         ^
+SKIP: no abstract files found
 
 ## CMD: ls -la phase_crosslineage_map.yaml
 L1:handoff_id: phase_crosslineage_alignment
 ... 246 lines not shown ...
 
 ## CMD: python -c "import os,stat; p='phase_crosslineage_map.yaml'; m=os.stat(p).st_mode; print(oct(m));"
-0o100644
+0o100444
 
 ## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c [ahead 1]
-?? .github/override/
+## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
+ M .github/workflows/phase_crosslineage_invariant.yml
+ M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+ M scripts/2026-01-31/agents/tools/README.md
+ D scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
 
 ## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c [ahead 1]
-?? .github/override/
+## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
+ M .github/workflows/phase_crosslineage_invariant.yml
+ M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+ M scripts/2026-01-31/agents/tools/README.md
+ D scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
 
 ## CMD: git diff --stat
+ .github/workflows/phase_crosslineage_invariant.yml |  10 +-
+ .../agents/notes/phase_crosslineage_map.yaml       |   8 +-
+ scripts/2026-01-31/agents/tools/README.md          |   3 +
+ .../guardrails_failuremode_review.console.log      | 632 ---------------------
+ 4 files changed, 15 insertions(+), 638 deletions(-)
 
 ## CMD: git diff
+diff --git a/.github/workflows/phase_crosslineage_invariant.yml b/.github/workflows/phase_crosslineage_invariant.yml
+index 91185cb..2e57612 100644
+--- a/.github/workflows/phase_crosslineage_invariant.yml
++++ b/.github/workflows/phase_crosslineage_invariant.yml
+@@ -16,8 +16,14 @@ jobs:
+       - name: Enforce crosslineage map invariant
+         shell: bash
+         run: |
+-          git fetch origin main
+-          diff_scope="origin/main...HEAD"
++          base_ref="${GITHUB_BASE_REF:-}"
++          if [ -n "${base_ref}" ]; then
++            git fetch origin "${base_ref}"
++            diff_scope="origin/${base_ref}...HEAD"
++          else
++            git fetch origin main
++            diff_scope="origin/main...HEAD"
++          fi
+           map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+           override_path=".github/override/phase_crosslineage_map_edit.override"
+           override_token="ALLOW_MAP_EDIT_OVERRIDE"
+diff --git a/scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml b/scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+index 52d5d3c..adfd755 100644
+--- a/scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
++++ b/scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+@@ -186,25 +186,25 @@ figure_concept_alignment:
+     anchored_concept: Canonical Decision-Valued Mapping Schematic
+     used_in:
+       - context_type: manuscript
+-        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 1
++        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 1"
+   - figure_id: 2
+     figure_path: scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+     anchored_concept: Primary Representational Sweep
+     used_in:
+       - context_type: manuscript
+-        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 2
++        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 2"
+   - figure_id: 3
+     figure_path: scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+     anchored_concept: Identity Persistence Regions
+     used_in:
+       - context_type: manuscript
+-        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 3
++        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 3"
+   - figure_id: 4
+     figure_path: scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+     anchored_concept: Boundary and Fracture Localization
+     used_in:
+       - context_type: manuscript
+-        section_or_slide: scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 4
++        section_or_slide: "scripts/2026-01-23/manuscript/sections/figure_placeholders.tex: Figure 4"
+ interface_inventory:
+   - interface_name: decision identity
+     defined_in:
+diff --git a/scripts/2026-01-31/agents/tools/README.md b/scripts/2026-01-31/agents/tools/README.md
+index 0dd160b..68d0a0e 100644
+--- a/scripts/2026-01-31/agents/tools/README.md
++++ b/scripts/2026-01-31/agents/tools/README.md
+@@ -35,3 +35,6 @@ ALLOW_MAP_EDIT_OVERRIDE
+ The repository includes a convenience pre-commit hook in `.githooks/pre-commit`.
+ If you already use a hooks manager, integrate the logic there instead of
+ overriding your hooks path.
++
++File mode is not used for enforcement. CI and the pre-commit hook are the
++authoritative guardrails.
+diff --git a/scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log b/scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
+deleted file mode 100644
+index e20260a..0000000
+--- a/scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
++++ /dev/null
+@@ -1,632 +0,0 @@
 
 ## CMD: git log --oneline --decorate -n 10
-5c06b56 (HEAD -> cursor/confidence-reuse-conditions-fe3c) Add arco cover note for guardrails review
-8c11483 (origin/cursor/confidence-reuse-conditions-fe3c) Move merge handoff to arco
+f6f1ee2 (HEAD -> cursor/confidence-reuse-conditions-fe3c, origin/cursor/confidence-reuse-conditions-fe3c) Add phase1.5 context compatibility trace artifacts
+4521d94 Add guardrails failure mode review audit
+9b4643b Add arco cover note for guardrails review
+8c11483 Move merge handoff to arco
 7faad05 Add crosslineage guardrails failuremode handoff
 a487f3f Tighten crosslineage map guardrails
 f0f05d8 Add crosslineage map guardrails
 8ebec1c Add crosslineage alignment report
 831026b Add phase crosslineage synthesis map
 b6ec4e8 Freeze phase 7 outputs and add status report
-f6d0f82 Add phase 7 follow up draft artifacts
-2382335 Add phase 7 handoff instructions
 
 ## CMD: rm -f .github/override/phase_crosslineage_map_edit.override.TMP_WRONG || true
 Successfully deleted file: /workspace/.github/override/phase_crosslineage_map_edit.override.TMP_WRONG (24 bytes)
@@ -620,13 +500,20 @@ Successfully deleted file: /workspace/.github/override/.keep_override_dir (1 byt
 Successfully deleted file: /workspace/.github/override/phase_crosslineage_map_edit.override (24 bytes)
 
 ## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c [ahead 1]
-?? .github/override/
+## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
+ M .github/workflows/phase_crosslineage_invariant.yml
+ M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+ M scripts/2026-01-31/agents/tools/README.md
+ D scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
 
 ## CMD: rmdir .github/override
 
 ## CMD: git status -sb
-## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c [ahead 1]
+## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
+ M .github/workflows/phase_crosslineage_invariant.yml
+ M scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+ M scripts/2026-01-31/agents/tools/README.md
+ D scripts/2026-01-31/agents/work-tree/audit/guardrails_failuremode_review.console.log
 
 ## CMD: date
-Sun Feb  1 05:41:49 AM UTC 2026
+Sun Feb  1 06:20:50 AM UTC 2026
