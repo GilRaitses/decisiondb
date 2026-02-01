@@ -1,0 +1,12 @@
+handoff_id: phase_crosslineage_alignment
+date: "2026-02-01"
+status: institutionally_frozen
+frozen_artifacts:
+  - scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml
+  - scripts/2026-01-31/agents/notes/phase_crosslineage_alignment_report.yaml
+enforcement:
+  - ci_invariant_check
+  - pre_commit_guardrail
+override_policy:
+  required_file: .github/override/phase_crosslineage_map_edit.override
+  required_contents: ALLOW_MAP_EDIT_OVERRIDE
