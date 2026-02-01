@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+MAP_PATH="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+
+if git diff --cached --name-only | rg -q "^${MAP_PATH}$"; then
+  echo "FAIL: phase_crosslineage_map.yaml is invariant."
+  echo "Use --no-verify and include [ALLOW-MAP-EDIT] if an override is required."
+  exit 1
+fi

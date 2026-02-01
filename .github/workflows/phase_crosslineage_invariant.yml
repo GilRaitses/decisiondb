@@ -1,0 +1,41 @@
+name: Crosslineage map invariant
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  crosslineage-guardrails:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Enforce crosslineage map invariant
+        shell: bash
+        run: |
+          git fetch origin main
+          map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+          if git diff --name-only origin/main...HEAD | rg -q "^${map_path}$"; then
+            if git log -1 --pretty=%B | rg -q "\[ALLOW-MAP-EDIT\]"; then
+              echo "ALLOW: override tag present"
+            else
+              echo "FAIL: phase_crosslineage_map.yaml is invariant"
+              exit 1
+            fi
+          else
+            echo "PASS: map unchanged"
+          fi
+
+      - name: Lint abstract against map
+        shell: bash
+        run: |
+          map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+          abstract_path="scripts/2026-01-31/agents/work-tree/abstract.txt"
+          if [ -f "$abstract_path" ]; then
+            python3 scripts/2026-01-31/agents/tools/lint_abstract_against_map.py "$map_path" "$abstract_path"
+          else
+            echo "SKIP: abstract.txt not found"
+          fi
