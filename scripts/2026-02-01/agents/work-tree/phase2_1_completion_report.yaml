@@ -1,0 +1,114 @@
+phase: phase_2_1
+report_type: completion_report
+status: complete
+
+summary:
+  one_sentence_outcome: >
+    Phase 2_1 grounded Phase 1.5 context-compatibility logic in frozen PAX
+    reuse paths without modifying model behavior or introducing new metrics.
+
+inputs_consumed:
+  phase1_5_artifacts:
+    - path: scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml
+      used_for: abstract context compatibility reference
+  frozen_system_artifacts:
+    - path: scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+      used_for: authoritative path index
+    - path: scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+      used_for: component boundaries and data flow
+    - path: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      used_for: metric reuse identification
+    - path: scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml
+      used_for: upstream dependency tracing
+    - path: scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml
+      used_for: scope and immutability enforcement
+
+outputs_produced:
+  required:
+    - path: scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+      description: mapping from abstract context fields to concrete PAX variables
+    - path: scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+      description: interpretation notes linking reuse paths to compatibility checks
+    - path: scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml
+      description: enumerated missing evidence required for empirical validation
+  optional: []
+
+context_binding_summary:
+  bound_fields:
+    - abstract_field: trace_id
+      pax_variable: reuse_paths.reuse_id
+      decision_stage: reuse_path_record
+      source_file: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+    - abstract_field: downstream_task
+      pax_variable: route_selection
+      decision_stage: pathfinding
+      source_file: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+    - abstract_field: input_regime
+      pax_variable: reuse_paths.upstream_metric.path
+      decision_stage: upstream_metric_source
+      source_file: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+    - abstract_field: assumption_set
+      pax_variable: reuse_paths.context_variables
+      decision_stage: reuse_path_context
+      source_file: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+  unbound_fields:
+    - abstract_field: task_id
+      reason: no task identifier field in reuse_paths or architecture_map
+    - abstract_field: abstraction_level
+      reason: no abstraction level field in PAX artifacts listed in inventory_paths
+    - abstract_field: confidence
+      reason: no confidence value in PAX artifacts listed in inventory_paths
+    - abstract_field: compatibility_result
+      reason: no compatibility result field in PAX artifacts listed in inventory_paths
+    - abstract_field: action_required
+      reason: no action required field in PAX artifacts listed in inventory_paths
+
+reuse_alignment_findings:
+  confirmed_safe_reuse: []
+  flagged_incompatibilities:
+    - reuse_path_id: camera_stress_scores_to_route_selection
+      incompatibility_type: missing_context_fields
+      triggering_context_mismatch: compatibility_result and action_required not present in PAX artifacts
+    - reuse_path_id: weighted_zone_stress_to_route_selection
+      incompatibility_type: missing_context_fields
+      triggering_context_mismatch: compatibility_result and action_required not present in PAX artifacts
+
+evidence_gaps:
+  present_but_external:
+    - description: frozen system log reference not present in repo
+      external_location: /Users/gilraitses/pax/docs/logs/2026-01-18.yaml
+    - description: frozen snapshot pdf bundle not present in repo
+      external_location: /Users/gilraitses/pax/system_explainer.pdf
+    - description: frozen snapshot pdf bundle not present in repo
+      external_location: /Users/gilraitses/pax/reproducibility_note.pdf
+    - description: frozen snapshot pdf bundle not present in repo
+      external_location: /Users/gilraitses/pax/technical_appendix.pdf
+  not_collected:
+    - description: data/voronoi_zones/voronoi_zones.json missing
+      impact_on_claims: limits reproduction of weighted stress scoring entrypoint
+    - description: data/config/stress_weights.yaml missing
+      impact_on_claims: limits verification of composite stress configuration
+    - description: data/intersection_scores_from_dynamics.json missing
+      impact_on_claims: limits optional empirical score path
+
+non_actions_confirmed:
+  - no_metrics_recomputed: true
+  - no_models_modified: true
+  - no_new_evaluation_added: true
+
+validation_checks:
+  path_consistency: pass
+  symbol_consistency: pass
+  scope_constraints_respected: pass
+  readlints: pass
+
+handoff_recommendation:
+  next_phase: phase_3
+  rationale: >
+    Phase 2 established a concrete grounding of context compatibility in
+    system behavior, enabling trace-based walkthroughs without requiring
+    new data collection.
+
+sign_off:
+  agent_id: cursor-cloud-agent
+  timestamp: "2026-02-01T08:11:13Z"

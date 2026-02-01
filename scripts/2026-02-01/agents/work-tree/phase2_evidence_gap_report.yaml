@@ -1,0 +1,40 @@
+phase: phase_2_1
+artifact: phase2_evidence_gap_report
+
+inputs:
+  - path: scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml
+  - path: scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+  - path: src/pax/scripts/voronoi_stress_scoring.py
+
+evidence_gaps:
+  present_but_external:
+    - description: frozen system log reference not present in repo
+      external_location: /Users/gilraitses/pax/docs/logs/2026-01-18.yaml
+      evidence_paths:
+        - scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml
+    - description: frozen snapshot pdf bundle not present in repo
+      external_location: /Users/gilraitses/pax/system_explainer.pdf
+      evidence_paths:
+        - scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml
+    - description: frozen snapshot pdf bundle not present in repo
+      external_location: /Users/gilraitses/pax/reproducibility_note.pdf
+      evidence_paths:
+        - scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml
+    - description: frozen snapshot pdf bundle not present in repo
+      external_location: /Users/gilraitses/pax/technical_appendix.pdf
+      evidence_paths:
+        - scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml
+
+  not_collected:
+    - description: data/voronoi_zones/voronoi_zones.json missing
+      impact_on_claims: limits reproduction of weighted stress scoring entrypoint
+      evidence_paths:
+        - scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+    - description: data/config/stress_weights.yaml missing
+      impact_on_claims: limits verification of composite stress configuration
+      evidence_paths:
+        - src/pax/scripts/voronoi_stress_scoring.py
+    - description: data/intersection_scores_from_dynamics.json missing
+      impact_on_claims: limits optional empirical score path
+      evidence_paths:
+        - scripts/2026-02-01/agents/work-tree/architecture_map.yaml

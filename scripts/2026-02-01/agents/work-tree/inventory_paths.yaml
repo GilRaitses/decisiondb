@@ -26,6 +26,39 @@ files:
   - path: "/workspace/scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
     relative_path: "scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
     exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/architecture_map.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/architecture_map.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/reuse_paths.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/reuse_paths.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_phase0_completion_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_phase0_completion_report.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/audit/phase2_phase0.console.log"
+    relative_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_phase0.console.log"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_1_completion_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_1_completion_report.yaml"
+    exists: true
 
 directories:
   - path: "/workspace/src"

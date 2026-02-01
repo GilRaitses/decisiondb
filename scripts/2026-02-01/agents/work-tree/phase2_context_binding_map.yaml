@@ -1,0 +1,79 @@
+phase: phase_2_1
+artifact: phase2_context_binding_map
+
+inputs:
+  - path: scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml
+  - path: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+  - path: scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+  - path: scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml
+
+bindings:
+  - abstract_field: trace_id
+    pax_variable: reuse_paths.reuse_id
+    decision_stage: reuse_path_record
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+  - abstract_field: downstream_task
+    pax_variable: reuse_paths.downstream_decision.name
+    decision_stage: pathfinding
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      - scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+  - abstract_field: input_regime
+    pax_variable: reuse_paths.upstream_metric.path
+    decision_stage: upstream_metric_source
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+  - abstract_field: assumption_set
+    pax_variable: reuse_paths.context_variables
+    decision_stage: reuse_path_context
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+
+reuse_path_bindings:
+  - reuse_id: camera_stress_scores_to_route_selection
+    trace_id: camera_stress_scores_to_route_selection
+    input_regime: /workspace/data/stress_scores_updated.json
+    assumption_set:
+      - stress_weight
+      - use_regularization
+      - query_hour
+      - stress_source_key
+    downstream_task: route_selection
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+  - reuse_id: weighted_zone_stress_to_route_selection
+    trace_id: weighted_zone_stress_to_route_selection
+    input_regime: src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress
+    assumption_set:
+      - neighbor_weight
+      - second_order_weight
+      - stress_weight
+    downstream_task: route_selection
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+
+unbound_fields:
+  - abstract_field: task_id
+    reason: no task identifier field in reuse_paths or architecture_map
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      - scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+  - abstract_field: abstraction_level
+    reason: no abstraction level field in PAX artifacts listed in inventory_paths
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+      - scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml
+  - abstract_field: confidence
+    reason: no confidence value in PAX artifacts listed in inventory_paths
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      - scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml
+  - abstract_field: compatibility_result
+    reason: no compatibility result field in PAX artifacts listed in inventory_paths
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+  - abstract_field: action_required
+    reason: no action required field in PAX artifacts listed in inventory_paths
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
