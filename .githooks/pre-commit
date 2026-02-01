@@ -2,9 +2,18 @@
 set -euo pipefail
 
 MAP_PATH="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
+OVERRIDE_PATH=".github/override/phase_crosslineage_map_edit.override"
+OVERRIDE_TOKEN="ALLOW_MAP_EDIT_OVERRIDE"
 
 if git diff --cached --name-only | rg -q "^${MAP_PATH}$"; then
-  echo "FAIL: phase_crosslineage_map.yaml is invariant."
-  echo "Use --no-verify and include [ALLOW-MAP-EDIT] if an override is required."
-  exit 1
+  if ! git diff --cached --name-only | rg -q "^${OVERRIDE_PATH}$"; then
+    echo "FAIL: ${MAP_PATH} is invariant."
+    echo "Override requires staged ${OVERRIDE_PATH} containing ${OVERRIDE_TOKEN}."
+    exit 1
+  fi
+  override_content="$(git show ":${OVERRIDE_PATH}" 2>/dev/null || true)"
+  if ! printf "%s\n" "${override_content}" | rg -x "${OVERRIDE_TOKEN}"; then
+    echo "FAIL: ${OVERRIDE_PATH} must contain only ${OVERRIDE_TOKEN}."
+    exit 1
+  fi
 fi

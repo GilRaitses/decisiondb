@@ -17,25 +17,27 @@ jobs:
         shell: bash
         run: |
           git fetch origin main
+          diff_scope="origin/main...HEAD"
           map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
-          if git diff --name-only origin/main...HEAD | rg -q "^${map_path}$"; then
-            if git log -1 --pretty=%B | rg -q "\[ALLOW-MAP-EDIT\]"; then
-              echo "ALLOW: override tag present"
-            else
-              echo "FAIL: phase_crosslineage_map.yaml is invariant"
+          override_path=".github/override/phase_crosslineage_map_edit.override"
+          override_token="ALLOW_MAP_EDIT_OVERRIDE"
+          if git diff --name-only "${diff_scope}" | rg -q "^${map_path}$"; then
+            if ! git diff --name-only "${diff_scope}" | rg -q "^${override_path}$"; then
+              echo "FAIL: ${map_path} changed in ${diff_scope} without override ${override_path}"
               exit 1
             fi
+            if ! rg -x "${override_token}" "${override_path}"; then
+              echo "FAIL: ${override_path} must contain only ${override_token}"
+              exit 1
+            fi
+            echo "ALLOW: override file present"
           else
-            echo "PASS: map unchanged"
+            echo "PASS: ${map_path} unchanged in ${diff_scope}"
           fi
 
       - name: Lint abstract against map
         shell: bash
         run: |
           map_path="scripts/2026-01-31/agents/notes/phase_crosslineage_map.yaml"
-          abstract_path="scripts/2026-01-31/agents/work-tree/abstract.txt"
-          if [ -f "$abstract_path" ]; then
-            python3 scripts/2026-01-31/agents/tools/lint_abstract_against_map.py "$map_path" "$abstract_path"
-          else
-            echo "SKIP: abstract.txt not found"
-          fi
+          abstract_root="scripts/2026-01-31/agents/work-tree"
+          python3 scripts/2026-01-31/agents/tools/lint_abstract_against_map.py "$map_path" "$abstract_root"

@@ -85,24 +85,44 @@ def tokenize_candidate_terms(text: str) -> set[str]:
     return {t.strip() for t in title_phrases | snake_tokens if t.strip()}
 
 
+def _collect_abstract_paths(path: Path) -> list[Path]:
+    if path.is_file():
+        return [path]
+    if not path.is_dir():
+        return []
+    return sorted(p for p in path.rglob("abstract*.txt") if p.is_file())
+
+
 def main() -> int:
     if len(sys.argv) != 3:
-        print("usage: lint_abstract_against_map.py <phase_crosslineage_map.yaml> <abstract.txt>")
+        print(
+            "usage: lint_abstract_against_map.py <phase_crosslineage_map.yaml> <abstract.txt|directory>"
+        )
         return 2
 
     map_path = Path(sys.argv[1])
-    abstract_path = Path(sys.argv[2])
+    target_path = Path(sys.argv[2])
 
     allow = load_allowlist(map_path)
-    abstract = abstract_path.read_text(encoding="utf-8")
+    abstracts = _collect_abstract_paths(target_path)
+    if not abstracts:
+        print("SKIP: no abstract files found")
+        return 0
 
-    candidates = tokenize_candidate_terms(abstract)
-    unknown = sorted(t for t in candidates if t not in allow)
+    failures = []
+    for abstract_path in abstracts:
+        abstract = abstract_path.read_text(encoding="utf-8")
+        candidates = tokenize_candidate_terms(abstract)
+        unknown = sorted(t for t in candidates if t not in allow)
+        if unknown:
+            failures.append((abstract_path, unknown))
 
-    if unknown:
+    if failures:
         print("FAIL: abstract contains out of map terms")
-        for term in unknown:
-            print(f"- {term}")
+        for abstract_path, unknown in failures:
+            print(f"{abstract_path}:")
+            for term in unknown:
+                print(f"- {term}")
         return 1
 
     print("PASS: abstract terms align with map")
