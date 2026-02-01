@@ -1,0 +1,57 @@
+Phase 0 handoff
+DecisionDB repo freeze audit and file index
+
+Goal
+Create a repo-accurate index of files and runnable entrypoints for the frozen commit. Produce only facts.
+
+Inputs
+Repo path or checkout location. Frozen commit hash or tag. If unknown, the agent must record the current HEAD hash.
+
+Outputs
+One YAML file. Name it phase0_index.yaml.
+
+Rules
+No design suggestions. No refactors. No patch plan. No schema guesses. No prose beyond short field strings. No comma-and lists in descriptions.
+
+What to enumerate
+Every file under these categories. Each file listed as a separate entry.
+
+Source code
+Python, notebooks, scripts.
+
+Build artifacts
+LaTeX, Quarto, markdown, figures, bibliography, makefiles.
+
+Configs
+YAML, JSON, TOML, env templates, CI.
+
+Data interface stubs
+Any sample data, schema files, fixtures.
+
+Entrypoints
+Any CLI, make target, task runner, notebook cell that triggers pipeline steps.
+
+For each file entry include
+path
+type
+role one short noun phrase
+owner module if obvious from folder
+last_modified if available
+size_bytes if available
+public_safe boolean default false
+
+For each entrypoint include
+name
+command
+workdir
+inputs list of paths
+outputs list of paths
+env_vars list of names
+requires_gpu boolean
+public_safe boolean default false
+
+Validation
+Agent must confirm every referenced path exists. Agent must confirm every command references existing files. No execution required yet.
+
+Stop condition
+Stop after phase0_index.yaml is produced. Do not proceed to Phase 1.
