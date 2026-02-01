@@ -1,0 +1,102 @@
+handoff_id: phase_1_5_planelanding
+date: 2026-01-31
+agent: nori
+status: authorized
+origin_phase: phase_1
+next_phase: phase_2
+scope_level: toy_model_materialization
+
+purpose:
+  Materialize Phase 1.5 toy-model artifacts strictly defined by the Phase 1
+  transformation map, producing deterministic, reproducible figure assets
+  sufficient to populate all mapped manuscript figures without expanding scope.
+
+authoritative_roots:
+  script_day_root: scripts/2026-01-31/
+  notes_root: scripts/2026-01-31/agents/notes/
+  work_root: scripts/2026-01-31/agents/work-tree/
+  handoff_root: scripts/2026-01-31/agents/handoff/
+
+inputs:
+  - scripts/2026-01-31/agents/notes/phase0_index.yaml
+  - scripts/2026-01-31/agents/notes/phase1_validation_checklist_eval.yaml
+  - scripts/2026-01-31/agents/notes/phase1_toy_model_requirements.yaml
+  - scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+
+preconditions:
+  - All inputs must exist at the specified paths
+  - No new directories may be created at repo root
+  - Any stray top-level agents/ directory must be removed if present
+
+execution_constraints:
+  - Do not modify Phase 1 mapping semantics
+  - Do not introduce new figures, metrics, or abstractions
+  - Do not optimize, tune, or generalize beyond toy-model intent
+  - Do not reference DecisionDB, PAX, or patent language explicitly
+  - Do not rename existing figure identifiers
+
+task_sequence:
+  - step: validate_inputs
+    description: >
+      Verify existence and checksum of all input YAML files.
+      Abort if any are missing or diverge from expected schema.
+    outputs:
+      - validation_report.yaml
+
+  - step: resolve_figure_inventory
+    description: >
+      Enumerate all figure IDs defined in phase1_transformation_map.yaml.
+      Confirm one-to-one mapping between figures and required toy artifacts.
+    outputs:
+      - figure_inventory.yaml
+
+  - step: materialize_artifacts
+    description: >
+      For each figure in the inventory, generate the minimal toy artifact
+      specified by the transformation map. Each artifact must be deterministic
+      and regenerable from its YAML spec.
+    constraints:
+      - Use only synthetic or abstracted data
+      - No dependency on unpublished datasets
+    outputs:
+      - artifacts/
+      - artifacts_manifest.yaml
+
+  - step: render_figures
+    description: >
+      Render final figure assets in the formats specified by the transformation map.
+      Default format: SVG unless otherwise specified.
+    constraints:
+      - Fixed dimensions
+      - No stylistic embellishment
+    outputs:
+      - figures/
+      - figure_render_log.yaml
+
+  - step: finalize_outputs
+    description: >
+      Produce a final summary confirming readiness for Phase 2 manuscript integration.
+    outputs:
+      - phase1_5_completion_report.yaml
+
+output_contract:
+  required_files:
+    - artifacts_manifest.yaml
+    - figure_inventory.yaml
+    - phase1_5_completion_report.yaml
+  required_directories:
+    - scripts/2026-01-31/agents/work-tree/artifacts/
+    - scripts/2026-01-31/agents/work-tree/figures/
+
+handoff_completion_criteria:
+  - All figures defined in phase1_transformation_map.yaml are rendered
+  - All outputs are reproducible from YAML alone
+  - No scope violations logged
+  - Completion report explicitly authorizes Phase 2
+
+authorization:
+  granted_by: gil
+  revocation_conditions:
+    - Scope expansion
+    - Non-deterministic outputs
+    - Creation of new conceptual abstractions
