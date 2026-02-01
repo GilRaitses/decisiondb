@@ -1,0 +1,40 @@
+phase: 3
+status: planning
+intent:
+  - Demonstrate how Phase 2 reuse conditions apply to real inference traces.
+  - Validate that defined observables surface reuse breakdown without new mechanisms.
+  - Prepare material suitable for internal review or external manuscript framing.
+
+inputs:
+  - phase1_5_figures
+  - phase2_compatibility_conditions
+  - phase2_reuse_invariants
+  - phase2_failure_conditions
+  - phase2_observables_map
+
+non_goals:
+  - No infrastructure implementation.
+  - No new data collection.
+  - No model retraining or recalibration.
+  - No optimization or performance claims.
+
+expected_outputs:
+  - Trace-level walkthroughs showing reuse acceptance and rejection.
+  - Mapping from observables to failure conditions using existing figures.
+  - Short narrative examples suitable for memo or manuscript inclusion.
+
+constraints:
+  - Use only frozen Phase 1.5 and Phase 2 artifacts.
+  - Do not introduce new abstractions or terminology.
+  - Maintain declarative framing throughout.
+  - Avoid prescriptive language.
+
+review_criteria:
+  - Does each example make reuse decisions legible?
+  - Are observables sufficient to explain outcomes?
+  - Is confidence interpretability preserved or lost in a traceable way?
+
+handoff_rules:
+  - All work stored under scripts/YYYY-MM-DD/agents/work-tree/.
+  - YAML for structured artifacts.
+  - Natural language only for narrative walkthroughs.
