@@ -1,0 +1,72 @@
+phase: 1.5
+artifact_id: fig4_boundary_fracture
+figure_id: 4
+figure_name: Boundary and Fracture Localization
+source_map: scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+derived_from: fig2_primary_sweep
+source_files:
+  - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+  - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+boundaries:
+  - sweep_id: neighbor_weight
+    parameter: neighbor_weight
+    baseline_value: 0.5
+    perturbed_value: 1.0
+    route_changed: false
+    edge_order_changed: false
+  - sweep_id: second_order_weight
+    parameter: second_order_weight
+    baseline_value: 0.25
+    perturbed_value: 0.5
+    route_changed: true
+    edge_order_changed: true
+render_spec:
+  canvas:
+    width: 640
+    height: 160
+    background: "#ffffff"
+  style:
+    stroke: "#000000"
+    fill: "#ffffff"
+    stroke_width: 1
+    font_family: Arial
+    font_size: 12
+  rows:
+    - row_id: neighbor_weight
+      label: neighbor_weight
+      label_x: 20
+      label_y: 60
+      segments:
+        - x: 160
+          y: 40
+          width: 360
+          height: 30
+          text: "0.5, 1.0"
+          text_x: 340
+          text_y: 60
+    - row_id: second_order_weight
+      label: second_order_weight
+      label_x: 20
+      label_y: 110
+      segments:
+        - x: 160
+          y: 90
+          width: 180
+          height: 30
+          text: "0.25"
+          text_x: 250
+          text_y: 110
+        - x: 340
+          y: 90
+          width: 180
+          height: 30
+          text: "0.5"
+          text_x: 430
+          text_y: 110
+      boundary_marker:
+        x: 340
+        y1: 90
+        y2: 120
+        annotation_text: "0.25 | 0.5"
+        annotation_x: 340
+        annotation_y: 82

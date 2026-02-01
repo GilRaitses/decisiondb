@@ -1,0 +1,27 @@
+phase: 1.5
+artifact: figure_inventory
+date: "2026-02-01"
+source_map: scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+figures:
+  - figure_id: 1
+    figure_name: Canonical Decision-Valued Mapping Schematic
+    artifact_id: fig1_canonical_schematic
+    artifact_spec: scripts/2026-01-31/agents/work-tree/artifacts/fig1_canonical_schematic.yaml
+    figure_asset: scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+  - figure_id: 2
+    figure_name: Primary Representational Sweep
+    artifact_id: fig2_primary_sweep
+    artifact_spec: scripts/2026-01-31/agents/work-tree/artifacts/fig2_primary_sweep.yaml
+    figure_asset: scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+  - figure_id: 3
+    figure_name: Identity Persistence Regions
+    artifact_id: fig3_identity_persistence
+    artifact_spec: scripts/2026-01-31/agents/work-tree/artifacts/fig3_identity_persistence.yaml
+    figure_asset: scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+  - figure_id: 4
+    figure_name: Boundary and Fracture Localization
+    artifact_id: fig4_boundary_fracture
+    artifact_spec: scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
+    figure_asset: scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+counts:
+  figures_total: 4

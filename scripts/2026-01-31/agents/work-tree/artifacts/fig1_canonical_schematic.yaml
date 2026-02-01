@@ -1,0 +1,158 @@
+phase: 1.5
+artifact_id: fig1_canonical_schematic
+figure_id: 1
+figure_name: Canonical Decision-Valued Mapping Schematic
+source_map: scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+source_files:
+  - scripts/2026-01-23/manuscript/sections/core_object.tex
+  - scripts/2026-01-23/manuscript/sections/protocol.tex
+  - scripts/2026-01-23/manuscript/sections/system_design.tex
+  - docs/DecisionDB_reference_architecture.md
+entities:
+  - id: snapshot
+    label: Snapshot
+  - id: representation
+    label: Representation
+  - id: engine_run
+    label: Engine run
+  - id: raw_output
+    label: Raw output
+  - id: equivalence_policy
+    label: Equivalence policy
+  - id: decision_identity
+    label: Decision identity
+  - id: decision_map
+    label: Decision map
+links:
+  - id: snapshot_to_representation
+    from: snapshot
+    to: representation
+    label: representation
+  - id: representation_to_engine
+    from: representation
+    to: engine_run
+    label: engine run
+  - id: engine_to_output
+    from: engine_run
+    to: raw_output
+    label: raw output
+  - id: output_to_identity
+    from: raw_output
+    to: decision_identity
+    label: decision identity
+  - id: policy_to_identity
+    from: equivalence_policy
+    to: decision_identity
+    label: equivalence policy
+  - id: representation_to_map
+    from: representation
+    to: decision_map
+    label: decision map
+  - id: identity_to_map
+    from: decision_identity
+    to: decision_map
+    label: decision map
+render_spec:
+  canvas:
+    width: 900
+    height: 210
+    background: "#ffffff"
+  style:
+    stroke: "#000000"
+    fill: "#ffffff"
+    stroke_width: 1
+    font_family: Arial
+    font_size: 12
+  nodes:
+    - id: snapshot
+      x: 30
+      y: 60
+      width: 110
+      height: 30
+    - id: representation
+      x: 170
+      y: 60
+      width: 140
+      height: 30
+    - id: engine_run
+      x: 340
+      y: 60
+      width: 120
+      height: 30
+    - id: raw_output
+      x: 490
+      y: 60
+      width: 120
+      height: 30
+    - id: decision_identity
+      x: 640
+      y: 60
+      width: 140
+      height: 30
+    - id: equivalence_policy
+      x: 640
+      y: 10
+      width: 140
+      height: 30
+    - id: decision_map
+      x: 420
+      y: 140
+      width: 200
+      height: 30
+  edges:
+    - id: snapshot_to_representation
+      x1: 140
+      y1: 75
+      x2: 170
+      y2: 75
+      label: representation
+      label_x: 150
+      label_y: 55
+    - id: representation_to_engine
+      x1: 310
+      y1: 75
+      x2: 340
+      y2: 75
+      label: engine run
+      label_x: 320
+      label_y: 55
+    - id: engine_to_output
+      x1: 460
+      y1: 75
+      x2: 490
+      y2: 75
+      label: raw output
+      label_x: 470
+      label_y: 55
+    - id: output_to_identity
+      x1: 610
+      y1: 75
+      x2: 640
+      y2: 75
+      label: decision identity
+      label_x: 615
+      label_y: 55
+    - id: policy_to_identity
+      x1: 710
+      y1: 40
+      x2: 710
+      y2: 60
+      label: equivalence policy
+      label_x: 720
+      label_y: 50
+    - id: representation_to_map
+      x1: 240
+      y1: 90
+      x2: 520
+      y2: 140
+      label: decision map
+      label_x: 330
+      label_y: 120
+    - id: identity_to_map
+      x1: 710
+      y1: 90
+      x2: 520
+      y2: 140
+      label: decision map
+      label_x: 600
+      label_y: 120

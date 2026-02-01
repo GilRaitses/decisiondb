@@ -1,0 +1,68 @@
+phase: 1.5
+artifact_id: fig3_identity_persistence
+figure_id: 3
+figure_name: Identity Persistence Regions
+source_map: scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+derived_from: fig2_primary_sweep
+source_files:
+  - scripts/2026-01-16/artifacts/pearson_neighbor_weight_activated_results.json
+  - scripts/2026-01-16/artifacts/pearson_second_order_weight_activated_results.json
+regions:
+  - sweep_id: neighbor_weight
+    parameter: neighbor_weight
+    regions:
+      - label: A
+        start_value: 0.5
+        end_value: 1.0
+  - sweep_id: second_order_weight
+    parameter: second_order_weight
+    regions:
+      - label: A
+        start_value: 0.25
+        end_value: 0.25
+      - label: B
+        start_value: 0.5
+        end_value: 0.5
+render_spec:
+  canvas:
+    width: 640
+    height: 160
+    background: "#ffffff"
+  style:
+    stroke: "#000000"
+    fill: "#ffffff"
+    stroke_width: 1
+    font_family: Arial
+    font_size: 12
+  rows:
+    - row_id: neighbor_weight
+      label: neighbor_weight
+      label_x: 20
+      label_y: 60
+      segments:
+        - label: A
+          x: 160
+          y: 40
+          width: 360
+          height: 30
+          label_x: 340
+          label_y: 60
+    - row_id: second_order_weight
+      label: second_order_weight
+      label_x: 20
+      label_y: 110
+      segments:
+        - label: A
+          x: 160
+          y: 90
+          width: 180
+          height: 30
+          label_x: 250
+          label_y: 110
+        - label: B
+          x: 340
+          y: 90
+          width: 180
+          height: 30
+          label_x: 430
+          label_y: 110
