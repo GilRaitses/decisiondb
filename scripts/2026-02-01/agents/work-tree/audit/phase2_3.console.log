@@ -1,0 +1,160 @@
+## COMMAND EQUIVALENCE NOTE:
+ls/find/grep/sed/printf/rm/mv commands were executed with tool equivalents due to environment guidance (LS/Glob/rg/ReadFile/ApplyPatch/Delete).
+
+## CMD: git status -sb
+## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
+?? scripts/2026-02-01/agents/handoffs/phase2-3.yaml
+
+## CMD: ReadFile scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+L1:reuse_paths:
+L2:  - reuse_id: "camera_stress_scores_to_route_selection"
+L3:    upstream_metric:
+L4:      name: "camera_stress_scores"
+L5:      path: "/workspace/data/stress_scores_updated.json"
+L6:      description: "camera_id to stress_score mapping used to build intersection stress."
+L7:    downstream_decision:
+L8:      name: "route_selection"
+L9:      description: "A* path choice using stress penalty in find_path."
+L10:      decision_artifact: "PathResult.nodes"
+L11:    context_variables:
+L12:      - "stress_weight"
+L13:      - "use_regularization"
+L14:      - "query_hour"
+L15:      - "stress_source_key"
+L16:    evidence_paths:
+L17:      - "src/pax/pathfinding/learned_heuristic.py#_load_stress_scores"
+L18:      - "src/pax/pathfinding/learned_heuristic.py#find_path"
+L19:
+L20:  - reuse_id: "weighted_zone_stress_to_route_selection"
+L21:    upstream_metric:
+L22:      name: "total_weighted_stress"
+L23:      path: "src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress"
+L24:      description: "base_stress plus neighbor_stress plus second_order_stress."
+L25:    downstream_decision:
+L26:      name: "route_selection"
+L27:      description: "A* path choice using stress penalty in find_path."
+L28:      decision_artifact: "PathResult.nodes"
+L29:    context_variables:
+L30:      - "neighbor_weight"
+L31:      - "second_order_weight"
+L32:      - "stress_weight"
+L33:    evidence_paths:
+L34:      - "src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress"
+L35:      - "src/pax/pathfinding/learned_heuristic.py#find_path"
+L36:
+
+## CMD: ReadFile scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+L1:phase: phase_2_2
+L2:artifact: phase2_context_sufficiency_conditions
+L3:
+L4:objective: >
+L5:  Specify minimal context fields required for reuse compatibility when
+L6:  incompatibility is detected from missing context only.
+L7:
+L8:inputs:
+L9:  - path: scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+L10:  - path: scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+L11:
+L12:required_context_fields:
+L13:  - task_id
+L14:  - abstraction_level
+L15:  - input_regime
+L16:  - assumption_set
+L17:  - downstream_task
+L18:
+L19:supporting_context_fields:
+L20:  - trace_id
+L21:
+L22:missing_context_basis:
+L23:  reuse_failure_basis: missing_context_only
+L24:  confidence_values_used: false
+L25:  accuracy_metrics_used: false
+L26:  performance_metrics_used: false
+L27:
+L28:evidence_paths:
+L29:  - scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+L30:  - scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+L31:
+
+## CMD: ReadFile scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+L1:phase: phase_2_2
+L2:artifact: phase2_compatibility_evaluation_rules
+L3:
+L4:inputs:
+L5:  - path: scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+L6:  - path: scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+L7:
+L8:rules:
+L9:  - rule_id: R1
+L10:    description: reuse is incompatible when any required context field is missing
+L11:    condition:
+L12:      required_fields_present: false
+L13:    decision: reuse_inadmissible
+L14:    basis: missing_context_only
+L15:  - rule_id: R2
+L16:    description: reuse is compatible only when all required context fields are present
+L17:    condition:
+L18:      required_fields_present: true
+L19:    decision: reuse_admissible
+L20:    basis: missing_context_only
+L21:
+L22:required_fields_reference:
+L23:  - task_id
+L24:  - abstraction_level
+L25:  - input_regime
+L26:  - assumption_set
+L27:  - downstream_task
+L28:
+L29:excluded_bases:
+L30:  - confidence_values
+L31:  - accuracy_metrics
+L32:  - performance_metrics
+L33:
+
+## DECISION: selected slice camera_stress_scores_to_route_selection
+## DECISION: required fields task_id and abstraction_level are missing
+## DECISION: apply rule R1 leading to new_justification_required
+
+## CMD: ApplyPatch add scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml
+
+## CMD: ApplyPatch add scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml
+
+## CMD: ApplyPatch add scripts/2026-02-01/agents/work-tree/phase2_3_compatibility_evaluation.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/phase2_3_compatibility_evaluation.yaml
+
+## CMD: ApplyPatch add scripts/2026-02-01/agents/work-tree/phase2_3_trace_walkthrough.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/phase2_3_trace_walkthrough.yaml
+
+## CMD: ApplyPatch add scripts/2026-02-01/agents/work-tree/phase2_3_completion_report.yaml
+Success. Updated the following files:
+A /workspace/scripts/2026-02-01/agents/work-tree/phase2_3_completion_report.yaml
+
+## DECISION: inventory_paths.yaml updated with Phase 2-3 outputs
+
+## CMD: git diff --stat --staged
+ scripts/2026-02-01/agents/handoffs/phase2-3.yaml   | 126 ++++++++++++++++
+ .../agents/work-tree/audit/phase2_3.console.log    | 160 +++++++++++++++++++++
+ .../agents/work-tree/inventory_paths.yaml          |  30 ++++
+ .../phase2_3_compatibility_evaluation.yaml         |  31 ++++
+ .../work-tree/phase2_3_completion_report.yaml      |  34 +++++
+ .../phase2_3_pax_context_binding_table.yaml        |  38 +++++
+ .../work-tree/phase2_3_selected_reuse_slice.yaml   |  13 ++
+ .../work-tree/phase2_3_trace_walkthrough.yaml      |  29 ++++
+ 8 files changed, 461 insertions(+)
+
+## CMD: git status -sb
+## cursor/confidence-reuse-conditions-fe3c...origin/cursor/confidence-reuse-conditions-fe3c
+A  scripts/2026-02-01/agents/handoffs/phase2-3.yaml
+A  scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log
+M  scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+A  scripts/2026-02-01/agents/work-tree/phase2_3_compatibility_evaluation.yaml
+A  scripts/2026-02-01/agents/work-tree/phase2_3_completion_report.yaml
+A  scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml
+A  scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml
+A  scripts/2026-02-01/agents/work-tree/phase2_3_trace_walkthrough.yaml

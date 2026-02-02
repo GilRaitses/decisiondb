@@ -1,0 +1,116 @@
+# phase2-4.yaml
+# STATUS: AUTHORIZED - EXECUTE AS WRITTEN
+# PHASE: 2-4
+# NAME: Cross-Slice Consistency and Boundary Stress
+
+phase: "2-4"
+agent_codename: "<agent_name>"
+execution_window: "<start_date> -> <end_date>"
+
+---
+
+mission:
+  objective: >
+    Demonstrate that reuse compatibility decisions derived from Phase 2-2
+    context sufficiency and compatibility rules behave consistently across
+    multiple reuse slices, and that reuse failure boundaries remain stable
+    under variation of slice selection alone.
+
+---
+
+scope_constraints:
+  allowed_actions:
+    - "Read and reference Phase 2-2 and Phase 2-3 artifacts"
+    - "Select multiple additional reuse slices from Pax"
+    - "Bind abstract context fields to Pax fields deterministically"
+    - "Apply existing compatibility rules without modification"
+    - "Compare outcomes across slices"
+  prohibited_actions:
+    - "Rule modification or reinterpretation"
+    - "Context schema changes"
+    - "Metric computation or recomputation"
+    - "Calibration, confidence use, or performance analysis"
+    - "Narrative justification beyond trace evidence"
+
+---
+
+authoritative_inputs:
+  frozen_artifacts:
+    - scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+    - scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+    - scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml
+    - scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml
+    - scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+
+---
+
+required_outputs:
+  additional_reuse_slices:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_4_selected_reuse_slices.yaml"
+    description: >
+      At least two additional Pax reuse slices selected using the same
+      selection criteria as Phase 2-3.
+
+  context_binding_tables:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_4_context_binding_tables.yaml"
+    description: >
+      Deterministic bindings mapping Pax fields to abstract context fields
+      for each selected reuse slice.
+
+  compatibility_evaluations:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_4_compatibility_evaluations.yaml"
+    description: >
+      Compatibility outcomes for each reuse slice using unmodified
+      Phase 2-2 rules.
+
+  cross_slice_comparison:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_4_cross_slice_comparison.yaml"
+    description: >
+      Structured comparison showing where compatibility outcomes agree,
+      diverge, and which missing context fields account for differences.
+
+  completion_report:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_4_completion_report.yaml"
+    template: "phase2_4_completion_report.yaml"
+
+---
+
+execution_requirements:
+  rule_source: "phase2_compatibility_evaluation_rules.yaml"
+  context_source: "phase2_context_sufficiency_conditions.yaml"
+  reuse_failure_basis: "missing_context_only"
+  confidence_used: false
+  accuracy_used: false
+  performance_metrics_used: false
+
+---
+
+validation_checks:
+  - "No new context fields introduced"
+  - "All reuse outcomes derive from missing context only"
+  - "Bindings are structurally consistent with Phase 2-3"
+  - "Differences across slices are explainable by context presence or absence"
+  - "All outputs registered in inventory_paths.yaml"
+  - "ReadLints clean on all produced YAML"
+
+---
+
+handoff_conditions:
+  completion_requires:
+    - "All required outputs present"
+    - "Completion report truthfully filled"
+    - "No prohibited actions taken"
+  authorize_next_phase: "2-5"
+
+---
+
+logging:
+  audit_log_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  record_commands: true
+  record_decisions: true
+
+---
+
+signoff:
+  agent_signature: "<agent_name>"
+  timestamp: "<ISO-8601>"

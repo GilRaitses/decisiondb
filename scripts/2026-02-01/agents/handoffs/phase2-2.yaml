@@ -1,0 +1,97 @@
+# phase2-2.yaml
+# STATUS: AUTHORIZED - EXECUTE AS WRITTEN
+# PHASE: 2-2
+# NAME: Context Sufficiency and Reuse Compatibility
+
+phase: "2-2"
+agent_codename: "<agent_name>"
+execution_window: "<start_date> -> <end_date>"
+
+---
+
+mission:
+  objective: >
+    Determine whether reuse incompatibility can be detected mechanically
+    from missing context alone, without appealing to confidence magnitude,
+    accuracy, recalibration, or system modification.
+
+---
+
+scope_constraints:
+  allowed_actions:
+    - "Read and reference Phase 2_0 and Phase 2_1 artifacts"
+    - "Define abstract context sufficiency conditions"
+    - "Specify deterministic reuse compatibility rules"
+    - "Demonstrate one concrete reuse incompatibility via trace walkthrough"
+  prohibited_actions:
+    - "Model modification"
+    - "Metric recomputation"
+    - "Calibration or recalibration"
+    - "Logging or instrumentation changes"
+    - "Schema or inventory restructuring"
+
+---
+
+authoritative_inputs:
+  frozen_artifacts:
+    - scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+    - scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+    - scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml
+    - scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+
+---
+
+required_outputs:
+  context_sufficiency_conditions:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+    description: >
+      Minimal abstract context fields required for reuse to be admissible.
+  compatibility_evaluation_rules:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+    description: >
+      Deterministic rules mapping context presence to reuse admissibility.
+  reuse_trace_walkthrough:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+    description: >
+      One concrete reuse path showing incompatibility triggered by missing context.
+  completion_report:
+    path: "scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+    template: "phase2_2_completion_report.yaml"
+
+---
+
+execution_requirements:
+  reuse_failure_basis: "missing_context_only"
+  confidence_values_used: false
+  accuracy_metrics_used: false
+  performance_metrics_used: false
+
+---
+
+validation_checks:
+  - "All symbols align with Phase 1.5 and Phase 2_1"
+  - "All paths exist in inventory_paths.yaml"
+  - "Reuse incompatibility derives only from absent context fields"
+  - "ReadLints clean on all produced YAML"
+
+---
+
+handoff_conditions:
+  completion_requires:
+    - "All required outputs present"
+    - "Completion report truthfully filled"
+    - "No prohibited actions taken"
+  authorize_next_phase: "2_3"
+
+---
+
+logging:
+  audit_log_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_2.console.log"
+  record_commands: true
+  record_decisions: true
+
+---
+
+signoff:
+  agent_signature: "<agent_name>"
+  timestamp: "<ISO-8601>"

@@ -1,0 +1,22 @@
+phase: phase_2_4
+artifact: phase2_4_cross_slice_comparison
+
+slice_outcomes:
+  - slice_id: camera_stress_scores_to_route_selection
+    outcome: new_justification_required
+    missing_fields:
+      - task_id
+      - abstraction_level
+  - slice_id: weighted_zone_stress_to_route_selection
+    outcome: new_justification_required
+    missing_fields:
+      - task_id
+      - abstraction_level
+
+comparison:
+  outcome_consistency: consistent
+  shared_missing_fields:
+    - task_id
+    - abstraction_level
+  divergence_fields: []
+  basis: missing_context_only

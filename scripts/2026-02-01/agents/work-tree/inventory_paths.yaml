@@ -26,6 +26,130 @@ files:
   - path: "/workspace/scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
     relative_path: "scripts/2026-01-18/snapshots/post_sensitivity_snapshot_index.md"
     exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/architecture_map.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/architecture_map.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/reuse_paths.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/reuse_paths.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/frozen_snapshot.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_phase0_completion_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_phase0_completion_report.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/audit/phase2_phase0.console.log"
+    relative_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_phase0.console.log"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_1_completion_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_1_completion_report.yaml"
+    exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_3_compatibility_evaluation.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_3_compatibility_evaluation.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_3_trace_walkthrough.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_3_trace_walkthrough.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_3_completion_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_3_completion_report.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+    relative_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/handoffs/phase2-4.yaml"
+    relative_path: "scripts/2026-02-01/agents/handoffs/phase2-4.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_4_selected_reuse_slices.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_4_selected_reuse_slices.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_4_context_binding_tables.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_4_context_binding_tables.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_4_compatibility_evaluations.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_4_compatibility_evaluations.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_4_cross_slice_comparison.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_4_cross_slice_comparison.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/phase2_4_completion_report.yaml"
+    relative_path: "scripts/2026-02-01/agents/work-tree/phase2_4_completion_report.yaml"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+    relative_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
+    exists: true
+    evidence:
+      - "scripts/2026-02-01/agents/work-tree/audit/phase2_4.console.log"
 
 directories:
   - path: "/workspace/src"

@@ -1,0 +1,103 @@
+# phase2-2a_path_resolution.yaml
+# STATUS: AUTHORIZED - EXECUTE AS WRITTEN
+# PURPOSE: Resolve inventory path gaps surfaced by Phase 2-2 without modifying Phase 2-2 outputs
+
+phase: "2-2a"
+name: "Inventory Path Resolution"
+agent_codename: "<agent_name>"
+execution_window: "<start_date> -> <end_date>"
+
+mission:
+  objective: >
+    Resolve paths missing from inventory_paths.yaml that are referenced by Phase 2-2 outputs.
+    Prefer exact matches inside the DecisionDB repo. If no exact match exists then produce
+    an evidence backed candidate mapping. If no credible candidate exists then open a Pax
+    audit that inventories the Pax snapshot and records external path gaps.
+
+non_negotiables:
+  do_not_modify:
+    - "scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+    - "scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+    - "scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+    - "scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+  allowed_to_modify_with_evidence:
+    - "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+
+authoritative_inputs:
+  phase2_outputs:
+    - "scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+    - "scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+    - "scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+    - "scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+  inventory:
+    - "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+  prior_maps:
+    - "scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+
+procedure:
+  step_1_extract_missing_paths:
+    action: >
+      Parse Phase 2-2 outputs and inventory_paths.yaml to compute the set difference.
+      Produce a machine readable list of missing paths.
+    output_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_2_missing_paths.yaml"
+
+  step_2_repo_exact_match_search:
+    action: >
+      For each missing path attempt an exact match search within the DecisionDB repo.
+      Record the command used and raw output. If exact match exists then record it as resolved.
+    evidence_log: "scripts/2026-02-01/agents/work-tree/audit/phase2_2_path_search.console.log"
+    output_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+
+  step_3_candidate_path_mapping:
+    action: >
+      For each unresolved item search for near matches by filename and by semantic neighbors
+      in inventory_paths.yaml. Propose at most one candidate per missing path. Each candidate
+      must include evidence lines from the search log and a short justification.
+    output_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_2_candidate_path_map.yaml"
+
+  step_4_pax_audit_trigger_if_needed:
+    condition: "unresolved_items_exist_after_step_3"
+    action: >
+      Create a Pax audit request artifact that lists unresolved items and the reason each could
+      not be matched in the DecisionDB repo. The audit request must not assume access to Pax.
+      It must specify what to inventory and what evidence to capture.
+    output_path: "scripts/2026-02-01/agents/work-tree/audit/phase2_2_pax_audit_request.yaml"
+
+  step_5_inventory_update_with_evidence:
+    action: >
+      Update inventory_paths.yaml only for items resolved by exact match or by an accepted
+      candidate mapping. Every new entry must link to an evidence record in the audit outputs.
+    output_path: "scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+
+required_outputs:
+  - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_missing_paths.yaml"
+  - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_path_search.console.log"
+  - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_exact_match_results.yaml"
+  - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_candidate_path_map.yaml"
+  - "scripts/2026-02-01/agents/work-tree/audit/phase2_2_pax_audit_request.yaml"
+  - "scripts/2026-02-01/agents/work-tree/audit/phase2_2a_completion_report.yaml"
+
+completion_report_template:
+  path: "scripts/2026-02-01/agents/work-tree/audit/phase2_2a_completion_report.yaml"
+  fields:
+    status: ["complete", "complete_with_external_gaps"]
+    missing_paths_count: "<int>"
+    exact_matches_count: "<int>"
+    candidate_mappings_count: "<int>"
+    unresolved_external_count: "<int>"
+    inventory_updated: "<true|false>"
+    pax_audit_required: "<true|false>"
+    notes: "<short free text>"
+
+guardrails:
+  no_scope_drift:
+    - "Do not edit Phase 2-2 content files"
+    - "Do not create new schemas beyond path resolution artifacts"
+    - "Do not assume Pax access exists"
+  evidence_required:
+    - "Every proposed mapping must cite raw console output in the search log"
+
+signoff:
+  agent_signature: "<agent_name>"
+  timestamp: "<ISO-8601>"
+  authorize_next_phase: "2-3"

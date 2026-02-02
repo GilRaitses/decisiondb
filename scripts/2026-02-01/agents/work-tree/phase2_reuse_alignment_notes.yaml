@@ -1,0 +1,61 @@
+phase: phase_2_1
+artifact: phase2_reuse_alignment_notes
+
+inputs:
+  - path: scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml
+  - path: scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+  - path: scripts/2026-02-01/agents/work-tree/data_lineage_graph.yaml
+  - path: scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+
+reuse_alignment:
+  - reuse_id: camera_stress_scores_to_route_selection
+    upstream_metric: camera_stress_scores
+    upstream_metric_path: /workspace/data/stress_scores_updated.json
+    downstream_decision: route_selection
+    decision_stage: pathfinding
+    mapped_context_fields:
+      trace_id: camera_stress_scores_to_route_selection
+      input_regime: /workspace/data/stress_scores_updated.json
+      assumption_set:
+        - stress_weight
+        - use_regularization
+        - query_hour
+        - stress_source_key
+      downstream_task: route_selection
+    unmapped_context_fields:
+      - task_id
+      - abstraction_level
+      - confidence
+      - compatibility_result
+      - action_required
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      - scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+
+  - reuse_id: weighted_zone_stress_to_route_selection
+    upstream_metric: total_weighted_stress
+    upstream_metric_path: src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress
+    downstream_decision: route_selection
+    decision_stage: pathfinding
+    mapped_context_fields:
+      trace_id: weighted_zone_stress_to_route_selection
+      input_regime: src/pax/scripts/voronoi_stress_scoring.py#calculate_weighted_stress
+      assumption_set:
+        - neighbor_weight
+        - second_order_weight
+        - stress_weight
+      downstream_task: route_selection
+    unmapped_context_fields:
+      - task_id
+      - abstraction_level
+      - confidence
+      - compatibility_result
+      - action_required
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml
+      - scripts/2026-02-01/agents/work-tree/architecture_map.yaml
+
+notes:
+  - note: compatibility_result and action_required are not present in PAX artifacts listed in inventory_paths
+    evidence_paths:
+      - scripts/2026-02-01/agents/work-tree/reuse_paths.yaml

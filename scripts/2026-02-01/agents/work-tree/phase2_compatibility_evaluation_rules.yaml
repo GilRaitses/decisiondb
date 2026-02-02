@@ -1,0 +1,32 @@
+phase: phase_2_2
+artifact: phase2_compatibility_evaluation_rules
+
+inputs:
+  - path: scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+  - path: scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+
+rules:
+  - rule_id: R1
+    description: reuse is incompatible when any required context field is missing
+    condition:
+      required_fields_present: false
+    decision: reuse_inadmissible
+    basis: missing_context_only
+  - rule_id: R2
+    description: reuse is compatible only when all required context fields are present
+    condition:
+      required_fields_present: true
+    decision: reuse_admissible
+    basis: missing_context_only
+
+required_fields_reference:
+  - task_id
+  - abstraction_level
+  - input_regime
+  - assumption_set
+  - downstream_task
+
+excluded_bases:
+  - confidence_values
+  - accuracy_metrics
+  - performance_metrics

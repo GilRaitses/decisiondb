@@ -1,0 +1,25 @@
+phase: phase_2_4
+artifact: phase2_4_compatibility_evaluations
+
+rule_source: scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+
+evaluations:
+  - slice_id: camera_stress_scores_to_route_selection
+    rule_id: R1
+    required_fields_present: false
+    missing_fields:
+      - task_id
+      - abstraction_level
+    decision: reuse_inadmissible
+    outcome: new_justification_required
+    basis: missing_context_only
+
+  - slice_id: weighted_zone_stress_to_route_selection
+    rule_id: R1
+    required_fields_present: false
+    missing_fields:
+      - task_id
+      - abstraction_level
+    decision: reuse_inadmissible
+    outcome: new_justification_required
+    basis: missing_context_only

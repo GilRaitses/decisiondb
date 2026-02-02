@@ -1,0 +1,32 @@
+phase: phase_2_2a
+artifact: phase2_2_exact_match_results
+
+evidence_log: scripts/2026-02-01/agents/work-tree/audit/phase2_2_path_search.console.log
+
+exact_matches:
+  - path: scripts/2026-02-01/agents/work-tree/inventory_paths.yaml
+    found: true
+    evidence_log_entry: "rg --files -g scripts/2026-02-01/agents/work-tree/inventory_paths.yaml"
+  - path: scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml
+    found: true
+    evidence_log_entry: "rg --files -g scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+  - path: scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml
+    found: true
+    evidence_log_entry: "rg --files -g scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+  - path: scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+    found: true
+    evidence_log_entry: "rg --files -g scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+  - path: scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml
+    found: true
+    evidence_log_entry: "rg --files -g scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+  - path: scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml
+    found: true
+    evidence_log_entry: "rg --files -g scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml"
+  - path: scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+    found: true
+    evidence_log_entry: "rg --files -g scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml"
+  - path: scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml
+    found: true
+    evidence_log_entry: "rg --files -g scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+
+exact_matches_count: 8

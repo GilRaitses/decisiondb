@@ -1,0 +1,29 @@
+phase: phase_2_3
+artifact: phase2_3_trace_walkthrough
+
+slice_id: camera_stress_scores_to_route_selection
+
+required_context:
+  - task_id
+  - abstraction_level
+  - input_regime
+  - assumption_set
+  - downstream_task
+
+present_context:
+  - input_regime: /workspace/data/stress_scores_updated.json
+  - assumption_set:
+      - stress_weight
+      - use_regularization
+      - query_hour
+      - stress_source_key
+  - downstream_task: route_selection
+
+missing_context:
+  - task_id
+  - abstraction_level
+
+decision:
+  outcome: new_justification_required
+  rule_id: R1
+  basis: missing_context_only

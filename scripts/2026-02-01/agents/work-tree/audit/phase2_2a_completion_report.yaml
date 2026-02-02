@@ -1,0 +1,8 @@
+status: complete
+missing_paths_count: 8
+exact_matches_count: 8
+candidate_mappings_count: 0
+unresolved_external_count: 0
+inventory_updated: true
+pax_audit_required: false
+notes: "All missing paths resolved by exact match and added to inventory_paths.yaml."

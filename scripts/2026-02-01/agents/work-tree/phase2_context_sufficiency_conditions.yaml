@@ -1,0 +1,30 @@
+phase: phase_2_2
+artifact: phase2_context_sufficiency_conditions
+
+objective: >
+  Specify minimal context fields required for reuse compatibility when
+  incompatibility is detected from missing context only.
+
+inputs:
+  - path: scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+  - path: scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
+
+required_context_fields:
+  - task_id
+  - abstraction_level
+  - input_regime
+  - assumption_set
+  - downstream_task
+
+supporting_context_fields:
+  - trace_id
+
+missing_context_basis:
+  reuse_failure_basis: missing_context_only
+  confidence_values_used: false
+  accuracy_metrics_used: false
+  performance_metrics_used: false
+
+evidence_paths:
+  - scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml
+  - scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml
