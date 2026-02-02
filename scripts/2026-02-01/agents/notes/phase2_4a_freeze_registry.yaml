@@ -1,0 +1,46 @@
+phase: 2
+artifact: phase2_4a_freeze_registry
+status: frozen
+timestamp: "2026-02-02T03:27:58Z"
+
+scope:
+  sections: ["2.1", "2.2", "2.3", "2.4"]
+  edit_policy: "No further edits without Phase 3 evidence"
+
+abstract_locked: |
+  This phase examines whether reuse incompatibility in inference systems can be detected mechanically from missing context alone. We evaluate reuse paths that share downstream consumers and stable confidence values, while varying only the presence of task and abstraction context at the point of reuse. Across multiple reuse slices, incompatibility is detected deterministically when required contextual fields are absent, without appealing to confidence magnitude, accuracy, recalibration, or system modification. These results show that confidence reuse becomes inadmissible when its originating assumptions cannot be traced, and that enforcing context sufficiency enables alignment checks prior to reuse rather than after failure. Phase 2 establishes context-based reuse compatibility as a necessary condition for interpretable inference reuse across tasks and timescales.
+
+canonical_visualization:
+  name: "Phase 2-4 Reuse Compatibility Comparison Table"
+  authoritative_source_artifacts:
+    - "scripts/2026-02-01/agents/work-tree/phase2_4_context_binding_tables.yaml"
+    - "scripts/2026-02-01/agents/work-tree/phase2_4_compatibility_evaluations.yaml"
+    - "scripts/2026-02-01/agents/work-tree/phase2_4_cross_slice_comparison.yaml"
+  approval_statement: |
+    The Phase 2-4 reuse compatibility comparison table is approved as the canonical visualization for Phase 2. It fully captures the evidence required to support Section 2.3 and supersedes all prior schematic or illustrative figures for this phase. No additional figures are required for Phase 2 unless new reuse slices or context dimensions are introduced in Phase 3.
+  status: "Approved and frozen"
+  permitted_use: "Manuscript, internal review, and talk slides"
+  restriction: "No alternative Phase 2 visualizations permitted"
+
+frozen_artifacts:
+  - "scripts/2026-02-01/agents/work-tree/phase2_context_binding_map.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_reuse_alignment_notes.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_evidence_gap_report.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_context_sufficiency_conditions.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_compatibility_evaluation_rules.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_trace_walkthrough.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_2_completion_report.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_3_selected_reuse_slice.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_3_pax_context_binding_table.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_3_compatibility_evaluation.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_3_trace_walkthrough.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_3_completion_report.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_4_selected_reuse_slices.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_4_context_binding_tables.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_4_compatibility_evaluations.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_4_cross_slice_comparison.yaml"
+  - "scripts/2026-02-01/agents/work-tree/phase2_4_completion_report.yaml"
+
+guardrails:
+  enforcement: "process_guardrail"
+  rejection_policy: "Reject Phase 2 edits unless Phase 3 evidence is documented"
