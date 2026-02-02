@@ -1,0 +1,62 @@
+Phase 2 Freeze and Canonicalization Notice
+
+Recipient: Agent Arco
+Action Required: Register and enforce freeze
+
+⸻
+
+Phase 2 Status: FROZEN
+
+Phase 2 is now closed under interpretation.
+
+The Phase 2 abstract, Sections 2.1–2.4, and all supporting artifacts are declared frozen. No further edits, reframing, or extensions are permitted without the introduction of new empirical evidence in Phase 3.
+
+Locked Content
+Phase 2 Abstract (LOCKED):
+
+This phase examines whether reuse incompatibility in inference systems can be detected mechanically from missing context alone. We evaluate reuse paths that share downstream consumers and stable confidence values, while varying only the presence of task and abstraction context at the point of reuse. Across multiple reuse slices, incompatibility is detected deterministically when required contextual fields are absent, without appealing to confidence magnitude, accuracy, recalibration, or system modification. These results show that confidence reuse becomes inadmissible when its originating assumptions cannot be traced, and that enforcing context sufficiency enables alignment checks prior to reuse rather than after failure. Phase 2 establishes context-based reuse compatibility as a necessary condition for interpretable inference reuse across tasks and timescales.
+
+Scope: Sections 2.1–2.4 only
+Edit policy: No further edits without Phase 3 evidence
+
+You are instructed to mark this abstract and associated Phase 2 section text as immutable.
+
+⸻
+
+Canonical Phase 2 Visualization Approval
+
+Approved canonical artifact:
+Phase 2-4 Reuse Compatibility Comparison Table
+
+Authoritative source artifacts:
+	•	phase2_4_context_binding_tables.yaml
+	•	phase2_4_compatibility_evaluations.yaml
+	•	phase2_4_cross_slice_comparison.yaml
+
+Visualization role:
+This table is the canonical Phase 2 figure. It summarizes reuse admissibility outcomes across slices by explicitly showing:
+	•	Reuse slice identity (anchor vs. additional)
+	•	Required context fields
+	•	Present vs. missing context at reuse
+	•	Deterministic compatibility outcome
+	•	Justification requirement triggered by missing context
+
+Approval statement (record verbatim in repo):
+
+The Phase 2-4 reuse compatibility comparison table is approved as the canonical visualization for Phase 2. It fully captures the evidence required to support Section 2.3 and supersedes all prior schematic or illustrative figures for this phase. No additional figures are required for Phase 2 unless new reuse slices or context dimensions are introduced in Phase 3.
+
+Status: Approved and frozen
+Permitted use: Manuscript, internal review, and talk slides
+Restriction: No alternative Phase 2 visualizations permitted
+
+⸻
+
+Registry Instructions
+
+Agent Arco is instructed to:
+	1.	Register Phase 2 as frozen in the appropriate phase registry.
+	2.	Record the abstract and visualization approval as canonical.
+	3.	Enforce immutability via guardrails consistent with prior phase freezes.
+	4.	Reject any Phase 2 edits not explicitly authorized by Phase 3 evidence acquisition.
+
+No further action is required for Phase 2.
