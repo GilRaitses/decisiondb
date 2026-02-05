@@ -1,0 +1,248 @@
+phase: 1.5
+artifact: handoff_plan
+date: "2026-02-01"
+agent: nori
+purpose:
+  Provide scoped instructions to integrate Phase 1 figures into the first manuscript.
+
+context:
+  status_note: Figures 1 to 4 exist as SVG assets. Figure 5 is missing as an asset.
+  manuscript_path: scripts/2026-01-23/manuscript
+
+scope_constraints:
+  - Do not change manuscript claims or section text outside figure integration.
+  - Do not modify analysis code or data.
+  - Do not introduce new metrics, thresholds, or evaluative language.
+  - Keep all new assets under scripts/2026-01-31/agents/work-tree/.
+  - Do not rename existing figure identifiers.
+  - Do not reference DecisionDB, PAX, or patent language in figure assets.
+
+inputs_required:
+  - scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+  - scripts/2026-01-31/agents/notes/phase1_figure_captions.md
+  - scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+  - scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+  - scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+
+required_outputs:
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig5_replay_verification.yaml
+  - scripts/2026-01-31/agents/work-tree/figures/figure5_replay_verification.svg
+  - scripts/2026-01-31/agents/work-tree/artifacts_manifest.yaml
+  - scripts/2026-01-31/agents/work-tree/figure_inventory.yaml
+  - scripts/2026-01-31/agents/work-tree/figure_render_log.yaml
+  - scripts/2026-01-23/manuscript/sections/figure_placeholders.tex
+  - scripts/2026-01-23/manuscript/main.tex
+
+task_sequence:
+  - step: 1
+    action: verify_existing_assets
+    instructions:
+      - Confirm figures 1 to 4 exist at the listed paths.
+      - Confirm no figure5 asset exists before creation.
+
+  - step: 2
+    action: define_figure5_artifact
+    instructions:
+      - Create fig5_replay_verification.yaml with a table spec derived from the replay verification logs.
+      - Use only fields present in the logs.
+      - Required table fields:
+        - decision_id
+        - policy_id
+        - payload_hash
+        - decision_id_hash
+        - verdict
+        - table_counts
+      - Keep layout fixed and recorded in render_spec.
+
+  - step: 3
+    action: render_figure5_svg
+    instructions:
+      - Render figure5_replay_verification.svg from the YAML spec.
+      - Use black and white only.
+      - Fixed dimensions and no embellishments.
+
+  - step: 4
+    action: update_manifests
+    instructions:
+      - Add Figure 5 to artifacts_manifest.yaml.
+      - Add Figure 5 to figure_inventory.yaml.
+      - Add Figure 5 to figure_render_log.yaml.
+
+  - step: 5
+    action: integrate_figures_into_manuscript
+    instructions:
+      - Replace placeholders in figure_placeholders.tex with figure environments.
+      - Use includegraphics with paths relative to scripts/2026-01-23/manuscript.
+      - Suggested relative path prefix:
+        - ../2026-01-31/agents/work-tree/figures/
+      - Keep captions aligned with phase1_figure_captions.md.
+      - If SVG inclusion fails, add a minimal main.tex change to enable SVG support or convert to PDF under scripts/2026-01-31/agents/work-tree/figures and update paths.
+
+acceptance_criteria:
+  - Figures 1 to 5 exist as assets under scripts/2026-01-31/agents/work-tree/figures/.
+  - Figure 5 artifact spec is present and reproducible from YAML alone.
+  - figure_placeholders.tex includes figure environments for Figures 1 to 5.
+  - No changes outside the scoped manuscript files and work-tree outputs.
+handoff_id: phase_1_figure_integration_plan
+date: 2026-02-01
+author: nori
+status: draft_for_handoff
+purpose:
+  Provide a scoped plan to integrate Phase 1 figures into the first manuscript.
+scope_constraints:
+  - Do not modify analysis code or data.
+  - Do not change figure semantics or captions.
+  - Do not introduce new metrics, claims, or terminology.
+  - Only add files under scripts/2026-01-31/ and edit manuscript files under scripts/2026-01-23/manuscript/.
+inputs:
+  figure_assets_existing:
+    - scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+    - scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+    - scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+    - scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+  figure5_sources:
+    - scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+    - scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+  phase1_specs:
+    - scripts/2026-01-31/agents/work-tree/artifacts_manifest.yaml
+    - scripts/2026-01-31/agents/work-tree/figure_inventory.yaml
+    - scripts/2026-01-31/agents/work-tree/figure_render_log.yaml
+    - scripts/2026-01-31/agents/notes/phase1_transformation_map.yaml
+manuscript_targets:
+  - scripts/2026-01-23/manuscript/sections/figure_placeholders.tex
+  - scripts/2026-01-23/manuscript/main.tex
+tasks:
+  - id: T1
+    name: Create Figure 5 artifact spec and SVG
+    steps:
+      - Create scripts/2026-01-31/agents/work-tree/artifacts/fig5_replay_verification.yaml.
+      - Define a table with fields from the replay verification logs:
+          decision_id, policy_id, payload_hash, decision_id_hash,
+          policy_id_hash, database table counts, verdict.
+      - Render scripts/2026-01-31/agents/work-tree/figures/figure5_replay_verification.svg
+        with fixed dimensions and black and white styling.
+    updates_required:
+      - Append fig5 entry to artifacts_manifest.yaml.
+      - Append fig5 entry to figure_inventory.yaml.
+      - Append fig5 entry to figure_render_log.yaml.
+  - id: T2
+    name: Integrate figures into the manuscript
+    steps:
+      - Replace placeholders in figure_placeholders.tex with LaTeX figure blocks
+        that include the figure assets for Figures 1 to 5.
+      - Use relative paths from scripts/2026-01-23/manuscript to
+        ../2026-01-31/agents/work-tree/figures/.
+      - Keep captions aligned with scripts/2026-01-23/manuscript/sections/figure_captions.tex.
+    latex_inclusion_rule:
+      - If the build uses pdfLaTeX only, convert SVG to PDF under
+        scripts/2026-01-31/agents/work-tree/figures/ and reference the PDF files.
+      - If the build supports SVG, add the svg package in main.tex and use includesvg.
+  - id: T3
+    name: Record integration completion
+    steps:
+      - Add a short integration report under
+        scripts/2026-01-31/agents/notes/phase1_figure_integration_report.yaml
+        with files changed and any build assumptions.
+outputs_expected:
+  - scripts/2026-01-31/agents/work-tree/artifacts/fig5_replay_verification.yaml
+  - scripts/2026-01-31/agents/work-tree/figures/figure5_replay_verification.svg
+  - scripts/2026-01-31/agents/work-tree/artifacts_manifest.yaml
+  - scripts/2026-01-31/agents/work-tree/figure_inventory.yaml
+  - scripts/2026-01-31/agents/work-tree/figure_render_log.yaml
+  - scripts/2026-01-23/manuscript/sections/figure_placeholders.tex
+  - scripts/2026-01-31/agents/notes/phase1_figure_integration_report.yaml
+handoff_ready_when:
+  - Figures 1 to 5 are present as assets under scripts/2026-01-31/agents/work-tree/figures/.
+  - Manuscript figure placeholders are replaced with figure include blocks.
+  - No scope violations are recorded in the integration report.
+phase: 1.5
+artifact: phase1_figure_integration_plan
+date: "2026-02-01"
+purpose:
+  Provide a scoped plan for integrating Phase 1 figures into the first
+  manuscript without adding new claims or analysis.
+scope:
+  - Integrate figures 1 to 5 into scripts/2026-01-23/manuscript
+  - Use existing Phase 1.5 assets for figures 1 to 4
+  - Materialize a minimal figure 5 asset from replay verification logs
+out_of_scope:
+  - Any changes to analysis logic or results
+  - Any changes to manuscript claims or framing
+  - Any new figures beyond the five planned figures
+inputs:
+  - scripts/2026-01-31/agents/notes/phase1_figure_captions.md
+  - scripts/2026-01-31/agents/work-tree/figure_inventory.yaml
+  - scripts/2026-01-31/agents/work-tree/artifacts_manifest.yaml
+  - scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+  - scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+  - scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+  - scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+current_state_evidence:
+  figures_present:
+    - scripts/2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.svg
+    - scripts/2026-01-31/agents/work-tree/figures/figure2_primary_sweep.svg
+    - scripts/2026-01-31/agents/work-tree/figures/figure3_identity_persistence.svg
+    - scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+  figure_missing:
+    - figure_id: 5
+      reason: No rendered asset in work-tree figures directory.
+constraints:
+  - Only create or modify files under scripts/2026-01-31/ and scripts/2026-01-23/manuscript/
+  - Keep captions consistent with scripts/2026-01-31/agents/notes/phase1_figure_captions.md
+  - Do not introduce new metrics, thresholds, or evaluative claims
+  - Do not rename figure identifiers
+task_sequence:
+  - step: materialize_figure_5_asset
+    description: >
+      Create a deterministic figure 5 table asset from the replay verification
+      logs. Use only fields already recorded in the exec report and work tree log.
+    inputs:
+      - scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+      - scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+    outputs:
+      - scripts/2026-01-31/agents/work-tree/artifacts/fig5_replay_verification.yaml
+      - scripts/2026-01-31/agents/work-tree/figures/figure5_replay_verification.svg
+      - scripts/2026-01-31/agents/work-tree/figure_render_log.yaml update
+      - scripts/2026-01-31/agents/work-tree/figure_inventory.yaml update
+      - scripts/2026-01-31/agents/work-tree/artifacts_manifest.yaml update
+    required_fields:
+      - decision_verified.decision_id
+      - policy_used.policy_id
+      - hashes_compared.payload_hash.recomputed
+      - hashes_compared.decision_id_hash.recomputed
+      - database_state_check.counts
+      - verdict
+  - step: stage_manuscript_figures
+    description: >
+      Create a manuscript figures directory and place the five SVG assets there.
+      Use copies of the work-tree assets to avoid dependence on external paths.
+    outputs:
+      - scripts/2026-01-23/manuscript/figures/figure1_canonical_schematic.svg
+      - scripts/2026-01-23/manuscript/figures/figure2_primary_sweep.svg
+      - scripts/2026-01-23/manuscript/figures/figure3_identity_persistence.svg
+      - scripts/2026-01-23/manuscript/figures/figure4_boundary_fracture.svg
+      - scripts/2026-01-23/manuscript/figures/figure5_replay_verification.svg
+  - step: integrate_figures_into_placeholders
+    description: >
+      Replace figure placeholders with figure environments that include each SVG
+      and the caption text. Use the existing caption language from Phase 1.
+    target_file:
+      - scripts/2026-01-23/manuscript/sections/figure_placeholders.tex
+    constraints:
+      - Keep captions consistent with phase1_figure_captions.md
+      - Keep figure order 1 to 5
+  - step: finalize_integration_report
+    description: >
+      Record which figures were integrated and the exact file paths used.
+    outputs:
+      - scripts/2026-01-31/agents/handoff/nori/phase1_figure_integration_report.yaml
+acceptance_criteria:
+  - Figures 1 to 5 have SVG assets under scripts/2026-01-23/manuscript/figures/
+  - figure_placeholders.tex contains figure includes for figures 1 to 5
+  - Captions match Phase 1 captions without new terms or claims
+  - No non scoped files are modified
