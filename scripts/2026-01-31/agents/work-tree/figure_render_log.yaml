@@ -35,3 +35,10 @@ figures:
     dimensions:
       width: 640
       height: 160
+  - figure_id: 5
+    artifact_id: fig5_replay_verification
+    spec_path: scripts/2026-01-31/agents/work-tree/artifacts/fig5_replay_verification.yaml
+    output_path: scripts/2026-01-31/agents/work-tree/figures/figure5_replay_verification.svg
+    dimensions:
+      width: 900
+      height: 340

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="340" viewBox="0 0 900 340">
+  <rect x="0" y="0" width="900" height="340" fill="#ffffff" />
+  <g stroke="#000000" stroke-width="1" fill="#ffffff" font-family="Arial" font-size="12">
+    <rect x="20" y="20" width="860" height="300" />
+    <line x1="440" y1="20" x2="440" y2="320" />
+    <line x1="20" y1="44" x2="880" y2="44" />
+
+    <text x="30" y="36">Replay verification summary</text>
+    <text x="450" y="36">Verification steps and policy</text>
+
+    <text x="30" y="64">decision_id: dec_e28092c4dc33b8f1</text>
+    <text x="30" y="80">policy_id: pol_d8da3e00e9584eb1</text>
+    <text x="30" y="96">payload_hash: 3a9d63ac28378116</text>
+    <text x="30" y="112">policy_id_hash: pol_d8da3e00e9584eb1</text>
+    <text x="30" y="128">decision_id_hash: dec_e28092c4dc33b8f1</text>
+    <text x="30" y="144">counts: snapshots=0, representations=0</text>
+    <text x="30" y="160">engine_runs=1, decisions=1, f_map=1</text>
+    <text x="30" y="176">verdict: PASS</text>
+
+    <text x="450" y="64">equivalence_policy:</text>
+    <text x="450" y="76">policy_id: pol_d8da3e00e9584eb1</text>
+    <text x="450" y="88">policy_version: 1.0.0</text>
+    <text x="450" y="100">policy_type: exact</text>
+    <text x="450" y="112">hash_source: route.nodes</text>
+    <text x="450" y="124">canonicalization: json_sorted_keys_utf8</text>
+    <text x="450" y="136">match_rule: sha256_equality</text>
+
+    <text x="450" y="148">steps:</text>
+    <text x="450" y="160">1 load raw output (nodes=29, path_found=true)</text>
+    <text x="450" y="172">2 recompute policy_id (pol_d8da3e00e9584eb1)</text>
+    <text x="450" y="184">3 extract decision payload</text>
+    <text x="450" y="196">4 recompute payload hash (3a9d63ac28378116)</text>
+    <text x="450" y="208">5 recompute decision id (dec_e28092c4dc33b8f1)</text>
+    <text x="450" y="220">6 compare recomputed vs persisted (all match)</text>
+    <text x="450" y="232">7 verify table counts unchanged</text>
+
+    <text x="450" y="244">operations_not_performed:</text>
+    <text x="450" y="256">no engine execution; no database writes</text>
+    <text x="450" y="268">no modifications to decisions, f_map, engine_runs</text>
+    <text x="450" y="280">no policy changes; no network access</text>
+  </g>
+</svg>
