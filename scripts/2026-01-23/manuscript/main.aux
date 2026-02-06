@@ -1,32 +1,56 @@
 \relax 
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2}Problem Setting and Scope}{1}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Core Object: Decision-Valued Maps}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}System Invariants}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}DecisionDB System Architecture}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Identifiers and Content Addressing}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Core Entities}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Experimental Protocol for Representational Sweeps}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Empirical Characterization via Representational Sweeps}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Canonical Sweep Visualization}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}Example: Route Identity Under Weight Policy Variation}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Failure Modes and Misinterpretations}{4}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textbf  {Canonical decision-valued mapping schematic for a fixed snapshot and engine.} A frozen snapshot is deterministically encoded into multiple representations. Each representation is consumed by the same fixed engine, producing immutable raw outputs. Discrete decision identity is extracted by a declared equivalence policy. The decision map materializes the links among snapshot, representation, engine run, decision, and policy, making representational dependence empirically testable. Minimal example: fix $s$ and engine, vary $r \in \mathcal  {R}(s)$, extract $d \in \mathcal  {D}$ using $\pi $.}}{2}{}\protected@file@percent }
+\newlabel{fig:decision_map_schematic}{{1}{2}{}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Core Object}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experimental Protocol for Representational Sweeps}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Minimal Example}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Snapshot, representation family, engine, policy}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Two representations that differ only by structure}{3}{}\protected@file@percent }
 \citation{liskov1978adt}
 \citation{gray1993tp}
 \citation{simonsohn2018spec}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Discrete Outcome Requirement}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Fixed Snapshot and Engine Assumption}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}No Claims About Optimization or Learning}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Empirical Coverage Limits}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {10}Relation to Prior Infrastructure Work}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {11}Discussion: What This Enables}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Auditability via Explicit Decision Provenance}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Reliability as Identity Persistence Under Variation}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Failure Precursors and Boundary Localization}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {12}Conclusion}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Replay verification as the minimal audit}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}From the minimal example to representational sweeps}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Related Infrastructural Precedents}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}DecisionDB System Architecture}{4}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Identifiers and Content Addressing}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Core Entities}{5}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Protocol Enforcement}{5}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces System architecture for logging and replaying decision-valued maps. Content-addressed identifiers link snapshots, representations, engine runs, and decisions to ensure reproducibility and auditability.}}{6}{}\protected@file@percent }
+\newlabel{fig:system_architecture}{{2}{6}{}{figure.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Empirical Characterization via Representational Sweeps}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Canonical Sweep Visualization}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Example representational sweep showing regions of decision identity persistence and boundary formation. Each point corresponds to a representation variant; color indicates discrete decision identity.}}{6}{}\protected@file@percent }
+\newlabel{fig:representational_sweep}{{3}{6}{}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Failure Modes and Misinterpretations}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Discrete Outcome Requirement}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Fixed Snapshot and Engine Assumption}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}No Claims About Optimization or Learning}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.4}Empirical Coverage Limits}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10}Discussion}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Auditability via Explicit Decision Provenance}{8}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Reproducibility replay verification. Independent rerun confirming identical decision identifiers are recovered across executions.}}{8}{}\protected@file@percent }
+\newlabel{fig:replay_verification}{{4}{8}{}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.2}Reliability as Identity Persistence Under Variation}{8}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.3}Failure Precursors and Boundary Localization}{8}{}\protected@file@percent }
 \bibstyle{plain}
 \bibdata{bibliography}
 \bibcite{gray1993tp}{1}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Boundary and fracture localization derived from representational sweep. Annotated parameter values indicate loci where decision identity changes.}}{9}{}\protected@file@percent }
+\newlabel{fig:boundaries}{{5}{9}{}{figure.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {11}Conclusion}{9}{}\protected@file@percent }
 \bibcite{liskov1978adt}{2}
 \bibcite{simonsohn2018spec}{3}
-\gdef \@abspage@last{8}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Canonical decision-valued mapping schematic. A fixed snapshot is encoded into a representation family. Each representation is executed by a fixed engine and yields raw output. An equivalence policy extracts a discrete decision identity from the raw output. The decision map links representation identifiers, engine runs, and decision identities.}}{10}{}\protected@file@percent }
+\newlabel{fig:canonical-decision-map}{{6}{10}{}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Primary representational sweep for one snapshot and engine. Each variant corresponds to a weight setting recorded in the weight variation results. Decision identity is defined by the route node sequence in each variant. Identical identities use the same label.}}{10}{}\protected@file@percent }
+\newlabel{fig:primary-representational-sweep}{{7}{10}{}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Identity persistence regions derived from Figure 2. Consecutive variants with identical decision identity labels are shown as a single region, indicating persistence under the tested weight changes.}}{11}{}\protected@file@percent }
+\newlabel{fig:identity-persistence}{{8}{11}{}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Boundary and fracture localization derived from Figure 2. Transitions where route\_changed or edge\_order\_changed is true are marked as boundaries, with baseline and perturbed weight values listed.}}{11}{}\protected@file@percent }
+\newlabel{fig:boundary-fracture}{{9}{11}{}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Reproducibility replay verification. The replay verification logs show recomputed policy identifier, payload hash, and decision identifier matching the persisted manifest, and table counts remain unchanged.}}{11}{}\protected@file@percent }
+\newlabel{fig:replay-verification}{{10}{11}{}{figure.10}{}}
+\gdef \@abspage@last{11}
