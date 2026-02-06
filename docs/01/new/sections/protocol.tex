@@ -1,0 +1,17 @@
+\section{Sweep Protocol}
+
+A \emph{representational sweep} evaluates the decision-valued map $f$ across a declared set of representations. The protocol proceeds in five stages:
+
+\begin{enumerate}
+\item \textbf{Freeze snapshot.} A snapshot $s$ is frozen and assigned a content-addressed identifier computed from its canonical JSON serialization (SHA-256, truncated to 16 hex characters, prefixed with \texttt{snap\_}).
+
+\item \textbf{Declare representations.} A representation family $\mathcal{R}(s)$ is declared, along with a deterministic factory that generates individual representations from parameter settings. Each representation receives a content-addressed identifier (prefix \texttt{repr\_}). Representation parameters are explicitly separated from engine configuration.
+
+\item \textbf{Plan sweep.} A sweep plan specifies the parameter grid to be evaluated, the engine name and version, and the equivalence policy. The plan itself is content-addressed.
+
+\item \textbf{Execute engine.} The fixed engine is executed independently for each representation. Each run produces a raw output artifact stored as an immutable file, linked by content hash (prefix \texttt{run\_}). Engine configuration is held constant across the sweep.
+
+\item \textbf{Extract decisions.} The equivalence policy $\pi$ is applied to each raw output to produce a discrete decision identity (prefix \texttt{dec\_}). The decision map table records the link from representation to engine run to decision identity.
+\end{enumerate}
+
+All artifacts are versioned and linked through content-addressed identifiers. The resulting materialized map supports reproducible replay and post-hoc analysis without re-executing the engine.

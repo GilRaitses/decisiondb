@@ -1,0 +1,13 @@
+\section{Limitations}
+
+\textbf{Discrete outcomes only.} The framework applies to systems whose outputs can be reduced to discrete identities via a declared equivalence policy. Continuous outputs (e.g., probability distributions, regression surfaces) are out of scope unless such a reduction is explicitly defined. The choice of equivalence policy directly determines what counts as ``the same outcome,'' and different policies applied to the same raw output will in general produce different decision maps.
+
+\textbf{Fixed snapshot and engine.} All results assume a frozen snapshot and a fixed engine. Any change to the input data, model parameters, or execution logic constitutes a new analytical context. The framework does not track how decision maps evolve across snapshot or engine versions; each combination requires a separate analysis.
+
+\textbf{Empirical coverage.} The reported sweeps cover two representation parameters (\texttt{neighbor\_weight} at values 0.5 and 1.0; \texttt{second\_order\_weight} at values 0.25 and 0.5) applied to a single graph snapshot with a single origin-destination pair. The representation space is sampled at four points total. Unobserved regions of representation space remain unconstrained: persistence regions and boundaries identified here may not generalize to finer parameter grids, different origin-destination pairs, or different graph topologies.
+
+\textbf{Single domain.} The empirical demonstration uses graph routing. The framework is designed to be domain-agnostic, but we have not validated it on classification, resource allocation, or other pipeline types. Applying the framework to a new domain requires defining an appropriate equivalence policy, which involves domain-specific judgment about what constitutes ``the same outcome.''
+
+\textbf{No causal claims.} Observing that a boundary exists between two parameter values does not explain why it exists. The framework is diagnostic, not explanatory. It identifies where decision identity changes but does not attribute the change to any specific mechanism within the engine or the representation construction.
+
+\textbf{Scalability.} The current implementation uses SQLite and has been tested with single-digit representation families. Scaling to large parameter grids (hundreds or thousands of representations) would require evaluation of storage, query performance, and sweep orchestration, which we have not performed.

@@ -1,0 +1,29 @@
+\section{Related Work}
+
+The sensitivity of analytical conclusions to representational and analytic choices has been documented across multiple disciplines. This section situates the decision-valued mapping framework relative to existing work on analytic flexibility, reproducibility infrastructure, and provenance systems.
+
+\subsection{Analytic Flexibility and Multiverse Methods}
+
+Specification curve analysis~\cite{simonsohn2020specification} systematically evaluates how reported effects vary across defensible analytic specifications, making the dependence of statistical conclusions on analytic choices visible. Multiverse analysis~\cite{steegen2016increasing} extends this idea by jointly varying data processing and model specification decisions to characterize the full space of results consistent with a dataset. The garden of forking paths~\cite{gelman2013garden} describes how implicit researcher degrees of freedom shape reported findings even absent deliberate p-hacking. The vibration of effects framework~\cite{patel2015assessment} quantifies how effect estimates fluctuate across model specifications in observational studies.
+
+Decision-valued mapping shares the premise that analytic conclusions depend on choices that are often left implicit. The distinction is structural: specification curve and multiverse analyses operate on continuous effect estimates (e.g., regression coefficients, p-values) and visualize their distribution. Decision-valued maps operate on discrete outcome identities and characterize the topology of representation space, identifying which regions preserve identity and where boundaries form. The object of analysis is a partition, not a distribution.
+
+\subsection{Sensitivity Analysis}
+
+Global sensitivity analysis~\cite{saltelli2008global} quantifies how variation in model inputs contributes to variation in model outputs, typically through variance decomposition or derivative-based indices over continuous output spaces. Decision-valued mapping differs in that it does not decompose output variance or compute sensitivity indices. Instead, it directly observes whether a discrete outcome changes or persists under representation variation. The framework is compatible with sensitivity analysis (one could compute sensitivity indices over a binarized decision map), but it does not require or assume a continuous output metric.
+
+\subsection{Reproducibility in Machine Learning}
+
+Underspecification in machine learning pipelines~\cite{damour2022underspecification} demonstrates that pipelines satisfying identical training criteria can yield predictors with divergent behavior under distribution shift. Henderson et al.~\cite{henderson2018deep} show that deep reinforcement learning results are sensitive to implementation details and hyperparameter choices in ways that standard reporting obscures. Bouthillier et al.~\cite{bouthillier2021accounting} formalize variance accounting across machine learning benchmarks. Reproducibility checklists~\cite{pineau2021improving} encourage reporting of experimental details but do not enforce content-addressed provenance or deterministic replay.
+
+Decision-valued mapping addresses a related but distinct problem. Rather than documenting variability in performance metrics across training runs or hyperparameter settings, it isolates representational variation as an independent variable and tracks its effect on discrete outcome identity under fixed snapshots and engines. The framework does not replace reproducibility checklists; it provides a lower-level infrastructure for testing whether specific outcomes are stable under specific representational changes.
+
+\subsection{Provenance and Workflow Systems}
+
+Provenance models such as W3C PROV~\cite{moreau2013prov} provide general-purpose vocabularies for recording the derivation history of computational artifacts. VisTrails~\cite{freire2012provenance} captures workflow provenance for scientific computations. MLflow~\cite{zaharia2018accelerating} tracks experiments, parameters, and artifacts for machine learning pipelines. The Common Workflow Language~\cite{amstutz2016common} standardizes workflow definitions for reproducible execution. Resilient Distributed Datasets~\cite{zaharia2012resilient} track lineage for fault-tolerant distributed computation.
+
+DecisionDB is narrower than these systems in scope and more specific in its invariants. It does not manage arbitrary workflows or track general-purpose provenance graphs. It enforces a specific structure: frozen snapshots, declared representation families, fixed engines, and equivalence policies that reduce raw output to discrete identities. The content-addressing scheme ensures that identical inputs always produce identical identifiers, and replay verification checks end-to-end consistency of the provenance chain. This specificity enables the decision-valued map as a queryable diagnostic object, which general-purpose provenance systems do not directly support.
+
+\subsection{Infrastructural Precedents}
+
+The approach follows a pattern observed in the development of foundational abstractions. Abstract data types~\cite{liskov1974programming} separated representation from observable behavior, enabling systems to evolve internally without collapsing external guarantees. Write-ahead logging~\cite{gray1993transaction} transformed durability from an ad-hoc property into an auditable, replayable state transition protocol. In both cases, the contribution was not a novel computational procedure but a diagnostic layer that made structural dependence explicit and testable. Decision-valued mapping extends this pattern to settings where discrete outcomes depend on representational choices in complex analytical pipelines.

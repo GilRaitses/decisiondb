@@ -1,0 +1,40 @@
+\section{The Decision-Valued Map}
+
+The central object of study is a mapping
+\[
+f \colon \mathcal{R} \to \mathcal{D},
+\]
+where $\mathcal{R}$ denotes a family of representations over a fixed snapshot $s$ and $\mathcal{D}$ denotes a set of discrete decision identities. For each representation $r \in \mathcal{R}$, the engine $E$ produces raw output $E(r)$, and the equivalence policy $\pi$ extracts a decision identity $d = \pi(E(r))$.
+
+Three structural features of this map are observable through controlled variation of $\mathcal{R}$:
+
+\begin{description}
+\item[Persistence regions.] Connected subsets of $\mathcal{R}$ over which $f$ is constant. Within a persistence region, representational variation does not change the outcome.
+\item[Boundaries.] Loci in $\mathcal{R}$ where $f$ changes value. A boundary separates two persistence regions with different decision identities.
+\item[Fractures.] Boundaries where a small change in representation parameters induces a discrete identity change. Fractures indicate high sensitivity of the outcome to the representation.
+\end{description}
+
+The purpose of DecisionDB is to \emph{materialize} $f$: to evaluate it at declared points in $\mathcal{R}$, store the results as immutable artifacts, and make the resulting map queryable, replayable, and auditable.
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[
+    node distance=7mm,
+    box/.style={draw, rounded corners, align=center, inner sep=5pt, text width=26mm, font=\small},
+    arrow/.style={-Latex, thick}
+  ]
+  \node[box] (snap) {Snapshot $s$\\{\scriptsize frozen inputs}};
+  \node[box, right=of snap] (rep) {Representation $r$\\{\scriptsize deterministic encoding}};
+  \node[box, right=of rep] (eng) {Engine $E$\\{\scriptsize fixed procedure}};
+  \node[box, right=of eng] (pol) {Policy $\pi$\\{\scriptsize decision identity $d$}};
+  \node[box, below=12mm of eng, text width=44mm] (map) {Decision map table\\{\scriptsize links $s$, $r$, $E$, $d$, $\pi$ by content hash}};
+
+  \draw[arrow] (snap) -- (rep);
+  \draw[arrow] (rep) -- (eng);
+  \draw[arrow] (eng) -- (pol);
+  \draw[arrow] (pol.south) -- ++(0,-0.35) -| (map.east);
+  \draw[arrow] (snap.south) -- ++(0,-0.65) -| (map.west);
+  \end{tikzpicture}
+  \caption{Decision-valued mapping pipeline. A frozen snapshot is encoded into a representation, consumed by a fixed engine, and reduced to a discrete decision identity via an equivalence policy. The decision map table materializes these links using content-addressed identifiers.}
+  \label{fig:pipeline}
+\end{figure}

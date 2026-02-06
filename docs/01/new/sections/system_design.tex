@@ -1,0 +1,54 @@
+\section{System Design}
+
+DecisionDB is implemented as a Python package backed by SQLite. It manages five entity types through a relational schema with content-addressed primary keys and foreign-key constraints.
+
+\subsection{Content Addressing}
+
+All identifiers are computed deterministically from content. Given an entity's payload (a Python dictionary), DecisionDB:
+\begin{enumerate}
+\item serializes it to canonical JSON (keys sorted alphabetically, no whitespace, arrays in declaration order, floats serialized as strings, explicit version fields included);
+\item computes the SHA-256 digest of the UTF-8 encoding;
+\item truncates to the first 16 hexadecimal characters;
+\item prepends a type-specific prefix (\texttt{snap\_}, \texttt{repr\_}, \texttt{run\_}, \texttt{dec\_}, \texttt{pol\_}, \texttt{exp\_}).
+\end{enumerate}
+Identical content always produces identical identifiers, regardless of when or where the computation occurs.
+
+\subsection{Schema}
+
+The five core tables are:
+
+\begin{description}
+\item[\texttt{snapshots}] stores frozen input state: snapshot identifier, time window, provenance metadata, and an artifact manifest listing all input files by content hash.
+
+\item[\texttt{representations}] stores deterministic encodings of snapshots: representation identifier, a foreign key to the parent snapshot, the representation specification (as canonical JSON), factory version, and the artifact URI and hash of the generated encoding.
+
+\item[\texttt{engine\_runs}] stores execution records: run identifier, a foreign key to the representation consumed, engine name and version, configuration (as canonical JSON with its own hash), runtime in milliseconds, and the URI and hash of the raw output artifact.
+
+\item[\texttt{decisions}] stores discrete outcomes: decision identifier, decision type, equivalence policy version, and the decision payload (as canonical JSON). The decision identifier is computed from the policy version and the payload, so the same raw output under different policies yields different decision identifiers.
+
+\item[\texttt{f\_map}] materializes the decision-valued map: a composite primary key of (representation identifier, engine run identifier), a foreign key to the decision, and optional auxiliary metrics. This table is the primary query surface for analyzing representation-to-decision relationships.
+\end{description}
+
+All writes are append-only, scoped by experiment identifier, and executed within transactions. Inserts use \texttt{INSERT OR IGNORE} for idempotency: re-inserting the same content-addressed entity is a no-op.
+
+\subsection{Equivalence Policies}
+
+An equivalence policy defines how raw engine output is reduced to a decision identity. Each policy specifies:
+\begin{itemize}
+\item a \textbf{hash source}: which field of the raw output carries the decision-relevant content (e.g., \texttt{route.nodes});
+\item a \textbf{canonicalization rule}: how to serialize the extracted content (e.g., \texttt{json\_sorted\_keys\_utf8});
+\item a \textbf{match rule}: how to determine identity (e.g., \texttt{sha256\_equality}).
+\end{itemize}
+The policy itself is content-addressed (prefix \texttt{pol\_}), so any change to the policy definition produces a new policy identifier and new decision identifiers downstream.
+
+\subsection{Replay Verification}
+
+Replay verification checks that persisted decision identifiers are deterministically recoverable from stored artifacts. Given a persisted decision record, the verifier:
+\begin{enumerate}
+\item loads the raw engine output from its stored URI;
+\item recomputes the equivalence policy identifier from the stored policy specification;
+\item extracts the decision payload using the policy;
+\item recomputes the payload hash and decision identifier;
+\item compares all recomputed values against the persisted values.
+\end{enumerate}
+Replay is read-only: it writes no new rows and modifies no existing state. A replay pass confirms end-to-end integrity of the content-addressing chain from raw output through policy application to decision identity.

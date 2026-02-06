@@ -1,0 +1,132 @@
+\begin{thebibliography}{17}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Amstutz et~al.(2016)Amstutz, Crusoe, Tijani{\'c}, Chapman, Chilton,
+  Heuer, Kartashov, Kern, Leehr, M{\'e}nager, et~al.]{amstutz2016common}
+Peter Amstutz, Michael~R. Crusoe, Neboj{\v{s}}a Tijani{\'c}, Brad Chapman, John
+  Chilton, Michael Heuer, Andrey Kartashov, John Kern, Dan Leehr, Herv{\'e}
+  M{\'e}nager, et~al.
+\newblock Common workflow language, v1.0.
+\newblock \url{https://www.commonwl.org/v1.0/}, 2016.
+
+\bibitem[Bouthillier et~al.(2021)Bouthillier, Laurent, and
+  Vincent]{bouthillier2021accounting}
+Xavier Bouthillier, C{\'e}sar Laurent, and Pascal Vincent.
+\newblock Accounting for variance in machine learning benchmarks.
+\newblock \emph{Proceedings of Machine Learning and Systems}, 3:\penalty0
+  747--769, 2021.
+
+\bibitem[D'Amour et~al.(2022)D'Amour, Heller, Moldovan, Adlam, Alipanahi,
+  Beutel, Chen, Deaton, Eisenstein, Hoffman,
+  et~al.]{damour2022underspecification}
+Alexander D'Amour, Katherine Heller, Dan Moldovan, Ben Adlam, Babak Alipanahi,
+  Alex Beutel, Christina Chen, Jonathan Deaton, Jacob Eisenstein, Matthew~D.
+  Hoffman, et~al.
+\newblock Underspecification presents challenges for credibility in modern
+  machine learning.
+\newblock \emph{Journal of Machine Learning Research}, 23:\penalty0 1--61,
+  2022.
+
+\bibitem[Dijkstra(1959)]{dijkstra1959note}
+Edsger~W. Dijkstra.
+\newblock A note on two problems in connexion with graphs.
+\newblock \emph{Numerische Mathematik}, 1:\penalty0 269--271, 1959.
+
+\bibitem[Freire et~al.(2008)Freire, Koop, Santos, and
+  Silva]{freire2012provenance}
+Juliana Freire, David Koop, Emanuele Santos, and Cl{\'a}udio~T. Silva.
+\newblock Provenance for computational tasks: A survey.
+\newblock \emph{Computing in Science \& Engineering}, 10\penalty0 (3):\penalty0
+  11--21, 2008.
+
+\bibitem[Gelman and Loken(2013)]{gelman2013garden}
+Andrew Gelman and Eric Loken.
+\newblock The garden of forking paths: Why multiple comparisons can be a
+  problem, even when there is no ``fishing expedition'' or ``p-hacking'' and
+  the research hypothesis was posited ahead of time.
+\newblock Department of Statistics, Columbia University, 2013.
+
+\bibitem[Gray and Reuter(1993)]{gray1993transaction}
+Jim Gray and Andreas Reuter.
+\newblock \emph{Transaction Processing: Concepts and Techniques}.
+\newblock Morgan Kaufmann, 1993.
+
+\bibitem[Henderson et~al.(2018)Henderson, Islam, Bachman, Pineau, Precup, and
+  Meger]{henderson2018deep}
+Peter Henderson, Riashat Islam, Philip Bachman, Joelle Pineau, Doina Precup,
+  and David Meger.
+\newblock Deep reinforcement learning that matters.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~32, 2018.
+
+\bibitem[Liskov and Zilles(1974)]{liskov1974programming}
+Barbara Liskov and Stephen Zilles.
+\newblock Programming with abstract data types.
+\newblock In \emph{Proceedings of the ACM SIGPLAN Symposium on Very High Level
+  Languages}, pages 50--59. ACM, 1974.
+
+\bibitem[Moreau and Missier(2013)]{moreau2013prov}
+Luc Moreau and Paolo Missier.
+\newblock {PROV-DM}: The {PROV} data model.
+\newblock W3C Recommendation, 2013.
+\newblock \url{https://www.w3.org/TR/prov-dm/}.
+
+\bibitem[Patel et~al.(2015)Patel, Bhatt, Patel, and
+  Ioannidis]{patel2015assessment}
+Chirag~J. Patel, Jay Bhatt, Atul~J. Patel, and John P.~A. Ioannidis.
+\newblock An environment-wide association study ({EWAS}) on type 2 diabetes
+  mellitus.
+\newblock \emph{PLoS ONE}, 10\penalty0 (7):\penalty0 e0132002, 2015.
+
+\bibitem[Pineau et~al.(2021)Pineau, Vincent-Lamarre, Sinha, Larivi{\`e}re,
+  Beygelzimer, d'Alch{\'e} Buc, Fox, and Larochelle]{pineau2021improving}
+Joelle Pineau, Philippe Vincent-Lamarre, Koustuv Sinha, Vincent Larivi{\`e}re,
+  Alina Beygelzimer, Florence d'Alch{\'e} Buc, Emily Fox, and Hugo Larochelle.
+\newblock Improving reproducibility in machine learning research (a report from
+  the {NeurIPS} 2019 reproducibility program).
+\newblock \emph{Journal of Machine Learning Research}, 22\penalty0
+  (164):\penalty0 1--20, 2021.
+
+\bibitem[Saltelli et~al.(2008)Saltelli, Ratto, Andres, Campolongo, Cariboni,
+  Gatelli, Saisana, and Tarantola]{saltelli2008global}
+Andrea Saltelli, Marco Ratto, Terry Andres, Francesca Campolongo, Jessica
+  Cariboni, Debora Gatelli, Michaela Saisana, and Stefano Tarantola.
+\newblock \emph{Global Sensitivity Analysis: The Primer}.
+\newblock John Wiley \& Sons, 2008.
+
+\bibitem[Simonsohn et~al.(2020)Simonsohn, Simmons, and
+  Nelson]{simonsohn2020specification}
+Uri Simonsohn, Joseph~P. Simmons, and Leif~D. Nelson.
+\newblock Specification curve analysis.
+\newblock \emph{Nature Human Behaviour}, 4\penalty0 (11):\penalty0 1208--1214,
+  2020.
+
+\bibitem[Steegen et~al.(2016)Steegen, Tuerlinckx, Gelman, and
+  Vanpaemel]{steegen2016increasing}
+Sara Steegen, Francis Tuerlinckx, Andrew Gelman, and Wolf Vanpaemel.
+\newblock Increasing transparency through a multiverse analysis.
+\newblock \emph{Perspectives on Psychological Science}, 11\penalty0
+  (5):\penalty0 702--712, 2016.
+
+\bibitem[Zaharia et~al.(2012)Zaharia, Chowdhury, Das, Dave, Ma, McCauley,
+  Franklin, Shenker, and Stoica]{zaharia2012resilient}
+Matei Zaharia, Mosharaf Chowdhury, Tathagata Das, Ankur Dave, Justin Ma, Murphy
+  McCauley, Michael~J. Franklin, Scott Shenker, and Ion Stoica.
+\newblock Resilient distributed datasets: A fault-tolerant abstraction for
+  in-memory cluster computing.
+\newblock In \emph{Proceedings of the 9th USENIX Symposium on Networked Systems
+  Design and Implementation (NSDI)}, pages 15--28, 2012.
+
+\bibitem[Zaharia et~al.(2018)Zaharia, Chen, Davidson, Ghodsi, Hong, Konwinski,
+  Murching, Nykodym, Ogilvie, Parkhe, et~al.]{zaharia2018accelerating}
+Matei Zaharia, Andrew Chen, Aaron Davidson, Ali Ghodsi, Sue~Ann Hong, Andy
+  Konwinski, Siddharth Murching, Tomas Nykodym, Paul Ogilvie, Mani Parkhe,
+  et~al.
+\newblock Accelerating the machine learning lifecycle with {MLflow}.
+\newblock \emph{IEEE Data Engineering Bulletin}, 41:\penalty0 39--45, 2018.
+
+\end{thebibliography}
