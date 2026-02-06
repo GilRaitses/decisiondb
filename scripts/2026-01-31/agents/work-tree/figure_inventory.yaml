@@ -23,5 +23,10 @@ figures:
     artifact_id: fig4_boundary_fracture
     artifact_spec: scripts/2026-01-31/agents/work-tree/artifacts/fig4_boundary_fracture.yaml
     figure_asset: scripts/2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.svg
+  - figure_id: 5
+    figure_name: Reproducibility Replay Verification
+    artifact_id: fig5_replay_verification
+    artifact_spec: scripts/2026-01-31/agents/work-tree/artifacts/fig5_replay_verification.yaml
+    figure_asset: scripts/2026-01-31/agents/work-tree/figures/figure5_replay_verification.svg
 counts:
-  figures_total: 4
+  figures_total: 5

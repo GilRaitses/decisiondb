@@ -1,44 +1,38 @@
-\section*{Planned Figures and Empirical Placeholders}
+\section*{Figures}
 
-\textbf{Figure 1: Canonical Decision-Valued Mapping Schematic}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../../2026-01-31/agents/work-tree/figures/figure1_canonical_schematic.pdf}
+\caption{Canonical decision-valued mapping schematic. A fixed snapshot is encoded into a representation family. Each representation is executed by a fixed engine and yields raw output. An equivalence policy extracts a discrete decision identity from the raw output. The decision map links representation identifiers, engine runs, and decision identities.}
+\label{fig:canonical-decision-map}
+\end{figure}
 
-Placeholder:
-\begin{itemize}
-  \item Conceptual diagram only (no empirical data)
-\end{itemize}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../../2026-01-31/agents/work-tree/figures/figure2_primary_sweep.pdf}
+\caption{Primary representational sweep for one snapshot and engine. Each variant corresponds to a weight setting recorded in the weight variation results. Decision identity is defined by the route node sequence in each variant. Identical identities use the same label.}
+\label{fig:primary-representational-sweep}
+\end{figure}
 
-\textbf{Figure 2: Primary Representational Sweep}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../../2026-01-31/agents/work-tree/figures/figure3_identity_persistence.pdf}
+\caption{Identity persistence regions derived from Figure 2. Consecutive variants with identical decision identity labels are shown as a single region, indicating persistence under the tested weight changes.}
+\label{fig:identity-persistence}
+\end{figure}
 
-Placeholder:
-\begin{itemize}
-  \item Experiment ID: \texttt{<EXP\_ID\_PRIMARY>}
-  \item Snapshot: \texttt{<SNAPSHOT\_ID>}
-  \item Representation family: \texttt{<REP\_FAMILY>}
-  \item Decision type: \texttt{<DECISION\_TYPE>}
-\end{itemize}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../../2026-01-31/agents/work-tree/figures/figure4_boundary_fracture.pdf}
+\caption{Boundary and fracture localization derived from Figure 2. Transitions where route\_changed or edge\_order\_changed is true are marked as boundaries, with baseline and perturbed weight values listed.}
+\label{fig:boundary-fracture}
+\end{figure}
 
-\textbf{Figure 3: Identity Persistence Regions}
-
-Placeholder:
-\begin{itemize}
-  \item Derived from Figure 2
-  \item Highlight contiguous regions of identical decision identity
-\end{itemize}
-
-\textbf{Figure 4: Boundary and Fracture Localization}
-
-Placeholder:
-\begin{itemize}
-  \item Derived from Figure 2
-  \item Annotate parameter values at which decision identity changes
-\end{itemize}
-
-\textbf{Figure 5: Reproducibility Replay Verification}
-
-Placeholder:
-\begin{itemize}
-  \item Experiment ID: \texttt{<EXP\_ID\_REPLAY>}
-  \item Independent rerun confirming identical identifiers
-\end{itemize}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../../2026-01-31/agents/work-tree/figures/figure5_replay_verification.pdf}
+\caption{Reproducibility replay verification. The replay verification logs show recomputed policy identifier, payload hash, and decision identifier matching the persisted manifest, and table counts remain unchanged.}
+\label{fig:replay-verification}
+\end{figure}
 
 All figures will use the canonical caption template defined at the end of this manuscript. No figure will introduce performance metrics, optimization criteria, or learning claims.

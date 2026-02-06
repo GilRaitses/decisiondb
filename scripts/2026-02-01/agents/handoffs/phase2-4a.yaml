@@ -1,0 +1,39 @@
+title: "Phase 2 Freeze and Canonicalization Notice"
+recipient: "Agent Arco"
+action_required: "Register and enforce freeze"
+
+phase_status:
+  phase: 2
+  status: frozen
+  scope: "Sections 2.1-2.4 only"
+  edit_policy: "No further edits without Phase 3 evidence"
+
+locked_content:
+  abstract_locked: |
+    This phase examines whether reuse incompatibility in inference systems can be detected mechanically from missing context alone. We evaluate reuse paths that share downstream consumers and stable confidence values, while varying only the presence of task and abstraction context at the point of reuse. Across multiple reuse slices, incompatibility is detected deterministically when required contextual fields are absent, without appealing to confidence magnitude, accuracy, recalibration, or system modification. These results show that confidence reuse becomes inadmissible when its originating assumptions cannot be traced, and that enforcing context sufficiency enables alignment checks prior to reuse rather than after failure. Phase 2 establishes context-based reuse compatibility as a necessary condition for interpretable inference reuse across tasks and timescales.
+
+canonical_visualization:
+  name: "Phase 2-4 Reuse Compatibility Comparison Table"
+  authoritative_source_artifacts:
+    - "scripts/2026-02-01/agents/work-tree/phase2_4_context_binding_tables.yaml"
+    - "scripts/2026-02-01/agents/work-tree/phase2_4_compatibility_evaluations.yaml"
+    - "scripts/2026-02-01/agents/work-tree/phase2_4_cross_slice_comparison.yaml"
+  visualization_role:
+    - "Reuse slice identity (anchor vs. additional)"
+    - "Required context fields"
+    - "Present vs. missing context at reuse"
+    - "Deterministic compatibility outcome"
+    - "Justification requirement triggered by missing context"
+  approval_statement: |
+    The Phase 2-4 reuse compatibility comparison table is approved as the canonical visualization for Phase 2. It fully captures the evidence required to support Section 2.3 and supersedes all prior schematic or illustrative figures for this phase. No additional figures are required for Phase 2 unless new reuse slices or context dimensions are introduced in Phase 3.
+  status: "Approved and frozen"
+  permitted_use: "Manuscript, internal review, and talk slides"
+  restriction: "No alternative Phase 2 visualizations permitted"
+
+registry_instructions:
+  - "Register Phase 2 as frozen in the appropriate phase registry."
+  - "Record the abstract and visualization approval as canonical."
+  - "Enforce immutability via guardrails consistent with prior phase freezes."
+  - "Reject any Phase 2 edits not explicitly authorized by Phase 3 evidence acquisition."
+
+note: "No further action is required for Phase 2."

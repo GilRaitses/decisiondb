@@ -14,6 +14,9 @@ files:
   - path: "/workspace/scripts/2026-02-01/agents/handoffs/phase2-0.yaml"
     relative_path: "scripts/2026-02-01/agents/handoffs/phase2-0.yaml"
     exists: true
+  - path: "/workspace/scripts/2026-02-01/agents/handoffs/phase2-4a.yaml"
+    relative_path: "scripts/2026-02-01/agents/handoffs/phase2-4a.yaml"
+    exists: true
   - path: "/workspace/scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml"
     relative_path: "scripts/2026-02-01/agents/handoffs/phase1.5_context_compatibility_trace.yaml"
     exists: true
@@ -115,6 +118,9 @@ files:
     exists: true
     evidence:
       - "scripts/2026-02-01/agents/work-tree/audit/phase2_3.console.log"
+  - path: "/workspace/scripts/2026-02-01/agents/notes/phase2_4a_freeze_registry.yaml"
+    relative_path: "scripts/2026-02-01/agents/notes/phase2_4a_freeze_registry.yaml"
+    exists: true
   - path: "/workspace/scripts/2026-02-01/agents/handoffs/phase2-4.yaml"
     relative_path: "scripts/2026-02-01/agents/handoffs/phase2-4.yaml"
     exists: true

@@ -1,0 +1,59 @@
+phase: 1
+artifact_id: fig5_replay_verification
+figure_id: 5
+figure_name: Reproducibility Replay Verification
+source_map: scripts/2026-01-31/agents/notes/phase1_reusable_artifacts.yaml
+source_files:
+  - scripts/2026-01-24/agents/handoff/king-dolphin/0647-barbara-replay_verification_exec_report.yaml
+  - scripts/2026-01-24/agents/work-tree/barbara/0647-replay_verification.yaml
+data:
+  summary_table:
+    decision_id: dec_e28092c4dc33b8f1
+    policy_id: pol_d8da3e00e9584eb1
+    payload_hash: 3a9d63ac28378116
+    policy_id_hash: pol_d8da3e00e9584eb1
+    decision_id_hash: dec_e28092c4dc33b8f1
+    table_counts:
+      snapshots: 0
+      representations: 0
+      engine_runs: 1
+      decisions: 1
+      f_map: 1
+    verdict: PASS
+  equivalence_policy:
+    policy_id: pol_d8da3e00e9584eb1
+    policy_version: "1.0.0"
+    policy_type: exact
+    hash_source: route.nodes
+    canonicalization: json_sorted_keys_utf8
+    match_rule: sha256_equality
+  verification_steps:
+    - "1 load raw output (nodes=29, path_found=true)"
+    - "2 recompute policy_id (pol_d8da3e00e9584eb1)"
+    - "3 extract decision payload"
+    - "4 recompute payload hash (3a9d63ac28378116)"
+    - "5 recompute decision id (dec_e28092c4dc33b8f1)"
+    - "6 compare recomputed vs persisted (all match)"
+    - "7 verify table counts unchanged"
+  operations_not_performed:
+    - "no engine execution; no database writes"
+    - "no modifications to decisions, f_map, engine_runs"
+    - "no policy changes; no network access"
+render_spec:
+  canvas:
+    width: 900
+    height: 340
+    background: "#ffffff"
+  style:
+    stroke: "#000000"
+    fill: "#ffffff"
+    stroke_width: 1
+    font_family: Arial
+    font_size: 12
+  table:
+    x: 20
+    y: 20
+    width: 860
+    height: 300
+    split_x: 440
+    header_y: 44
