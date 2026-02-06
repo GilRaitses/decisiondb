@@ -4,14 +4,7 @@ DecisionDB is implemented as a Python package backed by SQLite. It manages five 
 
 \subsection{Content Addressing}
 
-All identifiers are computed deterministically from content. Given an entity's payload (a Python dictionary), DecisionDB:
-\begin{enumerate}
-\item serializes it to canonical JSON (keys sorted alphabetically, no whitespace, arrays in declaration order, floats serialized as strings, explicit version fields included);
-\item computes the SHA-256 digest of the UTF-8 encoding;
-\item truncates to the first 16 hexadecimal characters;
-\item prepends a type-specific prefix (\texttt{snap\_}, \texttt{repr\_}, \texttt{run\_}, \texttt{dec\_}, \texttt{pol\_}, \texttt{exp\_}).
-\end{enumerate}
-Identical content always produces identical identifiers, regardless of when or where the computation occurs.
+All identifiers are computed deterministically from content. Given an entity's payload (a Python dictionary), DecisionDB serializes it to canonical JSON (keys sorted alphabetically, no whitespace, arrays in declaration order, floats as strings, explicit version fields), computes the SHA-256 digest of the UTF-8 encoding, truncates to the first 16 hexadecimal characters, and prepends a type-specific prefix (\texttt{snap\_}, \texttt{repr\_}, \texttt{run\_}, \texttt{dec\_}, \texttt{pol\_}, \texttt{exp\_}). Identical content always produces identical identifiers, regardless of when or where the computation occurs.
 
 \subsection{Schema}
 
@@ -33,22 +26,8 @@ All writes are append-only, scoped by experiment identifier, and executed within
 
 \subsection{Equivalence Policies}
 
-An equivalence policy defines how raw engine output is reduced to a decision identity. Each policy specifies:
-\begin{itemize}
-\item a \textbf{hash source}: which field of the raw output carries the decision-relevant content (e.g., \texttt{route.nodes});
-\item a \textbf{canonicalization rule}: how to serialize the extracted content (e.g., \texttt{json\_sorted\_keys\_utf8});
-\item a \textbf{match rule}: how to determine identity (e.g., \texttt{sha256\_equality}).
-\end{itemize}
-The policy itself is content-addressed (prefix \texttt{pol\_}), so any change to the policy definition produces a new policy identifier and new decision identifiers downstream.
+An equivalence policy defines how raw engine output is reduced to a decision identity. Each policy specifies a \emph{hash source} (which field of the raw output carries decision-relevant content, e.g., \texttt{route.nodes}), a \emph{canonicalization rule} (how to serialize the extracted content, e.g., \texttt{json\_sorted\_keys\_utf8}), and a \emph{match rule} (how to determine identity, e.g., \texttt{sha256\_equality}). The policy itself is content-addressed (prefix \texttt{pol\_}), so any change to the policy definition produces a new policy identifier and new decision identifiers downstream.
 
 \subsection{Replay Verification}
 
-Replay verification checks that persisted decision identifiers are deterministically recoverable from stored artifacts. Given a persisted decision record, the verifier:
-\begin{enumerate}
-\item loads the raw engine output from its stored URI;
-\item recomputes the equivalence policy identifier from the stored policy specification;
-\item extracts the decision payload using the policy;
-\item recomputes the payload hash and decision identifier;
-\item compares all recomputed values against the persisted values.
-\end{enumerate}
-Replay is read-only: it writes no new rows and modifies no existing state. A replay pass confirms end-to-end integrity of the content-addressing chain from raw output through policy application to decision identity.
+Replay verification checks that persisted decision identifiers are deterministically recoverable from stored artifacts. Given a persisted decision record, the verifier loads the raw engine output from its stored URI, recomputes the equivalence policy identifier from the stored policy specification, extracts the decision payload using the policy, recomputes the payload hash and decision identifier, and compares all recomputed values against the persisted values. Replay is read-only: it writes no new rows and modifies no existing state. A replay pass confirms end-to-end integrity of the content-addressing chain from raw output through policy application to decision identity.

@@ -6,12 +6,7 @@ We demonstrate the framework on a graph routing problem. The goal is not to eval
 
 \textbf{Snapshot.} We fix a directed graph with node set $V$ ($|V| = 564$), edge set $E$, and immutable edge attributes including baseline costs derived from geographic distance and a normalized stress metric. The snapshot is content-addressed and frozen before any engine execution. We fix a single origin-destination query: start node 85, end node 50.
 
-\textbf{Representation family.} Each representation encodes the graph's edge costs as a deterministic function of the frozen edge attributes. Two representation parameters control the cost surface:
-\begin{itemize}
-\item \texttt{neighbor\_weight}: weight applied to a neighbor-based cost component (tested at 0.5 and 1.0);
-\item \texttt{second\_order\_weight}: weight applied to a second-order cost component (tested at 0.25 and 0.5).
-\end{itemize}
-Each sweep varies one parameter while holding the other fixed, producing two representation variants per sweep and four engine evaluations total.
+\textbf{Representation family.} Each representation encodes the graph's edge costs as a deterministic function of the frozen edge attributes. Two representation parameters control the cost surface: \texttt{neighbor\_weight}, a weight applied to a neighbor-based cost component (tested at 0.5 and 1.0), and \texttt{second\_order\_weight}, a weight applied to a second-order cost component (tested at 0.25 and 0.5). Each sweep varies one parameter while holding the other fixed, producing two representation variants per sweep and four engine evaluations total.
 
 \textbf{Engine.} A fixed shortest-path solver (Dijkstra's algorithm~\cite{dijkstra1959note}), with configuration and version held constant across all runs. Execution times ranged from 0.5 to 1.4 milliseconds.
 
@@ -65,13 +60,15 @@ Table~\ref{tab:sweep-summary} summarizes the sweep results.
 \caption{Summary of representational sweep results.}
 \label{tab:sweep-summary}
 \smallskip
-\begin{tabular}{@{}llccl@{}}
+\tablestyle
+\rowcolors{2}{tableShade}{white}
+\begin{tabular}{@{\hskip 8pt}l l c c l@{\hskip 8pt}}
 \toprule
-Sweep parameter & Values & Decision & Nodes & Boundary? \\
+\rowcolor{white}
+\textbf{Sweep parameter} & \textbf{Value} & \textbf{Decision} & \textbf{Nodes} & \textbf{Boundary?} \\
 \midrule
 \texttt{neighbor\_weight} & 0.5 & A & 16 & \\
 \texttt{neighbor\_weight} & 1.0 & A & 16 & No \\
-\midrule
 \texttt{second\_order\_weight} & 0.25 & A & 16 & \\
 \texttt{second\_order\_weight} & 0.5 & B & 14 & Yes \\
 \bottomrule
@@ -89,9 +86,12 @@ All recomputed values match the persisted values exactly:
 \caption{Replay verification results for decision \texttt{dec\_e280\ldots}.}
 \label{tab:replay}
 \smallskip
-\begin{tabular}{@{}lll@{}}
+\tablestyle
+\rowcolors{2}{tableShade}{white}
+\begin{tabular}{@{\hskip 8pt}l l l@{\hskip 8pt}}
 \toprule
-Field & Persisted & Recomputed \\
+\rowcolor{white}
+\textbf{Field} & \textbf{Persisted} & \textbf{Recomputed} \\
 \midrule
 Policy ID & \texttt{pol\_d8da3e00e9584eb1} & \texttt{pol\_d8da3e00e9584eb1} \\
 Payload hash & \texttt{3a9d63ac28378116} & \texttt{3a9d63ac28378116} \\
