@@ -20,7 +20,7 @@ We demonstrate the framework on a graph routing problem. The goal is not to eval
 \noindent\textit{Decision A:} $[85, 176, 463, 14, 404, 76, 406, 407, 223, 200, 311, 310, 314, 322, 323, 50]$ \\ (16 nodes, decision identifier \texttt{dec\_e280\ldots}).
 
 \smallskip
-\noindent Doubling the neighbor weight from 0.5 to 1.0 does not change route identity. This parameter range constitutes a persistence region under the tested policy.
+\noindent Doubling the neighbor weight from 0.5 to 1.0 does not change route identity. This parameter range constitutes a persistence region under the tested policy (Figure~\ref{fig:persistence}).
 
 \textbf{Second-order weight sweep} (0.25 $\to$ 0.5, neighbor weight fixed at 0.5). The two representations yield different routes:
 
@@ -30,7 +30,7 @@ We demonstrate the framework on a graph routing problem. The goal is not to eval
 \noindent\textit{Decision B} (second-order weight = 0.5): $[85, 411, 419, 422, 332, 204, 500, 369, 79, 402, 473, 502, 501, 50]$ \\ (14 nodes, decision identifier \texttt{dec\_c2dd\ldots}).
 
 \smallskip
-\noindent The route changes entirely: a different sequence of 14 nodes instead of 16, traversing a different region of the graph. The boundary between these two decision identities lies between second-order weight values 0.25 and 0.5. This is a fracture: a small parameter change induces a qualitative change in the discrete outcome.
+\noindent The route changes entirely: a different sequence of 14 nodes instead of 16, traversing a different region of the graph. The boundary between these two decision identities lies between second-order weight values 0.25 and 0.5 (Figure~\ref{fig:boundary}). This is a fracture: a small parameter change induces a qualitative change in the discrete outcome.
 
 \begin{figure}[t]
   \centering
@@ -77,9 +77,9 @@ Table~\ref{tab:sweep-summary} summarizes the sweep results.
 
 \subsection{Replay Verification}
 
-We verify replay determinism for decision \texttt{dec\_e28092c4dc33b8f1}, produced by engine run \texttt{run\_36a0c96b084b2ffd}. The replay procedure loads the stored raw output (a 29-node route with 532 nodes explored), recomputes the equivalence policy identifier, extracts the decision payload, and recomputes both the payload hash and the decision identifier.
+We verify replay determinism for a decision produced by the sweep. The replay procedure loads the stored raw output from its persisted URI, recomputes the equivalence policy identifier, extracts the decision payload, and recomputes both the payload hash and the decision identifier.
 
-All recomputed values match the persisted values exactly:
+All recomputed values match the persisted values exactly (Table~\ref{tab:replay}, Figure~\ref{fig:replay}):
 
 \begin{table}[ht]
 \centering
@@ -104,7 +104,45 @@ The replay writes no new rows and modifies no database state. Table counts befor
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{figures/figure5_replay_verification.pdf}
-  \caption{Replay verification log. Recomputed policy identifier, payload hash, and decision identifier match the persisted manifest. Database table counts remain unchanged, confirming read-only replay.}
+  \begin{tikzpicture}[
+    node distance=5mm and 8mm,
+    box/.style={draw, rounded corners, align=center, inner sep=5pt, text width=30mm, font=\small},
+    artifact/.style={box, fill=tableShade},
+    result/.style={box, fill=black!8, font=\small\sffamily},
+    arrow/.style={-Latex, thick},
+    eq/.style={font=\small\sffamily, text=black!60}
+  ]
+  % Left column: persisted
+  \node[font=\small\bfseries\sffamily] (plabel) {Persisted};
+  \node[artifact, below=6mm of plabel] (ppol) {\texttt{pol\_d8da\ldots}\\{\scriptsize policy ID}};
+  \node[artifact, below=of ppol] (phash) {\texttt{3a9d63ac\ldots}\\{\scriptsize payload hash}};
+  \node[artifact, below=of phash] (pdec) {\texttt{dec\_e280\ldots}\\{\scriptsize decision ID}};
+
+  % Right column: recomputed
+  \node[font=\small\bfseries\sffamily, right=22mm of plabel] (rlabel) {Recomputed};
+  \node[artifact, below=6mm of rlabel] (rpol) {\texttt{pol\_d8da\ldots}\\{\scriptsize policy ID}};
+  \node[artifact, below=of rpol] (rhash) {\texttt{3a9d63ac\ldots}\\{\scriptsize payload hash}};
+  \node[artifact, below=of rhash] (rdec) {\texttt{dec\_e280\ldots}\\{\scriptsize decision ID}};
+
+  % Equality checks
+  \draw[thick, black!40] (ppol.east) -- node[eq, above] {$=$} (rpol.west);
+  \draw[thick, black!40] (phash.east) -- node[eq, above] {$=$} (rhash.west);
+  \draw[thick, black!40] (pdec.east) -- node[eq, above] {$=$} (rdec.west);
+
+  % Source arrow
+  \node[box, left=12mm of ppol, text width=22mm] (raw) {Raw output\\{\scriptsize stored artifact}};
+  \draw[arrow] (raw.east) -- (ppol.west);
+
+  % Recompute arrow
+  \node[box, right=12mm of rpol, text width=22mm] (engine) {Recompute\\{\scriptsize from artifact}};
+  \draw[arrow] (engine.west) -- (rpol.east);
+
+  % Verdict
+  \node[result, below=10mm of $(pdec.south)!0.5!(rdec.south)$, text width=22mm, line width=0.8pt] (verdict) {\textbf{PASS}\\{\scriptsize 0 rows written}};
+  \draw[arrow] (pdec.south) |- (verdict.west);
+  \draw[arrow] (rdec.south) |- (verdict.east);
+
+  \end{tikzpicture}
+  \caption{Replay verification. Persisted identifiers (left) are compared against values recomputed from stored artifacts (right). All three fields match exactly. No rows are written and no database state is modified.}
   \label{fig:replay}
 \end{figure}

@@ -8,6 +8,6 @@ This paper introduces a diagnostic framework for making representational depende
 
 We describe DecisionDB, a system that implements this framework. DecisionDB logs snapshots, representations, engine runs, and decision identities using content-addressed identifiers and immutable artifacts. It supports representational sweeps (systematic variation of declared representation parameters), replay verification (deterministic recovery of decision identifiers from persisted artifacts), and post-hoc audit of the full provenance chain.
 
-We demonstrate the framework on a graph routing problem. Fixing a graph snapshot and a shortest-path engine, we sweep two representation parameters that control edge-cost construction. One parameter preserves route identity across its tested range; the other induces a discrete change in route identity at a specific threshold. Replay verification confirms that all persisted identifiers are deterministically recoverable.
+We demonstrate the framework on a graph routing problem. Fixing a graph snapshot and a shortest-path engine, we sweep two representation parameters that control edge-cost construction. One parameter preserves route identity across its tested range; the other induces a discrete change in route identity at a specific threshold. Replay verification confirms that persisted identifiers are deterministically recoverable.
 
 The contribution is not a model, a learning rule, or an optimization procedure. It is an infrastructure for observing what happens to discrete outcomes when representations change.
