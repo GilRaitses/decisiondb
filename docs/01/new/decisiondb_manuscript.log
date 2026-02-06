@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  6 FEB 2026 00:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  6 FEB 2026 00:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -784,34 +784,13 @@ m/n/10.95 502\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 501\OML/cmm/m/it/10.95 ;
 
 
 [5]
-<figures/figure2_primary_sweep.pdf, id=139, 526.96875pt x 135.50626pt>
-File: figures/figure2_primary_sweep.pdf Graphic file (type pdf)
-<use figures/figure2_primary_sweep.pdf>
-Package pdftex.def Info: figures/figure2_primary_sweep.pdf  used on input line 
-37.
-(pdftex.def)             Requested size: 469.75502pt x 120.80074pt.
-<figures/figure3_identity_persistence.pdf, id=140, 481.8pt x 120.45pt>
-File: figures/figure3_identity_persistence.pdf Graphic file (type pdf)
-<use figures/figure3_identity_persistence.pdf>
-Package pdftex.def Info: figures/figure3_identity_persistence.pdf  used on inpu
-t line 44.
-(pdftex.def)             Requested size: 469.75502pt x 117.44286pt.
-<figures/figure4_boundary_fracture.pdf, id=143, 481.8pt x 120.45pt>
-File: figures/figure4_boundary_fracture.pdf Graphic file (type pdf)
-<use figures/figure4_boundary_fracture.pdf>
-Package pdftex.def Info: figures/figure4_boundary_fracture.pdf  used on input l
-ine 51.
-(pdftex.def)             Requested size: 469.75502pt x 117.44286pt.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 88.
 ) (./sections/related_work.tex
 
-[6 <./figures/figure2_primary_sweep.pdf> <./figures/figure3_identity_persistenc
-e.pdf
+[6]
 
-pdfTeX warning: pdflatex (file ./figures/figure3_identity_persistence.pdf): PDF
- inclusion: multiple pdfs with page group included in a single page
->]
-
-[7 <./figures/figure4_boundary_fracture.pdf>]
+[7]
 
 [8]) (./sections/limitations.tex
 Overfull \hbox (18.19237pt too wide) in paragraph at lines 7--8
@@ -831,15 +810,19 @@ weight
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `decisiondb_manuscript.out' has not changed.
 (rerunfilecheck)             Checksum: 98F566F868BF5A21DD173F165794CADC;3292.
  ) 
 Here is how much of TeX's memory you used:
- 22075 strings out of 473190
- 409912 string characters out of 5715801
- 795421 words of memory out of 5000000
- 44872 multiletter control sequences out of 15000+600000
- 570442 words of font info for 81 fonts, out of 8000000 for 9000
+ 22119 strings out of 473190
+ 410120 string characters out of 5715801
+ 806233 words of memory out of 5000000
+ 44914 multiletter control sequences out of 15000+600000
+ 571215 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,10n,91p,1330b,842s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -852,14 +835,16 @@ ocal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
 al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/
 texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/t
 exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/tex
-live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/te
-xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
-live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texl
-ive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on decisiondb_manuscript.pdf (11 pages, 308669 bytes).
+live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texli
+ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texl
+ive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
+ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texliv
+e/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive
+/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on decisiondb_manuscript.pdf (11 pages, 254484 bytes).
 PDF statistics:
- 316 PDF objects out of 1000 (max. 8388607)
- 262 compressed objects within 3 object streams
+ 300 PDF objects out of 1000 (max. 8388607)
+ 251 compressed objects within 3 object streams
  67 named destinations out of 1000 (max. 500000)
- 196 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 181 words of extra memory for PDF output out of 10000 (max. 10000000)
 

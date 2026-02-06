@@ -1,0 +1,28 @@
+---
+description: Visual style rules for all figures, charts, and data visualizations
+globs: "**/*.{py,tex,tikz,svg,ipynb}"
+alwaysApply: false
+---
+
+# Visual Style Guide
+
+## 1. Color palette: Cinnamoroll tones
+Use soft pastels: light sky blue (#A8D8EA), baby pink (#FFB6C1), lavender (#C3B1E1), cream white (#FFF8E7), soft mint (#B5EAD7). Reserve warm coral (#F7A8A8) for boundaries/alerts. Avoid saturated primaries.
+
+## 2. Typography: Avenir Ultra Light
+Default to Avenir Ultra Light (or `\sffamily` with light weight in LaTeX). When Unicode characters would break Avenir, substitute only those specific glyphs with a visually similar fallback (e.g., Source Sans Pro, Nunito Light). Do not switch the entire label or caption to the fallback font.
+
+## 3. Legends must not mask data
+Legends sit outside the plot area. If space is tight, place them below or to the right. Never overlay a legend on data points or grid lines. The legend must not stretch or compress the graph's aspect ratio.
+
+## 4. Prefer 3D and high-granularity visualizations
+Use 3D surfaces, manifolds, contour maps, and rotating GIFs whenever the data supports it. Fine granularity over coarse sampling. Flat 2D scatter plots are acceptable only when the data is inherently 1D or categorical.
+
+## 5. Use lines and signal-strength encoding over bar charts
+For continuous or ordinal data, use line plots. Encode signal strength through line style: strong signals get solid lines; weak or lower-class driver signals get progressively dashed/dotted/brittle broken lines. Bar charts are a last resort for purely categorical counts.
+
+## 6. Annotation padding and overlap check
+Every text annotation inside a figure must be manually reviewed to confirm: (a) no overlap with shapes, edges, or data marks; (b) ample padding on all sides so the text reads comfortably without clashing with surrounding graphics. If overlap is detected, reposition the annotation or add a white background box with padding.
+
+## 7. Transparent backgrounds
+All figure backgrounds must be transparent (no opaque white fills behind the plot area). In LaTeX/TikZ, do not draw a filled background rectangle. In Python (matplotlib), use `savefig(..., transparent=True)`.

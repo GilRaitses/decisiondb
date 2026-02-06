@@ -17,22 +17,23 @@
 \@writefile{toc}{\contentsline {section}{\numberline {6}Empirical Demonstration}{5}{section.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Setup}{5}{subsection.6.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Results: Identity Persistence and Boundary Formation}{5}{subsection.6.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Primary representational sweep. Each column corresponds to a representation variant defined by its weight parameter setting. Decision identity (A or B) is assigned by the equivalence policy based on the route node sequence. The neighbor weight sweep (left) shows identity persistence; the second-order weight sweep (right) shows a boundary.}}{6}{figure.2}\protected@file@percent }
-\newlabel{fig:primary-sweep}{{2}{6}{Primary representational sweep. Each column corresponds to a representation variant defined by its weight parameter setting. Decision identity (A or B) is assigned by the equivalence policy based on the route node sequence. The neighbor weight sweep (left) shows identity persistence; the second-order weight sweep (right) shows a boundary}{figure.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Identity persistence regions derived from the sweep in Figure~\ref {fig:primary-sweep}. The neighbor weight parameter spans a single persistence region (Decision~A). The second-order weight parameter spans two regions (A and B) separated by a boundary between 0.25 and 0.5.}}{6}{figure.3}\protected@file@percent }
-\newlabel{fig:persistence}{{3}{6}{Identity persistence regions derived from the sweep in Figure~\ref {fig:primary-sweep}. The neighbor weight parameter spans a single persistence region (Decision~A). The second-order weight parameter spans two regions (A and B) separated by a boundary between 0.25 and 0.5}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Primary representational sweep. Each row is a representation variant. Decision identity (A or B) is assigned by the equivalence policy based on route node sequence. The neighbor weight sweep preserves identity~A; the second-order weight sweep shows a transition from A to B.}}{6}{figure.2}\protected@file@percent }
+\newlabel{fig:primary-sweep}{{2}{6}{Primary representational sweep. Each row is a representation variant. Decision identity (A or B) is assigned by the equivalence policy based on route node sequence. The neighbor weight sweep preserves identity~A; the second-order weight sweep shows a transition from A to B}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Identity persistence regions derived from the sweep in Figure~\ref {fig:primary-sweep}. The neighbor weight parameter spans a single persistence region (A). The second-order weight parameter spans two regions (A and B) separated by a boundary.}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:persistence}{{3}{6}{Identity persistence regions derived from the sweep in Figure~\ref {fig:primary-sweep}. The neighbor weight parameter spans a single persistence region (A). The second-order weight parameter spans two regions (A and B) separated by a boundary}{figure.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Replay Verification}{6}{subsection.6.3}\protected@file@percent }
 \citation{simonsohn2020specification}
 \citation{steegen2016increasing}
 \citation{gelman2013garden}
 \citation{patel2015assessment}
 \citation{saltelli2008global}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Boundary and fracture localization. The neighbor weight sweep shows no boundary (\texttt  {route\_changed = false}). The second-order weight sweep shows a boundary between 0.25 and 0.5 (\texttt  {route\_changed = true}, \texttt  {edge\_order\_changed = true}).}}{7}{figure.4}\protected@file@percent }
-\newlabel{fig:boundary}{{4}{7}{Boundary and fracture localization. The neighbor weight sweep shows no boundary (\texttt {route\_changed = false}). The second-order weight sweep shows a boundary between 0.25 and 0.5 (\texttt {route\_changed = true}, \texttt {edge\_order\_changed = true})}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Boundary and fracture localization. The neighbor weight sweep shows no boundary (\texttt  {route\_changed = false}). The second-order weight sweep shows a fracture between 0.25 and 0.5 where route identity changes entirely.}}{7}{figure.4}\protected@file@percent }
+\newlabel{fig:boundary}{{4}{7}{Boundary and fracture localization. The neighbor weight sweep shows no boundary (\texttt {route\_changed = false}). The second-order weight sweep shows a fracture between 0.25 and 0.5 where route identity changes entirely}{figure.4}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Summary of representational sweep results.}}{7}{table.1}\protected@file@percent }
 \newlabel{tab:sweep-summary}{{1}{7}{Summary of representational sweep results}{table.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Related Work}{7}{section.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Analytic Flexibility and Multiverse Methods}{7}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Sensitivity Analysis}{7}{subsection.7.2}\protected@file@percent }
 \citation{damour2022underspecification}
 \citation{henderson2018deep}
 \citation{bouthillier2021accounting}
@@ -41,7 +42,6 @@
 \newlabel{tab:replay}{{2}{8}{Replay verification results for decision \texttt {dec\_e280\ldots }}{table.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Replay verification. Persisted identifiers (left) are compared against values recomputed from stored artifacts (right). All three fields match exactly. No rows are written and no database state is modified.}}{8}{figure.5}\protected@file@percent }
 \newlabel{fig:replay}{{5}{8}{Replay verification. Persisted identifiers (left) are compared against values recomputed from stored artifacts (right). All three fields match exactly. No rows are written and no database state is modified}{figure.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Sensitivity Analysis}{8}{subsection.7.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Reproducibility in Machine Learning}{8}{subsection.7.3}\protected@file@percent }
 \citation{moreau2013prov}
 \citation{freire2012provenance}
@@ -59,9 +59,9 @@
 \bibcite{bouthillier2021accounting}{{2}{2021}{{Bouthillier et~al.}}{{Bouthillier, Laurent, and Vincent}}}
 \bibcite{damour2022underspecification}{{3}{2022}{{D'Amour et~al.}}{{D'Amour, Heller, Moldovan, Adlam, Alipanahi, Beutel, Chen, Deaton, Eisenstein, Hoffman, et~al.}}}
 \bibcite{dijkstra1959note}{{4}{1959}{{Dijkstra}}{{}}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{10}{section.9}\protected@file@percent }
 \bibcite{freire2012provenance}{{5}{2008}{{Freire et~al.}}{{Freire, Koop, Santos, and Silva}}}
 \bibcite{gelman2013garden}{{6}{2013}{{Gelman and Loken}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{10}{section.9}\protected@file@percent }
 \bibcite{gray1993transaction}{{7}{1993}{{Gray and Reuter}}{{}}}
 \bibcite{henderson2018deep}{{8}{2018}{{Henderson et~al.}}{{Henderson, Islam, Bachman, Pineau, Precup, and Meger}}}
 \bibcite{liskov1974programming}{{9}{1974}{{Liskov and Zilles}}{{}}}
