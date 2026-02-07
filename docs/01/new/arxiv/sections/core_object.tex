@@ -19,11 +19,11 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
     box/.style={draw=erdStroke, rounded corners=4pt, align=center, inner sep=6pt, minimum height=18mm, text width=27mm, font=\rmfamily, fill=erdHeader},
     arrow/.style={-{Latex[length=3.5mm, width=2.5mm]}, thick, erdStroke}
   ]
-  \node[box] (snap) at (0,0) {Snapshot $s$\\[2pt]{\footnotesize\color{black!50} sealed inputs}};
-  \node[box, text width=34mm] (rep) at (3.9,0) {Representation $r$\\[2pt]{\footnotesize\color{black!50} deterministic encoding}};
-  \node[box] (eng) at (7.7,0) {Engine $E$\\[2pt]{\footnotesize\color{black!50} fixed procedure}};
-  \node[box] (pol) at (11.3,0) {Policy $\pi$\\[2pt]{\footnotesize\color{black!50} decision identity $d$}};
-  \node[box, text width=50mm] (map) at (5.65,-2.8) {Decision map table\\[2pt]{\footnotesize\color{black!50} links $s$, $r$, $E$, $d$, $\pi$ by content hash}};
+  \node[box] (snap) at (0,0) {Snapshot $s$\\[2pt]{\footnotesize\color{black!70} sealed inputs}};
+  \node[box, text width=34mm] (rep) at (4.2,0) {Representation $r$\\[2pt]{\footnotesize\color{black!70} deterministic encoding}};
+  \node[box] (eng) at (8.2,0) {Engine $E$\\[2pt]{\footnotesize\color{black!70} fixed procedure}};
+  \node[box] (pol) at (12.0,0) {Policy $\pi$\\[2pt]{\footnotesize\color{black!70} decision identity $d$}};
+  \node[box, text width=50mm] (map) at (6.0,-2.8) {Decision map table\\[2pt]{\footnotesize\color{black!70} links $s$, $r$, $E$, $d$, $\pi$ by content hash}};
 
   \draw[arrow] (snap.east) -- (rep.west);
   \draw[arrow] (rep.east) -- (eng.west);
