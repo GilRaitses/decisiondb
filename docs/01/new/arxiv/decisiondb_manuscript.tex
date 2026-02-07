@@ -6,8 +6,12 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, calc}
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage[table]{xcolor}
+
+% Raggedright paragraph column type for tables (prevents ugly hyphenation)
+\newcolumntype{R}[1]{>{\raggedright\arraybackslash}p{#1}}
 \usepackage{hyperref}
 \usepackage[numbers]{natbib}
 
