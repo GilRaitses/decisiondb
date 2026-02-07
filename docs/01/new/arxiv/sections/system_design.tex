@@ -8,7 +8,7 @@ All identifiers are computed deterministically from content. Given an entity's p
 
 \subsection{Schema}
 
-The relational schema contains five core tables whose relationships are shown in Figure~\ref{fig:schema} and whose roles are summarized in Table~\ref{tab:schema}. Each table enforces content-addressed primary keys and foreign-key constraints that link the full provenance chain from snapshot through representation and engine execution to decision identity. All writes are append-only, scoped by experiment identifier, and executed within transactions. Inserts use an insert-or-ignore strategy for idempotency, so re-inserting the same content-addressed entity is a no-op. Each table stores additional metadata such as artifact manifests, URIs, hashes, and configuration records; only the structural fields are shown in the diagram.
+The relational schema contains five core tables whose relationships and roles are shown in Figure~\ref{fig:schema}. Each table enforces content-addressed primary keys and foreign-key constraints that link the full provenance chain from snapshot through representation and engine execution to decision identity. All writes are append-only, scoped by experiment identifier, and executed within transactions. Inserts use an insert-or-ignore strategy for idempotency, so re-inserting the same content-addressed entity is a no-op. Each table stores additional metadata such as artifact manifests, URIs, hashes, and configuration records; only the structural fields are shown in the diagram.
 
 \begin{figure}[t]
   \centering
@@ -53,30 +53,27 @@ The relational schema contains five core tables whose relationships are shown in
   \draw[fk] (fmap.east) -- node[fklbl, above] {FK} (dec.west);
 
   \end{tikzpicture}
-  \caption{DecisionDB relational schema. Five tables form a content-addressed provenance chain. Foreign-key relationships link representations to their parent snapshot, engine runs to the representation consumed, and the decision map table to representations, runs, and decision identities. Arrows indicate foreign-key direction.}
+
+  \bigskip
+
+  \tablestyle
+  \rowcolors{2}{tableShade}{white}
+  \begin{tabular}{@{\hskip 8pt}l l R{68mm}@{\hskip 8pt}}
+  \toprule
+  \rowcolor{white}
+  Table & Primary key & Role \\
+  \midrule
+  snapshots & snap\_* & Immutable frozen input state and its artifact manifest \\
+  representations & repr\_* & Deterministic encodings of snapshots under a declared parameterization \\
+  engine\_runs & run\_* & Execution records of the fixed engine on specific representations \\
+  decisions & dec\_* & Discrete decision identities extracted by an equivalence policy \\
+  f\_map & composite & Materialized decision-valued map linking repr\_*, run\_*, and dec\_* \\
+  \bottomrule
+  \end{tabular}
+
+  \caption{DecisionDB relational schema. Top: entity-relationship diagram showing the five tables and their foreign-key links. Bottom: each table's primary key prefix and role. The snapshots table stores immutable input state. The representations table stores deterministic encodings derived from snapshots. The engine\_runs table stores execution records. The decisions table stores discrete outcomes extracted by equivalence policies. The f\_map table materializes the decision-valued map as the primary query surface.}
   \label{fig:schema}
 \end{figure}
-
-\begin{table}[t]
-\centering
-\caption{Core entities and their roles in the DecisionDB schema.}
-\label{tab:schema}
-\smallskip
-\tablestyle
-\rowcolors{2}{tableShade}{white}
-\begin{tabular}{@{\hskip 8pt}l l p{68mm}@{\hskip 8pt}}
-\toprule
-\rowcolor{white}
-Table & Primary key & Role \\
-\midrule
-snapshots & snap\_* & Immutable frozen input state and its artifact manifest \\
-representations & repr\_* & Deterministic encodings of snapshots under a declared parameterization \\
-engine\_runs & run\_* & Execution records of the fixed engine on specific representations \\
-decisions & dec\_* & Discrete decision identities extracted by an equivalence policy \\
-f\_map & composite & Materialized decision-valued map linking repr\_*, run\_*, and dec\_* \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \subsection{Equivalence Policies}
 

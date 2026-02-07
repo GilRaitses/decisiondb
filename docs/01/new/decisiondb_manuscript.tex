@@ -23,8 +23,10 @@
 \definecolor{tableShade}{gray}{0.93}
 \newcommand{\tablestyle}{\avenirultralight\small\renewcommand{\arraystretch}{1.35}}
 
-% Use \avenirultralight in all TikZ node font= specifications
-% Use \tablestyle in all table environments
+% Prevent widows, orphans, and page breaks after hyphenated words
+\widowpenalty=10000
+\clubpenalty=10000
+\brokenpenalty=10000
 
 \title{Decision-Valued Maps: A Diagnostic Infrastructure\\for Representational Dependence}
 \author{Gil Raitses}

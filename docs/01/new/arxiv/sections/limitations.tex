@@ -4,7 +4,9 @@ The framework applies to systems whose outputs can be reduced to discrete identi
 
 All results assume a frozen snapshot and a fixed engine. Any change to the input data, model parameters, or execution logic constitutes a new analytical context. The framework does not track how decision maps evolve across snapshot or engine versions; each combination requires a separate analysis.
 
-The reported sweeps cover two representation parameters, neighbor weight at values 0.5 and 1.0 and second-order weight at values 0.25 and 0.5, applied to a single graph snapshot with a single origin-destination pair. The representation space is sampled at four points total. Unobserved regions of representation space remain unconstrained, and persistence regions and boundaries identified here may not generalize to finer parameter grids, different origin-destination pairs, or different graph topologies.
+The reported sweeps cover two representation parameters, neighbor weight at values 0.5 and 1.0 and second-order weight at values 0.25 and 0.5, applied to a single graph snapshot with a single origin-destination pair. The representation space is sampled at four points total, and unobserved regions remain unconstrained.
+
+Persistence regions and boundaries identified here may not generalize to finer parameter grids, different origin-destination pairs, or different graph topologies.
 
 The empirical demonstration uses graph routing. The framework is designed to be domain-agnostic, but it has not been validated on classification, resource allocation, or other pipeline types. Applying the framework to a new domain requires defining an appropriate equivalence policy, which involves domain-specific judgment about what constitutes ``the same outcome.''
 
