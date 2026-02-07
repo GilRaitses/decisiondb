@@ -1,0 +1,42 @@
+---
+description: Manuscript writing style rules for academic papers and LaTeX documents
+globs: "**/*.tex"
+alwaysApply: false
+---
+
+# Manuscript Writing Style
+
+## 1. No bold text inline
+Never use `\textbf{}` for inline paragraph headers or emphasis within running text. Section structure comes from `\section`, `\subsection`, `\subsubsection` only. If a paragraph needs a topic marker, integrate it into the sentence structure.
+
+## 2. No first person language
+No first person pronouns or verb constructions anywhere in the manuscript. No "we", "our", "us", "I", "my". Use passive voice, impersonal constructions, or the system/framework as the grammatical subject.
+
+- BAD: "We describe DecisionDB"
+- GOOD: "This paper describes DecisionDB"
+- BAD: "We observe that the boundary forms"
+- GOOD: "The boundary forms at..."
+
+## 3. No inline parentheses
+Parenthetical content must be integrated into the sentence as regular prose. The only acceptable use of parentheses is for citation keys and mathematical notation.
+
+- BAD: "continuous outputs (e.g., probability distributions)"
+- GOOD: "continuous outputs such as probability distributions"
+
+## 4. No inline colons in prose
+Colons are reserved for citations and mathematical notation only. Rephrase sentences to eliminate prose colons.
+
+- BAD: "The five core tables are:"
+- GOOD: "The schema contains five core tables."
+
+## 5. No inline monospace
+Never use `\texttt{}` in running text. Technical terms, parameter names, and identifiers in prose should use `\emph{}` or plain text. Monospace is acceptable only inside figures, tables, and display environments.
+
+## 6. No unicode right arrows in prose
+Unicode arrows and `$\to$` are reserved for equations and display math only. In running prose, write "to" or rephrase.
+
+## 7. No two-word sentences
+Every sentence must be substantive. Avoid fragment-style sentences that read like list headers.
+
+## 8. Prose over lists
+Prefer flowing prose paragraphs over enumerated or description lists. When sequential steps or categories must be presented, use a figure with an extensive caption and distribute the content between a few lines of section copy and the figure caption. Description lists and enumerations should be converted to either flowing prose or table figures.
