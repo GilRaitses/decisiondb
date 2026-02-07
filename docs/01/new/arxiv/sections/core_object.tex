@@ -8,29 +8,60 @@ where $\mathcal{R}$ denotes a family of representations over a fixed snapshot $s
 
 Three structural features of this map are observable through controlled variation of $\mathcal{R}$. Persistence regions are connected subsets of $\mathcal{R}$ over which $f$ is constant; within a persistence region, representational variation preserves the outcome. Boundaries are loci in $\mathcal{R}$ where $f$ changes value, separating two persistence regions with different decision identities. Fractures are boundaries where a small change in representation parameters induces a discrete identity change, indicating high sensitivity of the outcome to the representation.
 
-The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declared points in $\mathcal{R}$, storing the results as immutable artifacts, then making the resulting map queryable, replayable, auditable. Figure~\ref{fig:pipeline} illustrates this pipeline.
+The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declared points in $\mathcal{R}$, storing the results as immutable artifacts, then making the resulting map queryable, replayable, auditable. Figure~\ref{fig:pipeline} illustrates this protocol.
 
 \definecolor{erdHeader}{HTML}{e1d5e7}
 \definecolor{erdStroke}{HTML}{b5739d}
+\definecolor{arenaFill}{HTML}{f3eff7}
 
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[
-    box/.style={draw=erdStroke, rounded corners=4pt, align=center, inner sep=6pt, minimum height=18mm, text width=27mm, font=\rmfamily, fill=erdHeader},
-    arrow/.style={-{Latex[length=3.5mm, width=2.5mm]}, thick, erdStroke}
+    box/.style={draw=erdStroke, rounded corners=4pt, align=center, inner sep=5pt, minimum height=13mm, font=\rmfamily\footnotesize, fill=erdHeader},
+    smallbox/.style={draw=erdStroke, rounded corners=3pt, align=center, inner sep=4pt, minimum height=10mm, font=\rmfamily\scriptsize, fill=erdHeader!40},
+    idbox/.style={draw=erdStroke, rounded corners=3pt, align=center, inner sep=3pt, minimum height=8mm, font=\rmfamily\scriptsize},
+    arrow/.style={-{Latex[length=2.5mm, width=2mm]}, thick, erdStroke},
+    eqlbl/.style={font=\rmfamily\scriptsize, erdStroke},
+    arenalbl/.style={font=\rmfamily\scriptsize, text=black!40}
   ]
-  \node[box] (snap) at (0,0) {Snapshot $s$\\[2pt]{\footnotesize\color{black!70} sealed inputs}};
-  \node[box, text width=34mm] (rep) at (4.2,0) {Representation $r$\\[2pt]{\footnotesize\color{black!70} deterministic encoding}};
-  \node[box] (eng) at (8.2,0) {Engine $E$\\[2pt]{\footnotesize\color{black!70} fixed procedure}};
-  \node[box] (pol) at (12.0,0) {Policy $\pi$\\[2pt]{\footnotesize\color{black!70} decision identity $d$}};
-  \node[box, text width=50mm] (map) at (6.0,-2.8) {Decision map table\\[2pt]{\footnotesize\color{black!70} links $s$, $r$, $E$, $d$, $\pi$ by content hash}};
 
-  \draw[arrow] (snap.east) -- (rep.west);
-  \draw[arrow] (rep.east) -- (eng.west);
-  \draw[arrow] (eng.east) -- (pol.west);
-  \draw[arrow] (pol.south) -- ++(0,-0.55) -| ([xshift=10mm]map.north);
-  \draw[arrow] (snap.south) -- ++(0,-0.55) -| ([xshift=-10mm]map.north);
+  % Arena enclosure
+  \draw[erdStroke!40, rounded corners=6pt, fill=arenaFill] (-0.8, 1.0) rectangle (4.6, -0.7);
+  \node[arenalbl, anchor=north west] at (-0.6, 0.9) {arena (invariant)};
+
+  % Arena components inside the enclosure
+  \node[box, text width=20mm] (snap) at (0.6, 0.2) {Snapshot $s$};
+  \node[box, text width=20mm] (eng) at (3.4, 0.2) {Engine $E$};
+
+  % Representation family (parallel, outside arena, feeding into engine)
+  \node[smallbox, text width=22mm] (r1) at (7.0, 1.6) {$r_1$};
+  \node[smallbox, text width=22mm] (r2) at (7.0, 0.2) {$r_2$};
+  \node[smallbox, text width=22mm] (r3) at (7.0, -1.2) {$r_3$};
+  \node[arenalbl, anchor=south] at (7.0, 2.2) {representation family};
+
+  % Arrows from arena engine to each representation evaluation
+  \draw[arrow] (eng.east) -- ++(0.4,0) |- (r1.west);
+  \draw[arrow] (eng.east) -- (r2.west);
+  \draw[arrow] (eng.east) -- ++(0.4,0) |- (r3.west);
+
+  % Decision identifiers (output)
+  \node[idbox, fill=blue!12] (d1) at (10.2, 1.6) {$d_A$};
+  \node[idbox, fill=blue!12] (d2) at (10.2, 0.2) {$d_A$};
+  \node[idbox, fill=orange!18] (d3) at (10.2, -1.2) {$d_B$};
+
+  \draw[arrow] (r1.east) -- (d1.west);
+  \draw[arrow] (r2.east) -- (d2.west);
+  \draw[arrow] (r3.east) -- (d3.west);
+
+  % Equivalence bracket for persistence region
+  \draw[erdStroke!60, thick, decorate, decoration={brace, amplitude=4pt, mirror}] (10.8, 1.9) -- (10.8, -0.1);
+  \node[arenalbl, anchor=west] at (11.1, 0.9) {persistence};
+
+  % Boundary marker
+  \draw[red!60, thick, dashed] (9.4, -0.5) -- (11.0, -0.5);
+  \node[font=\rmfamily\scriptsize, text=red!50, anchor=west] at (11.1, -0.5) {boundary};
+
   \end{tikzpicture}
-  \caption{Decision-valued map construction under a single arena. A data snapshot, computational engine and equivalence policy define an evaluation context that remains invariant. Within this context, multiple representations of the same snapshot are evaluated independently, producing discrete decision identities that are logged as immutable, content-addressed artifacts. The resulting map makes explicit which representational variations preserve decision identity (persistence regions) and where representational change alone induces a different outcome (boundaries), providing the substrate for replay verification and reuse admissibility analysis.}
+  \caption{Evaluation protocol for a decision-valued map. A single arena, defined by a data snapshot, a query and a computational engine, remains invariant throughout evaluation. A family of alternative representations of the same snapshot is varied within this arena. Each representation is passed through the same engine to produce a discrete decision identifier. Identical identifiers indicate persistence of decision identity across representational change, while a differing identifier marks a boundary where representational variation alone alters the outcome.}
   \label{fig:pipeline}
 \end{figure}
