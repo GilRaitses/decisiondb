@@ -6,25 +6,27 @@ alwaysApply: false
 
 # No Triadic Serial Comma Operator
 
-When three clauses or three items form a triad joined by ", and" before the final element, rephrase the third element using a different connector. The ", and" operator in a triad creates a rhythmic stall. Two-item conjunctions ("A and B") are unaffected by this rule.
+When three clauses or three items form a triad joined by ", and" (comma followed by "and") before the final element, rephrase the third element using a different connector. The ", and" pattern in a triad creates a rhythmic stall.
 
-## Three-clause triads
+## What is banned
+
+The specific pattern: A, B, and C. The comma before "and" in a three-item list.
 
 - BAD: "it loads the output, recomputes the hash, and checks the values"
-- GOOD: "it loads the output, recomputes the hash, then checks the values"
-- GOOD: "it loads the output and recomputes the hash before checking the values"
-
-## Three-item noun triads
-
 - BAD: "snapshots, representations, and decisions"
+
+## What is allowed
+
+A normal "and" joining the last two items WITHOUT a preceding comma is standard grammar and required:
+
+- GOOD: "a snapshot, an engine and a query"
+- GOOD: "it loads the output, recomputes the hash, then checks the values"
 - GOOD: "snapshots, representations, decisions"
-- GOOD: "snapshots, representations, as well as decisions"
-- GOOD: "snapshots and representations alongside decisions"
 
-## Replacement connectors for the third element
+Two-item conjunctions are always fine:
 
-Use whichever fits the sentence logic: then, before, so as to, thereby, alongside, as well as, or simply drop the conjunction entirely.
+- GOOD: "content-addressed identifiers and immutable artifacts"
 
-## Not affected
+## Replacement connectors for the third element in triads
 
-Two-item conjunctions are normal and stay as-is: "content-addressed identifiers and immutable artifacts" is fine.
+Use whichever fits: then, before, so as to, thereby, alongside, as well as, or drop the conjunction entirely and let the comma-separated list stand without a final connector.
