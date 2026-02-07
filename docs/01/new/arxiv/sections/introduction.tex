@@ -2,12 +2,12 @@
 
 Analytical pipelines produce discrete outcomes that depend on how their inputs are represented. The same data, processed through the same computational engine under the same query, can yield different outcomes when the internal representation changes. Some representational changes leave the outcome intact; others alter it entirely.
 
-This dependence is structural, arising from encoding choices such as which features are weighted, which aggregation rules are applied, which kernels are selected. In current practice, a pipeline runs under one representation, a result is reported, the sensitivity of that result to representational alternatives remains invisible.
+This dependence arises from encoding choices such as which features are weighted, which aggregation rules are applied, which kernels are selected, because the outcome varies under representational change even when the engine and snapshot remain invariant. In current practice, a pipeline runs under one representation, a result is reported, the sensitivity of that result to representational alternatives remains invisible.
 
 A \emph{decision-valued map} records which representations preserve the outcome and which change it, associating each member of a representation family with the discrete result the engine produces. By materializing this map across controlled representational variation, persistence regions where the outcome holds steady and boundaries where it changes become directly observable.
 
-DecisionDB is the system that implements this protocol. It logs snapshots, representations, engine runs and decision identities using identifiers computed from content and artifacts stored in write-once form. It supports representational sweeps through systematic variation of declared representation parameters, replay verification through deterministic recovery of decision identifiers from persisted artifacts and post-hoc audit of the full provenance chain.
+DecisionDB implements this protocol by logging every stage of the evaluation chain as a content-addressed artifact. It logs snapshots, representations, engine runs and decision identities using identifiers computed from content and artifacts stored in write-once form. It supports representational sweeps through systematic variation of declared representation parameters, replay verification through deterministic recovery of decision identifiers from persisted artifacts and post-hoc audit of the full provenance chain.
 
 A graph routing problem provides the empirical setting. Holding a graph snapshot and a shortest-path engine constant, two representation parameters that control edge-cost construction are swept. One parameter preserves decision identity across its tested range; the other induces a discrete identity change at a specific threshold. Replay verification recovers all persisted identifiers exactly.
 
-The contribution is an infrastructure for observing what happens to discrete outcomes when representations change.
+The contribution is an infrastructure that produces a queryable, replayable record of how discrete outcomes depend on representational choice.

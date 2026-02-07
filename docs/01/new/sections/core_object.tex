@@ -31,6 +31,6 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
   \draw[arrow] (pol.south) -- ++(0,-0.55) -| ([xshift=10mm]map.north);
   \draw[arrow] (snap.south) -- ++(0,-0.55) -| ([xshift=-10mm]map.north);
   \end{tikzpicture}
-  \caption{Decision-valued mapping pipeline. A snapshot is encoded into a representation, consumed by a fixed engine, then reduced to a discrete decision identity via an equivalence policy. The decision map table materializes these links using content-addressed identifiers. Each stage is immutable and content-addressed, so the full provenance chain from raw input to discrete outcome is recoverable at any later time.}
+  \caption{Decision-valued map construction under a single arena. A data snapshot, computational engine and equivalence policy define an evaluation context that remains invariant. Within this context, multiple representations of the same snapshot are evaluated independently, producing discrete decision identities that are logged as immutable, content-addressed artifacts. The resulting map makes explicit which representational variations preserve decision identity (persistence regions) and where representational change alone induces a different outcome (boundaries), providing the substrate for replay verification and reuse admissibility analysis.}
   \label{fig:pipeline}
 \end{figure}

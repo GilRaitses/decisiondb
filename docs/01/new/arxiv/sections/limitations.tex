@@ -10,6 +10,6 @@ Persistence regions and boundaries identified here may not generalize to finer p
 
 The empirical demonstration uses graph routing. The approach is designed to be domain-agnostic, but it has not been validated on classification, resource allocation, or other pipeline types. Applying decision-valued mapping to a new domain requires defining an appropriate equivalence policy, which involves domain-specific judgment about what constitutes ``the same outcome.''
 
-Observing that a boundary exists between two parameter values does not explain why it exists. The framework is diagnostic, not explanatory. It identifies where decision identity changes but does not attribute the change to any specific mechanism within the engine or the representation construction.
+Observing that a boundary exists between two parameter values does not explain why it exists. The framework identifies where decision identity changes under representational variation but does not attribute the change to any specific mechanism within the engine or the representation construction.
 
 The current implementation uses SQLite and has been tested with single-digit representation families. Scaling to large parameter grids of hundreds or thousands of representations would require evaluation of storage, query performance, sweep orchestration, none of which has been performed.
