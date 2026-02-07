@@ -2,9 +2,9 @@
 
 Analytical pipelines produce discrete outcomes that depend on how their inputs are represented. The same data, processed through the same computational engine under the same query, can yield different outcomes when the internal representation changes. Some representational changes leave the outcome intact; others alter it entirely.
 
-This dependence arises from encoding choices such as which features are weighted, which aggregation rules are applied, which kernels are selected, because the outcome varies under representational change even when the engine and snapshot remain invariant. In current practice, a pipeline runs under one representation, a result is reported, the sensitivity of that result to representational alternatives remains invisible.
+In current practice, a pipeline runs under one representation, a result is reported, the sensitivity of that result to representational alternatives remains invisible. No recorded evidence distinguishes decisions that can be reused under representational change from those requiring renewed justification.
 
-A \emph{decision-valued map} records which representations preserve the outcome and which change it, associating each member of a representation family with the discrete result the engine produces. By materializing this map across controlled representational variation, persistence regions where the outcome holds steady and boundaries where it changes become directly observable.
+A \emph{decision-valued map} records which representations preserve the outcome and which change it, associating each member of a representation family with the discrete result the engine produces. Figure~\ref{fig:pipeline} summarizes the evaluation protocol used to construct such a map by varying representations within a single arena.
 
 DecisionDB implements this protocol by logging every stage of the evaluation chain as a content-addressed artifact stored in write-once form. The system supports representational sweeps through systematic variation of declared representation parameters, replay verification through deterministic recovery of decision identifiers from persisted artifacts and post-hoc audit of the full provenance chain.
 
