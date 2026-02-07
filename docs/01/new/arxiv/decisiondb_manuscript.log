@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  7 FEB 2026 00:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  7 FEB 2026 03:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -777,24 +777,24 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [2]) (./sections/system_design.tex
 
 [3]
-<figures/figure2_schema.pdf, id=121, 614.295pt x 289.08pt>
+<figures/figure2_schema.pdf, id=121, 478.03593pt x 159.59625pt>
 File: figures/figure2_schema.pdf Graphic file (type pdf)
 <use figures/figure2_schema.pdf>
 Package pdftex.def Info: figures/figure2_schema.pdf  used on input line 15.
-(pdftex.def)             Requested size: 469.75502pt x 221.06166pt.
+(pdftex.def)             Requested size: 446.26582pt x 148.99037pt.
+)
 
+[4 <./figures/figure2_schema.pdf>] (./sections/empirical.tex
 
-[4 <./figures/figure2_schema.pdf>]) (./sections/empirical.tex
+[5]
 
-[5]) (./sections/related_work.tex
+[6]) (./sections/related_work.tex
 
-[6]
+[7]) (./sections/limitations.tex
 
-[7])
+[8]) (./sections/conclusion.tex
 
-[8] (./sections/limitations.tex
-
-[9]) (./sections/conclusion.tex) (./decisiondb_manuscript.bbl
+[9]) (./decisiondb_manuscript.bbl
 
 [10])
 
@@ -807,13 +807,13 @@ Package rerunfilecheck Info: File `decisiondb_manuscript.out' has not changed.
 (rerunfilecheck)             Checksum: 7EB73EE7A2283D5CDC1DE6F65B21529F;3052.
  ) 
 Here is how much of TeX's memory you used:
- 23348 strings out of 473190
- 434414 string characters out of 5715801
- 820948 words of memory out of 5000000
- 46147 multiletter control sequences out of 15000+600000
+ 23353 strings out of 473190
+ 434486 string characters out of 5715801
+ 820923 words of memory out of 5000000
+ 46152 multiletter control sequences out of 15000+600000
  569810 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,91p,1341b,884s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,12n,91p,1341b,889s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
@@ -826,10 +826,10 @@ l/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/
 texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/te
 xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on decisiondb_manuscript.pdf (11 pages, 226392 bytes).
+Output written on decisiondb_manuscript.pdf (11 pages, 239243 bytes).
 PDF statistics:
- 292 PDF objects out of 1000 (max. 8388607)
- 245 compressed objects within 3 object streams
+ 337 PDF objects out of 1000 (max. 8388607)
+ 266 compressed objects within 3 object streams
  60 named destinations out of 1000 (max. 500000)
  186 words of extra memory for PDF output out of 10000 (max. 10000000)
 

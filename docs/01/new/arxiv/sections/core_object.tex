@@ -10,12 +10,15 @@ Three structural features of this map are observable through controlled variatio
 
 The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declared points in $\mathcal{R}$, storing the results as immutable artifacts, then making the resulting map queryable, replayable, auditable. Figure~\ref{fig:pipeline} illustrates this pipeline.
 
+\definecolor{erdHeader}{HTML}{e1d5e7}
+\definecolor{erdStroke}{HTML}{b5739d}
+
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[
     node distance=10mm,
-    box/.style={draw, rounded corners=4pt, align=center, inner sep=6pt, minimum height=14mm, text width=27mm, font=\sffamily\small, fill=blue!6},
-    arrow/.style={-{Latex[length=3.5mm, width=2.5mm]}, thick, black!60}
+    box/.style={draw=erdStroke, rounded corners=4pt, align=center, inner sep=6pt, minimum height=14mm, text width=27mm, font=\sffamily\small, fill=erdHeader},
+    arrow/.style={-{Latex[length=3.5mm, width=2.5mm]}, thick, erdStroke}
   ]
   \node[box] (snap) {Snapshot $s$\\[2pt]{\scriptsize\color{black!50} frozen inputs}};
   \node[box, right=of snap] (rep) {Representation $r$\\[2pt]{\scriptsize\color{black!50} deterministic encoding}};
@@ -26,8 +29,8 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
   \draw[arrow] (snap) -- (rep);
   \draw[arrow] (rep) -- (eng);
   \draw[arrow] (eng) -- (pol);
-  \draw[arrow] (pol.south) -- ++(0,-0.5) -| (map.east);
-  \draw[arrow] (snap.south) -- ++(0,-0.8) -| (map.west);
+  \draw[arrow] (pol.south) -- ++(0,-0.5) -| ([xshift=10mm]map.north);
+  \draw[arrow] (snap.south) -- ++(0,-0.8) -| ([xshift=-10mm]map.north);
   \end{tikzpicture}
   \caption{Decision-valued mapping pipeline. A frozen snapshot is encoded into a representation, consumed by a fixed engine, then reduced to a discrete decision identity via an equivalence policy. The decision map table materializes these links using content-addressed identifiers. Each stage is immutable and content-addressed, so the full provenance chain from raw input to discrete outcome is recoverable at any later time.}
   \label{fig:pipeline}

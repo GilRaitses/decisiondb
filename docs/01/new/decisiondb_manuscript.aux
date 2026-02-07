@@ -25,6 +25,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Setup}{5}{subsection.6.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Representational sweep results.}}{6}{table.caption.5}\protected@file@percent }
 \newlabel{tab:sweep-summary}{{3}{6}{Representational sweep results}{table.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Identity persistence and fracture structure for the two representation parameters. The neighbor weight parameter spans a single persistence region in which both tested values produce Decision~A, indicating route identity is stable across this range. The second-order weight parameter spans two regions separated by a fracture, where route identity changes from Decision~A to Decision~B between the values 0.25 and 0.5. The exact threshold is not resolved by this two-point sample.}}{6}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:persistence-fracture}{{3}{6}{Identity persistence and fracture structure for the two representation parameters. The neighbor weight parameter spans a single persistence region in which both tested values produce Decision~A, indicating route identity is stable across this range. The second-order weight parameter spans two regions separated by a fracture, where route identity changes from Decision~A to Decision~B between the values 0.25 and 0.5. The exact threshold is not resolved by this two-point sample}{figure.caption.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Results}{6}{subsection.6.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Replay Verification}{6}{subsection.6.3}\protected@file@percent }
 \citation{simonsohn2020specification}
@@ -32,10 +34,10 @@
 \citation{gelman2013garden}
 \citation{patel2015assessment}
 \citation{saltelli2008global}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Identity persistence and fracture structure for the two representation parameters. The neighbor weight parameter spans a single persistence region in which both tested values produce Decision~A, indicating route identity is stable across this range. The second-order weight parameter spans two regions separated by a fracture, where route identity changes from Decision~A to Decision~B between the values 0.25 and 0.5. The exact threshold is not resolved by this two-point sample.}}{7}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:persistence-fracture}{{3}{7}{Identity persistence and fracture structure for the two representation parameters. The neighbor weight parameter spans a single persistence region in which both tested values produce Decision~A, indicating route identity is stable across this range. The second-order weight parameter spans two regions separated by a fracture, where route identity changes from Decision~A to Decision~B between the values 0.25 and 0.5. The exact threshold is not resolved by this two-point sample}{figure.caption.6}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Replay verification results.}}{7}{table.caption.7}\protected@file@percent }
 \newlabel{tab:replay}{{4}{7}{Replay verification results}{table.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain.}}{7}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:replay}{{4}{7}{Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain}{figure.caption.8}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Related Work}{7}{section.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Analytic Flexibility and Multiverse Methods}{7}{subsection.7.1}\protected@file@percent }
 \citation{damour2022underspecification}
@@ -47,16 +49,14 @@
 \citation{zaharia2018accelerating}
 \citation{amstutz2016common}
 \citation{zaharia2012resilient}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain.}}{8}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:replay}{{4}{8}{Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain}{figure.caption.8}{}}
+\citation{liskov1974programming}
+\citation{gray1993transaction}
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Sensitivity Analysis}{8}{subsection.7.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Reproducibility in Machine Learning}{8}{subsection.7.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Provenance and Workflow Systems}{8}{subsection.7.4}\protected@file@percent }
-\citation{liskov1974programming}
-\citation{gray1993transaction}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Infrastructural Precedents}{8}{subsection.7.5}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Summary comparison between decision-valued mapping and related approaches.}}{9}{table.caption.9}\protected@file@percent }
 \newlabel{tab:comparison}{{5}{9}{Summary comparison between decision-valued mapping and related approaches}{table.caption.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Infrastructural Precedents}{9}{subsection.7.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {8}Limitations}{9}{section.8}\protected@file@percent }
 \bibstyle{plainnat}
 \bibdata{bibliography}
@@ -65,10 +65,10 @@
 \bibcite{damour2022underspecification}{{3}{2022}{{D'Amour et~al.}}{{D'Amour, Heller, Moldovan, Adlam, Alipanahi, Beutel, Chen, Deaton, Eisenstein, Hoffman, et~al.}}}
 \bibcite{dijkstra1959note}{{4}{1959}{{Dijkstra}}{{}}}
 \bibcite{freire2012provenance}{{5}{2008}{{Freire et~al.}}{{Freire, Koop, Santos, and Silva}}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{10}{section.9}\protected@file@percent }
 \bibcite{gelman2013garden}{{6}{2013}{{Gelman and Loken}}{{}}}
 \bibcite{gray1993transaction}{{7}{1993}{{Gray and Reuter}}{{}}}
 \bibcite{henderson2018deep}{{8}{2018}{{Henderson et~al.}}{{Henderson, Islam, Bachman, Pineau, Precup, and Meger}}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{10}{section.9}\protected@file@percent }
 \bibcite{liskov1974programming}{{9}{1974}{{Liskov and Zilles}}{{}}}
 \bibcite{moreau2013prov}{{10}{2013}{{Moreau and Missier}}{{}}}
 \bibcite{patel2015assessment}{{11}{2015}{{Patel et~al.}}{{Patel, Bhatt, Patel, and Ioannidis}}}
