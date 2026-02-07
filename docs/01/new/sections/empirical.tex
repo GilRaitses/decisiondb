@@ -14,17 +14,9 @@ The engine is a shortest-path solver using Dijkstra's algorithm~\cite{dijkstra19
 
 In this instantiation, decision identities correspond to route equivalence classes, but the protocol applies to any discrete outcome produced by a fixed decision query.
 
-The neighbor weight sweep varies the neighbor weight from 0.5 to 1.0 while holding second-order weight fixed at 0.25. Both representations yield the same route, Decision~A, a 16-node path:
-\[
-[85,\; 176,\; 463,\; 14,\; 404,\; 76,\; 406,\; 407,\; 223,\; 200,\; 311,\; 310,\; 314,\; 322,\; 323,\; 50].
-\]
-Doubling the neighbor weight from 0.5 to 1.0 preserves decision identity. This parameter range constitutes a persistence region under the tested policy.
+The neighbor weight sweep varies the neighbor weight from 0.5 to 1.0 while holding second-order weight fixed at 0.25. Both representations yield the same 16-node path, Decision~A, indicating persistence across the tested range.
 
-The second-order weight sweep varies the second-order weight from 0.25 to 0.5 while holding neighbor weight fixed at 0.5. At second-order weight 0.25, the engine produces Decision~A. At second-order weight 0.5, the engine produces Decision~B, a 14-node path:
-\[
-[85,\; 411,\; 419,\; 422,\; 332,\; 204,\; 500,\; 369,\; 79,\; 402,\; 473,\; 502,\; 501,\; 50].
-\]
-The route changes entirely, traversing a different region of the graph. The boundary between these two decision identities lies between second-order weight values 0.25 and 0.5. This is a fracture, where a small parameter change induces a qualitative change in the discrete outcome. Table~\ref{tab:sweep-summary} summarizes the sweep results; Figure~\ref{fig:persistence-fracture} shows the persistence and fracture structure.
+The second-order weight sweep varies the second-order weight from 0.25 to 0.5 while holding neighbor weight fixed at 0.5. At second-order weight 0.25, the engine produces Decision~A. At second-order weight 0.5, the engine produces Decision~B, a distinct 14-node path traversing a different region of the graph. The boundary between these two decision identities lies between second-order weight values 0.25 and 0.5, where a small parameter change induces a qualitative change in the discrete outcome. Full node sequences for each decision are stored as raw output artifacts and are recoverable via replay verification. Table~\ref{tab:sweep-summary} summarizes the sweep results; Figure~\ref{fig:persistence-fracture} shows the persistence and fracture structure.
 
 \begin{table}[t]
 \centering
