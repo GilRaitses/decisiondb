@@ -22,7 +22,7 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
     idbox/.style={draw=erdStroke, rounded corners=3pt, align=center, inner sep=3pt, minimum height=8mm, font=\rmfamily\scriptsize},
     arrow/.style={-{Latex[length=2.5mm, width=2mm]}, thick, erdStroke},
     eqlbl/.style={font=\rmfamily\scriptsize, erdStroke},
-    arenalbl/.style={font=\rmfamily\scriptsize, text=black!40}
+    arenalbl/.style={font=\rmfamily\scriptsize, text=black!65}
   ]
 
   % Arena enclosure
@@ -54,7 +54,7 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
   \draw[arrow] (r3.east) -- (d3.west);
 
   % Equivalence bracket for persistence region
-  \draw[erdStroke!60, thick, decorate, decoration={brace, amplitude=4pt, mirror}] (10.8, 1.9) -- (10.8, -0.1);
+  \draw[erdStroke!60, thick, decorate, decoration={brace, amplitude=4pt}] (10.8, 1.9) -- (10.8, -0.1);
   \node[arenalbl, anchor=west] at (11.1, 0.9) {persistence};
 
   % Boundary marker
