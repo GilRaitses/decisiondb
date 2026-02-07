@@ -8,7 +8,7 @@ The demonstration fixes a directed graph with node set $V$ where $|V| = 564$, ed
 
 Each representation encodes the graph's edge costs as a deterministic function of the fixed edge attributes. Two representation parameters control the cost surface. The first, neighbor weight, applies a weight to a neighbor-based cost component and is tested at 0.5 and 1.0. The second, second-order weight, applies a weight to a second-order cost component and is tested at 0.25 and 0.5. Each sweep varies one parameter while holding the other fixed, producing two representation variants per sweep and four engine evaluations total.
 
-The engine is a fixed shortest-path solver using Dijkstra's algorithm~\cite{dijkstra1959note}, with configuration and version held constant across all runs. Execution times ranged from 0.5 to 1.4 milliseconds. The equivalence policy, version 1.0.0, performs exact match on the sorted node sequence of the computed route. Two routes are assigned the same decision identity if and only if they traverse identical node sequences. The policy uses SHA-256 over JSON-serialized, sorted-key, UTF-8-encoded route nodes.
+The engine is a shortest-path solver using Dijkstra's algorithm~\cite{dijkstra1959note}, with configuration and version held constant across all runs. Execution times ranged from 0.5 to 1.4 milliseconds. The equivalence policy, version 1.0.0, performs exact match on the sorted node sequence of the computed route. Two routes are assigned the same decision identity if and only if they traverse identical node sequences. The policy uses SHA-256 over JSON-serialized, sorted-key, UTF-8-encoded route nodes.
 
 \subsection{Results}
 
