@@ -53,8 +53,8 @@ second-order weight & 0.5 & B & 14 & Yes \\
     regionA/.style={region, fill=blue!12},
     regionB/.style={region, fill=orange!18},
     lbl/.style={font=\figfont\footnotesize, anchor=east},
-    tick/.style={font=\figfont\scriptsize, text=black!60},
-    plbl/.style={font=\figfont\scriptsize, text=black!40, anchor=west}
+    tick/.style={font=\figfont\scriptsize, text=black!80},
+    plbl/.style={font=\figfont\scriptsize, text=black!80, anchor=west}
   ]
 
   % Panel (a): Neighbor weight - persistence
@@ -118,7 +118,7 @@ The replay writes no new rows and modifies no database state. Table counts befor
   \begin{tikzpicture}[
     node distance=6mm,
     box/.style={draw=erdStroke, rounded corners=3pt, align=center, inner sep=5pt, minimum height=12mm, font=\figfont\footnotesize, fill=erdHeader},
-    artifact/.style={draw=erdStroke, rounded corners=3pt, align=center, inner sep=4pt, font=\figfont\scriptsize, fill=erdHeader!30, text=black!55},
+    artifact/.style={draw=erdStroke, rounded corners=3pt, align=center, inner sep=4pt, font=\figfont\scriptsize, fill=erdHeader!30, text=black!80},
     eqline/.style={thick, erdStroke!50},
     eqlbl/.style={font=\figfont\footnotesize, erdStroke},
     arrow/.style={-{Latex[length=2.5mm, width=2mm]}, thick, erdStroke},
@@ -136,7 +136,7 @@ The replay writes no new rows and modifies no database state. Table counts befor
   \draw[arrow] (pol) -- (p_polid);
 
   % Label
-  \node[font=\figfont\scriptsize, text=black!40, above=2mm of raw] {persisted};
+  \node[font=\figfont\scriptsize, text=black!80, above=2mm of raw] {persisted};
 
   % Right column: recomputed chain
   \node[box, text width=28mm] (raw2) at (5.8,0) {Raw output\\artifact};
@@ -149,7 +149,7 @@ The replay writes no new rows and modifies no database state. Table counts befor
   \draw[arrow] (pol2) -- (r_polid);
 
   % Label
-  \node[font=\figfont\scriptsize, text=black!40, above=2mm of raw2] {recomputed};
+  \node[font=\figfont\scriptsize, text=black!80, above=2mm of raw2] {recomputed};
 
   % Equality comparisons
   \draw[eqline] (p_polid.east) -- node[eqlbl, above] {$=$} (r_polid.west);
@@ -157,7 +157,7 @@ The replay writes no new rows and modifies no database state. Table counts befor
   \draw[eqline] (p_decid.east) -- node[eqlbl, above] {$=$} (r_decid.west);
 
   % Verdict
-  \node[verdict, text width=18mm, below=8mm of $(p_decid.south)!0.5!(r_decid.south)$] (pass) {PASS\\{\scriptsize\color{black!50} 0 rows written}};
+  \node[verdict, text width=18mm, below=8mm of $(p_decid.south)!0.5!(r_decid.south)$] (pass) {PASS\\{\scriptsize\color{black!80} 0 rows written}};
   \draw[arrow] (p_decid.south) -- ++(0,-0.3) -| ([xshift=-3mm]pass.north);
   \draw[arrow] (r_decid.south) -- ++(0,-0.3) -| ([xshift=3mm]pass.north);
 
