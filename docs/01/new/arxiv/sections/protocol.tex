@@ -2,7 +2,7 @@
 
 A \emph{representational sweep} evaluates the decision-valued map $f$ across a declared set of representations. The protocol proceeds through five stages, summarized in Table~\ref{tab:sweep-protocol}, that transform a frozen snapshot into a queryable decision map.
 
-A sweep begins by freezing a snapshot and assigning it a content-addressed identifier. A representation family is then declared via a deterministic factory, and a sweep plan specifies the parameter grid, engine, equivalence policy. The engine executes independently for each representation, producing raw outputs stored as immutable artifacts. The equivalence policy reduces each output to a decision identity, and the decision map table records the links from snapshot and representation through engine run to decision identity. All artifacts are versioned and linked through content-addressed identifiers, so the resulting materialized map supports reproducible replay and post-hoc analysis without re-executing the engine.
+A sweep begins by freezing a snapshot and assigning it a content-addressed identifier. A representation family is then declared via a deterministic factory, and a sweep plan specifies the parameter grid, engine and equivalence policy. The engine executes independently for each representation, producing raw outputs stored as immutable artifacts. The equivalence policy reduces each output to a decision identity, and the decision map table records the links from snapshot and representation through engine run to decision identity. All artifacts are versioned and linked through content-addressed identifiers, so the resulting materialized map supports reproducible replay and post-hoc analysis without re-executing the engine.
 
 \begin{table}[t]
 \centering
