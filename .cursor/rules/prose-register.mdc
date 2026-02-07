@@ -1,0 +1,39 @@
+---
+description: Prose register for academic manuscript writing
+globs: "**/*.tex"
+alwaysApply: false
+---
+
+# Prose Register
+
+## Voice
+
+State the object directly. Do not apologize for it, motivate it, or explain why it is interesting. If the object is interesting, the reader will see that from the statement. If it requires motivation, the sentence is not doing its job.
+
+## Sentence structure
+
+Every sentence must be a complete thought with a subject, verb, and object. No fragment sentences. No two-word declarations playing at drama. Short is good; incomplete is not.
+
+## Opening a section or paragraph
+
+Lead with the fact or the object, not with a complaint about current practice. "A computational engine applied to different representations can produce different outcomes" is better than "Current systems fail to record representational dependence."
+
+## Adjective discipline
+
+If the sentence structure already conveys a constraint, do not add an adjective that restates it. "Given a single snapshot and one engine" conveys constancy through "a single" and "one." Adding "fixed" on top of that is redundant.
+
+## No repeated modifiers
+
+No modifier appears twice in the same sentence. No key noun phrase repeats in adjacent sentences. Vary phrasing or use a pronoun to refer back.
+
+## Term introduction
+
+Introduce a term by showing what it does, not by defining it in isolation. "A decision-valued map records which representations preserve the outcome and which change it" is better than "A decision-valued map is defined as a function from representation space to decision identity space."
+
+## Grounding technical vocabulary
+
+Every non-standard term that appears must be either demonstrated by example earlier in the text or grounded with a plain-language equivalent in the same sentence. "Identifiers computed from content" is grounded. "Content-addressed identifiers" is not, unless it has been grounded previously.
+
+## Economy
+
+If a sentence can lose a clause without losing information, lose the clause. If two sentences say the same thing in different words, cut one. The goal is not brevity for its own sake but zero wasted words.
