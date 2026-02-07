@@ -1,6 +1,6 @@
 \section{Related Work}
 
-The sensitivity of analytical conclusions to representational and analytic choices has been documented across multiple disciplines. This section situates the decision-valued mapping framework relative to existing work on analytic flexibility, reproducibility infrastructure, provenance systems. Table~\ref{tab:comparison} summarizes the key distinctions.
+The sensitivity of analytical conclusions to representational and analytic choices has been documented across multiple disciplines. This section situates the decision-valued mapping framework relative to existing work on analytic flexibility, reproducibility infrastructure and provenance systems. Table~\ref{tab:comparison} summarizes the key distinctions.
 
 \subsection{Analytic Flexibility and Multiverse Methods}
 
@@ -20,9 +20,9 @@ Decision-valued mapping addresses a related but distinct problem. Rather than do
 
 \subsection{Provenance and Workflow Systems}
 
-Provenance models such as W3C PROV~\cite{moreau2013prov} provide general-purpose vocabularies for recording the derivation history of computational artifacts. VisTrails~\cite{freire2012provenance} captures workflow provenance for scientific computations. MLflow~\cite{zaharia2018accelerating} tracks experiments, parameters, artifacts for machine learning pipelines. The Common Workflow Language~\cite{amstutz2016common} standardizes workflow definitions for reproducible execution. Resilient Distributed Datasets~\cite{zaharia2012resilient} track lineage for fault-tolerant distributed computation.
+Provenance models such as W3C PROV~\cite{moreau2013prov} provide general-purpose vocabularies for recording the derivation history of computational artifacts. VisTrails~\cite{freire2012provenance} captures workflow provenance for scientific computations. MLflow~\cite{zaharia2018accelerating} tracks experiments, parameters and artifacts for machine learning pipelines. The Common Workflow Language~\cite{amstutz2016common} standardizes workflow definitions for reproducible execution. Resilient Distributed Datasets~\cite{zaharia2012resilient} track lineage for fault-tolerant distributed computation.
 
-DecisionDB is narrower than these systems in scope and more specific in its invariants. Rather than managing arbitrary workflows or tracking general-purpose provenance graphs, it enforces a specific structure with immutable snapshots, declared representation families, fixed engines, equivalence policies that reduce raw output to discrete identities. The content-addressing scheme ensures that identical inputs always produce identical identifiers; replay verification checks end-to-end consistency of the provenance chain. This specificity enables the decision-valued map as a queryable diagnostic object, which general-purpose provenance systems do not directly support.
+DecisionDB is narrower than these systems in scope and more specific in its invariants. Rather than managing arbitrary workflows or tracking general-purpose provenance graphs, it enforces a specific structure with immutable snapshots, declared representation families, fixed engines and equivalence policies that reduce raw output to discrete identities. The content-addressing scheme ensures that identical inputs always produce identical identifiers; replay verification checks end-to-end consistency of the provenance chain. This specificity enables the decision-valued map as a queryable diagnostic object, which general-purpose provenance systems do not directly support.
 
 \begin{table}[t]
 \centering

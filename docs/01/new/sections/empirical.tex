@@ -4,7 +4,7 @@ A graph routing problem provides the concrete setting for demonstrating how the 
 
 \subsection{Setup}
 
-The demonstration fixes a directed graph with node set $V$ where $|V| = 564$, edge set $E$, immutable edge attributes including baseline costs derived from geographic distance and a normalized stress metric. The snapshot is content-addressed and sealed before any engine execution. A single origin-destination query is fixed at start node 85 and end node 50.
+The demonstration fixes a directed graph with node set $V$ where $|V| = 564$, edge set $E$ and immutable edge attributes including baseline costs derived from geographic distance and a normalized stress metric. The snapshot is content-addressed and sealed before any engine execution. A single origin-destination query is fixed at start node 85 and end node 50.
 
 Each representation encodes the graph's edge costs as a deterministic function of the fixed edge attributes. Two representation parameters control the cost surface. The first, neighbor weight, applies a weight to a neighbor-based cost component and is tested at 0.5 and 1.0. The second, second-order weight, applies a weight to a second-order cost component and is tested at 0.25 and 0.5. Each sweep varies one parameter while holding the other fixed, producing two representation variants per sweep and four engine evaluations total.
 
