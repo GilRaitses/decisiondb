@@ -6,4 +6,4 @@ DecisionDB implements this framework through a five-stage sweep protocol, a five
 
 The framework is limited by its restriction to discrete outcomes, its reliance on fixed snapshots and engines, the narrow empirical coverage reported here. Extending the approach to finer parameter grids, additional domains, cross-snapshot comparison are directions for future work.
 
-The contribution is infrastructural. Making representational dependence observable does not improve outcomes, but it is a prerequisite for understanding when discrete outcomes can be trusted and when they cannot.
+The contribution of this work is infrastructural, introducing a diagnostic layer that records how discrete decisions arise from families of representations. Decision-valued maps expose stability and fracture directly, allowing downstream reuse to be conditioned on explicit representational context rather than on confidence or performance summaries alone. Decision reuse becomes a compatibility question that can be checked mechanically before deployment across tasks and timescales.
