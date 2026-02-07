@@ -10,7 +10,7 @@ Each representation encodes the graph's edge costs as a deterministic function o
 
 The engine is a shortest-path solver using Dijkstra's algorithm~\cite{dijkstra1959note}, with configuration and version held constant across all runs. Execution times ranged from 0.5 to 1.4 milliseconds.
 
-Two routes are assigned the same decision identity if and only if they traverse identical node sequences. The equivalence policy enforces this by computing an identifier from a JSON-serialized, sorted-key, UTF-8-encoded representation of the route nodes.
+Two routes are assigned the same decision identity if and only if they traverse identical node sequences. The equivalence policy enforces this by computing an identifier from a JSON-serialized, sorted-key and UTF-8-encoded representation of the route nodes.
 
 \subsection{Results}
 
