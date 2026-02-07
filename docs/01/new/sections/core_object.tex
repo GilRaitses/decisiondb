@@ -17,20 +17,20 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
   \centering
   \begin{tikzpicture}[
     node distance=10mm,
-    box/.style={draw=erdStroke, rounded corners=4pt, align=center, inner sep=6pt, minimum height=14mm, text width=27mm, font=\avenirultralight\small, fill=erdHeader},
+    box/.style={draw=erdStroke, rounded corners=4pt, align=center, inner sep=6pt, minimum height=18mm, text width=27mm, font=\avenirultralight, fill=erdHeader, anchor=north},
     arrow/.style={-{Latex[length=3.5mm, width=2.5mm]}, thick, erdStroke}
   ]
-  \node[box] (snap) {Snapshot $s$\\[2pt]{\scriptsize\color{black!50} frozen inputs}};
-  \node[box, right=of snap] (rep) {Representation $r$\\[2pt]{\scriptsize\color{black!50} deterministic encoding}};
-  \node[box, right=of rep] (eng) {Engine $E$\\[2pt]{\scriptsize\color{black!50} fixed procedure}};
-  \node[box, right=of eng] (pol) {Policy $\pi$\\[2pt]{\scriptsize\color{black!50} decision identity $d$}};
-  \node[box, below=16mm of $(rep.south)!0.5!(eng.south)$, text width=50mm] (map) {Decision map table\\[2pt]{\scriptsize\color{black!50} links $s$, $r$, $E$, $d$, $\pi$ by content hash}};
+  \node[box] (snap) at (0,0) {Snapshot $s$\\[2pt]{\footnotesize\color{black!50} frozen inputs}};
+  \node[box] (rep) at (3.7,0) {Representation $r$\\[2pt]{\footnotesize\color{black!50} deterministic encoding}};
+  \node[box] (eng) at (7.4,0) {Engine $E$\\[2pt]{\footnotesize\color{black!50} fixed procedure}};
+  \node[box] (pol) at (11.1,0) {Policy $\pi$\\[2pt]{\footnotesize\color{black!50} decision identity $d$}};
+  \node[box, text width=50mm, anchor=north] (map) at (5.55,-3.2) {Decision map table\\[2pt]{\footnotesize\color{black!50} links $s$, $r$, $E$, $d$, $\pi$ by content hash}};
 
-  \draw[arrow] (snap) -- (rep);
-  \draw[arrow] (rep) -- (eng);
-  \draw[arrow] (eng) -- (pol);
-  \draw[arrow] (pol.south) -- ++(0,-0.5) -| ([xshift=10mm]map.north);
-  \draw[arrow] (snap.south) -- ++(0,-0.8) -| ([xshift=-10mm]map.north);
+  \draw[arrow] (snap.east) -- (rep.west);
+  \draw[arrow] (rep.east) -- (eng.west);
+  \draw[arrow] (eng.east) -- (pol.west);
+  \draw[arrow] (pol.south) -- ++(0,-0.6) -| ([xshift=10mm]map.north);
+  \draw[arrow] (snap.south) -- ++(0,-0.6) -| ([xshift=-10mm]map.north);
   \end{tikzpicture}
   \caption{Decision-valued mapping pipeline. A frozen snapshot is encoded into a representation, consumed by a fixed engine, then reduced to a discrete decision identity via an equivalence policy. The decision map table materializes these links using content-addressed identifiers. Each stage is immutable and content-addressed, so the full provenance chain from raw input to discrete outcome is recoverable at any later time.}
   \label{fig:pipeline}
