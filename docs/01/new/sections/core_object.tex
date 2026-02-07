@@ -44,7 +44,8 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
   \draw[arrow] (eng.east) -- (r2.west);
   \draw[arrow] (eng.east) -- ++(0.4,0) |- (r3.west);
 
-  % Decision identifiers (output)
+  % Decision identifiers (output) -- grouped by agreement
+  \draw[blue!8, rounded corners=4pt, fill=blue!6] (9.5, 2.1) rectangle (11.0, -0.3);
   \node[idbox, fill=blue!12] (d1) at (10.2, 1.6) {$d_A$};
   \node[idbox, fill=blue!12] (d2) at (10.2, 0.2) {$d_A$};
   \node[idbox, fill=orange!18] (d3) at (10.2, -1.2) {$d_B$};
@@ -53,15 +54,7 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
   \draw[arrow] (r2.east) -- (d2.west);
   \draw[arrow] (r3.east) -- (d3.west);
 
-  % Equivalence bracket for persistence region
-  \draw[erdStroke!60, thick, decorate, decoration={brace, amplitude=4pt}] (10.8, 1.9) -- (10.8, -0.1);
-  \node[arenalbl, anchor=west] at (11.1, 0.9) {persistence};
-
-  % Boundary marker
-  \draw[red!60, thick, dashed] (9.4, -0.5) -- (11.0, -0.5);
-  \node[font=\figfont\scriptsize, text=red!50, anchor=west] at (11.1, -0.5) {boundary};
-
   \end{tikzpicture}
-  \caption{Evaluation protocol for a decision-valued map. A single arena, defined by a data snapshot, a query and a computational engine, remains invariant throughout evaluation. A family of alternative representations of the same snapshot is varied within this arena. Each representation is passed through the same engine to produce a discrete decision identifier. Identical identifiers indicate persistence of decision identity across representational change, while a differing identifier marks a boundary where representational variation alone alters the outcome.}
+  \caption{Evaluation protocol for a decision-valued map. A single arena, consisting of a data snapshot and a computational engine, is reused across evaluation. Representations drawn from a declared family are varied within this arena and evaluated independently. Agreement of decision identifiers across representations indicates persistence of decision identity; a change in identifier indicates a boundary induced by representational variation alone.}
   \label{fig:pipeline}
 \end{figure}
