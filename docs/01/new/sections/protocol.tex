@@ -1,43 +1,26 @@
 \section{Sweep Protocol}
 
-A \emph{representational sweep} evaluates the decision-valued map $f$ across a declared set of representations. The protocol proceeds through five stages, illustrated in Figure~\ref{fig:sweep-protocol}, that transform a frozen snapshot into a queryable decision map.
+A \emph{representational sweep} evaluates the decision-valued map $f$ across a declared set of representations. The protocol proceeds through five stages, summarized in Table~\ref{tab:sweep-protocol}, that transform a frozen snapshot into a queryable decision map.
 
 A sweep begins by freezing a snapshot and assigning it a content-addressed identifier. A representation family is then declared via a deterministic factory, and a sweep plan specifies the parameter grid, engine, and equivalence policy. The engine executes independently for each representation, producing raw outputs stored as immutable artifacts. The equivalence policy reduces each output to a decision identity, and the decision map table records the links from snapshot and representation through engine run to decision identity. All artifacts are versioned and linked through content-addressed identifiers, so the resulting materialized map supports reproducible replay and post-hoc analysis without re-executing the engine.
 
-\begin{figure}[t]
-  \centering
-  \begin{tikzpicture}[
-    node distance=4mm,
-    stage/.style={draw, rounded corners, align=left, inner sep=5pt, text width=62mm, font=\avenirultralight\footnotesize, fill=blue!6},
-    arrow/.style={-Latex, thick}
-  ]
-
-  \node[stage] (s1) {%
-    Freeze snapshot\\
-    {\scriptsize\color{black!50} in: world state, time window \hfill out: snap\_* identifier}};
-
-  \node[stage, below=of s1] (s2) {%
-    Declare representations\\
-    {\scriptsize\color{black!50} in: snapshot ref, parameterization, factory \hfill out: repr\_* identifiers}};
-
-  \node[stage, below=of s2] (s3) {%
-    Plan sweep\\
-    {\scriptsize\color{black!50} in: parameter grid, engine, policy \hfill out: sweep plan descriptor}};
-
-  \node[stage, below=of s3] (s4) {%
-    Execute engine\\
-    {\scriptsize\color{black!50} in: each repr\_* \hfill out: run\_* rows, raw output artifacts}};
-
-  \node[stage, below=of s4] (s5) {%
-    Extract decisions\\
-    {\scriptsize\color{black!50} in: raw outputs, policy $\pi$ \hfill out: dec\_* identifiers, f\_map links}};
-
-  \draw[arrow] (s1) -- (s2);
-  \draw[arrow] (s2) -- (s3);
-  \draw[arrow] (s3) -- (s4);
-  \draw[arrow] (s4) -- (s5);
-
-  \end{tikzpicture}
-  \caption{Five-stage representational sweep protocol. Each stage consumes content-addressed inputs and produces content-addressed outputs. The protocol transforms a frozen snapshot into a materialized decision map linking snapshots, representations, engine runs, and decision identities through immutable, replayable artifacts.}
-  \label{fig:sweep-protocol}
-\end{figure}
+\begin{table}[t]
+\centering
+\caption{Five-stage representational sweep protocol. Each stage consumes content-addressed inputs and produces content-addressed outputs, transforming a frozen snapshot into a materialized decision map. All identifiers are computed via SHA-256 over canonical JSON, truncated to 16 hexadecimal characters, and prefixed by entity type.}
+\label{tab:sweep-protocol}
+\smallskip
+\tablestyle
+\rowcolors{2}{tableShade}{white}
+\begin{tabular}{@{\hskip 6pt}c l p{38mm} p{40mm}@{\hskip 6pt}}
+\toprule
+\rowcolor{white}
+ & Stage & Inputs & Outputs \\
+\midrule
+1 & Freeze snapshot & World state, time window & snap\_* identifier \\
+2 & Declare representations & Snapshot ref, parameterization, factory version & repr\_* identifiers, one per parameter setting \\
+3 & Plan sweep & Parameter grid, engine name and version, equivalence policy & Sweep plan descriptor, itself content-addressed \\
+4 & Execute engine & Each repr\_* independently & run\_* rows, raw output artifacts stored as immutable files \\
+5 & Extract decisions & Raw outputs, equivalence policy $\pi$ & dec\_* identifiers, f\_map links from repr\_* and run\_* to dec\_* \\
+\bottomrule
+\end{tabular}
+\end{table}
