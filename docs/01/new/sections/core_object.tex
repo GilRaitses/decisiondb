@@ -29,6 +29,6 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
   \draw[arrow] (pol.south) -- ++(0,-0.35) -| (map.east);
   \draw[arrow] (snap.south) -- ++(0,-0.65) -| (map.west);
   \end{tikzpicture}
-  \caption{Decision-valued mapping pipeline. A frozen snapshot is encoded into a representation, consumed by a fixed engine, and reduced to a discrete decision identity via an equivalence policy. The decision map table materializes these links using content-addressed identifiers. Each stage is immutable and content-addressed, so the full provenance chain from raw input to discrete outcome is recoverable at any later time.}
+  \caption{Decision-valued mapping pipeline.}
   \label{fig:pipeline}
 \end{figure}
