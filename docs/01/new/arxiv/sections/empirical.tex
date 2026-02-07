@@ -1,6 +1,6 @@
 \section{Empirical Demonstration}
 
-The approach is demonstrated on a graph routing problem. The goal is not to evaluate routing algorithms, but to show how the decision-valued map makes representational dependence observable in a concrete setting.
+The approach is demonstrated on a graph routing problem. The goal is to show how the decision-valued map makes representational dependence observable in a concrete setting.
 
 \subsection{Setup}
 
@@ -18,7 +18,7 @@ The neighbor weight sweep varies the neighbor weight from 0.5 to 1.0 while holdi
 \[
 [85,\; 176,\; 463,\; 14,\; 404,\; 76,\; 406,\; 407,\; 223,\; 200,\; 311,\; 310,\; 314,\; 322,\; 323,\; 50].
 \]
-Doubling the neighbor weight from 0.5 to 1.0 does not change decision identity. This parameter range constitutes a persistence region under the tested policy.
+Doubling the neighbor weight from 0.5 to 1.0 preserves decision identity. This parameter range constitutes a persistence region under the tested policy.
 
 The second-order weight sweep varies the second-order weight from 0.25 to 0.5 while holding neighbor weight fixed at 0.5. At second-order weight 0.25, the engine produces Decision~A. At second-order weight 0.5, the engine produces Decision~B, a 14-node path:
 \[
