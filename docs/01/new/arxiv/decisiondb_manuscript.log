@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  7 FEB 2026 00:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  7 FEB 2026 00:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -771,14 +771,18 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
-(./sections/problem_scope.tex) (./sections/core_object.tex)
-(./sections/protocol.tex
+(./sections/problem_scope.tex) (./sections/core_object.tex
+Overfull \hbox (8.94562pt too wide) in paragraph at lines 31--32
+ [][] 
+ []
+
+) (./sections/protocol.tex
 
 [2]) (./sections/system_design.tex
 
-[3]) (./sections/empirical.tex
+[3])
 
-[4]
+[4] (./sections/empirical.tex
 
 [5]
 
@@ -801,10 +805,10 @@ Package rerunfilecheck Info: File `decisiondb_manuscript.out' has not changed.
 (rerunfilecheck)             Checksum: 7EB73EE7A2283D5CDC1DE6F65B21529F;3052.
  ) 
 Here is how much of TeX's memory you used:
- 23367 strings out of 473190
- 434469 string characters out of 5715801
- 821002 words of memory out of 5000000
- 46166 multiletter control sequences out of 15000+600000
+ 23377 strings out of 473190
+ 434720 string characters out of 5715801
+ 820956 words of memory out of 5000000
+ 46175 multiletter control sequences out of 15000+600000
  569978 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,12n,91p,1349b,884s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -815,17 +819,16 @@ Here is how much of TeX's memory you used:
 sr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
 /local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
 ocal/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
-al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/
-texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/t
-exlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/tex
-live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texli
-ve/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
-e/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
-/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on decisiondb_manuscript.pdf (11 pages, 224953 bytes).
+al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/loca
+l/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/
+texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/te
+xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
+live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texl
+ive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on decisiondb_manuscript.pdf (11 pages, 215960 bytes).
 PDF statistics:
- 280 PDF objects out of 1000 (max. 8388607)
- 236 compressed objects within 3 object streams
- 59 named destinations out of 1000 (max. 500000)
+ 277 PDF objects out of 1000 (max. 8388607)
+ 235 compressed objects within 3 object streams
+ 60 named destinations out of 1000 (max. 500000)
  181 words of extra memory for PDF output out of 10000 (max. 10000000)
 

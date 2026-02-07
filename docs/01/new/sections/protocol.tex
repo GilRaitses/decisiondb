@@ -16,11 +16,11 @@ A sweep begins by freezing a snapshot and assigning it a content-addressed ident
 \rowcolor{white}
  & Stage & Inputs & Outputs \\
 \midrule
-1 & Freeze snapshot & World state, time window & snap\_* identifier \\
-2 & Declare representations & Snapshot ref, parameterization, factory version & repr\_* identifiers, one per parameter setting \\
+1 & Freeze snapshot & World state, time window & Snapshot identifier \\
+2 & Declare representations & Snapshot ref, parameterization, factory version & Representation identifiers, one per parameter setting \\
 3 & Plan sweep & Parameter grid, engine name and version, equivalence policy & Sweep plan descriptor, itself content-addressed \\
-4 & Execute engine & Each repr\_* independently & run\_* rows, raw output artifacts stored as immutable files \\
-5 & Extract decisions & Raw outputs, equivalence policy $\pi$ & dec\_* identifiers, f\_map links from repr\_* and run\_* to dec\_* \\
+4 & Execute engine & Each representation independently & Run records, raw output artifacts stored as immutable files \\
+5 & Extract decisions & Raw outputs, equivalence policy $\pi$ & Decision identifiers, decision map entries linking representations and runs to decisions \\
 \bottomrule
 \end{tabular}
 \end{table}

@@ -11,20 +11,22 @@
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Five-stage representational sweep protocol.}}{3}{table.caption.2}\protected@file@percent }
 \newlabel{tab:sweep-protocol}{{1}{3}{Five-stage representational sweep protocol}{table.caption.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Sweep Protocol}{3}{section.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces DecisionDB relational schema. Five tables form a content-addressed provenance chain. Foreign-key arrows indicate the direction of referential dependency, linking representations to their parent snapshot, engine runs to the representation consumed, and the decision map table to representations, runs, and decision identities.}}{4}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:schema}{{2}{4}{DecisionDB relational schema. Five tables form a content-addressed provenance chain. Foreign-key arrows indicate the direction of referential dependency, linking representations to their parent snapshot, engine runs to the representation consumed, and the decision map table to representations, runs, and decision identities}{figure.caption.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}System Design}{4}{section.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Content Addressing}{4}{subsection.5.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Schema}{4}{subsection.5.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Equivalence Policies}{4}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Replay Verification}{4}{subsection.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Empirical Demonstration}{4}{section.6}\protected@file@percent }
 \citation{dijkstra1959note}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces DecisionDB relational schema and entity roles. Top: entity-relationship diagram showing the five tables and their foreign-key links. Bottom: each table's primary key prefix and role. Foreign-key arrows indicate the direction of referential dependency, linking representations to their parent snapshot, engine runs to the representation consumed, and the decision map table to representations, runs, and decision identities.}}{5}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:schema}{{2}{5}{DecisionDB relational schema and entity roles. Top: entity-relationship diagram showing the five tables and their foreign-key links. Bottom: each table's primary key prefix and role. Foreign-key arrows indicate the direction of referential dependency, linking representations to their parent snapshot, engine runs to the representation consumed, and the decision map table to representations, runs, and decision identities}{figure.caption.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces DecisionDB entity roles.}}{5}{table.caption.4}\protected@file@percent }
+\newlabel{tab:schema}{{2}{5}{DecisionDB entity roles}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Replay Verification}{5}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Empirical Demonstration}{5}{section.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Setup}{5}{subsection.6.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Representational sweep results.}}{6}{table.caption.4}\protected@file@percent }
-\newlabel{tab:sweep-summary}{{2}{6}{Representational sweep results}{table.caption.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Identity persistence and fracture structure for the two representation parameters. The neighbor weight parameter spans a single persistence region in which both tested values produce Decision~A, indicating route identity is stable across this range. The second-order weight parameter spans two regions separated by a fracture, where route identity changes from Decision~A to Decision~B between the values 0.25 and 0.5. The exact threshold is not resolved by this two-point sample.}}{6}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:persistence-fracture}{{3}{6}{Identity persistence and fracture structure for the two representation parameters. The neighbor weight parameter spans a single persistence region in which both tested values produce Decision~A, indicating route identity is stable across this range. The second-order weight parameter spans two regions separated by a fracture, where route identity changes from Decision~A to Decision~B between the values 0.25 and 0.5. The exact threshold is not resolved by this two-point sample}{figure.caption.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Representational sweep results.}}{6}{table.caption.5}\protected@file@percent }
+\newlabel{tab:sweep-summary}{{3}{6}{Representational sweep results}{table.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Identity persistence and fracture structure for the two representation parameters. The neighbor weight parameter spans a single persistence region in which both tested values produce Decision~A, indicating route identity is stable across this range. The second-order weight parameter spans two regions separated by a fracture, where route identity changes from Decision~A to Decision~B between the values 0.25 and 0.5. The exact threshold is not resolved by this two-point sample.}}{6}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:persistence-fracture}{{3}{6}{Identity persistence and fracture structure for the two representation parameters. The neighbor weight parameter spans a single persistence region in which both tested values produce Decision~A, indicating route identity is stable across this range. The second-order weight parameter spans two regions separated by a fracture, where route identity changes from Decision~A to Decision~B between the values 0.25 and 0.5. The exact threshold is not resolved by this two-point sample}{figure.caption.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Results}{6}{subsection.6.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Replay Verification}{6}{subsection.6.3}\protected@file@percent }
 \citation{simonsohn2020specification}
@@ -32,10 +34,10 @@
 \citation{gelman2013garden}
 \citation{patel2015assessment}
 \citation{saltelli2008global}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Replay verification results.}}{7}{table.caption.6}\protected@file@percent }
-\newlabel{tab:replay}{{3}{7}{Replay verification results}{table.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain.}}{7}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:replay}{{4}{7}{Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain}{figure.caption.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Replay verification results.}}{7}{table.caption.7}\protected@file@percent }
+\newlabel{tab:replay}{{4}{7}{Replay verification results}{table.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain.}}{7}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:replay}{{4}{7}{Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain}{figure.caption.8}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Related Work}{7}{section.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Analytic Flexibility and Multiverse Methods}{7}{subsection.7.1}\protected@file@percent }
 \citation{damour2022underspecification}
@@ -53,8 +55,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Reproducibility in Machine Learning}{8}{subsection.7.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Provenance and Workflow Systems}{8}{subsection.7.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Infrastructural Precedents}{8}{subsection.7.5}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Summary comparison between decision-valued mapping and related approaches.}}{9}{table.caption.8}\protected@file@percent }
-\newlabel{tab:comparison}{{4}{9}{Summary comparison between decision-valued mapping and related approaches}{table.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Summary comparison between decision-valued mapping and related approaches.}}{9}{table.caption.9}\protected@file@percent }
+\newlabel{tab:comparison}{{5}{9}{Summary comparison between decision-valued mapping and related approaches}{table.caption.9}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {8}Limitations}{9}{section.8}\protected@file@percent }
 \bibstyle{plainnat}
 \bibdata{bibliography}

@@ -13,21 +13,21 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[
-    node distance=7mm,
-    box/.style={draw, rounded corners, align=center, inner sep=5pt, text width=26mm, font=\avenirultralight\small},
-    arrow/.style={-Latex, thick}
+    node distance=10mm,
+    box/.style={draw, rounded corners=4pt, align=center, inner sep=6pt, minimum height=14mm, text width=27mm, font=\avenirultralight\small, fill=blue!6},
+    arrow/.style={-{Latex[length=3.5mm, width=2.5mm]}, thick, black!60}
   ]
-  \node[box] (snap) {Snapshot $s$\\{\scriptsize frozen inputs}};
-  \node[box, right=of snap] (rep) {Representation $r$\\{\scriptsize deterministic encoding}};
-  \node[box, right=of rep] (eng) {Engine $E$\\{\scriptsize fixed procedure}};
-  \node[box, right=of eng] (pol) {Policy $\pi$\\{\scriptsize decision identity $d$}};
-  \node[box, below=12mm of eng, text width=44mm] (map) {Decision map table\\{\scriptsize links $s$, $r$, $E$, $d$, $\pi$ by content hash}};
+  \node[box] (snap) {Snapshot $s$\\[2pt]{\scriptsize\color{black!50} frozen inputs}};
+  \node[box, right=of snap] (rep) {Representation $r$\\[2pt]{\scriptsize\color{black!50} deterministic encoding}};
+  \node[box, right=of rep] (eng) {Engine $E$\\[2pt]{\scriptsize\color{black!50} fixed procedure}};
+  \node[box, right=of eng] (pol) {Policy $\pi$\\[2pt]{\scriptsize\color{black!50} decision identity $d$}};
+  \node[box, below=16mm of $(rep.south)!0.5!(eng.south)$, text width=50mm] (map) {Decision map table\\[2pt]{\scriptsize\color{black!50} links $s$, $r$, $E$, $d$, $\pi$ by content hash}};
 
   \draw[arrow] (snap) -- (rep);
   \draw[arrow] (rep) -- (eng);
   \draw[arrow] (eng) -- (pol);
-  \draw[arrow] (pol.south) -- ++(0,-0.35) -| (map.east);
-  \draw[arrow] (snap.south) -- ++(0,-0.65) -| (map.west);
+  \draw[arrow] (pol.south) -- ++(0,-0.5) -| (map.east);
+  \draw[arrow] (snap.south) -- ++(0,-0.8) -| (map.west);
   \end{tikzpicture}
   \caption{Decision-valued mapping pipeline. A frozen snapshot is encoded into a representation, consumed by a fixed engine, and reduced to a discrete decision identity via an equivalence policy. The decision map table materializes these links using content-addressed identifiers. Each stage is immutable and content-addressed, so the full provenance chain from raw input to discrete outcome is recoverable at any later time.}
   \label{fig:pipeline}

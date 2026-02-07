@@ -8,72 +8,72 @@ All identifiers are computed deterministically from content. Given an entity's p
 
 \subsection{Schema}
 
-The relational schema contains five core tables whose relationships and roles are shown in Figure~\ref{fig:schema}. Each table enforces content-addressed primary keys and foreign-key constraints that link the full provenance chain from snapshot through representation and engine execution to decision identity. All writes are append-only, scoped by experiment identifier, and executed within transactions. Inserts use an insert-or-ignore strategy for idempotency, so re-inserting the same content-addressed entity is a no-op. Each table stores additional metadata such as artifact manifests, URIs, hashes, and configuration records; only the structural fields are shown in the diagram.
+The relational schema contains five core tables. Figure~\ref{fig:schema} shows their foreign-key relationships and Table~\ref{tab:schema} summarizes each table's role. Each table enforces content-addressed primary keys and foreign-key constraints that link the full provenance chain from snapshot through representation and engine execution to decision identity. All writes are append-only, scoped by experiment identifier, and executed within transactions. Inserts use an insert-or-ignore strategy for idempotency, so re-inserting the same content-addressed entity is a no-op.
 
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[
-    node distance=8mm and 12mm,
+    node distance=8mm and 14mm,
     entity/.style={draw, rounded corners, align=left, inner sep=6pt, text width=32mm, font=\avenirultralight\footnotesize, fill=blue!6},
     fk/.style={-Latex, thick, black!50},
     fklbl/.style={font=\avenirultralight\scriptsize, text=black!40, fill=white, inner sep=1pt}
   ]
 
-  % Top row: main chain
   \node[entity] (snap) {%
     snapshots\\[1pt]
-    {\scriptsize\color{black!50} snap\_id \textnormal{(PK)}}};
+    {\scriptsize\color{black!50} snap{\_}id (PK)}};
 
   \node[entity, right=of snap] (repr) {%
     representations\\[1pt]
-    {\scriptsize\color{black!50} repr\_id \textnormal{(PK)}}\\
-    {\scriptsize\color{black!50} snapshot\_id \textnormal{(FK)}}};
+    {\scriptsize\color{black!50} repr{\_}id (PK)}\\
+    {\scriptsize\color{black!50} snapshot{\_}id (FK)}};
 
   \node[entity, right=of repr] (runs) {%
-    engine\_runs\\[1pt]
-    {\scriptsize\color{black!50} run\_id \textnormal{(PK)}}\\
-    {\scriptsize\color{black!50} repr\_id \textnormal{(FK)}}};
+    engine{\_}runs\\[1pt]
+    {\scriptsize\color{black!50} run{\_}id (PK)}\\
+    {\scriptsize\color{black!50} repr{\_}id (FK)}};
 
-  % Bottom row: f_map and decisions
-  \node[entity, below=12mm of $(repr.south)!0.5!(runs.south)$] (fmap) {%
-    f\_map\\[1pt]
-    {\scriptsize\color{black!50} repr\_id, run\_id \textnormal{(PK)}}\\
-    {\scriptsize\color{black!50} dec\_id \textnormal{(FK)}}};
+  \node[entity, below=14mm of $(repr.south)!0.5!(runs.south)$] (fmap) {%
+    f{\_}map\\[1pt]
+    {\scriptsize\color{black!50} repr{\_}id, run{\_}id (PK)}\\
+    {\scriptsize\color{black!50} dec{\_}id (FK)}};
 
   \node[entity, right=of fmap] (dec) {%
     decisions\\[1pt]
-    {\scriptsize\color{black!50} dec\_id \textnormal{(PK)}}\\
-    {\scriptsize\color{black!50} policy\_id}};
+    {\scriptsize\color{black!50} dec{\_}id (PK)}\\
+    {\scriptsize\color{black!50} policy{\_}id}};
 
-  % FK arrows
   \draw[fk] (repr.west) -- node[fklbl, above] {FK} (snap.east);
   \draw[fk] (runs.west) -- node[fklbl, above] {FK} (repr.east);
-  \draw[fk] (fmap.north) -- ++(0,0.35) -| node[fklbl, near start, above] {FK} (repr.south);
-  \draw[fk] (fmap.north east) -- ++(0.15,0.35) -| node[fklbl, near start, above] {FK} (runs.south);
+  \draw[fk] (fmap.north) -- ++(0,0.4) -| node[fklbl, near start, above] {FK} (repr.south);
+  \draw[fk] (fmap.north east) -- ++(0.15,0.4) -| node[fklbl, near start, above] {FK} (runs.south);
   \draw[fk] (fmap.east) -- node[fklbl, above] {FK} (dec.west);
 
   \end{tikzpicture}
-
-  \bigskip
-
-  \tablestyle
-  \rowcolors{2}{tableShade}{white}
-  \begin{tabular}{@{\hskip 8pt}l l R{68mm}@{\hskip 8pt}}
-  \toprule
-  \rowcolor{white}
-  Table & Primary key & Role \\
-  \midrule
-  snapshots & snap\_* & Immutable frozen input state and its artifact manifest \\
-  representations & repr\_* & Deterministic encodings of snapshots under a declared parameterization \\
-  engine\_runs & run\_* & Execution records of the fixed engine on specific representations \\
-  decisions & dec\_* & Discrete decision identities extracted by an equivalence policy \\
-  f\_map & composite & Materialized decision-valued map linking repr\_*, run\_*, and dec\_* \\
-  \bottomrule
-  \end{tabular}
-
-  \caption{DecisionDB relational schema and entity roles. Top: entity-relationship diagram showing the five tables and their foreign-key links. Bottom: each table's primary key prefix and role. Foreign-key arrows indicate the direction of referential dependency, linking representations to their parent snapshot, engine runs to the representation consumed, and the decision map table to representations, runs, and decision identities.}
+  \caption{DecisionDB relational schema. Five tables form a content-addressed provenance chain. Foreign-key arrows indicate the direction of referential dependency, linking representations to their parent snapshot, engine runs to the representation consumed, and the decision map table to representations, runs, and decision identities.}
   \label{fig:schema}
 \end{figure}
+
+\begin{table}[t]
+\centering
+\caption{DecisionDB entity roles.}
+\label{tab:schema}
+\smallskip
+\tablestyle
+\rowcolors{2}{tableShade}{white}
+\begin{tabular}{@{\hskip 8pt}l l R{68mm}@{\hskip 8pt}}
+\toprule
+\rowcolor{white}
+Table & Key prefix & Role \\
+\midrule
+snapshots & snap & Immutable frozen input state and its artifact manifest \\
+representations & repr & Deterministic encodings of snapshots under a declared parameterization \\
+engine runs & run & Execution records of the fixed engine on specific representations \\
+decisions & dec & Discrete decision identities extracted by an equivalence policy \\
+f map & composite & Materialized decision-valued map linking representations, runs, and decisions \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Equivalence Policies}
 
