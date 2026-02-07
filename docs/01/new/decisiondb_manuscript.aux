@@ -35,10 +35,9 @@
 \citation{patel2015assessment}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Replay verification results.}}{7}{table.caption.7}\protected@file@percent }
 \newlabel{tab:replay}{{4}{7}{Replay verification results}{table.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain.}}{7}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:replay}{{4}{7}{Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain}{figure.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Replay verification pipeline. Both columns begin with the same stored raw output artifact. The persisted column records the identifiers that were computed during the original sweep. The recomputed column re-applies the equivalence policy to the stored artifact, independently regenerating the policy identifier, payload hash, decision identifier. All three pairs match exactly. The procedure writes no rows; a successful pass confirms that the content-addressing chain from raw output through policy application to decision identity is deterministically recoverable.}}{7}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:replay}{{4}{7}{Replay verification pipeline. Both columns begin with the same stored raw output artifact. The persisted column records the identifiers that were computed during the original sweep. The recomputed column re-applies the equivalence policy to the stored artifact, independently regenerating the policy identifier, payload hash, decision identifier. All three pairs match exactly. The procedure writes no rows; a successful pass confirms that the content-addressing chain from raw output through policy application to decision identity is deterministically recoverable}{figure.caption.8}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Related Work}{7}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Analytic Flexibility and Multiverse Methods}{7}{subsection.7.1}\protected@file@percent }
 \citation{saltelli2008global}
 \citation{damour2022underspecification}
 \citation{henderson2018deep}
@@ -49,26 +48,27 @@
 \citation{zaharia2018accelerating}
 \citation{amstutz2016common}
 \citation{zaharia2012resilient}
-\citation{liskov1974programming}
-\citation{gray1993transaction}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Analytic Flexibility and Multiverse Methods}{8}{subsection.7.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Sensitivity Analysis}{8}{subsection.7.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Reproducibility in Machine Learning}{8}{subsection.7.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Provenance and Workflow Systems}{8}{subsection.7.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Infrastructural Precedents}{8}{subsection.7.5}\protected@file@percent }
+\citation{liskov1974programming}
+\citation{gray1993transaction}
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Summary comparison between decision-valued mapping and related approaches.}}{9}{table.caption.9}\protected@file@percent }
 \newlabel{tab:comparison}{{5}{9}{Summary comparison between decision-valued mapping and related approaches}{table.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}Infrastructural Precedents}{9}{subsection.7.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {8}Limitations}{9}{section.8}\protected@file@percent }
 \bibstyle{plainnat}
 \bibdata{bibliography}
 \bibcite{amstutz2016common}{{1}{2016}{{Amstutz et~al.}}{{Amstutz, Crusoe, Tijani{\'c}, Chapman, Chilton, Heuer, Kartashov, Kern, Leehr, M{\'e}nager, et~al.}}}
 \bibcite{bouthillier2021accounting}{{2}{2021}{{Bouthillier et~al.}}{{Bouthillier, Laurent, and Vincent}}}
 \bibcite{damour2022underspecification}{{3}{2022}{{D'Amour et~al.}}{{D'Amour, Heller, Moldovan, Adlam, Alipanahi, Beutel, Chen, Deaton, Eisenstein, Hoffman, et~al.}}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{10}{section.9}\protected@file@percent }
 \bibcite{dijkstra1959note}{{4}{1959}{{Dijkstra}}{{}}}
 \bibcite{freire2012provenance}{{5}{2008}{{Freire et~al.}}{{Freire, Koop, Santos, and Silva}}}
 \bibcite{gelman2013garden}{{6}{2013}{{Gelman and Loken}}{{}}}
 \bibcite{gray1993transaction}{{7}{1993}{{Gray and Reuter}}{{}}}
 \bibcite{henderson2018deep}{{8}{2018}{{Henderson et~al.}}{{Henderson, Islam, Bachman, Pineau, Precup, and Meger}}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{10}{section.9}\protected@file@percent }
 \bibcite{liskov1974programming}{{9}{1974}{{Liskov and Zilles}}{{}}}
 \bibcite{moreau2013prov}{{10}{2013}{{Moreau and Missier}}{{}}}
 \bibcite{patel2015assessment}{{11}{2015}{{Patel et~al.}}{{Patel, Bhatt, Patel, and Ioannidis}}}
@@ -78,4 +78,4 @@
 \bibcite{steegen2016increasing}{{15}{2016}{{Steegen et~al.}}{{Steegen, Tuerlinckx, Gelman, and Vanpaemel}}}
 \bibcite{zaharia2012resilient}{{16}{2012}{{Zaharia et~al.}}{{Zaharia, Chowdhury, Das, Dave, Ma, McCauley, Franklin, Shenker, and Stoica}}}
 \bibcite{zaharia2018accelerating}{{17}{2018}{{Zaharia et~al.}}{{Zaharia, Chen, Davidson, Ghodsi, Hong, Konwinski, Murching, Nykodym, Ogilvie, Parkhe, et~al.}}}
-\gdef \@abspage@last{11}
+\gdef \@abspage@last{12}

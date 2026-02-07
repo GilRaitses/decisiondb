@@ -108,27 +108,58 @@ Decision ID & dec\_e28092c4dc33b8f1 & dec\_e28092c4dc33b8f1 \\
 
 The replay writes no new rows and modifies no database state. Table counts before and after replay are identical, with 1~engine run, 1~decision, 1~f\_map entry. This confirms that the content-addressing chain from raw output through policy application to decision identity is deterministic and end-to-end auditable.
 
+\definecolor{erdHeader}{HTML}{e1d5e7}
+\definecolor{erdStroke}{HTML}{b5739d}
+
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[
-    node distance=8mm,
-    rbox/.style={draw, rounded corners, align=center, inner sep=6pt, text width=34mm, font=\sffamily\small, fill=blue!6},
-    arrow/.style={-Latex, thick},
-    ann/.style={font=\sffamily\scriptsize, text=black!50, align=center}
+    node distance=6mm,
+    box/.style={draw=erdStroke, rounded corners=3pt, align=center, inner sep=5pt, minimum height=12mm, font=\sffamily\footnotesize, fill=erdHeader},
+    artifact/.style={draw=erdStroke, rounded corners=3pt, align=center, inner sep=4pt, font=\sffamily\scriptsize, fill=erdHeader!30, text=black!55},
+    eqline/.style={thick, erdStroke!50},
+    eqlbl/.style={font=\sffamily\footnotesize, erdStroke},
+    arrow/.style={-{Latex[length=2.5mm, width=2mm]}, thick, erdStroke},
+    verdict/.style={draw=erdStroke, rounded corners=3pt, align=center, inner sep=5pt, font=\sffamily\footnotesize, fill=tableShade}
   ]
 
-  \node[rbox] (s1) {Persisted\\decision record};
-  \node[rbox, right=10mm of s1] (s2) {Reload and\\recompute};
-  \node[rbox, right=10mm of s2, fill=tableShade] (s3) {Equality check};
+  % Left column: persisted chain
+  \node[box, text width=28mm] (raw) at (0,0) {Raw output\\artifact};
+  \node[box, text width=28mm, below=of raw] (pol) {Equivalence\\policy $\pi$};
+  \node[artifact, text width=28mm, below=8mm of pol] (p_polid) {policy ID};
+  \node[artifact, text width=28mm, below=3mm of p_polid] (p_hash) {payload hash};
+  \node[artifact, text width=28mm, below=3mm of p_hash] (p_decid) {decision ID};
 
-  \draw[arrow] (s1) -- (s2);
-  \draw[arrow] (s2) -- (s3);
+  \draw[arrow] (raw) -- (pol);
+  \draw[arrow] (pol) -- (p_polid);
 
-  \node[ann, below=4mm of s1] {stored artifact URI,\\policy specification};
-  \node[ann, below=4mm of s2] {recompute policy ID,\\payload hash, decision ID};
-  \node[ann, below=4mm of s3] {read-only, 0 writes\\PASS / FAIL};
+  % Label
+  \node[font=\sffamily\scriptsize, text=black!40, above=2mm of raw] {persisted};
+
+  % Right column: recomputed chain
+  \node[box, text width=28mm] (raw2) at (5.8,0) {Raw output\\artifact};
+  \node[box, text width=28mm, below=of raw2] (pol2) {Equivalence\\policy $\pi$};
+  \node[artifact, text width=28mm, below=8mm of pol2] (r_polid) {policy ID};
+  \node[artifact, text width=28mm, below=3mm of r_polid] (r_hash) {payload hash};
+  \node[artifact, text width=28mm, below=3mm of r_hash] (r_decid) {decision ID};
+
+  \draw[arrow] (raw2) -- (pol2);
+  \draw[arrow] (pol2) -- (r_polid);
+
+  % Label
+  \node[font=\sffamily\scriptsize, text=black!40, above=2mm of raw2] {recomputed};
+
+  % Equality comparisons
+  \draw[eqline] (p_polid.east) -- node[eqlbl, above] {$=$} (r_polid.west);
+  \draw[eqline] (p_hash.east) -- node[eqlbl, above] {$=$} (r_hash.west);
+  \draw[eqline] (p_decid.east) -- node[eqlbl, above] {$=$} (r_decid.west);
+
+  % Verdict
+  \node[verdict, text width=18mm, below=8mm of $(p_decid.south)!0.5!(r_decid.south)$] (pass) {PASS\\{\scriptsize\color{black!50} 0 rows written}};
+  \draw[arrow] (p_decid.south) -- ++(0,-0.3) -| ([xshift=-3mm]pass.north);
+  \draw[arrow] (r_decid.south) -- ++(0,-0.3) -| ([xshift=3mm]pass.north);
 
   \end{tikzpicture}
-  \caption{Replay verification pipeline. A persisted decision record is used to reload the raw output artifact and policy specification. All three identifying fields are recomputed from stored artifacts and compared against persisted values. The procedure is read-only and writes no database rows; a successful pass confirms deterministic self-consistency of the content-addressing chain.}
+  \caption{Replay verification pipeline. Both columns begin with the same stored raw output artifact. The persisted column records the identifiers that were computed during the original sweep. The recomputed column re-applies the equivalence policy to the stored artifact, independently regenerating the policy identifier, payload hash, decision identifier. All three pairs match exactly. The procedure writes no rows; a successful pass confirms that the content-addressing chain from raw output through policy application to decision identity is deterministically recoverable.}
   \label{fig:replay}
 \end{figure}
