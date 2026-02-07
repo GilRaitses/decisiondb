@@ -25,9 +25,9 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
     arenalbl/.style={font=\figfont\scriptsize, text=black!65}
   ]
 
-  % Arena enclosure
-  \draw[erdStroke!40, rounded corners=6pt, fill=arenaFill] (-0.8, 1.0) rectangle (4.6, -0.7);
-  \node[arenalbl, anchor=north west] at (-0.6, 0.9) {arena (invariant)};
+  % Arena enclosure (equal padding around contents)
+  \draw[erdStroke!40, rounded corners=6pt, fill=arenaFill] (-0.6, 1.1) rectangle (4.8, -0.7);
+  \node[arenalbl, anchor=north west] at (-0.4, 1.0) {arena (invariant)};
 
   % Arena components inside the enclosure
   \node[box, text width=20mm] (snap) at (0.6, 0.2) {Snapshot $s$};
@@ -53,6 +53,10 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
   \draw[arrow] (r1.east) -- (d1.west);
   \draw[arrow] (r2.east) -- (d2.west);
   \draw[arrow] (r3.east) -- (d3.west);
+
+  % Output annotations
+  \node[arenalbl, anchor=west] at (11.2, 0.9) {persistence};
+  \node[arenalbl, anchor=west] at (11.2, -1.2) {boundary};
 
   \end{tikzpicture}
   \caption{Evaluation protocol for a decision-valued map. A single arena, consisting of a data snapshot and a computational engine, is reused across evaluation. Representations drawn from a declared family are varied within this arena and evaluated independently. Agreement of decision identifiers across representations indicates persistence of decision identity; a change in identifier indicates a boundary induced by representational variation alone.}
