@@ -2,7 +2,7 @@
 
 Decision-valued maps provide a diagnostic way to make the dependence of discrete outcomes on representational choices explicit. The object is a mapping from representations to decision identities, evaluated under a fixed snapshot and engine, then materialized through content-addressed identifiers and immutable artifacts.
 
-DecisionDB implements this approach through a five-stage sweep protocol, a five-table relational schema, a replay verification procedure. In a graph routing demonstration, one representation parameter preserves route identity across its tested range while another induces a discrete route change. Replay verification confirmed that all persisted decision identifiers are deterministically recoverable.
+DecisionDB implements this approach through a five-stage sweep protocol, a five-table relational schema, a replay verification procedure. In a graph routing demonstration, one representation parameter preserves decision identity across its tested range while another induces a discrete identity change. Replay verification confirmed that all persisted decision identifiers are deterministically recoverable.
 
 The approach is limited by its restriction to discrete outcomes, its reliance on fixed snapshots and engines, the narrow empirical coverage reported here. A natural extension is to densify the parameter sweep, apply the same protocol across additional domains, introduce a cross-snapshot comparison procedure that treats ``same query, different snapshot'' as an explicit axis of reuse admissibility.
 
