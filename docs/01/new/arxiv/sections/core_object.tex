@@ -8,13 +8,13 @@ where $\mathcal{R}$ denotes a family of representations over a fixed snapshot $s
 
 Three structural features of this map are observable through controlled variation of $\mathcal{R}$. Persistence regions are connected subsets of $\mathcal{R}$ over which $f$ is constant; within a persistence region, representational variation does not change the outcome. Boundaries are loci in $\mathcal{R}$ where $f$ changes value, separating two persistence regions with different decision identities. Fractures are boundaries where a small change in representation parameters induces a discrete identity change, indicating high sensitivity of the outcome to the representation.
 
-The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declared points in $\mathcal{R}$, storing the results as immutable artifacts, and making the resulting map queryable, replayable, and auditable. Figure~\ref{fig:pipeline} illustrates this pipeline.
+The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declared points in $\mathcal{R}$, storing the results as immutable artifacts, then making the resulting map queryable, replayable, auditable. Figure~\ref{fig:pipeline} illustrates this pipeline.
 
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[
-    node distance=12mm,
-    box/.style={draw, rounded corners=4pt, align=center, inner sep=7pt, minimum height=14mm, text width=28mm, font=\sffamily\small, fill=blue!6},
+    node distance=10mm,
+    box/.style={draw, rounded corners=4pt, align=center, inner sep=6pt, minimum height=14mm, text width=27mm, font=\sffamily\small, fill=blue!6},
     arrow/.style={-{Latex[length=3.5mm, width=2.5mm]}, thick, black!60}
   ]
   \node[box] (snap) {Snapshot $s$\\[2pt]{\scriptsize\color{black!50} frozen inputs}};
@@ -29,6 +29,6 @@ The purpose of DecisionDB is to \emph{materialize} $f$, evaluating it at declare
   \draw[arrow] (pol.south) -- ++(0,-0.5) -| (map.east);
   \draw[arrow] (snap.south) -- ++(0,-0.8) -| (map.west);
   \end{tikzpicture}
-  \caption{Decision-valued mapping pipeline. A frozen snapshot is encoded into a representation, consumed by a fixed engine, and reduced to a discrete decision identity via an equivalence policy. The decision map table materializes these links using content-addressed identifiers. Each stage is immutable and content-addressed, so the full provenance chain from raw input to discrete outcome is recoverable at any later time.}
+  \caption{Decision-valued mapping pipeline. A frozen snapshot is encoded into a representation, consumed by a fixed engine, then reduced to a discrete decision identity via an equivalence policy. The decision map table materializes these links using content-addressed identifiers. Each stage is immutable and content-addressed, so the full provenance chain from raw input to discrete outcome is recoverable at any later time.}
   \label{fig:pipeline}
 \end{figure}

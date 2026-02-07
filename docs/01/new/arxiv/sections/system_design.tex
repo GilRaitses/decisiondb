@@ -4,11 +4,11 @@ DecisionDB is implemented as a Python package backed by SQLite. It manages five 
 
 \subsection{Content Addressing}
 
-All identifiers are computed deterministically from content. Given an entity's payload as a Python dictionary, DecisionDB serializes it to canonical JSON with keys sorted alphabetically, no whitespace, arrays in declaration order, floats as strings, and explicit version fields. It then computes the SHA-256 digest of the UTF-8 encoding, truncates to the first 16 hexadecimal characters, and prepends a type-specific prefix. Identical content always produces identical identifiers, regardless of when or where the computation occurs.
+All identifiers are computed deterministically from content. Given an entity's payload as a Python dictionary, DecisionDB serializes it to canonical JSON with keys sorted alphabetically, no whitespace, arrays in declaration order, floats as strings, explicit version fields. It then computes the SHA-256 digest of the UTF-8 encoding, truncates to the first 16 hexadecimal characters, prepends a type-specific prefix. Identical content always produces identical identifiers, regardless of when or where the computation occurs.
 
 \subsection{Schema}
 
-The relational schema contains five core tables. Figure~\ref{fig:schema} shows their foreign-key relationships and Table~\ref{tab:schema} summarizes each table's role. Each table enforces content-addressed primary keys and foreign-key constraints that link the full provenance chain from snapshot through representation and engine execution to decision identity. All writes are append-only, scoped by experiment identifier, and executed within transactions. Inserts use an insert-or-ignore strategy for idempotency, so re-inserting the same content-addressed entity is a no-op.
+The relational schema contains five core tables. Figure~\ref{fig:schema} shows their foreign-key relationships and Table~\ref{tab:schema} summarizes each table's role. Each table enforces content-addressed primary keys and foreign-key constraints that link the full provenance chain from snapshot through representation and engine execution to decision identity. All writes are append-only, scoped by experiment identifier, executed within transactions. Inserts use an insert-or-ignore strategy for idempotency, so re-inserting the same content-addressed entity is a no-op.
 
 \begin{figure}[t]
   \centering
@@ -33,15 +33,15 @@ snapshots & snap & Immutable frozen input state and its artifact manifest \\
 representations & repr & Deterministic encodings of snapshots under a declared parameterization \\
 engine runs & run & Execution records of the fixed engine on specific representations \\
 decisions & dec & Discrete decision identities extracted by an equivalence policy \\
-f map & composite & Materialized decision-valued map linking representations, runs, and decisions \\
+f map & composite & Materialized decision-valued map linking representations, runs, decisions \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Equivalence Policies}
 
-An equivalence policy defines how raw engine output is reduced to a decision identity. Each policy specifies a hash source, identifying which field of the raw output carries decision-relevant content such as the route node sequence. It also specifies a canonicalization rule that determines how to serialize the extracted content, and a match rule that determines identity such as SHA-256 equality. The policy itself is content-addressed, so any change to the policy definition produces a new policy identifier and new decision identifiers downstream.
+An equivalence policy defines how raw engine output is reduced to a decision identity. Each policy specifies a hash source, identifying which field of the raw output carries decision-relevant content such as the route node sequence. It also specifies a canonicalization rule that determines how to serialize the extracted content alongside a match rule that determines identity such as SHA-256 equality. The policy itself is content-addressed, so any change to the policy definition produces a new policy identifier and new decision identifiers downstream.
 
 \subsection{Replay Verification}
 
-Replay verification takes a persisted decision record, reloads the stored raw output and policy specification, recomputes the policy identifier, payload hash, and decision identifier, and checks them against the persisted values. Because replay is read-only and writes no rows, a successful pass confirms that the content-addressing chain from raw output through policy application to decision identity is deterministic and self-consistent.
+Replay verification takes a persisted decision record, reloads the stored raw output and policy specification, recomputes the policy identifier, payload hash, decision identifier, then checks them against the persisted values. Because replay is read-only and writes no rows, a successful pass confirms that the content-addressing chain from raw output through policy application to decision identity is deterministic and self-consistent.

@@ -4,7 +4,7 @@ The framework is demonstrated on a graph routing problem. The goal is not to eva
 
 \subsection{Setup}
 
-The demonstration fixes a directed graph with node set $V$ where $|V| = 564$, edge set $E$, and immutable edge attributes including baseline costs derived from geographic distance and a normalized stress metric. The snapshot is content-addressed and frozen before any engine execution. A single origin-destination query is fixed at start node 85 and end node 50.
+The demonstration fixes a directed graph with node set $V$ where $|V| = 564$, edge set $E$, immutable edge attributes including baseline costs derived from geographic distance and a normalized stress metric. The snapshot is content-addressed and frozen before any engine execution. A single origin-destination query is fixed at start node 85 and end node 50.
 
 Each representation encodes the graph's edge costs as a deterministic function of the frozen edge attributes. Two representation parameters control the cost surface. The first, neighbor weight, applies a weight to a neighbor-based cost component and is tested at 0.5 and 1.0. The second, second-order weight, applies a weight to a second-order cost component and is tested at 0.25 and 0.5. Each sweep varies one parameter while holding the other fixed, producing two representation variants per sweep and four engine evaluations total.
 
@@ -85,7 +85,7 @@ second-order weight & 0.5 & B & 14 & Yes \\
 
 \subsection{Replay Verification}
 
-Replay verification is performed on a decision produced by the sweep. The procedure reloads the stored raw output and policy specification, recomputes all three identifying fields, and checks them against the persisted values. All recomputed values match exactly, as shown in Table~\ref{tab:replay} and Figure~\ref{fig:replay}.
+Replay verification is performed on a decision produced by the sweep. The procedure reloads the stored raw output and policy specification, recomputes all three identifying fields so as to check them against the persisted values. All recomputed values match exactly, as shown in Table~\ref{tab:replay} and Figure~\ref{fig:replay}.
 
 \begin{table}[t]
 \centering
@@ -106,7 +106,7 @@ Decision ID & dec\_e28092c4dc33b8f1 & dec\_e28092c4dc33b8f1 \\
 \end{tabular}
 \end{table}
 
-The replay writes no new rows and modifies no database state. Table counts before and after replay are identical, with 1~engine run, 1~decision, and 1~f\_map entry. This confirms that the content-addressing chain from raw output through policy application to decision identity is deterministic and end-to-end auditable.
+The replay writes no new rows and modifies no database state. Table counts before and after replay are identical, with 1~engine run, 1~decision, 1~f\_map entry. This confirms that the content-addressing chain from raw output through policy application to decision identity is deterministic and end-to-end auditable.
 
 \begin{figure}[t]
   \centering
