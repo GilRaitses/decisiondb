@@ -12,45 +12,8 @@ The relational schema contains five core tables. Figure~\ref{fig:schema} shows t
 
 \begin{figure}[t]
   \centering
-  \begin{tikzpicture}[
-    node distance=8mm and 14mm,
-    entity/.style={draw, rounded corners, align=left, inner sep=6pt, text width=32mm, font=\sffamily\footnotesize, fill=blue!6},
-    fk/.style={-Latex, thick, black!50},
-    fklbl/.style={font=\sffamily\scriptsize, text=black!40, fill=white, inner sep=1pt}
-  ]
-
-  \node[entity] (snap) {%
-    snapshots\\[1pt]
-    {\scriptsize\color{black!50} snap{\_}id (PK)}};
-
-  \node[entity, right=of snap] (repr) {%
-    representations\\[1pt]
-    {\scriptsize\color{black!50} repr{\_}id (PK)}\\
-    {\scriptsize\color{black!50} snapshot{\_}id (FK)}};
-
-  \node[entity, right=of repr] (runs) {%
-    engine{\_}runs\\[1pt]
-    {\scriptsize\color{black!50} run{\_}id (PK)}\\
-    {\scriptsize\color{black!50} repr{\_}id (FK)}};
-
-  \node[entity, below=14mm of $(repr.south)!0.5!(runs.south)$] (fmap) {%
-    f{\_}map\\[1pt]
-    {\scriptsize\color{black!50} repr{\_}id, run{\_}id (PK)}\\
-    {\scriptsize\color{black!50} dec{\_}id (FK)}};
-
-  \node[entity, right=of fmap] (dec) {%
-    decisions\\[1pt]
-    {\scriptsize\color{black!50} dec{\_}id (PK)}\\
-    {\scriptsize\color{black!50} policy{\_}id}};
-
-  \draw[fk] (repr.west) -- node[fklbl, above] {FK} (snap.east);
-  \draw[fk] (runs.west) -- node[fklbl, above] {FK} (repr.east);
-  \draw[fk] (fmap.north) -- ++(0,0.4) -| node[fklbl, near start, above] {FK} (repr.south);
-  \draw[fk] (fmap.north east) -- ++(0.15,0.4) -| node[fklbl, near start, above] {FK} (runs.south);
-  \draw[fk] (fmap.east) -- node[fklbl, above] {FK} (dec.west);
-
-  \end{tikzpicture}
-  \caption{DecisionDB relational schema. Five tables form a content-addressed provenance chain. Foreign-key arrows indicate the direction of referential dependency, linking representations to their parent snapshot, engine runs to the representation consumed, and the decision map table to representations, runs, and decision identities.}
+  \includegraphics[width=\textwidth]{figures/figure2_schema.pdf}
+  \caption{DecisionDB relational schema. Five tables form a content-addressed provenance chain. Foreign-key arrows indicate the direction of referential dependency, linking representations to their parent snapshot, engine runs to the representation consumed, the decision map table to representations, runs, decision identities.}
   \label{fig:schema}
 \end{figure}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  7 FEB 2026 00:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  7 FEB 2026 00:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -663,24 +663,24 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 (./decisiondb_manuscript.aux)
 \openout1 = `decisiondb_manuscript.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 35.
+LaTeX Font Info:    ... okay on input line 35.
 
 (/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -749,18 +749,18 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 34.
+Package hyperref Info: Link coloring OFF on input line 35.
 (./decisiondb_manuscript.out) (./decisiondb_manuscript.out)
 \@outlinefile=\write4
 \openout4 = `decisiondb_manuscript.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 37.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 38.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 37.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
 
 
 (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -780,19 +780,25 @@ Overfull \hbox (8.94562pt too wide) in paragraph at lines 31--32
 
 [2]) (./sections/system_design.tex
 
-[3])
+[3]
+<figures/figure2_schema.pdf, id=121, 614.295pt x 289.08pt>
+File: figures/figure2_schema.pdf Graphic file (type pdf)
+<use figures/figure2_schema.pdf>
+Package pdftex.def Info: figures/figure2_schema.pdf  used on input line 15.
+(pdftex.def)             Requested size: 469.75502pt x 221.06166pt.
 
-[4] (./sections/empirical.tex
 
-[5]
+[4 <./figures/figure2_schema.pdf>]) (./sections/empirical.tex
 
-[6]) (./sections/related_work.tex
+[5]) (./sections/related_work.tex
 
-[7]) (./sections/limitations.tex
+[6]
 
-[8]) (./sections/conclusion.tex
+[7])
 
-[9]) (./decisiondb_manuscript.bbl
+[8] (./sections/limitations.tex
+
+[9]) (./sections/conclusion.tex) (./decisiondb_manuscript.bbl
 
 [10])
 
@@ -805,11 +811,11 @@ Package rerunfilecheck Info: File `decisiondb_manuscript.out' has not changed.
 (rerunfilecheck)             Checksum: 7EB73EE7A2283D5CDC1DE6F65B21529F;3052.
  ) 
 Here is how much of TeX's memory you used:
- 23377 strings out of 473190
- 434720 string characters out of 5715801
- 820956 words of memory out of 5000000
- 46175 multiletter control sequences out of 15000+600000
- 569978 words of font info for 79 fonts, out of 8000000 for 9000
+ 23346 strings out of 473190
+ 434362 string characters out of 5715801
+ 820947 words of memory out of 5000000
+ 46145 multiletter control sequences out of 15000+600000
+ 569810 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,12n,91p,1349b,884s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -823,12 +829,11 @@ al/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/loca
 l/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/
 texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/te
 xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
-live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texl
-ive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on decisiondb_manuscript.pdf (11 pages, 215960 bytes).
+live/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on decisiondb_manuscript.pdf (11 pages, 226390 bytes).
 PDF statistics:
- 277 PDF objects out of 1000 (max. 8388607)
- 235 compressed objects within 3 object streams
+ 292 PDF objects out of 1000 (max. 8388607)
+ 245 compressed objects within 3 object streams
  60 named destinations out of 1000 (max. 500000)
- 181 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 186 words of extra memory for PDF output out of 10000 (max. 10000000)
 
