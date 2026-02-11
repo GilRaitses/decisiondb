@@ -20,7 +20,10 @@ Decision-valued mapping addresses a related but distinct problem. Rather than do
 
 \subsection{Provenance and Workflow Systems}
 
-General-purpose provenance vocabularies record the derivation history of computational artifacts~\cite{moreau2013prov}. Workflow provenance for scientific computations~\cite{freire2012provenance}, experiment tracking for machine learning pipelines~\cite{zaharia2018accelerating}, standardized workflow definitions for reproducible execution~\cite{amstutz2016common} and lineage tracking for fault-tolerant distributed computation~\cite{zaharia2012resilient} all address aspects of this problem.
+{\sloppy
+General-purpose provenance vocabularies record the derivation history of computational
+artifacts~\cite{moreau2013prov}. Workflow provenance for scientific computations~\cite{freire2012provenance}, experiment tracking for machine learning pipelines~\cite{zaharia2018accelerating}, standardized workflow definitions for reproducible execution~\cite{amstutz2016common} and lineage tracking for fault-tolerant distributed computation~\cite{zaharia2012resilient} all address aspects of this problem.
+\par}
 
 The diagnostic layer described here is narrower than these systems in scope and more specific in its invariants. Rather than managing arbitrary workflows or tracking general-purpose provenance graphs, it enforces a specific structure with immutable snapshots, declared representation families, fixed engines and equivalence policies that reduce raw output to discrete identities. The content-addressing scheme ensures that identical inputs always produce identical identifiers; replay verification checks end-to-end consistency of the provenance chain. This specificity enables the decision-valued map as a queryable diagnostic object, which general-purpose provenance systems do not directly support.
 
