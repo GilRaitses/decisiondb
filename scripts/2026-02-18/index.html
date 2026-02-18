@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>pax A* frontier diagnostics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+      color: #1f2937;
+      background: #ffffff;
+      line-height: 1.45;
+    }
+    h1, h2 {
+      margin-bottom: 8px;
+    }
+    .muted {
+      color: #4b5563;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+    .card {
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 12px;
+      background: #f9fafb;
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: #fff;
+    }
+    code {
+      background: #f3f4f6;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    ul {
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>A* frontier-level diagnostics for pax routing</h1>
+  <p class="muted">
+    This page documents a diagnostic re-instrumentation pass focused on search behavior.
+    The goal is to expose frontier evolution, open and closed set transitions, and pruning events.
+    It does not change routing policy for optimization.
+  </p>
+
+  <h2>What was instrumented</h2>
+  <ul>
+    <li>Expanded node and its <code>g</code>, <code>h</code>, <code>f</code> values per step</li>
+    <li>Frontier size and nodes added to open set</li>
+    <li>Nodes skipped or pruned during expansion</li>
+    <li>Closed set membership changes</li>
+    <li>Best-path candidate evolution</li>
+  </ul>
+
+  <h2>Frontier evolution panels</h2>
+  <p class="muted">
+    All three GIFs are synchronized by expansion step for direct comparison.
+  </p>
+  <div class="grid">
+    <div class="card">
+      <h3>Panel A: baseline</h3>
+      <img src="gifs/panel_a_baseline.gif" alt="Panel A baseline frontier evolution">
+      <p>
+        Distance-only A* objective (stress weight set to zero) with Manhattan-distance heuristic.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Panel B: paper heuristic</h3>
+      <img src="gifs/panel_b_paper_heuristic.gif" alt="Panel B paper heuristic frontier evolution">
+      <p>
+        Paper configuration: stress-weighted path cost with distance-only admissible heuristic.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Panel C: stress-weighted heuristic</h3>
+      <img src="gifs/panel_c_stress_weighted.gif" alt="Panel C stress-weighted heuristic frontier evolution">
+      <p>
+        Diagnostic stress-emphasized variant: higher stress weight and stress-influenced heuristic term.
+      </p>
+    </div>
+  </div>
+
+  <h2>Observed findings</h2>
+  <ul>
+    <li>All three variants found a route from Grand Central to Carnegie Hall.</li>
+    <li>First search divergence occurred at step 2 for both stress-weighted variants.</li>
+    <li>Nodes explored: baseline 57, paper heuristic 433, stress-weighted heuristic 446.</li>
+    <li>No sustained frontier-collapse event was detected under the 10% of peak frontier threshold criterion.</li>
+    <li>Baseline-path nodes were not permanently pruned before any expansion in the weighted variants.</li>
+  </ul>
+
+  <h2>Why frontier visibility matters for admissibility checks</h2>
+  <p>
+    Final path outputs do not show whether candidate states were dropped before evaluation.
+    Frontier traces reveal when pruning is due to closed-set policy, stale entries, or objective reweighting.
+    This visibility is required to confirm or rule out premature elimination of admissible alternatives.
+  </p>
+
+  <h2>Artifacts</h2>
+  <ul>
+    <li><code>astar_audit.md</code></li>
+    <li><code>frontier_trace.jsonl</code></li>
+    <li><code>frontier_pruning_diagnosis.md</code></li>
+    <li><code>frontier_diagnostic_summary.json</code></li>
+  </ul>
+</body>
+</html>

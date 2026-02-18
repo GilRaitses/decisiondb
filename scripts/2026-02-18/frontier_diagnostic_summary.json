@@ -1,0 +1,2262 @@
+{
+  "start_node": 418,
+  "goal_node": 486,
+  "variants": {
+    "panel_a_baseline": {
+      "path_found": true,
+      "path_length_nodes": 18,
+      "distance": 0.02184049966422208,
+      "total_stress": 0.007740993320834231,
+      "nodes_explored": 57,
+      "trace_steps": 57,
+      "stress_weight": 0.0,
+      "heuristic_mode": "distance",
+      "heuristic_stress_weight": 0.0
+    },
+    "panel_b_paper_heuristic": {
+      "path_found": true,
+      "path_length_nodes": 19,
+      "distance": 0.03075357463738726,
+      "total_stress": 0.005609818910990692,
+      "nodes_explored": 433,
+      "trace_steps": 433,
+      "stress_weight": 0.088,
+      "heuristic_mode": "distance",
+      "heuristic_stress_weight": 0.0
+    },
+    "panel_c_stress_weighted": {
+      "path_found": true,
+      "path_length_nodes": 19,
+      "distance": 0.03075357463738726,
+      "total_stress": 0.005609818910990692,
+      "nodes_explored": 446,
+      "trace_steps": 446,
+      "stress_weight": 0.264,
+      "heuristic_mode": "distance_plus_node_stress",
+      "heuristic_stress_weight": 0.088
+    }
+  },
+  "diagnosis": {
+    "baseline_path_nodes": [
+      418,
+      11,
+      263,
+      139,
+      202,
+      313,
+      223,
+      200,
+      243,
+      61,
+      69,
+      514,
+      56,
+      434,
+      492,
+      170,
+      513,
+      486
+    ],
+    "variants": {
+      "panel_a_baseline": {
+        "path_found": true,
+        "nodes_explored": 57,
+        "first_divergence_step": null,
+        "frontier_peak": 146,
+        "collapse_step": null,
+        "prune_events_on_baseline_path": [
+          {
+            "step": 2,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 2,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 3,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 3,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 4,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 4,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 5,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 5,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 6,
+            "node": 263,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 8,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 8,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 9,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 10,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 12,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 13,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 13,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 14,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 14,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 15,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 16,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 17,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 18,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 18,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 19,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 20,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 21,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 22,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 23,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 24,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 25,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 26,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 27,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 28,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 28,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 29,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 30,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 31,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 32,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 33,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 34,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 34,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 35,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 35,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 36,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 37,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 38,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 39,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 40,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 41,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 42,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 43,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 44,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 45,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 46,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 47,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 48,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 49,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 50,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 51,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 52,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 53,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 54,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 55,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 56,
+            "node": 170,
+            "reason": "neighbor_in_closed_set"
+          }
+        ],
+        "permanently_pruned_baseline_nodes": [],
+        "expanded_baseline_path_nodes": [
+          11,
+          56,
+          61,
+          69,
+          139,
+          170,
+          200,
+          202,
+          223,
+          243,
+          263,
+          313,
+          418,
+          434,
+          486,
+          492,
+          513,
+          514
+        ],
+        "stress_weight": 0.0,
+        "heuristic_mode": "distance",
+        "heuristic_stress_weight": 0.0
+      },
+      "panel_b_paper_heuristic": {
+        "path_found": true,
+        "nodes_explored": 433,
+        "first_divergence_step": 2,
+        "frontier_peak": 81,
+        "collapse_step": null,
+        "prune_events_on_baseline_path": [
+          {
+            "step": 2,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 3,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 4,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 4,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 5,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 5,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 6,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 6,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 7,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 7,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 8,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 8,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 9,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 9,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 11,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 11,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 12,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 13,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 14,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 16,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 17,
+            "node": 202,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 18,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 20,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 20,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 22,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 24,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 24,
+            "node": 139,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 28,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 29,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 30,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 31,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 33,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 34,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 35,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 36,
+            "node": 313,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 41,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 45,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 46,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 48,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 49,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 49,
+            "node": 223,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 51,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 52,
+            "node": 223,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 52,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 52,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 54,
+            "node": 223,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 54,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 55,
+            "node": 223,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 55,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 59,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 59,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 59,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 63,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 64,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 65,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 70,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 71,
+            "node": 223,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 71,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 73,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 76,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 79,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 83,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 88,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 89,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 92,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 93,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 96,
+            "node": 200,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 96,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 103,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 111,
+            "node": 200,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 112,
+            "node": 200,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 114,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 114,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 117,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 128,
+            "node": 200,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 130,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 131,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 132,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 132,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 136,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 145,
+            "node": 243,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 146,
+            "node": 243,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 147,
+            "node": 243,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 158,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 158,
+            "node": 243,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 162,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 163,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 166,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 171,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 174,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 184,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 185,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 186,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 187,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 188,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 194,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 220,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 220,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 221,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 226,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 230,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 231,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 232,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 233,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 234,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 235,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 236,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 238,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 238,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 240,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 248,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 255,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 260,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 261,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 261,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 265,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 266,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 270,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 275,
+            "node": 56,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 276,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 277,
+            "node": 56,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 278,
+            "node": 56,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 282,
+            "node": 56,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 286,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 290,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 290,
+            "node": 56,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 304,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 306,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 306,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 308,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 309,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 314,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 319,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 320,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 321,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 322,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 330,
+            "node": 492,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 331,
+            "node": 492,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 336,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 339,
+            "node": 492,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 340,
+            "node": 492,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 342,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 355,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 355,
+            "node": 492,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 357,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 361,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 362,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 363,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 365,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 369,
+            "node": 170,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 371,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 372,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 374,
+            "node": 170,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 375,
+            "node": 170,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 377,
+            "node": 170,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 383,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 387,
+            "node": 170,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 395,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 395,
+            "node": 513,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 398,
+            "node": 513,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 399,
+            "node": 170,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 401,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 402,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 404,
+            "node": 170,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 407,
+            "node": 170,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 407,
+            "node": 486,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 408,
+            "node": 513,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 409,
+            "node": 513,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 415,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 416,
+            "node": 513,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 417,
+            "node": 170,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 418,
+            "node": 513,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 427,
+            "node": 486,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 430,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 431,
+            "node": 486,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 432,
+            "node": 486,
+            "reason": "no_better_g"
+          }
+        ],
+        "permanently_pruned_baseline_nodes": [],
+        "expanded_baseline_path_nodes": [
+          11,
+          56,
+          61,
+          69,
+          139,
+          170,
+          200,
+          202,
+          223,
+          243,
+          263,
+          313,
+          418,
+          434,
+          486,
+          492,
+          513,
+          514
+        ],
+        "stress_weight": 0.088,
+        "heuristic_mode": "distance",
+        "heuristic_stress_weight": 0.0
+      },
+      "panel_c_stress_weighted": {
+        "path_found": true,
+        "nodes_explored": 446,
+        "first_divergence_step": 2,
+        "frontier_peak": 84,
+        "collapse_step": null,
+        "prune_events_on_baseline_path": [
+          {
+            "step": 2,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 3,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 4,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 4,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 5,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 5,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 6,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 6,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 8,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 8,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 9,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 9,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 10,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 11,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 12,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 13,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 14,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 14,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 15,
+            "node": 202,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 17,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 17,
+            "node": 418,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 18,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 22,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 22,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 23,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 26,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 26,
+            "node": 139,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 26,
+            "node": 313,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 30,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 32,
+            "node": 313,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 34,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 35,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 38,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 39,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 40,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 41,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 43,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 44,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 48,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 52,
+            "node": 11,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 55,
+            "node": 223,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 55,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 55,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 60,
+            "node": 223,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 60,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 63,
+            "node": 223,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 63,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 66,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 66,
+            "node": 223,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 69,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 70,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 70,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 70,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 71,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 72,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 74,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 76,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 77,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 79,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 82,
+            "node": 223,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 82,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 89,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 94,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 99,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 102,
+            "node": 263,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 103,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 104,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 108,
+            "node": 202,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 110,
+            "node": 200,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 110,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 118,
+            "node": 200,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 123,
+            "node": 200,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 133,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 133,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 136,
+            "node": 200,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 138,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 138,
+            "node": 313,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 139,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 150,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 151,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 155,
+            "node": 139,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 156,
+            "node": 243,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 157,
+            "node": 243,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 159,
+            "node": 243,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 173,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 175,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 177,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 179,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 185,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 188,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 188,
+            "node": 243,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 198,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 201,
+            "node": 223,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 205,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 206,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 208,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 209,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 232,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 236,
+            "node": 243,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 239,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 240,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 240,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 242,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 246,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 247,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 249,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 250,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 251,
+            "node": 200,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 252,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 262,
+            "node": 61,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 265,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 267,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 267,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 269,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 272,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 277,
+            "node": 69,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 280,
+            "node": 56,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 281,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 285,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 285,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 288,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 291,
+            "node": 56,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 292,
+            "node": 56,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 293,
+            "node": 514,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 294,
+            "node": 56,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 304,
+            "node": 243,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 314,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 314,
+            "node": 56,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 317,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 323,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 323,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 324,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 326,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 327,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 328,
+            "node": 61,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 332,
+            "node": 69,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 334,
+            "node": 492,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 342,
+            "node": 492,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 343,
+            "node": 492,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 345,
+            "node": 492,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 347,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 348,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 350,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 363,
+            "node": 514,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 364,
+            "node": 434,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 365,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 366,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 368,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 370,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 370,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 371,
+            "node": 170,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 374,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 377,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 382,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 391,
+            "node": 170,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 392,
+            "node": 170,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 395,
+            "node": 170,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 396,
+            "node": 170,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 397,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 401,
+            "node": 56,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 407,
+            "node": 513,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 409,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 410,
+            "node": 492,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 410,
+            "node": 513,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 411,
+            "node": 170,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 412,
+            "node": 170,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 419,
+            "node": 170,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 420,
+            "node": 170,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 420,
+            "node": 486,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 421,
+            "node": 513,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 422,
+            "node": 513,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 423,
+            "node": 513,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 424,
+            "node": 513,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 430,
+            "node": 434,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 432,
+            "node": 486,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 434,
+            "node": 170,
+            "reason": "neighbor_in_closed_set"
+          },
+          {
+            "step": 443,
+            "node": 486,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 444,
+            "node": 486,
+            "reason": "no_better_g"
+          },
+          {
+            "step": 445,
+            "node": 486,
+            "reason": "no_better_g"
+          }
+        ],
+        "permanently_pruned_baseline_nodes": [],
+        "expanded_baseline_path_nodes": [
+          11,
+          56,
+          61,
+          69,
+          139,
+          170,
+          200,
+          202,
+          223,
+          243,
+          263,
+          313,
+          418,
+          434,
+          486,
+          492,
+          513,
+          514
+        ],
+        "stress_weight": 0.264,
+        "heuristic_mode": "distance_plus_node_stress",
+        "heuristic_stress_weight": 0.088
+      }
+    }
+  },
+  "gif_paths": {
+    "panel_a_baseline": "/workspace/scripts/2026-02-18/gifs/panel_a_baseline.gif",
+    "panel_b_paper_heuristic": "/workspace/scripts/2026-02-18/gifs/panel_b_paper_heuristic.gif",
+    "panel_c_stress_weighted": "/workspace/scripts/2026-02-18/gifs/panel_c_stress_weighted.gif"
+  }
+}

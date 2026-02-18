@@ -53,3 +53,26 @@ Beads tracker:
 - Artifact: `index.html`
 - Verification:
   - Includes explanation, three GIF panels with captions, concise findings, and admissibility note.
+
+## Completion status
+
+- [x] Phase 1 Discovery completed
+- [x] Phase 2 Construction completed
+- [x] Phase 3 Synthesis completed
+- [x] Phase 4 Analysis completed
+- [x] Phase 5 Publication completed
+
+## Verification results
+
+- Trace records written: 936 total expansions
+  - Panel A baseline: 57
+  - Panel B paper heuristic: 433
+  - Panel C stress-weighted heuristic: 446
+- GIF synchronization check:
+  - `panel_a_baseline.gif`: 446 frames
+  - `panel_b_paper_heuristic.gif`: 446 frames
+  - `panel_c_stress_weighted.gif`: 446 frames
+- Diagnosis summary:
+  - First divergence at step 2 for weighted variants
+  - No permanent pruning of baseline-path nodes before expansion
+  - No frontier collapse under 10 percent peak criterion

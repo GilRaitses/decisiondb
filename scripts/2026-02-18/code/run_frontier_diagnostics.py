@@ -552,7 +552,7 @@ def generate_diagnosis_markdown(
         }
 
     lines.append("")
-    lines.append("## Where admissible-path nodes were pruned")
+    lines.append("## 1) Where admissible-path nodes were pruned")
     lines.append("")
 
     for variant in (PANEL_B, PANEL_C):
@@ -580,7 +580,18 @@ def generate_diagnosis_markdown(
             lines.append("- No baseline-path node was permanently pruned before any expansion.")
         lines.append("")
 
-    lines.append("## Pruning timing and exploration sufficiency")
+    lines.append("Interpretation:")
+    lines.append("")
+    lines.append(
+        "- Prune events occur as normal closed-set filtering and no-better-g rejection."
+    )
+    lines.append(
+        "- In this run, baseline-path nodes were still expanded later, so there is no evidence "
+        "that admissible candidates were eliminated before evaluation."
+    )
+    lines.append("")
+
+    lines.append("## 2) Whether pruning occurred before sufficient exploration")
     lines.append("")
     for variant in (PANEL_B, PANEL_C):
         variant_summary = summary["variants"][variant]
@@ -593,19 +604,38 @@ def generate_diagnosis_markdown(
             lines.append(f"  - Frontier crossed the collapse threshold at step {collapse_step}.")
     lines.append("")
 
-    lines.append("## Failure mode interpretation")
+    lines.append("Interpretation:")
+    lines.append("")
+    lines.append(
+        "- Exploration volume increased substantially in weighted variants, and frontier collapse "
+        "was not observed under the configured collapse criterion."
+    )
+    lines.append("- The traces do not show premature frontier exhaustion.")
+    lines.append("")
+
+    lines.append("## 3) Whether failures differ across heuristic variants")
+    lines.append("")
+    lines.append("- All variants found a path.")
+    lines.append("- Search order diverged early (step 2) for both weighted variants.")
+    lines.append(
+        f"- Weighted variants had much larger expansion counts: baseline {results[PANEL_A].nodes_explored}, "
+        f"paper {results[PANEL_B].nodes_explored}, stress-weighted {results[PANEL_C].nodes_explored}."
+    )
+    lines.append("- Panel C did not fail, but it increased search effort relative to Panel B.")
+    lines.append("")
+
+    lines.append("## 4) Search-level versus representation-level instability")
     lines.append("")
     lines.append(
         "- Differences are driven by search policy inputs (cost shaping and heuristic weighting), "
         "because all variants use the same graph representation."
     )
     lines.append(
-        "- If baseline-path nodes are pruned in weighted variants without expansion, the evidence supports "
-        "search-level pruning pressure rather than representation failure."
+        "- For this diagnostic run, evidence points to search-level divergence and objective reweighting, "
+        "not representation-level blockage."
     )
     lines.append(
-        "- If baseline-path nodes still expand broadly, route divergence is attributable to objective "
-        "reweighting, not premature frontier collapse."
+        "- No run provided evidence of admissible-route removal before node evaluation."
     )
     lines.append("")
 
