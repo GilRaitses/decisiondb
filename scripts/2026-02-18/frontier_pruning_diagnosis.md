@@ -11,21 +11,21 @@
 | Variant | Path found | Nodes explored | First divergence step | Frontier peak | Collapse step |
 | --- | --- | ---: | ---: | ---: | ---: |
 | Panel A baseline | True | 57 |  | 146 |  |
-| Panel B paper heuristic | True | 433 | 2 | 81 |  |
-| Panel C stress-weighted heuristic | True | 446 | 2 | 84 |  |
+| Panel B paper heuristic | True | 418 | 2 | 98 |  |
+| Panel C stress-weighted heuristic | True | 439 | 2 | 87 |  |
 
 ## 1) Where admissible-path nodes were pruned
 
 ### Panel B paper heuristic
 
-- Recorded 176 prune events on baseline-path nodes.
-- Sample events: step 2 node 418 (neighbor_in_closed_set), step 3 node 418 (neighbor_in_closed_set), step 4 node 11 (neighbor_in_closed_set), step 4 node 418 (neighbor_in_closed_set), step 5 node 11 (neighbor_in_closed_set), step 5 node 418 (neighbor_in_closed_set), step 6 node 11 (neighbor_in_closed_set), step 6 node 418 (neighbor_in_closed_set)
+- Recorded 172 prune events on baseline-path nodes.
+- Sample events: step 2 node 418 (neighbor_in_closed_set), step 3 node 11 (neighbor_in_closed_set), step 3 node 418 (neighbor_in_closed_set), step 4 node 11 (neighbor_in_closed_set), step 4 node 418 (neighbor_in_closed_set), step 5 node 418 (neighbor_in_closed_set), step 6 node 11 (neighbor_in_closed_set), step 6 node 418 (neighbor_in_closed_set)
 - No baseline-path node was permanently pruned before any expansion.
 
 ### Panel C stress-weighted heuristic
 
-- Recorded 179 prune events on baseline-path nodes.
-- Sample events: step 2 node 418 (neighbor_in_closed_set), step 3 node 418 (neighbor_in_closed_set), step 4 node 11 (neighbor_in_closed_set), step 4 node 418 (neighbor_in_closed_set), step 5 node 11 (neighbor_in_closed_set), step 5 node 418 (neighbor_in_closed_set), step 6 node 11 (neighbor_in_closed_set), step 6 node 418 (neighbor_in_closed_set)
+- Recorded 178 prune events on baseline-path nodes.
+- Sample events: step 2 node 418 (neighbor_in_closed_set), step 3 node 418 (neighbor_in_closed_set), step 4 node 11 (neighbor_in_closed_set), step 4 node 418 (neighbor_in_closed_set), step 5 node 11 (neighbor_in_closed_set), step 5 node 418 (neighbor_in_closed_set), step 7 node 11 (neighbor_in_closed_set), step 7 node 418 (neighbor_in_closed_set)
 - No baseline-path node was permanently pruned before any expansion.
 
 Interpretation:
@@ -35,9 +35,9 @@ Interpretation:
 
 ## 2) Whether pruning occurred before sufficient exploration
 
-- Panel B paper heuristic explored 433 nodes.
+- Panel B paper heuristic explored 418 nodes.
   - Frontier did not collapse below the 10 percent peak threshold.
-- Panel C stress-weighted heuristic explored 446 nodes.
+- Panel C stress-weighted heuristic explored 439 nodes.
   - Frontier did not collapse below the 10 percent peak threshold.
 
 Interpretation:
@@ -49,10 +49,7 @@ Interpretation:
 
 - All variants found a path.
 - Search order diverged early (step 2) for both weighted variants.
-- Weighted variants had much larger expansion counts:
-  - Baseline: 57
-  - Paper heuristic: 433
-  - Stress-weighted heuristic: 446
+- Weighted variants had much larger expansion counts: baseline 57, paper 418, stress-weighted 439.
 - Panel C did not fail, but it increased search effort relative to Panel B.
 
 ## 4) Search-level versus representation-level instability

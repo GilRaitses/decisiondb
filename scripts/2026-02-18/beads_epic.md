@@ -64,14 +64,14 @@ Beads tracker:
 
 ## Verification results
 
-- Trace records written: 936 total expansions
+- Trace records written: 914 total expansions
   - Panel A baseline: 57
-  - Panel B paper heuristic: 433
-  - Panel C stress-weighted heuristic: 446
+  - Panel B paper heuristic: 418
+  - Panel C stress-weighted heuristic: 439
 - GIF synchronization check:
-  - `panel_a_baseline.gif`: 446 frames
-  - `panel_b_paper_heuristic.gif`: 446 frames
-  - `panel_c_stress_weighted.gif`: 446 frames
+  - `panel_a_baseline.gif`: 439 frames
+  - `panel_b_paper_heuristic.gif`: 439 frames
+  - `panel_c_stress_weighted.gif`: 439 frames
 - Diagnosis summary:
   - First divergence at step 2 for weighted variants
   - No permanent pruning of baseline-path nodes before expansion

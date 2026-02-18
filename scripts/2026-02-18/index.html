@@ -81,14 +81,14 @@
       <h3>Panel B: paper heuristic</h3>
       <img src="gifs/panel_b_paper_heuristic.gif" alt="Panel B paper heuristic frontier evolution">
       <p>
-        Paper configuration: stress-weighted path cost with distance-only admissible heuristic.
+        Paper configuration: stress-weighted path cost with alpha 0.033 and distance-only admissible heuristic.
       </p>
     </div>
     <div class="card">
       <h3>Panel C: stress-weighted heuristic</h3>
       <img src="gifs/panel_c_stress_weighted.gif" alt="Panel C stress-weighted heuristic frontier evolution">
       <p>
-        Diagnostic stress-emphasized variant: higher stress weight and stress-influenced heuristic term.
+        Diagnostic stress-emphasized variant: alpha 0.099 with an added stress-influenced heuristic term.
       </p>
     </div>
   </div>
@@ -97,7 +97,7 @@
   <ul>
     <li>All three variants found a route from Grand Central to Carnegie Hall.</li>
     <li>First search divergence occurred at step 2 for both stress-weighted variants.</li>
-    <li>Nodes explored: baseline 57, paper heuristic 433, stress-weighted heuristic 446.</li>
+    <li>Nodes explored: baseline 57, paper heuristic 418, stress-weighted heuristic 439.</li>
     <li>No sustained frontier-collapse event was detected under the 10% of peak frontier threshold criterion.</li>
     <li>Baseline-path nodes were not permanently pruned before any expansion in the weighted variants.</li>
   </ul>
