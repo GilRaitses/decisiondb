@@ -714,6 +714,12 @@ def parse_args() -> argparse.Namespace:
         help="GIF frame rate.",
     )
     parser.add_argument(
+        "--paper-alpha",
+        type=float,
+        default=0.033,
+        help="Stress weight alpha for the paper heuristic panel.",
+    )
+    parser.add_argument(
         "--start",
         type=str,
         default="Grand Central",
@@ -750,7 +756,7 @@ def main() -> int:
         raise RuntimeError("Failed to resolve start or goal node.")
 
     node_stress = learned.intersection_stress
-    paper_weight = learned.stress_weight
+    paper_weight = float(args.paper_alpha)
 
     results = {
         PANEL_A: run_traced_variant(
